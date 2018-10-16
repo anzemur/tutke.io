@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styles/signUp.css">
+</head>
+<body>
+    <div class="sign-up-form">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#Tutor" data-toggle="tab">Tutor</a></li>
+            <li><a href="#Student" data-toggle="tab">Student</a></li>
+        </ul>
+        
+        <div class="tab-content">
+            <!-- Tutor Sign Up tab-->
+            <div class="tab-pane fade in active"  id="Tutor">
+                <form>
+                    <div class="input-group sign-up-inputs">
+                        <label for="first_name">First name<span style="color: red">*</span></label>
+                        <input name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="input-group sign-up-inputs">
+                        <label for="last_name">Last name<span style="color: red">*</span></label>
+                        <input name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="input-group sign-up-inputs">
+                        <label for="email">Email address<span style="color: red">*</span></label>
+                        <input name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="3" required oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="input-group sign-up-inputs">
+                        <label for="current_teaching">Current teaching institution</label>
+                        <input name="current_teaching" class="form-control input-lg" placeholder="Current teaching institution" type="text" tabindex="4">
+                    </div>
+                    <div class="input-group sign-up-inputs">
+                        <label for="certificates">Upload certificates<span style="font-size: 14px; color: #878797"> (.png)</span></label>
+                        <input name="certificates" class="form-control input-lg" type="file" tabindex="5" multiple accept="image/png">
+                    </div>
+                    <div class="sign-up-btn-position">
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Student Sign Up tab-->
+            <div class="tab-pane"  id="Student">
+                <div class="input-group sign-up-inputs">
+                    <label for="first_name">First name<span style="color: red">*</span></label>
+                    <input name="first_name" class="form-control input-lg col-lg-8" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="last_name">Last name<span style="color: red">*</span></label>
+                    <input name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="email">Email address<span style="color: red">*</span></label>
+                    <input name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="3" required oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="sign-up-btn-position">
+                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                </div>              
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap scripts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
