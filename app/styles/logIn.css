@@ -44,8 +44,9 @@ h3 {
     border-bottom-left-radius: 10px;
     border-width: 1px;
     border-style: solid;
-    border-color: rgb(45, 183, 218);
-    border-top: none;
+    border-left-color: rgb(45, 183, 218);
+    border-right-color: rgb(45, 183, 218);
+    border-bottom-color: rgb(45, 183, 218);
 }
 
 .log-in-btn-position {
