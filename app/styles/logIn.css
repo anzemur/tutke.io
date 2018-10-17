@@ -1,7 +1,9 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(45, 183, 218);
+    background-image: url('../res/backgroundLogIn.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; 
 }
 
 h3 {
@@ -13,7 +15,7 @@ h3 {
 
 .log-in-form {
     width: 340px;
-    height: 420px;
+    height: 410px;
     background: #fff;
     top: 40%;
     left: 50%;
@@ -30,7 +32,7 @@ h3 {
 }
 
 .panel-footer {
-    margin-top: 35px;
+    margin-top: 25px;
     padding: 28px;
     text-align: center;
     display: block;
@@ -40,7 +42,10 @@ h3 {
     box-sizing: border-box;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(45, 183, 218);
+    border-top: none;
 }
 
 .log-in-btn-position {
@@ -56,4 +61,10 @@ h3 {
     border: none;
     background-color: rgb(45, 183, 218);
     background-image: -webkit-linear-gradient(left bottom,rgba(159,88,150,0) 0,rgba(33, 109, 209, 0.6) 100%) !important;
+}
+
+.border-primary {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(45, 183, 218);
 }
