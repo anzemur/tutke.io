@@ -1,14 +1,15 @@
 body {
-    margin: 0;
-    padding: 0;
     background-image: url('../res/backgroundLogIn.jpg');
+    min-height:100%;
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
+    -moz-background-size: cover;
 }
 
 .sign-up-form {
     width: 460px;
-    height: 660px;
+    max-height: 800px;
     background: #fff;
     top: 40%;
     left: 50%;
@@ -19,7 +20,10 @@ body {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(45, 183, 218);
+    display: block;
+    overflow: auto;
 }
+
 
 .nav-tabs {
     font-size: 20px;

@@ -1,9 +1,10 @@
 body {
-    margin: 0;
-    padding: 0;
     background-image: url('../res/backgroundLogIn.jpg');
+    min-height:100%;
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
+    -moz-background-size: cover;
 }
 
 h3 {
