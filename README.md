@@ -10,9 +10,12 @@ Tutke.io is an app for tutors and students that wants to give or rececive more k
 
 ## Feautured Screens
 
-* ### [Log In Screen](docs/logIn.png):
-	* User can log in
-	* User can be redirected to sign up page
+* ### [Log In screen](docs/logIn.png):
+	* User can log in.
+	* User can be redirected to sign up page.
+
+* ### [Sign In screen](docs/signIn.png):
+	* User can create an account. He can choose between two roles: tutor and student. Account creation is personalized based on choosen role.
 
 ## Development guidelines:
 * ### Develop branch
