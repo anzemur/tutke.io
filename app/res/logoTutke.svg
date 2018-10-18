@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1117px" height="278px" viewBox="0 0 1117 278" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>logoTutke</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-3">
+            <g id="Group-2">
+                <path d="M187.143463,206.212844 L224.335233,107.877328 L224.383584,107.902574 L276.582844,39.2301075 L176.531221,0.209849109 L49.9793497,16.8412012 L0.0324431772,62.2776897 L64.728494,112.762824 C67.2999944,134.420041 68.9212123,149.40736 68.9212123,149.40736 L133.033113,247.123055 L196.993078,277.7484 L187.143463,206.212844 Z" id="Combined-Shape" fill="#FF9B00"></path>
+                <g id="Group" transform="translate(15.828571, 8.367893)">
+                    <polygon id="Rectangle" fill="#F8F8F8" points="158.605777 0.0471929547 245.866565 34.0790093 200.131928 93.775357 41.1444656 16.4724733"></polygon>
+                    <path d="M41.8991597,16.735786 C49.431552,66.2040526 66.3003283,147.280727 66.3003283,147.280727 L162.304688,193.892506 L200.155777,93.8137411" id="Path-2" fill="#D2D2D2"></path>
+                    <polygon id="Rectangle" fill="#F2F2F2" transform="translate(100.170178, 63.853598) rotate(180.000000) translate(-100.170178, -63.853598) " points="122.274623 16.270903 200.202754 73.9157947 159.00429 111.436293 0.137602604 33.9481118"></polygon>
+                    <polygon id="Path-3" fill="#E1E1E1" points="66.6224406 147.090413 125.503218 233.37358 168.723143 253.077076 162.215059 193.461954"></polygon>
+                </g>
+            </g>
+            <text id="Tutke.io" fill="#FF9B00" font-family="FuturaBT-Medium, Futura Md BT" font-size="190" font-weight="400" letter-spacing="14">
+                <tspan x="297" y="240">Tutke.io</tspan>
+                <tspan x="1078.45312" y="240"> </tspan>
+            </text>
+        </g>
+    </g>
+</svg>
