@@ -8,9 +8,10 @@ body {
 }
 
 .sign-up-form {
-    width: 500px;
+    width: 90%;
     max-height: 800px;
     background:#e6e8f4;
+    margin-top: 40vh;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
@@ -21,7 +22,8 @@ body {
     border-style: solid;
     border-color: #536ade;
     display: block;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 
@@ -48,13 +50,14 @@ body {
     padding-top: 15px;
     padding-left: 20px;
     padding-right: 20px;
+    margin: 0 auto;
 }
 
 .sign-up-btn-position {
     margin-bottom: 15px;
     margin-top: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .btn-primary {
@@ -67,12 +70,6 @@ body {
     /* background-image: -webkit-linear-gradient(left bottom,rgba(159,88,150,0) 0,rgba(33, 109, 209, 0.6) 100%) !important; */
 }
 
-.btn.btn-primary.btn-block {
-    margin: 30px;
-    width: 400px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
 
 .scrollbar-primary::-webkit-scrollbar {
     width: 5px;
@@ -86,13 +83,13 @@ body {
 }
 
 .input-group.sign-up-inputs {
-    padding-left: 50px;
-    padding-right: 50px;
-    width: 460px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 100%;
 }
 
 .form-group.sign-up-inputs {
-    padding-left: 50px;
-    padding-right: 50px;
-    width: 460px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 100%;
 }
