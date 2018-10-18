@@ -1,0 +1,41 @@
+.navbar-default {
+    background-color: #fff;
+    border-color: #E7E7E7;
+    height: 50px;
+}
+
+.navbar {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-width: 0px;
+    border-bottom: 1px solid #E0E0E0;
+
+    min-height: 60px;
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 60px;
+    line-height: 60px;
+    position: absolute;
+}
+  
+.navbar-toggle {
+    /* (60px - button height 34px) / 2 = 13px */
+    margin-top: 13px;
+    padding: 9px 10px !important;
+}
+  
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+      /* (60px - line-height of 27px) / 2 = 26.5px */
+      padding-top: 16.5px;
+      padding-bottom: 16.5px;
+      line-height: 27px;
+    }
+
+    .navbar {
+        padding: 0 12%;
+    }
+}
