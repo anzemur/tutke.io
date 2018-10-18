@@ -16,8 +16,8 @@ h3 {
 
 .log-in-form {
     margin-top: 40vh;
-    width: 100%;
-    height: 395px;
+    width: 90%;
+    height: 390px;
     background: #e6e8f4;
     top: 40%;
     left: 50%;
@@ -29,13 +29,13 @@ h3 {
 }
 
 .log-in-inputs {
-    padding-top: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 17px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .panel-footer {
-    margin-top: 35px;
+    margin-top: 25px;
     padding: 25px;
     text-align: center;
     display: block;
@@ -50,11 +50,12 @@ h3 {
 
 .log-in-btn-position {
     margin-top: 50px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .btn-primary {
+    margin-top: 10px;
     border-radius: 10px;
     font-size: 20px;
     height: 45px;
