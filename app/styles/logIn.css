@@ -15,12 +15,12 @@ h3 {
 }
 
 .log-in-form {
-    width: 340px;
-    height: 395px;
+    /* margin-left: auto;
+    margin-right: auto; */
     background: #e6e8f4;
-    top: 40%;
+     top: 40%; 
     left: 50%;
-    transform: translate(-50%, -40%);
+    /* transform: translate(-50%, -40%); */
     position: absolute;
     box-sizing: border-box;
     border-radius: 20px;
