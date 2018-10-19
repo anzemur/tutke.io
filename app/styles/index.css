@@ -1,7 +1,12 @@
+/* ===============NAVBAR================================== */
 .navbar-default {
     background-color: #fff;
     border-color: #E7E7E7;
     height: 50px;
+
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
 }
 
 .navbar {
@@ -26,8 +31,8 @@
     margin-top: 13px;
     padding: 9px 10px !important;
 }
-  
-@media (min-width: 768px) {
+
+@media (min-width: 768px) { /* zasloni nad 768px */
     .navbar-nav > li > a {
       /* (60px - line-height of 27px) / 2 = 26.5px */
       padding-top: 16.5px;
@@ -38,6 +43,25 @@
     .navbar {
         padding: 0 12%;
     }
+
+    .navLogo {
+        margin: 10px 0px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .navLogo {
+        margin: 10px 0 10px 10px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .navLogo {
+        margin: 10px 0 10px 10px;
+        width: 80px;
+    }
 }
 
 .fas.fa-user-circle {
@@ -45,7 +69,36 @@
     color: #ff9b00;
 }
 
-.navLogo {
-    margin: 7.5px 0;
-    height: 45px;
+.navbar.center .navbar-inner {
+    text-align: center;
+}
+
+.navbar.center .navbar-inner .nav {
+    display:inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+/* ====================================================END OF NAVBAR */
+
+#toggleNavContainer {
+    text-align: center;
+    width: 100%;
+    padding: 0 12%;
+}
+
+.nav-tabs.nav-custom>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #1c1259;
+    font-weight: 500;
+}
+
+.nav-tabs.nav-custom.nav-justified>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border: 0;
+    border-bottom: 3px solid #ff9b00;
+}
+
+.nav-tabs.nav-custom>li>a {
+    color: #ff9b00;
+    border: 0;
+    border-bottom: 1px solid #E7E7E7;
 }
