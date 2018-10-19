@@ -1,3 +1,17 @@
+h3{
+    color: #1c1259;
+}
+
+.form-control {
+    border-radius: 20px 20px;
+}
+
+#btnSearch {
+    border-radius: 0px 20px 20px 0px;
+    color: #1c1259;
+    font-weight: 500;
+}
+
 /* ===============NAVBAR================================== */
 .navbar-default {
     background-color: #fff;
@@ -17,6 +31,10 @@
     border-bottom: 1px solid #E0E0E0;
 
     min-height: 60px;
+}
+
+.navbar.navbar-default {
+    margin-bottom: 12px;
 }
 
 .navbar-brand {
@@ -41,7 +59,7 @@
     }
 
     .navbar {
-        padding: 0 12%;
+        padding: 0 14%;
     }
 
     .navLogo {
@@ -62,11 +80,16 @@
         margin: 10px 0 10px 10px;
         width: 80px;
     }
+
+    .container.container-jumbotron h3{
+        font-size: 14px;
+    }
 }
 
 .fas.fa-user-circle {
     font-size: 30px;
     color: #ff9b00;
+    padding-right: 0;
 }
 
 .navbar.center .navbar-inner {
@@ -81,10 +104,11 @@
 
 /* ====================================================END OF NAVBAR */
 
+/* ================================NAV TABS======================== */
 #toggleNavContainer {
     text-align: center;
     width: 100%;
-    padding: 0 12%;
+    padding: 0 14%;
 }
 
 .nav-tabs.nav-custom>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
@@ -101,4 +125,75 @@
     color: #ff9b00;
     border: 0;
     border-bottom: 1px solid #E7E7E7;
+}
+
+.nav.nav-custom>li>a {
+    padding: 10px 5px;
+    margin-top: 0;
+}
+/* ========================================END OF NAVTABS==================== */
+
+/* ==============================JUMBOTRON====================== */
+.container.container-jumbotron {
+    margin: 10px 14%;
+    padding: 0;
+}
+
+div.jumbotron {
+    padding: 10px 0;
+    background-color: #fff;
+}
+
+/* =================================END OF JUMBOTRON================ */
+
+#mainContent {
+    margin: 10px 14%;
+}
+
+.col-xl-8.col-lg-8.col-md-8.col-sm-12.adPreview {
+    padding-left: 0;
+}
+
+.panel.panel-default.adPanel {
+    border-radius: 0;
+}
+
+#adTitle {
+    color: #1c1259;
+}
+
+#adPrice {
+    color: #ff9b00;
+    float: right;
+}
+
+#requestTutorBtn{
+    height: 39px;
+    padding: 2px 10px;
+    margin-top: -11px;
+    margin-left: 10px;
+    margin-right: -16px;
+    color: #ff9b00;
+    background-color: #fff;
+    border: 1px solid #ff9b00;
+    border-radius: 0;
+}
+
+#requestTutorBtn:hover {
+    color: #fff;
+    background-color: #ff9b00;
+}
+
+.pagination>li>a {
+    color: #1c1259;
+}
+
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.pagination>li:last-child>a, .pagination>li:last-child>span {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
