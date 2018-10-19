@@ -92,6 +92,11 @@ h3{
     padding-right: 0;
 }
 
+#usernameTitle {
+    color: #ff9b00;
+    padding-right: 0;
+}
+
 .navbar.center .navbar-inner {
     text-align: center;
 }
