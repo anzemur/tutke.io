@@ -68,6 +68,10 @@ h3 {
     background-color: #ffb648
 }
 
+.btn-click:active {
+    background-color: #ff8800 !important;
+}
+
 .log-in-form.panel.panel-default {
     border: 1px solid #ff9b00;
 }
