@@ -23,3 +23,9 @@ Tutke.io is an app for tutors and students that wants to give or rececive more k
 
 * ### Master branch
 	* Master branch is meant only for releases when we are certain that all new added features are working correctly.
+	
+## Git workflow:
+* Commit
+* Pull -> resolve merge conflicts if any
+* Push
+	
