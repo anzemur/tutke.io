@@ -7,6 +7,7 @@ Tutke.io is an app for tutors and students that wants to give or rececive more k
 * Lovro Kalan
 * Zala Erič
 * Anže Mur
+* Matej De Faveri
 
 ## Feautured Screens
 
