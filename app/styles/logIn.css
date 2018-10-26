@@ -9,7 +9,7 @@ body {
 
 h3 {
     margin: 30px 0px 15px 0px;
-    color: #536ade;
+    color: #ff9b00;
     font-size: 27px;
     text-align: center;
 }
@@ -18,7 +18,7 @@ h3 {
     margin-top: 40vh;
     width: 90%;
     height: 390px;
-    background: #e6e8f4;
+    background: #fff;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
@@ -42,7 +42,7 @@ h3 {
     font-size: 18px;
     color: #878797;
     font-weight: 150;
-    background-color: #fff;
+    background-color: #eeeeee;
     box-sizing: border-box;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -60,16 +60,20 @@ h3 {
     font-size: 20px;
     height: 45px;
     border: none;
-    background-color: #536ade;
+    background-color: #ff9b00;
     /* background-image: -webkit-linear-gradient(left bottom,rgba(159,88,150,0) 0,rgba(33, 109, 209, 0.6) 100%) !important; */
 }
 
-.input-group-addon.transparent {
-    background-color: #fff;
+.btn-hover:hover {
+    background-color: #ffb648
+}
+
+.btn-click:active {
+    background-color: #ff8800 !important;
 }
 
 .log-in-form.panel.panel-default {
-    border: 1px solid #536ade;
+    border: 1px solid #ff9b00;
 }
 
 .log-in-btn-position {
