@@ -148,6 +148,11 @@ td {
     vertical-align: top;
 }
 
+#usernameTitle {
+    color: #ff9b00;
+    padding-right: 0;
+}
+
 /* ====================================================END OF NAVBAR */
 
 /* ================================NAV TABS======================== */
