@@ -50,6 +50,11 @@ h3{
     padding: 9px 10px !important;
 }
 
+#navbarContainer {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 @media (min-width: 768px) { /* zasloni nad 768px */
     .navbar-nav > li > a {
       /* (60px - line-height of 27px) / 2 = 26.5px */
@@ -88,6 +93,21 @@ h3{
 
 .fas.fa-user-circle {
     font-size: 30px;
+    color: #ff9b00;
+    padding-right: 0;
+}
+
+a#userIcon.dropdown-toggle {
+    background-color: #fff;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#userIcon {
+    padding-right: 0;
+}
+
+#usernameTitle {
     color: #ff9b00;
     padding-right: 0;
 }
