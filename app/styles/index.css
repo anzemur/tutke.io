@@ -170,6 +170,8 @@ div.jumbotron {
 }
 
 /* =================================END OF JUMBOTRON================ */
+
+/* ======================== MAIN COLUMN ================== */
 .row{
     margin-left: auto; margin-right: auto;
 }
@@ -208,14 +210,14 @@ div.jumbotron {
     color: #fff;
     background-color: #ff9b00;
 }
-
-.thumbnail.usersOnlineTumbnail{
-    height: 40px;
-    background-color: #fff;
-}
+/* ======================== END OF MAIN COLUMN ================== */
 
 .thumbnail.activeUsersMenu {
     height: 100px;
+}
+
+.thumbnail.actionsMenu {
+    height: 400px;
 }
 
 /* =============== pagination: ============= */
