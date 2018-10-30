@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(245, 246, 250);
+}
+
 h3{
     color: #1c1259;
 }
@@ -138,6 +142,7 @@ a#userIcon.dropdown-toggle {
 
 .nav-tabs.nav-custom.nav-justified>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     border: 0;
+    background-color: rgb(245, 246, 250);
     border-bottom: 3px solid #ff9b00;
 }
 
@@ -161,18 +166,18 @@ a#userIcon.dropdown-toggle {
 
 div.jumbotron {
     padding: 10px 0;
-    background-color: #fff;
+    background-color: rgb(245, 246, 250);
 }
 
 /* =================================END OF JUMBOTRON================ */
+.row{
+    margin-left: auto; margin-right: auto;
+}
 
-#mainContent {
+#mainContent.container-fluid {
     margin: 10px 14%;
-}
-
-.col-xl-8.col-lg-8.col-md-8.col-sm-12.adPreview {
-    padding-left: 0;
-}
+    padding: 0;
+} 
 
 .panel.panel-default.adPanel {
     border-radius: 0;
@@ -204,6 +209,16 @@ div.jumbotron {
     background-color: #ff9b00;
 }
 
+.thumbnail.usersOnlineTumbnail{
+    height: 40px;
+    background-color: #fff;
+}
+
+.thumbnail.activeUsersMenu {
+    height: 100px;
+}
+
+/* =============== pagination: ============= */
 .pagination>li>a {
     color: #1c1259;
 }
@@ -217,3 +232,4 @@ div.jumbotron {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+/* =============== end of pagination: ============= */
