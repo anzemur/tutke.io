@@ -2,8 +2,20 @@ body {
     background-color: rgb(245, 246, 250);
 }
 
-h3{
+h3 {
     color: #1c1259;
+}
+
+h4 {
+    color: #1c1259;
+}
+
+a {
+    color: #ff9b00;
+}
+
+ul {
+    list-style-type: square;
 }
 
 .form-control {
@@ -74,6 +86,12 @@ h3{
     .navLogo {
         margin: 10px 0px;
         height: 40px;
+    }
+}
+
+@media (max-width: 1035px) {
+    .thumbnail.profileThumbnail p {
+        font-size: 80%;
     }
 }
 
@@ -212,13 +230,56 @@ div.jumbotron {
 }
 /* ======================== END OF MAIN COLUMN ================== */
 
-.thumbnail.activeUsersMenu {
-    height: 100px;
+/* =========================== LEFT COLUMN ======================== */
+.thumbnail.profileThumbnail {
+    border-radius: 0;
+    padding: 10px;
 }
 
-.thumbnail.actionsMenu {
-    height: 400px;
+h4#profileTitle {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
 }
+
+.thumbnail.profileThumbnail p {
+    text-align: left;
+    margin: 0px 0px 10px 0px;
+}
+
+.rating {
+    white-space: nowrap;
+}
+
+.rating i {
+    color: #ff9b00;
+    white-space: nowrap;
+}
+
+.thumbnail.upcomingEvents {
+    border-radius: 0;
+    padding: 10px 10px 10px 20px;
+}
+
+ul#upcomingEventsList {
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+#upcomingEventsList li {
+    margin-bottom: 5px;
+}
+
+h4#upcomingEvents {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+/* =========================== END OF LEFT COLUMN ======================== */
 
 /* =============== pagination: ============= */
 .pagination>li>a {
