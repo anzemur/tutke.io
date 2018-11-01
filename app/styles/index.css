@@ -89,12 +89,6 @@ ul {
     }
 }
 
-@media (max-width: 1035px) {
-    .thumbnail.profileThumbnail p {
-        font-size: 80%;
-    }
-}
-
 @media (max-width: 767px) {
     .navLogo {
         margin: 10px 0 10px 10px;
