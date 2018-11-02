@@ -94,6 +94,10 @@ ul {
         margin: 10px 0 10px 10px;
         height: 40px;
     }
+
+    .buttonTextRequest {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 320px) {
