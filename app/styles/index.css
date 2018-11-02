@@ -321,6 +321,13 @@ button.acceptDeny:hover {
     margin-top: 30px;
 }
 
+#tutorOffersTitle {
+    color: #ff9b00;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 /* ====================== END OF TUTOR INDEX PAGE ======================== */
 
 /* =============== pagination: ============= */
