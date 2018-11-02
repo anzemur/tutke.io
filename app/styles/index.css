@@ -1,6 +1,5 @@
 body {
     background-color: rgb(245, 246, 250);
-    overflow-x: hidden;
 }
 
 h3 {
@@ -176,32 +175,14 @@ a#userIcon.dropdown-toggle {
 /* ========================================END OF NAVTABS==================== */
 
 /* ==============================JUMBOTRON====================== */
-#headers.container-fluid {
-    margin: 20px 10% 20px 14%;
-    padding: 0px 0px 15px 0px;
-    background-color: rgb(245, 246, 250);
-}
-
-#btnAdd {
-    border-radius: 5px 2px 5px 2px;
-    color: #ff9b00;
-    font-weight: 500;
-    background-color: #fff;
-    border: 1px solid #ff9b00;
-    margin-bottom: 5px;
-}
-
-#btnAdd:hover {
-    color: #fff;
-    background-color: #ff9b00;
-}
-
 .container.container-jumbotron {
-
+    margin: 10px 14%;
+    padding: 0;
 }
 
-.input-group {
-    width: inherit;
+div.jumbotron {
+    padding: 10px 0;
+    background-color: rgb(245, 246, 250);
 }
 
 /* =================================END OF JUMBOTRON================ */
