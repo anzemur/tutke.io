@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<head>
+    <title>Tutke.io</title>
+    <meta charset="utf-8">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid" id="navbarContainer">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-left"><img class="navLogo" src="../res/logoTutke.svg"></a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" id="usernameTitle">User</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="userIcon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Account setting</a></li>
+                            <li role="separator" class="divider"></li>
+                            <!-- <li class="dropdown-header">Nav header</li> -->
+                            <li><a href="#">My requests</a></li>
+                            <li><a href="#">My listings</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="logIn.html">Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container" id="toggleNavContainer">
+        <ul class="nav nav-tabs nav-custom nav-justified nav-horizontal">
+            <li role="presentation" class="active"><a href="#">Student</a></li>
+            <li role="presentation"><a href="#">Tutor</a></li>
+          </ul>
+    </div>
+
+    <div class="container-fluid" id="mainContent">
+        <div class="row">
+
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                    <div class="thumbnail profileThumbnail" id="tutorProfile">
+                        <h4 id="profileTitle">Profile</h4>
+                        <p>Tutor Rating:
+                            <span class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span> 
+                        </p>
+                        <p>Last time online:</p>
+                    </div>
+
+                    <div class="thumbnail upcomingEvents">
+                            <h4 id="upcomingEvents">Upcoming Events</h4>
+                            <ul id="upcomingEventsList">
+                                <li>
+                                    <a href="#">Learn Linear Algebra!, 9/12/2019 at 17:45 w/Student1</a>
+                                </li>
+                                <li>
+                                    <a href="#">JAVA programming, 10/12/2019 at 12:45 w/StudentUsername</a>
+                                </li>
+                                <li>
+                                    <a href="#">Fun times with prof. Mur, 22/12/2019 at 9:00 w/Student3</a>
+                                </li>
+                                <li>
+                                    <a href="#">Learn Linear Algebra!, 28/12/2019 at 14:30 w/Student4</a>
+                                </li>
+                            </ul>
+                    </div>
+
+                    <div class="thumbnail upcomingEvents">
+                            <h4 id="upcomingEvents">Active requests</h4>
+                            <ul id="upcomingEventsList">
+                                <li>
+                                    <p>Learn Linear Algebra! - from Student1<br><button class="acceptDeny">Accept</button><button class="acceptDeny">Deny</button></p>
+                                </li>
+                                <li>
+                                    <p>JAVA programming - from StudentUsername<br><button class="acceptDeny">Accept</button><button class="acceptDeny">Deny</button></p>
+                                </li>
+                                <li>
+                                    <p>Learn Linear Algebra! - from Student4<br><button class="acceptDeny">Accept</button><button class="acceptDeny">Deny</button></p>
+                                </li>
+                            </ul>
+                    </div>
+            </div>
+
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" id="tutorsOffers">
+                
+                <div class="panel panel-default adPanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="adTitle">Learn Linear Algebra!<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    </div>
+                </div>
+
+                <div class="panel panel-default adPanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="adTitle">Learn Linear Algebra!<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    </div>
+                </div>
+
+                <div class="panel panel-default adPanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="adTitle">Learn Linear Algebra!<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    </div>
+                </div>
+
+                <div class="panel panel-default adPanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="adTitle">Learn Linear Algebra!<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div> 
+    
+    <!-- pagination -->
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- end of pagination -->
+
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+        $(".nav-custom li").on("click", function(){
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script>
+</body>

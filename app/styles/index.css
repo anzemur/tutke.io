@@ -298,6 +298,31 @@ h4#upcomingEvents {
 
 /* =========================== END OF LEFT COLUMN ======================== */
 
+/* ====================== TUTOR INDEX PAGE ======================== */
+
+button.acceptDeny {
+    color: #ff9b00;
+    background-color: #fff;
+    border: 1px solid #ff9b00;
+    border-radius: 20px;
+    margin-left: 5px;
+}
+
+button.acceptDeny:hover {
+    color: #fff;
+    background-color: #ff9b00;
+}
+
+#tutorProfile {
+    margin-top: 30px;
+}
+
+#tutorsOffers {
+    margin-top: 30px;
+}
+
+/* ====================== END OF TUTOR INDEX PAGE ======================== */
+
 /* =============== pagination: ============= */
 .pagination>li>a {
     color: #1c1259;
