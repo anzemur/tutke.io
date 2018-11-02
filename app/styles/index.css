@@ -180,8 +180,8 @@ a#userIcon.dropdown-toggle {
     padding: 0;
 }
 
-div.jumbotron {
-    padding: 10px 0;
+#searchTutor {
+    padding-bottom: 10px;
     background-color: rgb(245, 246, 250);
 }
 
@@ -376,6 +376,40 @@ a.float:hover + div.label-container{
 }
 
 /* ============== END OF FLOAT BUTTON ============= */
+
+/* ======================== MODAL ======================== */
+#addListing.modal.fade {
+    height: 100%;
+}
+
+.modal-title {
+    color: #ff9b00;
+    font-weight: 500;
+}
+
+.adInfo {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.modal-knowledge { margin-right: 10px; }
+
+.modal-radio-group {
+    margin-top: 25px;
+}
+
+.form-price {
+    margin-top: 15px;
+}
+
+.modal-form-group {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+/* =================== END OF MODAL ====================== */
 
 /* =============== pagination: ============= */
 .pagination>li>a {

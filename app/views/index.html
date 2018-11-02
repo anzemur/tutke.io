@@ -141,13 +141,122 @@
 
         </div>
     </div> 
-    <a href="#" class="float">
+    
+    <a href="#" class="float" data-toggle="modal" data-target="#addListing">
         <i class="fa fa-plus my-float"></i>
     </a>
     <div class="label-container">
         <div class="label-text">Add New Listing</div>
         <i class="fa fa-play label-arrow"></i>
     </div>
+    
+    <!-- Modal popup -->
+    <div class="modal fade" id="addListing" tabindex="-1" role="dialog" aria-labelledby="addListing" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add a new request for a specific subject</h4>
+                  </div>
+                  
+                <div class="modal-body">
+                    <div class="modal-body-info">
+                        <div class="row">
+                            <div class="col-sm-4 col-sx-12">
+                                <div class="form-subject">
+                                    <label for="subject">Subject:</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Main (specific) subject of interest" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-4 col-sx-12">
+                                <div class="form-category">
+                                    <label for="category">Choose category:</label>
+                                    <select class="form-control" id="category" required>
+                                        <option></option>
+                                        <option>algebra</option>
+                                        <option>archaeology</option>
+                                        <option>art</option>
+                                        <option>band</option>
+                                        <option>biology</option>
+                                        <option>botany</option>
+                                        <option>calculus</option>
+                                        <option>chemistry</option>
+                                        <option>computer science</option>
+                                        <option>drama</option>
+                                        <option>economics</option>
+                                        <option>English</option>
+                                        <option>French</option>
+                                        <option>geography</option>
+                                        <option>geology</option>
+                                        <option>geometry</option>
+                                        <option>German</option>
+                                        <option>gym</option>
+                                        <option>health</option>
+                                        <option>history</option>
+                                        <option>home economics</option>
+                                        <option>keyboarding</option>
+                                        <option>language arts</option>
+                                        <option>literature</option>
+                                        <option>logic</option>
+                                        <option>music</option>
+                                        <option>physical education</option>
+                                        <option>physics</option>
+                                        <option>psychology</option>
+                                        <option>reading</option>
+                                        <option>science</option>
+                                        <option>social studies</option>
+                                        <option>world geography</option>
+                                        <option>writing</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-4 col-sx-12">
+                                <div class="form-expDate">
+                                    <label for="expDate">Expiration date:</label>
+                                    <input type="text" class="form-control" id="expDate" placeholder="Exp. date for the request">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-options">
+                        <div class="modal-radio-group">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12 col-sx-12">
+                                    <label class="modal-knowledge">Choose your education stage:</label>
+                                </div>
+                                
+                                <div class="col-md-3 col-sm-4 col-sx-12">
+                                    <label class="radio-inline"><input id="primary" type="radio" value="" name="optradio" title="">Primary education</label>
+                                </div>
+                                
+                                <div class="col-md-3 col-sm-4 col-sx-12">
+                                    <label class="radio-inline"><input id="secondary" type="radio" value="" name="optradio" title="">Secondary education</label>
+                                </div>
+                                
+                                <div class="col-md-2 col-sm-4 col-sx-12">
+                                    <label class="radio-inline"><input id="faculty" type="radio" value="" name="optradio" title="">Faculty</label> 
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-form-group">
+                            <label class="modal-comment">Add optional message:</label>
+                            <textarea class="form-control" rows="5" id="modal-message"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- pagination -->
     <div class="text-center">
         <nav aria-label="Page navigation">
@@ -186,5 +295,5 @@
             $(".nav li").removeClass("active");
             $(this).addClass("active");
         });
-    </script>
+    </script> 
 </body>
