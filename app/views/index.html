@@ -48,25 +48,44 @@
     </nav>
 
     <div class="container" id="toggleNavContainer">
-        <ul class="nav nav-tabs nav-custom nav-justified">
+        <ul class="nav nav-tabs nav-custom nav-justified nav-horizontal">
             <li role="presentation" class="active"><a href="#">Student</a></li>
             <li role="presentation"><a href="#">Tutor</a></li>
           </ul>
     </div>
 
-    <div class="jumbotron">
-        <div class="container container-jumbotron">
-            <h3>Search available tutors:</h3>
-            <div class="row">
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-8">
-                    <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" id="btnSearch" type="button">Go!</button>
-                    </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-            </div><!-- /.row -->
+    <div class="container" id="headers">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="container container-jumbotron" id="addRequest">
+                    <h3>Add a specific tutor request here:</h3>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="add-group">
+                                <span class="add-group-btn">
+                                    <button class="btn btn-default" id="btnAdd" type="button">Request a tutor</button>
+                                </span>
+                            </div><!-- /add-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
+            
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="container container-jumbotron" id="searchTutor">
+                    <h3>Search available tutors here:</h3>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
         </div>
     </div>
 
