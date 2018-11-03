@@ -275,6 +275,18 @@ h4#upcomingEvents {
     text-align: center;
 }
 
+.statusDenied {
+    color: #ff4239;
+}
+
+.statusDenied a{
+    color: #ff4239;
+}
+
+.statusPending {
+    color: #1c1259;
+}
+
 
 /* =========================== END OF LEFT COLUMN ======================== */
 
