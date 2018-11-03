@@ -275,6 +275,14 @@ h4#upcomingEvents {
     text-align: center;
 }
 
+div#leftColumn {
+    padding-left: 0;
+}
+
+div#rightColumn {
+    padding-right: 0;
+}
+
 .statusDenied {
     color: #ff4239;
 }
@@ -311,6 +319,7 @@ button.acceptDeny:hover {
 
 #tutorsOffers {
     margin-top: 30px;
+    padding-right: 0;
 }
 
 #tutorOffersTitle {
