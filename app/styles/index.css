@@ -175,13 +175,11 @@ a#userIcon.dropdown-toggle {
 /* ========================================END OF NAVTABS==================== */
 
 /* ==============================JUMBOTRON====================== */
-.container.container-jumbotron {
-    margin: 10px 14%;
-    padding: 0;
-}
 
 #searchTutor {
     padding-bottom: 10px;
+    margin-bottom: 30px;
+    margin-top: 10px;
     background-color: rgb(245, 246, 250);
 }
 
