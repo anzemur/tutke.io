@@ -98,6 +98,20 @@ ul {
     .buttonTextRequest {
         display: none;
     }
+
+    div#leftColumn {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    div#rightColumn {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    div#tutorsOffers {
+        padding-left: 0;
+    }
 }
 
 @media screen and (max-width: 320px) {
