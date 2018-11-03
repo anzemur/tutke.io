@@ -441,6 +441,11 @@ a.float:hover + div.label-container{
     margin-bottom: 10px;
 }
 
+select#category.form-control {
+    border-radius:20px;
+    -webkit-appearance: none;
+}
+
 
 /* =================== END OF MODAL ====================== */
 
