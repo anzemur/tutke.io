@@ -322,9 +322,16 @@ button.acceptDeny {
     margin-left: 5px;
 }
 
-button.acceptDeny:hover {
+#acceptRequest.acceptDeny:hover {
     color: #fff;
-    background-color: #ff9b00;
+    background-color: green;
+    border: 1px solid green;
+}
+
+#denyRequest.acceptDeny:hover {
+    color: #fff;
+    background-color: red;
+    border: 1px solid red;
 }
 
 #tutorProfile {
