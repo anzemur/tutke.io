@@ -340,3 +340,17 @@ textarea {
 }
 
 /* =================== END OF MODAL ====================== */
+
+div.panel-heading {
+    padding-right: 0;
+}
+
+button#requestTutorBtn.btn.btn-primary {
+    margin-right: -1px;
+}
+
+@media (max-width: 1000px) {
+    .buttonTextRequest {
+        display: none;
+    }
+}
