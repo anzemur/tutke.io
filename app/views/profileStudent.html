@@ -47,36 +47,45 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-
-
     <div class="container" id="mainContent">
-
-        <div class="row">
-            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 line">
-                <div class="usernameAndPic">
-                    <h4 id="username">miha.j12</h4>
-                    <img src="../res/profilePicPlaceholder.jpg" alt="profilePic" id="pic">
+        <div class="box" id="line" style = "border:1px solid #ff9b00; min-width: 210px;">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12" style="margin-left: 25px; text-align: center; padding-right: 40px;">
+                    <div class="userPic">
+                        <img src="../res/profilePicPlaceholder.jpg" alt="profilePic" id="pic">
+                    </div>
                 </div>
                 
-                <table id="dataTable">
-                    <tr>
-                        <td class="data">NAME:</td>
-                        <td style="display: inline;">Miha Jakše</td>
-                    </tr>
-                    <tr>
-                        <td class="data">FACULTY:</td>
-                        <td style="display: inline;">Faculty of Computer and Information Science</td>
-                    </tr>
-                    <tr>
-                        <td class="data">LEVEL OF EDUCATION:</td>
-                        <td style="display: inline;">Bachelor's</d>
-                    </tr>
-                </table>
+                <div class="col-md-6 col-sm-7 col-xs-12" style="padding-left: 20px;">
+                    <h4 id="name">Miha Jerman</h4>
+                    <table id="dataTable">
+                        <tr>
+                            <td class="data" style="padding-top: 16px;">USERNAME:</td>
+                            <td class="field-data-username">miha.j12</td>
+                        </tr>
+                        <tr>
+                            <td class="data" style="padding-top: 16px;">FACULTY:</td>
+                            <td class="field-data-faculty">Faculty of Computer and Information Science</td>
+                        </tr>
+                        <tr>
+                            <td class="data" style="padding-top: 16px;">LEVEL OF EDUCATION:</td>
+                            <td class="field-data-education">Bachelor's</td>
+                        </tr>
+                    </table>
+                </div>
+            
+                <div class="col-md-2 col-xs-12" style="padding-top: 45px; padding-bottom: 10px;">
+                    <div class="row" style="text-align: center;">
+                        <div class="col-xs-12"><a type="button" class="btn btn-primary" id="requestStudentRequests" href="#" style="width: 90%; margin-bottom: 10px; display: inline-block;">See requests</a></div>
+                        <div class="col-xs-12"><a type="button" class="btn btn-primary" id="requestStudentLectures" href="#" style="width: 90%; margin-top: 10px; display: inline-block;">Catched lectures</a></div>
+                    </div>
+                </div>
             </div>
             
+            <hr style="margin-left: 15px; margin-right: 15px; padding-bottom: 5px;" />
+            
         </div>
-
-    </div> 
+    </div>
     
     <!-- pagination -->
     
