@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Student's attending lectures</title>
+    <title>Student profile</title>
     <meta charset="utf-8">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -50,15 +50,16 @@
     <div class="container" id="mainContent">
         <div class="box" id="line" style = "border:1px solid #ff9b00; min-width: 210px;">
             <div class="row">
+                <h4 id="name" class="title">Miha Jerman</h4>
                 <div class="col-md-3 col-sm-4 col-xs-12" style="margin-left: 25px; text-align: center; padding-right: 40px;">
                     <div class="userPic">
                         <img src="../res/profilePicPlaceholder.jpg" alt="profilePic" id="pic">
                     </div>
                 </div>
                 
-                <div class="col-md-6 col-sm-7 col-xs-12" style="padding-left: 20px;">
-                    <h4 id="name">Miha Jerman</h4>
-                    <table id="dataTable">
+                <div class="col-md-6 col-sm-7 col-xs-12" style="margin-left: 25px; padding-right: 40px;">
+                    <!--<h4 id="name">Miha Jerman</h4>-->
+                    <table id="dataTable" style="margin-top: 10px; margin-right: 10px;">
                         <tr>
                             <td class="data" style="padding-top: 16px;">USERNAME:</td>
                             <td class="field-data-username">miha.j12</td>
@@ -76,8 +77,8 @@
 
                 <div class="col-md-2 col-xs-12" style="padding-top: 45px; padding-bottom: 10px;">
                     <div class="row" style="text-align: center;">
-                        <div class="col-xs-12"><a type="button" class="btn btn-primary" id="requestStudentRequests" href="requests.html" style="width: 90%; margin-bottom: 10px; display: inline-block;">See requests</a></div>
-                        <div class="col-xs-12"><a type="button" class="btn btn-primary" id="requestStudentLectures" href="profileStudent.html" style="width: 90%; margin-top: 10px; display: inline-block;">Hide my lectures</a></div>
+                        <div class="col-xs-12"><a type="button" class="btn btn-primary" id="requestStudentRequests" href="profileStudent.html" style="width: 90%; margin-bottom: 10px; display: inline-block;">Requests</a></div>
+                        <div class="col-xs-12"><a type="button" class="btn btn-primary" id="requestStudentLectures"  style="width: 90%; margin-top: 10px; display: inline-block; background-color: black; color: yellow;">Taken lectures</a></div>
                     </div>
                 </div>
             </div>
