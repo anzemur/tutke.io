@@ -29,35 +29,31 @@ ul {
 }
 
 /* ===============NAVBAR================================== */
-.navbar-default {
+.customNavbar {
     background-color: #fff;
     border-color: #E7E7E7;
-    height: 50px;
+    height: 60px;
+    line-height: 60px;
 
     -webkit-box-shadow: 0 4px 6px -6px #222;
     -moz-box-shadow: 0 4px 6px -6px #222;
     box-shadow: 0 4px 6px -6px #222;
+
+    padding-left: 14%;
+    padding-right: 14%;
+    margin-bottom: 10px;
 }
 
-.navbar {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    border-width: 0px;
-    border-bottom: 1px solid #E0E0E0;
-
-    min-height: 60px;
+#userIconToggle {
+    float: right;
+    display: inline-block;
 }
 
-.navbar.navbar-default {
-    margin-bottom: 12px;
-}
-
-.navbar-brand {
-    padding: 0 15px;
-    height: 60px;
-    line-height: 60px;
-    position: absolute;
+#userIconToggle i{
+    padding-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 }
   
 .navbar-toggle {
@@ -72,16 +68,6 @@ ul {
 }
 
 @media (min-width: 768px) { /* zasloni nad 768px */
-    .navbar-nav > li > a {
-      /* (60px - line-height of 27px) / 2 = 26.5px */
-      padding-top: 16.5px;
-      padding-bottom: 16.5px;
-      line-height: 27px;
-    }
-
-    .navbar {
-        padding: 0 14%;
-    }
 
     .navLogo {
         margin: 10px 0px;
@@ -146,16 +132,6 @@ a#userIcon.dropdown-toggle {
 #usernameTitle {
     color: #ff9b00;
     padding-right: 0;
-}
-
-.navbar.center .navbar-inner {
-    text-align: center;
-}
-
-.navbar.center .navbar-inner .nav {
-    display:inline-block;
-    float: none;
-    vertical-align: top;
 }
 
 /* ====================================================END OF NAVBAR */
