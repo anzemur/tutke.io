@@ -2,6 +2,10 @@ h3{
     color: #1c1259;
 }
 
+body {
+    background-color: rgb(245, 246, 250);
+}
+
 th {
     padding: 20px;
 }
