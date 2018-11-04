@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="../styles/profiles.css">
 </head>
 <body>
-
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,7 +25,6 @@
         
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" id="usernameTitle">User</a></li>
                     <li class="dropdown">
@@ -42,46 +40,78 @@
                         </ul>
                     </li>
                 </ul>
-
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
-
-
+    
     <div class="container" id="mainContent">
-
-        <div class="row">
-            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 line">
-                <div class="usernameAndPic">
-                    <h4 id="username">miha.j12</h4>
-                    <img src="../res/profilePicPlaceholder.jpg" alt="profilePic" id="pic">
+        <div class="box" id="line" style = "border:1px solid #ff9b00; min-width: 210px;">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12" style="margin-left: 25px; text-align: center; padding-right: 40px;">
+                    <div class="stars" id="profile" style="margin-top: 10px; display: inline-block;">
+                        <tr><img src="../res/profilePicPlaceholder.jpg" alt="profilePic" id="pic"></tr>
+                        <tr><img src="../res/stars.png" alt="profilePic" id="pic1"></tr>
+                    </div>
                 </div>
                 
-                <table id="dataTable">
-                    <tr>
-                        <td class="data">NAME:</td>
-                        <td style="display: inline;">Miha Jakše</td>
-                    </tr>
-                    <tr>
-                        <td class="data">FACULTY:</td>
-                        <td style="display: inline;">Faculty of Computer and Information Science</td>
-                    </tr>
-                    <tr>
-                        <td class="data">LEVEL OF EDUCATION:</td>
-                        <td style="display: inline;">Bachelor's</d>
-                    </tr>
-                </table>
+                <div class="col-md-6 col-sm-7 col-xs-12" style="padding-left: 20px;">
+                    <h4 class="title">Student Miha Jakše</h4>
+                    <table id="dataTable">
+                        <tr>
+                            <td class="data" style="padding-top: 16px;">USERNAME:</td>
+                            <td class="field-data-username">miha.j</td>
+                        </tr>
+                        <tr>
+                            <td class="data" style="padding-top: 16px;">FACULTY:</td>
+                            <td class="field-data-faculty">Faculty of Computer and Information Science</td>
+                        </tr>
+                        <tr>
+                            <td class="data" style="padding-top: 16px;">LEVEL OF EDUCATION:</td>
+                            <td class="field-data-education">Upper secondary education</td>
+                        </tr>
+                    </table>
+                </div>
+            
             </div>
             
-        </div>
+            <!-- <hr style="margin-left: 15px; margin-right: 15px; padding-bottom: 5px;" />-->
+            
+            <h4 class="pastLectures">Taken Lectures:</h4>
 
+            <div class="adPreview">    
+                <hr />
+                <div class="panel panel-default adPanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="adTitle">Tutoring Data Structures<span id="adPrice">tutor1</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="adPreview">           
+                <div class="panel panel-default adPanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="adTitle">Economics Crash-course!<span id="adPrice">tutor2</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="adPreview">           
+                <div class="panel panel-default adPanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="adTitle">Learn PyCharm<span id="adPrice">tutor3</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    </div>
+                </div>
+            </div>     
+        </div>
     </div> 
     
-    <!-- pagination -->
-    
-    <!-- end of pagination -->
-
     <!-- Bootstrap scripts -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- jQuery -->

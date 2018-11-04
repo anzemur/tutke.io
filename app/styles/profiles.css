@@ -10,7 +10,7 @@ th {
     padding: 20px;
 }
 
-h4{ 
+.title { 
     padding-top: 15px;
     text-align: center;
 }
@@ -22,6 +22,12 @@ table {
 td {
     height: 50px;
     padding-right: 10px;
+}
+
+.pastLectures {
+    margin-left: 20px;
+    margin-top: 30px;
+    font-weight: 500;
 }
 
 #slika {
