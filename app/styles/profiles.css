@@ -17,8 +17,12 @@ td {
     padding-right: 10px;
 }
 
-#slika {
-    padding-right: 40px;
+#mainContent {
+    border: 1px solid #ff9b00;
+    border-color: #ff9b00;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
 }
 
 .form-control {
@@ -53,7 +57,7 @@ td {
     height: auto;
     /*border-radius: 60%;*/
     float: left;
-    padding-right: 20px;
+    padding-right: 30px;
     padding-bottom: 30px;
 }
 
