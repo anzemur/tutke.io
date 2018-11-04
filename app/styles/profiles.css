@@ -217,9 +217,13 @@ div.jumbotron {
 
 /* =================================END OF JUMBOTRON================ */
 
-#mainContent {
-    left: 50%;
-}
+
+
+#mainContent.container1 {
+    margin: 10px 14% 14%;
+    padding: 0;
+} 
+
 
 .adPreview {
     padding-left: 15px;
