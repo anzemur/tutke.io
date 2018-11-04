@@ -213,6 +213,10 @@ a#userIcon.dropdown-toggle {
     border-radius: 0;
 }
 
+div.panel-body p{
+    margin-bottom: 0;
+}
+
 #adTitle {
     color: #1c1259;
 }
@@ -237,6 +241,24 @@ a#userIcon.dropdown-toggle {
 #requestTutorBtn:hover {
     color: #fff;
     background-color: #ff9b00;
+}
+
+#userPublisher {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #ff9b00;
+}
+
+.extraHeading {
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    border: 1px rgb(221, 221, 221) solid;
+    border-bottom-color: rgb(245, 245, 245);
+    display: inline-block;
+    background-color: rgb(245, 245, 245);
+    border-radius: 15px 15px 0 0;
+    margin-bottom: -1px;
 }
 /* ======================== END OF MAIN COLUMN ================== */
 
