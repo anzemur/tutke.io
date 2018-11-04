@@ -346,11 +346,24 @@ div.panel-heading {
 }
 
 button#requestTutorBtn.btn.btn-primary {
-    margin-right: -1px;
+    margin-right: -11px;
 }
 
 @media (max-width: 1000px) {
     .buttonTextRequest {
         display: none;
     }
+}
+
+span#adPrice {
+    margin-right: 10px;
+}
+
+div.panel-body a {
+    color: #ff9b00;
+}
+
+#textAreaComment {
+    max-width: 97%;
+    min-width: 97%;
 }

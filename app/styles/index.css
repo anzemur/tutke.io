@@ -500,3 +500,7 @@ select#category.form-control {
     border-bottom-right-radius: 20px;
 }
 /* =============== end of pagination: ============= */
+
+#fullViewOffer {
+    margin-top: 30px;
+}
