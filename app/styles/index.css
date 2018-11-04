@@ -1,5 +1,21 @@
-h3{
+body {
+    background-color: rgb(245, 246, 250);
+}
+
+h3 {
     color: #1c1259;
+}
+
+h4 {
+    color: #1c1259;
+}
+
+a {
+    color: #ff9b00;
+}
+
+ul {
+    list-style-type: square;
 }
 
 .form-control {
@@ -78,6 +94,24 @@ h3{
         margin: 10px 0 10px 10px;
         height: 40px;
     }
+
+    .buttonTextRequest {
+        display: none;
+    }
+
+    div#leftColumn {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    div#rightColumn {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    div#tutorsOffers {
+        padding-left: 0;
+    }
 }
 
 @media screen and (max-width: 320px) {
@@ -138,6 +172,7 @@ a#userIcon.dropdown-toggle {
 
 .nav-tabs.nav-custom.nav-justified>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     border: 0;
+    background-color: rgb(245, 246, 250);
     border-bottom: 3px solid #ff9b00;
 }
 
@@ -154,25 +189,25 @@ a#userIcon.dropdown-toggle {
 /* ========================================END OF NAVTABS==================== */
 
 /* ==============================JUMBOTRON====================== */
-.container.container-jumbotron {
-    margin: 10px 14%;
-    padding: 0;
-}
 
-div.jumbotron {
-    padding: 10px 0;
-    background-color: #fff;
+#searchTutor {
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    background-color: rgb(245, 246, 250);
 }
 
 /* =================================END OF JUMBOTRON================ */
 
-#mainContent {
-    margin: 10px 14%;
+/* ======================== MAIN COLUMN ================== */
+.row{
+    margin-left: auto; margin-right: auto;
 }
 
-.col-xl-8.col-lg-8.col-md-8.col-sm-12.adPreview {
-    padding-left: 0;
-}
+#mainContent.container-fluid {
+    margin: 10px 14%;
+    padding: 0;
+} 
 
 .panel.panel-default.adPanel {
     border-radius: 0;
@@ -203,7 +238,225 @@ div.jumbotron {
     color: #fff;
     background-color: #ff9b00;
 }
+/* ======================== END OF MAIN COLUMN ================== */
 
+/* =========================== LEFT COLUMN ======================== */
+.thumbnail.profileThumbnail {
+    border-radius: 0;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+h4#profileTitle {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.thumbnail.profileThumbnail p {
+    text-align: left;
+    margin: 0px 0px 10px 0px;
+}
+
+.rating {
+    white-space: nowrap;
+}
+
+.rating i {
+    color: #ff9b00;
+    white-space: nowrap;
+}
+
+.thumbnail.upcomingEvents {
+    border-radius: 0;
+    padding: 10px 10px 10px 20px;
+}
+
+ul#upcomingEventsList {
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+#upcomingEventsList li {
+    margin-bottom: 5px;
+}
+
+h4#upcomingEvents {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+div#leftColumn {
+    padding-left: 0;
+}
+
+div#rightColumn {
+    padding-right: 0;
+}
+
+.statusDenied {
+    color: #ff4239;
+}
+
+.statusDenied a{
+    color: #ff4239;
+}
+
+.statusPending {
+    color: #1c1259;
+}
+
+
+/* =========================== END OF LEFT COLUMN ======================== */
+
+/* ====================== TUTOR INDEX PAGE ======================== */
+
+button.acceptDeny {
+    color: #ff9b00;
+    background-color: #fff;
+    border: 1px solid #ff9b00;
+    border-radius: 20px;
+    margin-left: 5px;
+}
+
+#acceptRequest.acceptDeny:hover {
+    color: #fff;
+    background-color: green;
+    border: 1px solid green;
+}
+
+#denyRequest.acceptDeny:hover {
+    color: #fff;
+    background-color: red;
+    border: 1px solid red;
+}
+
+#tutorProfile {
+    margin-top: 30px;
+}
+
+#tutorsOffers {
+    margin-top: 30px;
+    padding-right: 0;
+}
+
+#tutorOffersTitle {
+    color: #ff9b00;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ====================== END OF TUTOR INDEX PAGE ======================== */
+
+/* ============== FLOAT BUTTON ============= */
+
+.label-container{
+	position:fixed;
+	bottom:48px;
+	right:105px;
+	display:table;
+	visibility: hidden;
+}
+
+.label-text{
+	color:#FFF;
+	background:rgba(51,51,51,0.5);
+	display:table-cell;
+	vertical-align:middle;
+	padding:10px;
+	border-radius:3px;
+}
+
+.label-arrow{
+	display:table-cell;
+	vertical-align:middle;
+	color:#333;
+	opacity:0.5;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#ff9b00;
+	color:#fff;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.float:hover {
+    color: #fff;
+}
+
+.float:focus {
+    color: #fff;
+}
+
+.my-float{
+	font-size:24px;
+	margin-top:18px;
+}
+
+a.float + div.label-container {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease;
+}
+
+a.float:hover + div.label-container{
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ============== END OF FLOAT BUTTON ============= */
+
+/* ======================== MODAL ======================== */
+#addListing.modal.fade {
+    height: 100%;
+}
+
+.modal-title {
+    color: #ff9b00;
+    font-weight: 500;
+}
+
+.adInfo {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.modal-knowledge { margin-right: 10px; }
+
+.modal-radio-group {
+    margin-top: 25px;
+}
+
+.form-price {
+    margin-top: 15px;
+}
+
+.modal-form-group {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+select#category.form-control {
+    border-radius:20px;
+    -webkit-appearance: none;
+}
+
+
+/* =================== END OF MODAL ====================== */
+
+/* =============== pagination: ============= */
 .pagination>li>a {
     color: #1c1259;
 }
@@ -217,3 +470,4 @@ div.jumbotron {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+/* =============== end of pagination: ============= */
