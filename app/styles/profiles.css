@@ -82,6 +82,13 @@ td {
     border-radius: 20px;
 }
 
+.btn.btn-danger {
+    border-radius: 20px;
+}
+
+.btn.btn-success {
+    border-radius: 20px;
+}
 
 /* ===============NAVBAR================================== */
 .customNavbar {
