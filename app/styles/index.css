@@ -28,6 +28,22 @@ ul {
     font-weight: 500;
 }
 
+.btn.btn-primary{
+    border-radius: 20px;
+    border-color: #ff9b00;
+    color: #ff9b00;
+    background-color: #fff;
+}
+
+.btn.btn-default {
+    border-radius: 20px;
+}
+
+.btn.btn-primary:hover {
+    background-color: #ff9b00;
+    color: #FFF;
+}
+
 /* ===============NAVBAR================================== */
 .customNavbar {
     background-color: #fff;
