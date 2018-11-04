@@ -346,7 +346,7 @@ div.panel-heading {
 }
 
 button#requestTutorBtn.btn.btn-primary {
-    margin-right: -1px;
+    margin-right: -11px;
 }
 
 @media (max-width: 1000px) {
