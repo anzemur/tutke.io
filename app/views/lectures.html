@@ -48,30 +48,42 @@
     </nav>
 
     <div class="container " id="mainContent">
-        <div class="row col-xl-offset-1 col-xl-10 col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-12 col-xs-12" style = "border:1px solid #ff9b00;">
+        <div style = "border:1px solid #ff9b00;">
             <div class="line">
-                <div class="stars" style="margin-top: 10px;">
-                    <img src="../res/profilePicPlaceholder.jpg" alt="profilePic" id="pic">
-                    <img src="../res/stars.png" alt="profilePic" id="pic1">
-                </div>
-                <h4>Tutor Anja Holc</h4>
-                <table id="dataTable">
-                    <tr>
-                        <td class="data">USERNAME:</td>
-                        <td class="field-data">anjaholc</td>
-                        <td><a type="button" class="btn btn-primary" id="requestTutorCertificates" href="#" style="width: 200px; margin-left: 50px; margin-bottom: 10px;">See certificates</a></td>
-                    </tr>
-                    <tr>
-                        <td class="data">FACULTY:</td>
-                        <td>Faculty of Computer and Information Science</td>
-                    </tr>
-                    <tr>
-                        <td class="data">LEVEL OF EDUCATION:</td>
-                        <td>Bachelor or equivalent</td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-left: 25px; text-align: center; padding-right: 40px;">
+                        <div class="stars" id="profile" style="margin-top: 10px; display: inline-block;">
+                            <tr><img src="../res/profilePicPlaceholder.jpg" alt="profilePic" id="pic"></tr>
+                            <tr><img src="../res/stars.png" alt="profilePic" id="pic1"></tr>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-7 col-xs-12" style="padding-left: 20px;">
+                        <h4>Tutor Anja Holc</h4>
+                        <table id="dataTable">
+                            <tr>
+                                <td class="data" style="padding-top: 16px;">USERNAME:</td>
+                                <td class="field-data-username">anjaholc</td>
+                            </tr>
+                            <tr>
+                                <td class="data" style="padding-top: 16px;">FACULTY:</td>
+                                <td class="field-data-faculty">Faculty of Computer and Information Science</td>
+                            </tr>
+                            <tr>
+                                <td class="data" style="padding-top: 16px;">LEVEL OF EDUCATION:</td>
+                                <td class="field-data-education">Bachelor or equivalent</td>
+                            </tr>
+                        </table>
+                    </div>
                 
-                <div class="lectures-list" id="tutor">
+                    <div class="col-md-2 col-xs-12" style="padding-top: 45px; padding-bottom: 10px;">
+                        <div class="row" style="text-align: center;">
+                            <div class="col-xs-12"><a type="button" class="btn btn-primary" id="requestTutorCertificates" href="#" style="width: 90%; margin-bottom: 10px; display: inline-block;">See certificates</a></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lectures-list" id="tutor" style="margin-left:20px; margin-right: 20px">
                     <br><h3>All my lectures:</h3>
                     <div class="panel panel-default adPanel">
                         <div class="panel-heading">
