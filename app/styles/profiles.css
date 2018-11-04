@@ -78,6 +78,10 @@ td {
     padding-bottom: 15px;
 }
 
+.btn.btn-default {
+    border-radius: 20px;
+}
+
 
 /* ===============NAVBAR================================== */
 .customNavbar {
@@ -311,11 +315,21 @@ textarea {
     -webkit-appearance: none;
 }
 
-.btn.send {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+#modal-message {
+    max-width: 100%;
+    min-width: 100%;
 }
 
+.btn.sendBtn {
+    border-radius: 20px;
+    border-color: #ff9b00;
+    color: #ff9b00;
+    background-color: #fff;
+}
+
+.btn.sendBtn:hover {
+    background-color: #ff9b00;
+    color: #FFF;
+}
 
 /* =================== END OF MODAL ====================== */

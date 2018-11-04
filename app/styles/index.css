@@ -477,6 +477,11 @@ select#category.form-control {
     -webkit-appearance: none;
 }
 
+#modal-message {
+    max-width: 100%;
+    min-width: 100%;
+}
+
 
 /* =================== END OF MODAL ====================== */
 
