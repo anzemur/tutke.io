@@ -55,12 +55,6 @@ ul {
     vertical-align: middle;
     line-height: normal;
 }
-  
-.navbar-toggle {
-    /* (60px - button height 34px) / 2 = 13px */
-    margin-top: 13px;
-    padding: 9px 10px !important;
-}
 
 #navbarContainer {
     padding-left: 0;
@@ -117,6 +111,10 @@ ul {
     font-size: 30px;
     color: #ff9b00;
     padding-right: 0;
+}
+
+a#userIcon.dropdown-toggle {
+    color: #ff9b00;
 }
 
 a#userIcon.dropdown-toggle {
