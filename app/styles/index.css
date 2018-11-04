@@ -89,14 +89,16 @@ ul {
     }
 }
 
+@media (max-width: 1000px) {
+    .buttonTextRequest {
+        display: none;
+    }
+}
+
 @media (max-width: 767px) {
     .navLogo {
         margin: 10px 0 10px 10px;
         height: 40px;
-    }
-
-    .buttonTextRequest {
-        display: none;
     }
 
     div#leftColumn {
