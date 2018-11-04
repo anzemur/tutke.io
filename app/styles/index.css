@@ -307,6 +307,16 @@ div#rightColumn {
     color: #1c1259;
 }
 
+#dailyQuote.thumbnail {
+    background-color: rgb(245, 246, 250);
+    border: 0;
+    color: #1c1259;
+}
+
+#dailyQuote.thumbnail h4 {
+    text-align: center;
+}
+
 
 /* =========================== END OF LEFT COLUMN ======================== */
 
