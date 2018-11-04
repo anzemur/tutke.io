@@ -20,17 +20,8 @@ td {
     padding-right: 10px;
 }
 
-<<<<<<< HEAD
-#mainContent {
-    border: 1px solid #ff9b00;
-    border-color: #ff9b00;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 30px;
-=======
 #slika {
     padding-right: 20px;
->>>>>>> ada8c051edb916166a4245dc3f0186b4f8c97427
 }
 
 .form-control {
@@ -64,11 +55,6 @@ td {
     width: 180px;
     height: auto;
     /*border-radius: 60%;*/
-<<<<<<< HEAD
-    float: left;
-    padding-right: 30px;
-    padding-bottom: 30px;
-=======
     padding-top: 20px;
     padding-right: 20px;
     padding-bottom: 15px;
@@ -80,7 +66,6 @@ td {
     /*border-radius: 60%;*/
     padding-right: 20px;
     padding-bottom: 15px;
->>>>>>> ada8c051edb916166a4245dc3f0186b4f8c97427
 }
 
 
