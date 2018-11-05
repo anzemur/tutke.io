@@ -48,6 +48,12 @@ Our goal is to spread knowledge.
 * ### [Pop up - edit Offer](docs/editOffer.png):
 	* From his profile page, a tutor can access his active offers. He can delete them or edit them. By clicking on the button edit, a pop up window opens which allows the user to change the offers Title, Choose a different category, change the expiration date and focused educating group, change the price and edit his lecture's desrctiption. By clicking on the button Validate, his changes to the offer take effect.
 	
+	
+## Integration with outsourced api:
+User will be able to see daily students qoutes from this [API](http://quotes.rest/).
+
+
+
 ## Development guidelines:
 * ### Develop branch
 	* All development happens here, you can add more branches for specific features and when that feature is completed merge it back to develop branch.
