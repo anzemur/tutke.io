@@ -45,7 +45,7 @@ Our goal is to spread knowledge.
 * ### [Pop up - add offer](docs/addNewTutorService.png):
 	* By clicking on the float button(marked with +) while being on the Student's Requests tab on the homepage, a user can add a new tutor's service. He has to name a specific subject, choose a category for the said subject and pick a date until which he is ready to offer his service. He also picks a targeted group based on the level of education and names his price per hour for such a service. Finally, he can add an optional message before posting his offer on the webpage for all students to see.
 	
-* ### [Pop up - edit Offer](docs/editOffer.png):
+* ### [Pop up - edit Offer](docs/popUp-editOffer.png):
 	* From his profile page, a tutor can access his active offers. He can delete them or edit them. By clicking on the button edit, a pop up window opens which allows the user to change the offers Title, Choose a different category, change the expiration date and focused educating group, change the price and edit his lecture's desrctiption. By clicking on the button Validate, his changes to the offer take effect.
 	
 	
