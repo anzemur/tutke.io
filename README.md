@@ -15,7 +15,7 @@ Our goal is to spread knowledge.
 
 ## Feautured Screens
 
-* ### [Log In screen](docs/login.png):
+* ### [Log In screen](docs/logIn.png):
 	* User can log in.
 	* User can be redirected to sign up page.
 
