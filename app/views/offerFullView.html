@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+    <title>Tutke.io</title>
+    <meta charset="utf-8">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body>
+
+    <div class="customNavbar">
+        <a href="index.html" class="navbar-left"><img class="navLogo" src="../res/logoTutke.svg"></a>
+       
+        <div class="dropdown" id="userIconToggle">
+            <a href="#" class="dropdown-toggle" id="userIcon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <i class="fas fa-user-circle"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Account setting</a></li>
+                <li role="separator" class="divider"></li>
+                <!-- <li class="dropdown-header">Nav header</li> -->
+                <li><a href="#">My requests</a></li>
+                <li><a href="#">My listings</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="logIn.html">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="mainContent">
+
+        <div class="totalAdPanel" id="fullViewOffer">
+            <div class="extraHeading"><span id="userPublisher"><a href="#">TutorUser1</a><span class="date"> - 05/11/2018</span></span></div>
+            <div class="panel panel-default adPanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="adTitle">Learn Linear Algebra!<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla. Nullam dignissim tincidunt porttitor. Nunc elementum odio eget erat bibendum condimentum. Sed dapibus eleifend neque a ultricies. Donec enim urna, cursus sit amet tellus ac, imperdiet pellentesque libero. Vivamus mollis magna enim. Etiam vel nunc metus. Donec vehicula posuere nunc, non fermentum elit aliquet ut. Proin suscipit dui ac neque ornare iaculis.
+                            <br>
+                            Suspendisse potenti. Nullam felis justo, luctus sit amet eros nec, laoreet pretium ligula. Aliquam porta eget tortor eget placerat. Sed eget elit ut dui sodales tempor nec id lacus. Maecenas ac ex euismod dui pharetra pellentesque vel quis metus. Aliquam quis ex quis dolor elementum mollis. In convallis efficitur orci id porta. Curabitur sed risus non augue rutrum vulputate. Quisque et nisi metus. Mauris laoreet commodo nibh, et porttitor lorem fringilla aliquet.
+                            <br>
+                            Sed sit amet nulla eget eros volutpat bibendum. Integer mattis lacinia libero. Sed aliquet tellus eget sapien aliquet, nec tempus eros finibus. In tincidunt eros ex, ac tempor ex aliquam eget. Donec ullamcorper magna vel justo vulputate, eget venenatis nisl lobortis. Donec accumsan quam a turpis egestas, gravida fermentum velit tristique. Maecenas ultrices gravida pretium. Quisque nulla sapien, viverra a sapien vel, aliquam pretium mi. Aliquam hendrerit, velit nec lacinia viverra, justo mi luctus est, at facilisis orci diam in augue. Cras sed aliquam nisl, ullamcorper fermentum ipsum. Nunc id sem at tellus faucibus eleifend. Aliquam sagittis vitae massa eget pulvinar. Suspendisse potenti. Sed ullamcorper nisi consectetur, lobortis lacus sed, tempor mauris.</p>
+                </div>
+            </div>
+        </div>    
+        
+    </div>
+
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+        $(".nav-custom li").on("click", function(){
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script> 
+</body>
