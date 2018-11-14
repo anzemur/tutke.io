@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title Log In
+    meta(charset='utf-8')
+    // Bootstrap
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+    // Styles
+    link(rel='stylesheet', type='text/css', href='/stylesheets/logIn.css')
+  body
+    .container
+      .row
+        .col-sm-offset-2.col-sm-8.col-md-offset-4.col-md-4.col-xs-12
+          .log-in-form.panel.panel-default
+            h3 Log in to your account
+            form(action='index.html')
+              .input-group.log-in-inputs
+                span.input-group-addon
+                  span.glyphicon.glyphicon-user
+                input.form-control.left-border-none.input-lg(name='username', placeholder='Username or email', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter username.')", oninput="this.setCustomValidity('')")
+              .input-group.log-in-inputs
+                span.input-group-addon
+                  span.glyphicon.glyphicon-lock
+                input.form-control.left-border-none.input-lg(name='password', placeholder='Password', type='password', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter password.')", oninput="this.setCustomValidity('')")
+              .log-in-btn-position
+                button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Log In
+            div
+              a.panel-footer(href='signUp.html') Not a part of tutke.io yet? Sign Up
+    // Bootstrap scripts
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
