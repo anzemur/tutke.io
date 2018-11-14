@@ -26,6 +26,7 @@ var server = http.createServer(app);
  */
 
 server.listen(port);
+logListeningParams();
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -87,4 +88,13 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+}
+
+/**
+ * Log listening parameters.
+ */
+function logListeningParams() {
+  var host = server.address().address;
+  host = (host === '::' ? 'localhost' : host);
+  console.log('Server running at: http://%s:%s', host, port);
 }
