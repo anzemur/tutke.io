@@ -2,6 +2,13 @@ body {
     background-color: rgb(245, 246, 250);
 }
 
+footer {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    overflow: hidden;
+}
+
 h3 {
     color: #1c1259;
 }
