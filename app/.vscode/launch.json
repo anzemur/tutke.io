@@ -7,8 +7,16 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug [DEFAULT PORT]",
+      "name": "DEBUG [Default PORT]",
       "program": "${workspaceFolder}\\bin\\www"
+    },
+    {
+      "name": "NODEMON [Default PORT]",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/nodemon/bin/nodemon.js",
+      "args": ["${workspaceFolder}\\bin\\www"],
+      "runtimeArgs": ["--nolazy"]
     }
   ]
 }
