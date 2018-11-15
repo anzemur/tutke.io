@@ -1,0 +1,21 @@
+{
+    "username": "janezNovak",
+    "firstName": "Miha",
+    "lastName": "Novak",
+    "email": "janez.novak@gmail.com",
+    "currentTeachingInstitution": "FRI",
+    "educationLevel": "Primary education",
+    "educationField": "Computer Science",
+    "role": 2,
+    "rating": 4,
+    "comments": [
+        1,
+        2,
+        3
+    ],
+    "postedLectures": [
+        1,
+        2,
+        3
+    ]
+}
