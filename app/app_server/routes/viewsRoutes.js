@@ -5,6 +5,7 @@ var ctrlLogIn = require('../controllers/logIn');
 
 /* GET index page. */
 router.get('/', ctrlIndex.index);
+router.post('/', ctrlIndex.index);
 router.get('/login', ctrlLogIn.logIn);
 
 module.exports = router;

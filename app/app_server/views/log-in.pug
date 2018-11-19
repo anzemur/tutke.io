@@ -14,11 +14,16 @@ html
     link(rel='stylesheet', type='text/css', href='/stylesheets/logIn.css')
   body
     .container
+      if error
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{error}
       .row
         .col-sm-offset-2.col-sm-8.col-md-offset-4.col-md-4.col-xs-12
           .log-in-form.panel.panel-default
             h3 Log in to your account
-            form(action='index.html')
+            form(action='/' method="POST")
               .input-group.log-in-inputs
                 span.input-group-addon
                   span.glyphicon.glyphicon-user
