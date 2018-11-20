@@ -1,8 +1,13 @@
+'use strict';
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+/* Connect to db. */
+require('./app_api/models/db');
 
 var viewsRouter = require('./app_server/routes/viewsRoutes');
 
