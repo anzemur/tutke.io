@@ -57,3 +57,5 @@ var closedConnection = function(msg, callback) {
 function getDbUri() {
   return process.env.NODE_ENV === 'production' ? process.env.MLAB_URI : 'mongodb://localhost/tutkeDev';
 }
+
+require('./users');
