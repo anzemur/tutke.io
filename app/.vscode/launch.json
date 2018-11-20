@@ -7,16 +7,24 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "NODEMON [Default PORT]",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceFolder}/app.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "DEBUG [Default PORT]",
       "program": "${workspaceFolder}\\bin\\www"
     },
     {
-      "name": "NODEMON [Default PORT]",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/nodemon/bin/nodemon.js",
-      "args": ["${workspaceFolder}\\bin\\www"],
-      "runtimeArgs": ["--nolazy"]
-    }
+      "name": "SEED [Default PORT]",
+      "program": "${workspaceFolder}\\app_api\\models\\seed\\seed"
+    },
   ]
 }
