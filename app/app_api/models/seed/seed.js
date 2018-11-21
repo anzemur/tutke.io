@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * Adds base data to db. Define data in ./data folder.
+ */
 var mongoose = require('mongoose');
 require('../db');
 var User = mongoose.model('User');

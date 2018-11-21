@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 module.exports.getUser = function(req, res) {
-  User.create()
 
   respondJson(res, 200, {"status": "uspešno"});
 };
