@@ -1,6 +1,68 @@
 extends layout
 
-
 block content
-  h1= title
-  p Welcome to #{title} #{user.firstName}
+  
+  #toggleNavContainer.container
+  ul.nav.nav-tabs.nav-custom.nav-justified
+    li.active(role='presentation')
+      a(href='index.html') Lectures
+    li(role='presentation')
+      a(href='indexTutor.html') Student&apos;s requests
+
+  #mainContent.container-fluid
+    .row
+      #leftColumn.col-xl-4.col-lg-4.col-md-4.col-sm-4
+        .thumbnail.profileThumbnail(stlye='margin-top:200px')
+          h4#profileTitle Profile
+          p
+            | Rating:
+            span.rating
+              i.fas.fa-star
+              i.fas.fa-star
+              i.fas.fa-star
+              i.far.fa-star
+              i.far.fa-star
+          p Last time online: 14:43 06/10/2018
+        .thumbnail.upcomingEvents
+          h4#upcomingEvents Upcoming Events
+          ul#upcomingEventsList
+            li
+              a(href='#') Learn Linear Algebra!, 9/12/2019 at 17:45
+            li
+              a(href='#') JAVA programming, 10/12/2019 at 12:45
+            li
+              a(href='#') Fun times with prof. Mur, 22/12/2019 at 9:00
+            li
+              a(href='#') Learn Linear Algebra!, 28/12/2019 at 14:30
+        .thumbnail.upcomingEvents
+          h4#upcomingEvents Pending Requests
+          ul#upcomingEventsList
+            li
+              p
+                | Learn Linear Algebra! - TutorUsername - 
+                span.statusPending Pending
+            li
+              p
+                | JAVA programming - TutorUsername - 
+                span.statusPending Pending
+            li
+              p
+                | Learn Linear Algebra! - TutorUsername - 
+                span.statusDenied
+                  | Denied 
+                  a.far.fa-trash-alt(href='#' title='Remove from list')
+        #dailyQuote.thumbnail
+          h4 Daily Quote
+          p
+            | &ldquo;Winners embrace hard work. They love the discipline of it, the trade-off they&rsquo;re making to win. Losers, on the other hand, see it as punishment. And that&rsquo;s the difference.&rdquo;
+          p - Lou Holtz
+      
+      #rightColumn.col-xl-8.col-lg-8.col-md-8.col-sm-8
+        #searchTutor.container-fluid.container-jumbotron
+          h3 Search available tutors here:
+          .input-group
+            input.form-control(type='text' placeholder='Search for...')
+            span.input-group-btn
+              button#btnSearch.btn.btn-default(type='button') Go!
+        
+
