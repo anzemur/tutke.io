@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
+var userEnums = require('./enums/users-enums');
 
 var commentSchema = new mongoose.Schema({
   author: {type: String, required: true},
@@ -18,7 +19,7 @@ var userSchema = new mongoose.Schema({
   educationLevel: String,
   fieldOfEducation: String,
   rating: {type: Number, "default": 0, min: 0, max: 5}, 
-  role: {type: String, required: true},
+  role: {type: userEnums.userRoles, required: true},
   comments: [commentSchema]
 });
 

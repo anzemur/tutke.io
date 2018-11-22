@@ -58,4 +58,6 @@ function getDbUri() {
   return process.env.NODE_ENV === 'production' ? process.env.MLAB_URI : 'mongodb://localhost/tutkeDev';
 }
 
+/* Register mongoose schemas */
 require('./users');
+require('./lectures');

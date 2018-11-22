@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var errors = require('../../lib/errors');
-var helperFunctions = require('./helper-functions');
+var helperFunctions = require('../../lib/helper-functions');
 var respondJson = helperFunctions.respondJson;
 
 /**
