@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "NODEMON [Default PORT]",
       "runtimeExecutable": "nodemon",
-      "program": "${workspaceFolder}\\bin\\www",
+      "program": "${workspaceFolder}/bin/www",
       "restart": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
@@ -18,13 +18,13 @@
       "type": "node",
       "request": "launch",
       "name": "DEBUG [Default PORT]",
-      "program": "${workspaceFolder}\\bin\\www"
+      "program": "${workspaceFolder}/bin/www"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "SEED [Default PORT]",
-      "program": "${workspaceFolder}\\app_api\\models\\seed\\seed"
+      "program": "${workspaceFolder}/app_api/models/seed/seed"
     },
   ]
 }

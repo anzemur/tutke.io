@@ -5,7 +5,7 @@ module.exports = [
     firstName: "Miha",
     lastName: "Novak",
     email: "miha.novak@gmail.com",
-    role: "tutor"
+    role: "tutor",
   },
   {
     username: "student",
@@ -13,6 +13,6 @@ module.exports = [
     firstName: "Janez",
     lastName: "Cena",
     email: "jc@gmail.com",
-    role: "student"
+    role: "student",
   }
 ];
