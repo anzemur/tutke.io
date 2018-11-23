@@ -16,7 +16,7 @@ module.exports.index = function(req, res) {
   // TODO
   // Log in successful
   if(true) {
-    res.render('indexV2', { title: 'Tutke.io', user: logedInUser });
+    res.render('index', { title: 'Tutke.io', user: logedInUser });
   
   // Error handling -> TODO: handle different errors
   } else {
