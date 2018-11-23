@@ -8,7 +8,7 @@
  * @param {object} data 
  */
 module.exports.respondJson = function(res, status, data) {
-  if(status == 200) {
+  if(status < 300) {
     res.status(status);
     res.json(data);
   } else {

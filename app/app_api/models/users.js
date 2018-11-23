@@ -20,7 +20,8 @@ var userSchema = new mongoose.Schema({
   fieldOfEducation: String,
   rating: {type: Number, "default": 0, min: 0, max: 5}, 
   role: {type: userEnums.userRoles, required: true},
-  comments: [commentSchema]
+  comments: [commentSchema],
+  postedLectures: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Lectures'} ]
 });
 
 mongoose.model('User', userSchema, 'Users');
