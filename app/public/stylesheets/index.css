@@ -500,12 +500,15 @@ select#category.form-control {
 .pagination>li:first-child>a, .pagination>li:first-child>span {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    width: 100px;
 }
 
 .pagination>li:last-child>a, .pagination>li:last-child>span {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    width: 100px;
 }
+
 /* =============== end of pagination: ============= */
 
 #fullViewOffer {
