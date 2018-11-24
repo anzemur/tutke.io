@@ -32,6 +32,12 @@ router.get('/lectures',
 
 router.get('/lectures/:lectureId', 
   ctrlLectures.getLecture);
+  
+router.patch('/lectures/:lectureId', 
+  ctrlLectures.updateLecture);
+
+router.put('/lectures/:lectureId', 
+  ctrlLectures.updateWholeLecture);
 
 router.post('/lectures', 
   ctrlLectures.createLecture);

@@ -8,7 +8,7 @@ var helperFunctions = require('../../lib/helper-functions');
 var respondJson = helperFunctions.respondJson;
 
 /**
- * GET all lectures.
+ * GET all lectures. TODO: Add sort, pagination, query..
  * Query parameter: {boolean} populate
  */
 module.exports.getLectures = (req, res) => {
@@ -55,6 +55,68 @@ module.exports.getLecture = (req, res) => {
 };
 
 /**
+ * UPDATES the whole lecture model.
+ * Path parameter: {string} lectureId.
+ * Body: {Lecture} Lecture model.
+ */
+module.exports.updateWholeLecture = (req, res) => {
+  if(req.params && req.params.lectureId) {
+    Lecture
+      .findById(req.params.lectureId)
+      .select('-createdAt -author -lectureType')
+      .exec((err, lecture) => {
+        if(!lecture) {
+          respondJson(res, 404, errors.NotFound);
+          return;
+        } else if(err) {
+          respondJson(res, 500, err);
+          return;
+        }
+        
+        lecture.title = req.body.title;
+        lecture.description = req.body.description;
+        lecture.price = req.body.price;
+        
+        lecture.save((err, lecture) => {
+          if(err) {
+            respondJson(res, 400, err);
+          } else {
+            respondJson(res, 200, lecture);
+          }
+        });
+      });
+
+  } else {
+    respondJson(res, 400, errors.BadRequest + 'lectureId');
+  }
+};
+
+/**
+ * UPDATES the lecture model - only attributes that are present in req body.
+ * Path parameter: {string} lectureId.
+ * Body: {Lecture} Lecture model.
+ */
+module.exports.updateLecture = function(req, res) {
+  if(req.params && req.params.lectureId) {
+    if(req.body.createdAt || req.body.author || req.body.lectureType) {
+      respondJson(res, 400, 'Cannot update attributes: createdAt, author, lectureType.');
+    } else {
+      Lecture
+        .update(
+          { _id: mongoose.Types.ObjectId(req.params.lectureId)},
+          { $set: req.body}
+        ).then(updateRes => {
+          respondJson(res, 200, updateRes);
+        }).catch(err => {
+          respondJson(res, 500, err);
+        });
+    }
+  } else {
+    respondJson(res, 400, errors.BadRequest + 'lectureId');
+  }
+}
+
+/**
  * CREATES lecture and adds its reference to the user.
  * Query parameter: {string} Author's userId.
  * Body: {Lecture} Lecture model.
@@ -84,7 +146,6 @@ module.exports.createLecture = (req, res) => {
     respondJson(res, 400, errors.BadRequest + 'userId');
   }
 };
-
 
 /**
  * DELETES lecture and adds its reference from the user.

@@ -6,7 +6,7 @@ var helperFunctions = require('../../lib/helper-functions');
 var respondJson = helperFunctions.respondJson;
 
 /**
- * GET all users. TODO: Add sort, pagination, populate, query..
+ * GET all users.
  */
 module.exports.getUsers = (req, res) => {
   User
@@ -54,7 +54,7 @@ module.exports.getUser = (req, res) => {
  * Body: {User} User model.
  */
 module.exports.updateWholeUser = (req, res) => {
-  if(req.params.userId && req.params.userId) {
+  if(req.params && req.params.userId) {
     User
       .findById(req.params.userId)
       .select('-comments -rating -role -postedLectures -password')
@@ -86,7 +86,7 @@ module.exports.updateWholeUser = (req, res) => {
       });
 
   } else {
-    respondJson(res, 200, user);
+    respondJson(res, 400, errors.BadRequest + 'userId');
   }
 };
 
@@ -96,7 +96,7 @@ module.exports.updateWholeUser = (req, res) => {
  * Body: {User} User model.
  */
 module.exports.updateUser = function(req, res) {
-  if(req.params.userId && req.params.userId) {
+  if(req.params && req.params.userId) {
     if(req.body.password || req.body.rating || req.body.role || req.body.postedLectures) {
       respondJson(res, 400, 'Cannot update attributes: password, rating, role, postedLectures');
     } else {
