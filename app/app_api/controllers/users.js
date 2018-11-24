@@ -57,7 +57,7 @@ module.exports.updateWholeUser = (req, res) => {
   if(req.params && req.params.userId) {
     User
       .findById(req.params.userId)
-      .select('-comments -rating -role -postedLectures -password')
+      .select('-comments -rating -role -postedLectures -password -lecturesRequests')
       .exec((err, user) => {
         if(!user) {
           respondJson(res, 404, errors.NotFound);
@@ -97,8 +97,8 @@ module.exports.updateWholeUser = (req, res) => {
  */
 module.exports.updateUser = function(req, res) {
   if(req.params && req.params.userId) {
-    if(req.body.password || req.body.rating || req.body.role || req.body.postedLectures) {
-      respondJson(res, 400, 'Cannot update attributes: password, rating, role, postedLectures');
+    if(req.body.password || req.body.rating || req.body.role || req.body.postedLectures || req.body.lecturesRequests) {
+      respondJson(res, 400, 'Cannot update attributes: password, rating, role, postedLectures, lecturesRequests.');
     } else {
       User
         .update(

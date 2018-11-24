@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+
 var ctrlUsers = require('../controllers/users');
 var ctrlLectures = require('../controllers/lectures');
+var ctrlLecturesRequests = require('../controllers/lectures-requests');
 
 /**
  * USERS routes.
@@ -44,5 +46,17 @@ router.post('/lectures',
 
 router.delete('/lectures/:lectureId', 
   ctrlLectures.deleteLecture);
+
+/**
+ * LECTURE REQUESTS routes.
+ */
+router.get('/lecturesRequests', 
+  ctrlLecturesRequests.getLecturesRequests);
+
+router.get('/lecturesRequests/:lectureRequestId', 
+  ctrlLecturesRequests.getLecturesRequest);
+
+router.post('/lecturesRequests', 
+  ctrlLecturesRequests.createLectureRequest);
 
 module.exports = router;
