@@ -13,7 +13,8 @@ module.exports.getUsers = (req, res) => {
     .find()
     .exec((err, users) => {
       if(err) {
-        respondJson(res, 500, err)
+        respondJson(res, 500, err);
+        return;
       } else {
         respondJson(res, 200, users);
       }
@@ -21,21 +22,27 @@ module.exports.getUsers = (req, res) => {
 };
 
 /**
- * GET a user based on userId.
- * Query param: userId
+ * GET a user by userId.
+ * Path parameter: {string} userId
+ * Query parameter: {boolean} populate
  */
 module.exports.getUser = (req, res) => {
   if (req.params && req.params.userId) {
-    User
-      .findById(req.params.userId)
-      .exec((err, user) => {
-        if (!user) {
-          respondJson(res, 404, errors.NotFound)
-        } else if (err) {
-          respondJson(res, 500, err)
-        }
-        respondJson(res, 200, user);
-      });
+    var query = User.findById(req.params.userId);
+
+    if(req.query && req.query.populate) 
+      query.populate('postedLectures');
+
+    query.exec((err, user) => {
+      if (!user) {
+        respondJson(res, 404, errors.NotFound);
+        return;
+      } else if (err) {
+        respondJson(res, 500, err);
+        return;
+      }
+      respondJson(res, 200, user);
+    });
   } else {
     respondJson(res, 400, errors.BadRequest + 'userId');
   }
