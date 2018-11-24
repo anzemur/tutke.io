@@ -9,38 +9,46 @@ var respondJson = helperFunctions.respondJson;
 
 /**
  * GET all lectures.
+ * Query parameter: {boolean} populate
  */
 module.exports.getLectures = (req, res) => {
-  Lecture
-    .find()
-    .exec((err, lectures) => {
-      if(err) {
-        respondJson(res, 500, err)
-        return;
-      } else {
-        respondJson(res, 200, lectures);
-      }
-    });
+  var query = Lecture.find();
+
+  if(req.query && req.query.populate) 
+    query.populate('author', 'username');
+
+  query.exec((err, lectures) => {
+    if(err) {
+      respondJson(res, 500, err)
+      return;
+    } else {
+      respondJson(res, 200, lectures);
+    }
+  });
 };
 
 /**
  * GET a user by lectureId.
- * Path parameter: lectureId
+ * Path parameter: {string} lectureId
+ * Query parameter: {boolean} populate
  */
 module.exports.getLecture = (req, res) => {
   if (req.params && req.params.lectureId) {
-    Lecture
-      .findById(req.params.lectureId)
-      .exec((err, lecture) => {
-        if (!lecture) {
-          respondJson(res, 404, errors.NotFound);
-          return;
-        } else if (err) {
-          respondJson(res, 500, err);
-          return;
-        }
-        respondJson(res, 200, lecture);
-      });
+    var query = Lecture.findById(req.params.lectureId);
+
+    if(req.query && req.query.populate) 
+      query.populate('author');
+
+    query.exec((err, lecture) => {
+      if (!lecture) {
+        respondJson(res, 404, errors.NotFound);
+        return;
+      } else if (err) {
+        respondJson(res, 500, err);
+        return;
+      }
+      respondJson(res, 200, lecture);
+    });
   } else {
     respondJson(res, 400, errors.BadRequest + 'lectureId');
   }
@@ -48,8 +56,8 @@ module.exports.getLecture = (req, res) => {
 
 /**
  * CREATES lecture and adds its reference to the user.
- * Query parameter: Author's userId.
- * Body: Lecture model.
+ * Query parameter: {string} Author's userId.
+ * Body: {Lecture} Lecture model.
  */
 module.exports.createLecture = (req, res) => {
   if(req.query && req.query.userId) {
@@ -80,8 +88,8 @@ module.exports.createLecture = (req, res) => {
 
 /**
  * DELETES lecture and adds its reference from the user.
- * Query parameter: Author's userId.
- * Path parameter: lectureId
+ * Query parameter: {string} Author's userId.
+ * Path parameter: {string} lectureId
  */
 module.exports.deleteLecture = (req, res) => {
   if(req.query && req.query.userId) {
