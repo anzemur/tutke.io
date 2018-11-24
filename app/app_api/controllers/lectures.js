@@ -118,33 +118,29 @@ module.exports.updateLecture = function(req, res) {
 
 /**
  * CREATES lecture and adds its reference to the user.
- * Query parameter: {string} Author's userId.
  * Body: {Lecture} Lecture model.
  */
 module.exports.createLecture = (req, res) => {
-  if(req.query && req.query.userId) {
-    req.body.author = mongoose.Types.ObjectId(req.query.userId);
-    Lecture.create(req.body)
-      .then(lecture => {
-        User.updateOne(
-          { _id: req.query.userId},
-          { $push: { postedLectures: lecture.id } }
-        )
-        .then(updateRes => {
-          respondJson(res, 201, lecture);
-        })
-        .catch(err=> {
-          respondJson(res, 500, 'User update failed:' + err);
-          return;
-        })
+  var userId = req.body.author;
+  req.body.author = mongoose.Types.ObjectId(req.body.author);
+  Lecture.create(req.body)
+    .then(lecture => {
+      User.updateOne(
+        { _id: userId },
+        { $push: { postedLectures: lecture.id } }
+      )
+      .then(updateRes => {
+        respondJson(res, 201, lecture);
       })
-      .catch(err => {
-        respondJson(res, 400, err);
+      .catch(err=> {
+        respondJson(res, 500, 'User update failed:' + err);
         return;
-      });
-  } else {
-    respondJson(res, 400, errors.BadRequest + 'userId');
-  }
+      })
+    })
+    .catch(err => {
+      respondJson(res, 400, err);
+      return;
+    });
 };
 
 /**
