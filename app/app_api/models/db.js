@@ -61,3 +61,4 @@ function getDbUri() {
 /* Register mongoose schemas */
 require('./users');
 require('./lectures');
+require('./lectures-requests');
