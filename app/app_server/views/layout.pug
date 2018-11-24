@@ -11,7 +11,7 @@ html
     link(rel='stylesheet', href='/stylesheets/index.css')
   body
     .customNavbar
-      a.navbar-left(href='index.html')
+      a.navbar-left(href='/')
         img.navLogo(src='/images/logoTutke.svg')
       #userIconToggle.dropdown
         a#userIcon.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
@@ -28,9 +28,9 @@ html
             a(href='#') My listings
           li.divider(role='separator')
           li
-            a(href='logIn.html') Log Out  
+            a(href='/login') Log Out  
 
   block content
-    
+
   script(src='/javascripts/jquery-3.3.1.min.js')
   script(src='/bootstrap/js/bootstrap.min.js')
