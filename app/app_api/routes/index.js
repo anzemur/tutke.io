@@ -12,6 +12,17 @@ router.get('/users',
 router.get('/users/:userId', 
   ctrlUsers.getUser);
 
+router.patch('/users/:userId', 
+  ctrlUsers.updateUser);
+
+router.put('/users/:userId', 
+  ctrlUsers.updateWholeUser);
+
+router.post('/users', 
+  ctrlUsers.createUser);
+
+router.delete('/users/:userId', 
+  ctrlUsers.deleteUser);
 
 /**
  * LECTURES routes.
@@ -27,5 +38,5 @@ router.post('/lectures',
 
 router.delete('/lectures/:lectureId', 
   ctrlLectures.deleteLecture);
-  
+
 module.exports = router;

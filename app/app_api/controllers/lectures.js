@@ -77,7 +77,7 @@ module.exports.createLecture = (req, res) => {
         })
       })
       .catch(err => {
-        respondJson(res, 500, err);
+        respondJson(res, 400, err);
         return;
       });
   } else {

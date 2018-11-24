@@ -1,5 +1,6 @@
 'use strict';
 /**
+ * User have to run it manually.
  * Adds base data to db. Define data in ./data folder.
  */
 var mongoose = require('mongoose');
