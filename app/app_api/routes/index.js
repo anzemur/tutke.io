@@ -19,7 +19,13 @@ router.get('/users/:userId',
 router.get('/lectures', 
   ctrlLectures.getLectures);
 
+router.get('/lectures/:lectureId', 
+  ctrlLectures.getLecture);
+
 router.post('/lectures', 
   ctrlLectures.createLecture);
 
+router.delete('/lectures/:lectureId', 
+  ctrlLectures.deleteLecture);
+  
 module.exports = router;
