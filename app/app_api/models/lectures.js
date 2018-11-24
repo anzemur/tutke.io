@@ -7,7 +7,8 @@ var lectureSchema = new mongoose.Schema({
   description: {type: String, required: true},
   lectureType: {type: lectureEnums.lectureType, required: true},
   price: {type: Number},
-  author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+  author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  createdAt: {type: Date, "default": Date.now}
 });
 
 mongoose.model('Lecture', lectureSchema, 'Lectures');

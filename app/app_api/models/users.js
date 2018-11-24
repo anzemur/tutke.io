@@ -21,7 +21,7 @@ var userSchema = new mongoose.Schema({
   rating: {type: Number, "default": 0, min: 0, max: 5}, 
   role: {type: userEnums.userRoles, required: true},
   comments: [commentSchema],
-  postedLectures: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Lectures'} ]
+  postedLectures: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Lecture'} ]
 });
 
 mongoose.model('User', userSchema, 'Users');
