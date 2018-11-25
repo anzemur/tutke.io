@@ -514,3 +514,20 @@ select#category.form-control {
 #fullViewOffer {
     margin-top: 30px;
 }
+
+.Site {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+.Site-content {
+    flex: 1;
+} 
+
+.footer {
+    border-top: #E7E7E7 solid 1px;
+    padding-top: 10px;
+    text-align: center;
+    color: #1c1259;
+}

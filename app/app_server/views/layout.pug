@@ -9,28 +9,32 @@ html
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
     // Styles
     link(rel='stylesheet', href='/stylesheets/index.css')
-  body
-    .customNavbar
-      a.navbar-left(href='index.html')
-        img.navLogo(src='/images/logoTutke.svg')
-      #userIconToggle.dropdown
-        a#userIcon.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
-          | User 
-          i.fas.fa-user-circle
-        ul.dropdown-menu
-          li
-            a(href='#') Account setting
-          li.divider(role='separator')
-          // <li class="dropdown-header">Nav header</li>
-          li
-            a(href='#') My requests
-          li
-            a(href='#') My listings
-          li.divider(role='separator')
-          li
-            a(href='logIn.html') Log Out  
+  body.Site
+    .Site-content
+      .customNavbar
+        a.navbar-left(href='index.html')
+          img.navLogo(src='/images/logoTutke.svg')
+        #userIconToggle.dropdown
+          a#userIcon.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+            | User 
+            i.fas.fa-user-circle
+          ul.dropdown-menu
+            li
+              a(href='#') Account setting
+            li.divider(role='separator')
+            // <li class="dropdown-header">Nav header</li>
+            li
+              a(href='#') My requests
+            li
+              a(href='#') My listings
+            li.divider(role='separator')
+            li
+              a(href='logIn.html') Log Out  
 
-  block content
+    block content
+
+  .footer
+    p &copy; Tutke.io 2018
     
   script(src='/javascripts/jquery-3.3.1.min.js')
   script(src='/bootstrap/js/bootstrap.min.js')
