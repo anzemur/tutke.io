@@ -16,8 +16,10 @@ module.exports.getLectures = (req, res) => {
   if(req.query && req.query.lectureType) 
     queryOptions['lectureType'] = req.query.lectureType;
 
-  var query = Lecture.find(queryOptions);
+  if(req.query && req.query.search && req.query != '') 
+    queryOptions['$text'] = { $search: req.query.search };
 
+  var query = Lecture.find(queryOptions);
   if(req.query && req.query.populate) 
     query.populate('author', 'username');
 

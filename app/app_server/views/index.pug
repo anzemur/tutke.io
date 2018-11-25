@@ -61,10 +61,11 @@ block content
           #searchTutor.container-fluid.container-jumbotron
             h3(style='padding-left: 15px') Search available lectures:
             .input-group
-              input.form-control(type='text' placeholder='Search for...')
+              input#inputSearchText.form-control(type='text' placeholder='Search for...')
               span.input-group-btn
-                a(href='/')
-                  button#btnSearch.btn.btn-default(type='button') Go!                
+                button#btnSearch.btn.btn-default(type='button' lecture=lectureType) Go!
+            if search != ''
+              h5  Showing results for: #{search}                
           each lecture in lectures
             .totalAdPanel
                 .extraHeading
@@ -91,7 +92,7 @@ block content
                     a.disabled(href='#' aria-label='Previous')
                       span(aria-hidden='true') &laquo;
                   else
-                    - url = '/' + '?page=' + (page-1) + '&lectureType=' + lectureType
+                    - url = '/' + '?page=' + (page-1) + '&lectureType=' + lectureType + '&search=' + search
                     a(href=url aria-label='Previous')
                       span(aria-hidden='true') &laquo;
                 li 
@@ -101,7 +102,7 @@ block content
                     a.disabled(href='#' aria-label='Next')
                       span(aria-hidden='true') &raquo;        
                   else
-                    - url = '/' + '?page=' + (page+1) + '&lectureType=' + lectureType
+                    - url = '/' + '?page=' + (page+1) + '&lectureType=' + lectureType + '&search=' + search
                     a(href=url aria-label='Next')
                       span(aria-hidden='true') &raquo; 
 

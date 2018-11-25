@@ -10,5 +10,5 @@ var lectureSchema = new mongoose.Schema({
   author: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
   createdAt: {type: Date, "default": Date.now}
 });
-
+lectureSchema.index({name: 'text', 'title': 'text'});
 mongoose.model('Lecture', lectureSchema, 'Lectures');
