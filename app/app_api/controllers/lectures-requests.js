@@ -59,6 +59,9 @@ module.exports.getLectureRequest = (req, res) => {
       if(err) {
         respondJson(res, 500, err.message)
         return;
+      } else if(!lecture) {
+        respondJson(res, 404, errors.NotFound);
+        return;
       } else {
         respondJson(res, 200, lecturesRequest);
       }
@@ -106,41 +109,48 @@ module.exports.createLectureRequest = (req, res) => {
 };
 
 /**
- * CREATES lecture request and adds its reference to tutor and student.
+ * DELETES lectures request and its reference from tutor and student.
  * Body: {LecturesRequest} LecturesRequest model.
- * Query parameter: {string} tutorId.
- * Query parameter: {string} studentId.
  */
 module.exports.deleteLectureRequest = (req, res) => {
-  if((req.query && req.query.tutorId && req.query.studentId) && (req.params && req.params.lectureRequestId)) {
-    var tutorId = req.query.tutorId;
-    var studentId = req.query.studentId;
+  if(req.params && req.params.lectureRequestId) {
 
-    LecturesRequest.findByIdAndDelete(req.params.lectureRequestId)
-      .then(delRes => {
-        User.updateMany(
-          { $or: 
-            [
-              { _id: tutorId},
-              { _id: studentId}
-            ]
-          },
-          { $pull: { lecturesRequests: mongoose.Types.ObjectId(req.params.lectureRequestId) } }
-        )
-        .then(updateRes => {
-          respondJson(res, 204, null);
+    LecturesRequest.findById(req.params.lectureRequestId)
+      .then(lecturesRequest => {
+        var tutorId = lecturesRequest.tutor;
+        var studentId = lecturesRequest.student;
+
+        LecturesRequest.findByIdAndDelete(req.params.lectureRequestId)
+          .then(delRes => {
+            User.updateMany(
+              { $or: 
+                [
+                  { _id: tutorId},
+                  { _id: studentId}
+                ]
+              },
+              { $pull: { lecturesRequests: mongoose.Types.ObjectId(req.params.lectureRequestId) } }
+            )
+            .then(updateRes => {
+              respondJson(res, 204, null);
+            })
+            .catch(err=> {
+              respondJson(res, 500, 'User update failed:' + err.message);
+              return;
+            })
+          })
+          .catch(err => {
+            respondJson(res, 500, err.message);
+            return;
+          });
         })
-        .catch(err=> {
-          respondJson(res, 500, 'User update failed:' + err.message);
-          return;
-        })
-      })
       .catch(err => {
-        respondJson(res, 500, err.message);
+        respondJson(res, 404, errors.NotFound);
         return;
       });
+
   } else {
-    respondJson(res, 400, errors.BadRequest + 'studentId or tutorId or lectureRequestId');
+    respondJson(res, 400, errors.BadRequest + 'lectureRequestId');
   }
 };
 
