@@ -54,9 +54,12 @@ router.get('/lecturesRequests',
   ctrlLecturesRequests.getLecturesRequests);
 
 router.get('/lecturesRequests/:lectureRequestId', 
-  ctrlLecturesRequests.getLecturesRequest);
+  ctrlLecturesRequests.getLectureRequest);
 
 router.post('/lecturesRequests', 
   ctrlLecturesRequests.createLectureRequest);
+
+router.delete('/lecturesRequests/:lectureRequestId', 
+  ctrlLecturesRequests.deleteLectureRequest);
 
 module.exports = router;

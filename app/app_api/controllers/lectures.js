@@ -19,7 +19,7 @@ module.exports.getLectures = (req, res) => {
 
   query.exec((err, lectures) => {
     if(err) {
-      respondJson(res, 500, err)
+      respondJson(res, 500, err.message)
       return;
     } else {
       respondJson(res, 200, lectures);
@@ -44,7 +44,7 @@ module.exports.getLecture = (req, res) => {
         respondJson(res, 404, errors.NotFound);
         return;
       } else if (err) {
-        respondJson(res, 500, err);
+        respondJson(res, 500, err.message);
         return;
       }
       respondJson(res, 200, lecture);
@@ -69,7 +69,7 @@ module.exports.updateWholeLecture = (req, res) => {
           respondJson(res, 404, errors.NotFound);
           return;
         } else if(err) {
-          respondJson(res, 500, err);
+          respondJson(res, 500, err.message);
           return;
         }
         
@@ -79,7 +79,7 @@ module.exports.updateWholeLecture = (req, res) => {
         
         lecture.save((err, lecture) => {
           if(err) {
-            respondJson(res, 400, err);
+            respondJson(res, 400, err.message);
           } else {
             respondJson(res, 200, lecture);
           }
@@ -108,7 +108,7 @@ module.exports.updateLecture = function(req, res) {
         ).then(updateRes => {
           respondJson(res, 200, updateRes);
         }).catch(err => {
-          respondJson(res, 500, err);
+          respondJson(res, 500, err.message);
         });
     }
   } else {
@@ -133,12 +133,12 @@ module.exports.createLecture = (req, res) => {
         respondJson(res, 201, lecture);
       })
       .catch(err=> {
-        respondJson(res, 500, 'User update failed:' + err);
+        respondJson(res, 500, 'User update failed:' + err.message);
         return;
       })
     })
     .catch(err => {
-      respondJson(res, 400, err);
+      respondJson(res, 400, err.message);
       return;
     });
 };
@@ -161,12 +161,12 @@ module.exports.deleteLecture = (req, res) => {
             respondJson(res, 204, null);
           })
           .catch(err=> {
-            respondJson(res, 500, 'User update failed:' + err);
+            respondJson(res, 500, 'User update failed:' + err.message);
             return;
           })
         })
         .catch(err => {
-          respondJson(res, 500, err);
+          respondJson(res, 500, err.message);
           return;
         });
     } else {

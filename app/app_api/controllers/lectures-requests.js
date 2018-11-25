@@ -32,7 +32,7 @@ module.exports.getLecturesRequests = (req, res) => {
 
   query.exec((err, lecturesRequest) => {
     if(err) {
-      respondJson(res, 500, err)
+      respondJson(res, 500, err.message)
       return;
     } else {
       respondJson(res, 200, lecturesRequest);
@@ -45,23 +45,27 @@ module.exports.getLecturesRequests = (req, res) => {
  * Query parameter: {boolean} populate
  * Path parameter: {string} lectureRequestId
  */
-module.exports.getLecturesRequest = (req, res) => {
-  var query = LecturesRequest.findById(req.params.lectureRequestId);
+module.exports.getLectureRequest = (req, res) => {
+  if (req.params && req.params.lectureRequestId) {
+    var query = LecturesRequest.findById(req.params.lectureRequestId);
 
-  if(req.query && req.query.populate) {
-    query.populate('lecture', 'title');
-    query.populate('tutor', 'username');
-    query.populate('student', 'username');
-  }
-
-  query.exec((err, lecturesRequest) => {
-    if(err) {
-      respondJson(res, 500, err)
-      return;
-    } else {
-      respondJson(res, 200, lecturesRequest);
+    if(req.query && req.query.populate) {
+      query.populate('lecture', 'title');
+      query.populate('tutor', 'username');
+      query.populate('student', 'username');
     }
-  });
+
+    query.exec((err, lecturesRequest) => {
+      if(err) {
+        respondJson(res, 500, err.message)
+        return;
+      } else {
+        respondJson(res, 200, lecturesRequest);
+      }
+    });
+  } else {
+    respondJson(res, 400, errors.BadRequest + 'lectureRequestId');
+  }
 };
 
 /**
@@ -91,13 +95,52 @@ module.exports.createLectureRequest = (req, res) => {
         respondJson(res, 201, lecturesRequest);
       })
       .catch(err=> {
-        respondJson(res, 500, 'User update failed:' + err);
+        respondJson(res, 500, 'User update failed:' + err.message);
         return;
       })
     })
     .catch(err => {
-      respondJson(res, 400, err);
+      respondJson(res, 400, err.message);
       return;
     });
+};
+
+/**
+ * CREATES lecture request and adds its reference to tutor and student.
+ * Body: {LecturesRequest} LecturesRequest model.
+ * Query parameter: {string} tutorId.
+ * Query parameter: {string} studentId.
+ */
+module.exports.deleteLectureRequest = (req, res) => {
+  if((req.query && req.query.tutorId && req.query.studentId) && (req.params && req.params.lectureRequestId)) {
+    var tutorId = req.query.tutorId;
+    var studentId = req.query.studentId;
+
+    LecturesRequest.findByIdAndDelete(req.params.lectureRequestId)
+      .then(delRes => {
+        User.updateMany(
+          { $or: 
+            [
+              { _id: tutorId},
+              { _id: studentId}
+            ]
+          },
+          { $pull: { lecturesRequests: mongoose.Types.ObjectId(req.params.lectureRequestId) } }
+        )
+        .then(updateRes => {
+          respondJson(res, 204, null);
+        })
+        .catch(err=> {
+          respondJson(res, 500, 'User update failed:' + err.message);
+          return;
+        })
+      })
+      .catch(err => {
+        respondJson(res, 500, err.message);
+        return;
+      });
+  } else {
+    respondJson(res, 400, errors.BadRequest + 'studentId or tutorId or lectureRequestId');
+  }
 };
 

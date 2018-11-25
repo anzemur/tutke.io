@@ -13,7 +13,7 @@ module.exports.getUsers = (req, res) => {
     .find()
     .exec((err, users) => {
       if(err) {
-        respondJson(res, 500, err);
+        respondJson(res, 500, err.message);
         return;
       } else {
         respondJson(res, 200, users);
@@ -38,7 +38,7 @@ module.exports.getUser = (req, res) => {
         respondJson(res, 404, errors.NotFound);
         return;
       } else if (err) {
-        respondJson(res, 500, err);
+        respondJson(res, 500, err.message);
         return;
       }
       respondJson(res, 200, user);
@@ -63,7 +63,7 @@ module.exports.updateWholeUser = (req, res) => {
           respondJson(res, 404, errors.NotFound);
           return;
         } else if(err) {
-          respondJson(res, 500, err);
+          respondJson(res, 500, err.message);
           return;
         }
         
@@ -78,7 +78,7 @@ module.exports.updateWholeUser = (req, res) => {
         
         user.save((err, user) => {
           if(err) {
-            respondJson(res, 400, err);
+            respondJson(res, 400, err.message);
           } else {
             respondJson(res, 200, user);
           }
@@ -107,7 +107,7 @@ module.exports.updateUser = function(req, res) {
         ).then(updateRes => {
           respondJson(res, 200, null);
         }).catch(err => {
-          respondJson(res, 500, err);
+          respondJson(res, 500, err.message);
         });
     }
   } else {
@@ -122,7 +122,7 @@ module.exports.updateUser = function(req, res) {
 module.exports.createUser = (req, res) => {
   User.create(req.body, (err, user) => {
     if(err) {
-      respondJson(res, 400, err);
+      respondJson(res, 400, err.message);
       return;
     } else {
       respondJson(res, 201, user);
@@ -139,7 +139,7 @@ module.exports.deleteUser = function(req, res) {
       .findByIdAndRemove(req.params.userId)
       .exec((err, users) => {
         if(err) {
-          respondJson(res, 500, err);
+          respondJson(res, 500, err.message);
           return;
         } else {
           respondJson(res, 204, null);
