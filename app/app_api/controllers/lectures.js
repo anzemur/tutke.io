@@ -12,10 +12,21 @@ var respondJson = helperFunctions.respondJson;
  * Query parameter: {boolean} populate
  */
 module.exports.getLectures = (req, res) => {
-  var query = Lecture.find();
+  var queryOptions = {};
+  if(req.query && req.query.lectureType) 
+    queryOptions['lectureType'] = req.query.lectureType;
+
+  var query = Lecture.find(queryOptions);
 
   if(req.query && req.query.populate) 
     query.populate('author', 'username');
+
+  query.sort( {createdAt: -1} );
+
+  if(req.query && req.query.page) {
+    query.skip(req.query.page*5);
+    query.limit(5);
+  }
 
   query.exec((err, lectures) => {
     if(err) {
