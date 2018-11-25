@@ -9,6 +9,7 @@ html
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
     // Styles
     link(rel='stylesheet', href='/stylesheets/index.css')
+<<<<<<< HEAD
   body.Site
     .Site-content
       .customNavbar
@@ -36,5 +37,30 @@ html
   .footer
     p &copy; Tutke.io 2018
     
+=======
+  body
+    .customNavbar
+      a.navbar-left(href='/')
+        img.navLogo(src='/images/logoTutke.svg')
+      #userIconToggle.dropdown
+        a#userIcon.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+          | User 
+          i.fas.fa-user-circle
+        ul.dropdown-menu
+          li
+            a(href='#') Account setting
+          li.divider(role='separator')
+          // <li class="dropdown-header">Nav header</li>
+          li
+            a(href='#') My requests
+          li
+            a(href='#') My listings
+          li.divider(role='separator')
+          li
+            a(href='/login') Log Out  
+
+  block content
+
+>>>>>>> d7ed06295eb0eca4a2dea8a2efda48bab521f842
   script(src='/javascripts/jquery-3.3.1.min.js')
   script(src='/bootstrap/js/bootstrap.min.js')
