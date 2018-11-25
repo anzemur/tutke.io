@@ -16,20 +16,20 @@ html
           img.navLogo(src='/images/logoTutke.svg')
         #userIconToggle.dropdown
           a#userIcon.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
-            | User 
             i.fas.fa-user-circle
-          ul.dropdown-menu
-            li
-              a(href='#') Account setting
-            li.divider(role='separator')
-            // <li class="dropdown-header">Nav header</li>
-            li
-              a(href='#') My requests
-            li
-              a(href='#') My listings
-            li.divider(role='separator')
-            li
-              a(href='/login') Log Out  
+          ul.dropdown-menu            
+            // <li class="dropdown-header">Nav header</li>            
+            if user
+              li
+                a(href='#') My account
+              li.divider(role='separator')
+              li
+                a(href='/login') Log Out  
+            else
+              li
+                a(href='/login') Log In 
+              li
+                a(href='/signUp') Sign Up!  
 
     block content
 
