@@ -19,6 +19,11 @@ html
           .alert.alert-danger.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
             a.close(href='#', data-dismiss='alert', aria-label='close') ×
             | #{error}
+      if msg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{msg}
       .row
         .col-sm-offset-2.col-sm-8.col-md-offset-4.col-md-4.col-xs-12
           .log-in-form.panel.panel-default
@@ -35,7 +40,7 @@ html
               .log-in-btn-position
                 button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Log In
             div
-              a.panel-footer(href='signUp.html') Not a part of tutke.io yet? Sign Up
+              a.panel-footer(href='/signUp') Not a part of tutke.io yet? Sign Up
     
   script(src='/javascripts/jquery-3.3.1.min.js')
   script(src='/bootstrap/js/bootstrap.min.js')

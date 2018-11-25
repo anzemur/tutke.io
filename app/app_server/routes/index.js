@@ -13,7 +13,9 @@ router.post('/', ctrlIndex.index);
 router.get('/login', ctrlLogIn.logIn);
 
 /* Sign Up page routes.*/
-router.get('/signUp', ctrlSignUp.signUp);
+router.get('/signUp', ctrlSignUp.signUpRender);
+router.post('/signUp', ctrlSignUp.signUp);
+
 
 
 module.exports = router;

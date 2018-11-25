@@ -14,6 +14,11 @@ html
     link(rel='stylesheet', type='text/css', href='/stylesheets/signUp.css')
   body
     .container
+      if error
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{error}
       .row
         .col-sm-10.col-sm-offset-1.col-md-offset-3.col-md-6.col-xs-12
           .sign-up-form
@@ -26,17 +31,19 @@ html
             .tab-content
               // Tutor Sign Up tab
               #Tutor.tab-pane.fade.in.active
-                form.scrollbar-primary(style='overflow-y: scroll; height: 650px;', action='index.html')
+                form.scrollbar-primary(style='overflow-y: scroll; height: 650px;', action='/signUp', method="POST")
+                  .input-group.sign-up-inputs
+                    input(type='hidden', name='role', value='tutor')
                   .input-group.sign-up-inputs
                     label(for='first_name')
                       | First name
                       span(style='color: red') *
-                    input.form-control.input-lg(name='first_name', placeholder='First name', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                    input.form-control.input-lg(name='firstName', placeholder='First name', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
                   .input-group.sign-up-inputs
                     label(for='last_name')
                       | Last name
                       span(style='color: red') *
-                    input.form-control.input-lg(name='last_name', placeholder='Last name', type='text', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter last name.')", oninput="this.setCustomValidity('')")
+                    input.form-control.input-lg(name='lastName', placeholder='Last name', type='text', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter last name.')", oninput="this.setCustomValidity('')")
                   .input-group.sign-up-inputs
                     label(for='username')
                       | Username
@@ -59,12 +66,12 @@ html
                     input.form-control.input-lg(name='email', placeholder='Email address', type='email', tabindex='6', required='', oninvalid="this.setCustomValidity('Please enter email.')", oninput="this.setCustomValidity('')")
                   .input-group.sign-up-inputs
                     label(for='current_teaching') Current teaching institution
-                    input.form-control.input-lg(name='current_teaching', placeholder='Current teaching institution', type='text', tabindex='7')
+                    input.form-control.input-lg(name='teachingInstitution', placeholder='Current teaching institution', type='text', tabindex='7')
                   .form-group.sign-up-inputs
                     label(for='education')
                       | Select your level of education:
                       span(style='color: red') *
-                    select#education.form-control.input-lg(name='levelOfEducation', tabindex='7', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                    select#education.form-control.input-lg(name='educationLevel', tabindex='7', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
                       option Primary education
                       option Lower secondary education
                       option Upper secondary education
@@ -82,17 +89,19 @@ html
                     button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Sign Up
               // Student Sign Up tab
               #Student.tab-pane
-                form.scrollbar-primary(style='overflow-y: scroll; height: 650px;', action='index.html')
+                form.scrollbar-primary(style='overflow-y: scroll; height: 650px;', action='/signUp', method="POST")
+                  .input-group.sign-up-inputs
+                    input(type='hidden', name='role', value='student')
                   .input-group.sign-up-inputs
                     label(for='first_name')
                       | First name
                       span(style='color: red') *
-                    input.form-control.input-lg.col-lg-8(name='first_name', placeholder='First name', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                    input.form-control.input-lg.col-lg-8(name='firstName', placeholder='First name', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
                   .input-group.sign-up-inputs
                     label(for='last_name')
                       | Last name
                       span(style='color: red') *
-                    input.form-control.input-lg(name='last_name', placeholder='Last name', type='text', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter last name.')", oninput="this.setCustomValidity('')")
+                    input.form-control.input-lg(name='lastName', placeholder='Last name', type='text', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter last name.')", oninput="this.setCustomValidity('')")
                   .input-group.sign-up-inputs
                     label(for='username')
                       | Username
@@ -117,7 +126,7 @@ html
                     label(for='education')
                       | Select your level of education:
                       span(style='color: red') *
-                    select#education.form-control.input-lg(name='levelOfEducation', tabindex='7', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                    select#education.form-control.input-lg(name='educationLevel', tabindex='7', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
                       option None
                       option Primary education
                       option Lower secondary education
