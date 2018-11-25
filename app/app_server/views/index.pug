@@ -4,10 +4,16 @@ include _includes/skupneHTMLfunkcije.pug
 block content
     #toggleNavContainer.container
       ul.nav.nav-tabs.nav-custom.nav-justified
-        li.active(role='presentation')
-          a(href='index.html') Lectures
-        li(role='presentation')
-          a(href='indexTutor.html') Student&apos;s requests
+        if lectureType == 'posted'
+          li.active(role='presentation')
+            a(href='/') Lectures
+          li(role='presentation')
+            a(href='/?page=0&lectureType=requested') Student&apos;s requests
+        else
+          li(role='presentation')
+            a(href='/') Lectures
+          li.active(role='presentation')
+            a(href='/?page=0&lectureType=requested') Student&apos;s requests
     #mainContent.container-fluid
       .row
         #leftColumn.col-xl-4.col-lg-4.col-md-4.col-sm-4
@@ -53,17 +59,19 @@ block content
             p - Lou Holtz
         #rightColumn.col-xl-8.col-lg-8.col-md-8.col-sm-8
           #searchTutor.container-fluid.container-jumbotron
-            h3(style='padding-left: 15px') Search available tutors here:
+            h3(style='padding-left: 15px') Search available lectures:
             .input-group
               input.form-control(type='text' placeholder='Search for...')
               span.input-group-btn
-                button#btnSearch.btn.btn-default(type='button') Go!
+                a(href='/')
+                  button#btnSearch.btn.btn-default(type='button') Go!                
           each lecture in lectures
             .totalAdPanel
                 .extraHeading
                   span#userPublisher
                     a(href='profileTutor.html') #{lecture.author.username}
-                    span.date  - #{lecture.createdAt}
+                    span.date  - 
+                      +formatDate(lecture.createdAt)
                 .panel.panel-default.listingPanel
                   .panel-heading
                     h3#adTitle.panel-title #{lecture.title}
@@ -86,6 +94,8 @@ block content
                     - url = '/' + '?page=' + (page-1) + '&lectureType=' + lectureType
                     a(href=url aria-label='Previous')
                       span(aria-hidden='true') &laquo;
+                li 
+                  span(aria-hidden='true') #{page + 1}
                 li
                   if lectures.length < 5
                     a.disabled(href='#' aria-label='Next')
