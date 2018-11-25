@@ -12,4 +12,5 @@ var lecturesRequestSchema = new mongoose.Schema({
   createdAt: {type: Date, "default": Date.now}
 });
 
+lecturesRequestSchema.index({ lecture: 1, tutor: 1, student: 1}, {name: 'unique_lectures_requests_index', unique: true });
 mongoose.model('LecturesRequest', lecturesRequestSchema, 'LecturesRequests');
