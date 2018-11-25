@@ -531,3 +531,8 @@ select#category.form-control {
     text-align: center;
     color: #1c1259;
 }
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}

@@ -2,8 +2,6 @@ extends layout
 include _includes/skupneHTMLfunkcije.pug
 
 block content
-
-  
     #toggleNavContainer.container
       ul.nav.nav-tabs.nav-custom.nav-justified
         li.active(role='presentation')
@@ -17,7 +15,8 @@ block content
             h4#profileTitle Profile
             p Rating: 
               span.rating
-                +showRating(user.rating)
+                if user && user.role == 'tutor'
+                  +showRating(user.rating)
             p Last time online: 14:43 06/10/2018
           .thumbnail.upcomingEvents
             h4#upcomingEvents Upcoming Events
@@ -59,32 +58,42 @@ block content
               input.form-control(type='text' placeholder='Search for...')
               span.input-group-btn
                 button#btnSearch.btn.btn-default(type='button') Go!
-          
-          .totalAdPanel
-              .extraHeading
-                span#userPublisher
-                  a(href='profileTutor.html') Tutor
-                  span.date  - 05/11/2018
-              .panel.panel-default.listingPanel
-                .panel-heading
-                  h3#adTitle.panel-title Learn Linear Algebra!
-                    span#adPrice
-                      button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
-                        span.buttonTextRequest Send Request 
-                        i.far.fa-share-square
-                .panel-body
-                  p Panel content
+          each lecture in lectures
+            .totalAdPanel
+                .extraHeading
+                  span#userPublisher
+                    a(href='profileTutor.html') #{lecture.author.username}
+                    span.date  - #{lecture.createdAt}
+                .panel.panel-default.listingPanel
+                  .panel-heading
+                    h3#adTitle.panel-title #{lecture.title}
+                      span#adPrice
+                        button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
+                          span.buttonTextRequest Send Request 
+                          i.far.fa-share-square
+                  .panel-body
+                    p  #{lecture.description}
 
           // pagination
           .text-center
             nav#pagination(aria-label='Page navigation')
               ul.pagination
                 li
-                  a(href='#' aria-label='Previous')
-                    span(aria-hidden='true') &laquo;
+                  if page == 0
+                    a.disabled(href='#' aria-label='Previous')
+                      span(aria-hidden='true') &laquo;
+                  else
+                    - url = '/' + '?page=' + (page-1) + '&lectureType=' + lectureType
+                    a(href=url aria-label='Previous')
+                      span(aria-hidden='true') &laquo;
                 li
-                  a(href='#' aria-label='Next')
-                    span(aria-hidden='true') &raquo;        
+                  if lectures.length < 5
+                    a.disabled(href='#' aria-label='Next')
+                      span(aria-hidden='true') &raquo;        
+                  else
+                    - url = '/' + '?page=' + (page+1) + '&lectureType=' + lectureType
+                    a(href=url aria-label='Next')
+                      span(aria-hidden='true') &raquo; 
 
     a.float(href='#' data-toggle='modal' data-target='#addListing')
       i.fa.fa-plus.my-float
