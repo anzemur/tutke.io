@@ -17,7 +17,7 @@ module.exports.logIn = async (req, res) => {
     if(user.error) {
       logInError = 'Log in failed:' + user.error.message ? user.error.message : user.error;
     }
-    global.loggedInUser = user._id;
+    global.loggedInUser = user._id ? user._id : null;
 
   } else {
     logInError = "Please enter username and password!";
