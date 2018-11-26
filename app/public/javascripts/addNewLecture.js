@@ -1,5 +1,5 @@
-var apiParams = process.env.NODE_ENV === 'production' ? 'heroku_url/api' : 'http://localhost:' + (process.env.PORT || '3000') + '/api';
-
+// var apiParams = process.env.NODE_ENV === 'production' ? 'heroku_url/api' : 'http://localhost:' + (process.env.PORT || '3000') + '/api';
+var apiParams = 'http://localhost:3000/api';
 $('#addNewLectureBtn').click(function (e){
   var author =  $('#newLectureAuthor').val();
   var title = $('#titleNewLecture').val();
@@ -9,9 +9,7 @@ $('#addNewLectureBtn').click(function (e){
   if(lectureType == 'posted') {
     price = $('#priceNewLecture').val();
   }
-
   // TODO: check 
-
   var body = {
     author: author,
     title: title,
@@ -23,20 +21,20 @@ $('#addNewLectureBtn').click(function (e){
     body['price'] = price;
   }
 
-
   e.preventDefault();
   $.ajax({
       type: "POST",
-      async: false,
+      async: true,
       url: apiParams + '/lectures',
-      data: JSON.stringify(body),
+      data: body,
       dataType: 'json',
       cache: false,
       success: function (result) {
-        alert("kulio");
+        alert("Lecture successfully created!");
+        
       },
-      error: function () {
-          alert("server error");
+      error: function (err) {
+          alert("Lecture creation failed: "+ err);
       }
   });
 });

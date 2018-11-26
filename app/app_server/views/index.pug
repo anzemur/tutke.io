@@ -117,9 +117,16 @@ block content
                   .panel-heading
                     h3#adTitle.panel-title #{lecture.title}
                       span#adPrice
-                        button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
-                          span.buttonTextRequest Send Request 
-                          i.far.fa-share-square
+                        if lecture.lectureType == 'posted'
+                          | #{lecture.price} €/h
+                        if user && user.role =='tutor' && lecture.lectureType =='requested'
+                          button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
+                            span.buttonTextRequest Send Offer 
+                            i.far.fa-share-square
+                        if user && user.role =='student' && lecture.lectureType =='posted'
+                          button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
+                            span.buttonTextRequest Send Request 
+                            i.far.fa-share-square
                   .panel-body
                     p  #{lecture.description}
 
