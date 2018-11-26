@@ -18,45 +18,85 @@ block content
       .row
         #leftColumn.col-xl-4.col-lg-4.col-md-4.col-sm-4
           .thumbnail.profileThumbnail(stlye='margin-top:200px')
-            h4#profileTitle Profile
-            p Rating: 
-              span.rating
-                if user && user.role == 'tutor'
-                  +showRating(user.rating)
-            p Last time online: 14:43 06/10/2018
-          .thumbnail.upcomingEvents
-            h4#upcomingEvents Upcoming Events
-            ul#upcomingEventsList
-              li
-                a(href='#') Learn Linear Algebra!, 9/12/2019 at 17:45
-              li
-                a(href='#') JAVA programming, 10/12/2019 at 12:45
-              li
-                a(href='#') Fun times with prof. Mur, 22/12/2019 at 9:00
-              li
-                a(href='#') Learn Linear Algebra!, 28/12/2019 at 14:30
+            if user
+              h4#profileTitle Logged in as #{user.firstName} #{user.lastName}
+              p Username: #{user.username}
+              if user.role == 'tutor'
+                p Posted lectures: #{user.postedLectures.length}
+                p Rating: 
+                  span.rating
+                    if user && user.role == 'tutor'
+                      +showRating(user.rating)
+              else
+                p Requested lectures: #{user.postedLectures.length}
+              p User since: 
+                +formatDate(user.createdAt)
+            else 
+              h4#profileTitle Please log in to see profile info.
+          //- .thumbnail.upcomingEvents
+          //-   h4#upcomingEvents Upcoming Events
+          //-   ul#upcomingEventsList
+          //-     li
+          //-       a(href='#') Learn Linear Algebra!, 9/12/2019 at 17:45
+          //-     li
+          //-       a(href='#') JAVA programming, 10/12/2019 at 12:45
+          //-     li
+          //-       a(href='#') Fun times with prof. Mur, 22/12/2019 at 9:00
+          //-     li
+          //-       a(href='#') Learn Linear Algebra!, 28/12/2019 at 14:30
+          //- .thumbnail.upcomingEvents
+          //-   h4#upcomingEvents Pending Requests
+          //-   ul#upcomingEventsList
+          //-     li
+          //-       p
+          //-         | Learn Linear Algebra! - TutorUsername - 
+          //-         span.statusPending Pending
+          //-     li
+          //-       p
+          //-         | JAVA programming - TutorUsername - 
+          //-         span.statusPending Pending
+          //-     li
+          //-       p
+          //-         | Learn Linear Algebra! - TutorUsername - 
+          //-         span.statusDenied
+          //-           | Denied 
+          //-           a.far.fa-trash-alt(href='#' title='Remove from list')
           .thumbnail.upcomingEvents
             h4#upcomingEvents Pending Requests
             ul#upcomingEventsList
-              li
-                p
-                  | Learn Linear Algebra! - TutorUsername - 
-                  span.statusPending Pending
-              li
-                p
-                  | JAVA programming - TutorUsername - 
-                  span.statusPending Pending
-              li
-                p
-                  | Learn Linear Algebra! - TutorUsername - 
-                  span.statusDenied
-                    | Denied 
-                    a.far.fa-trash-alt(href='#' title='Remove from list')
-          #dailyQuote.thumbnail
-            h4 Daily Quote
-            p
-              | &ldquo;Winners embrace hard work. They love the discipline of it, the trade-off they&rsquo;re making to win. Losers, on the other hand, see it as punishment. And that&rsquo;s the difference.&rdquo;
-            p - Lou Holtz
+              if user
+                if user.role == 'tutor'
+                  - pendingLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest')
+                  if pendingLectures.length == 0
+                    h4#profileTitle No pending requests.
+                  else
+                    each pendingLecture in pendingLectures
+                      li
+                        p
+                          | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
+                          br
+                          button#acceptRequest.acceptDeny Accept
+                          button#denyRequest.acceptDeny Deny
+                else
+                  - pendingLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer')
+                  if pendingLectures.length == 0
+                    h4#profileTitle No pending requests.
+                  else
+                    each pendingLecture in pendingLectures
+                      li
+                        p
+                          | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
+                          br
+                          button#acceptRequest.acceptDeny Accept
+                          button#denyRequest.acceptDeny Deny
+              else
+                h4#profileTitle Please log in to see pending requests.
+
+          //- #dailyQuote.thumbnail
+          //-   h4 Daily Quote
+          //-   p
+          //-     | &ldquo;Winners embrace hard work. They love the discipline of it, the trade-off they&rsquo;re making to win. Losers, on the other hand, see it as punishment. And that&rsquo;s the difference.&rdquo;
+          //-   p - Lou Holtz
         #rightColumn.col-xl-8.col-lg-8.col-md-8.col-sm-8
           #searchTutor.container-fluid.container-jumbotron
             h3(style='padding-left: 15px') Search available lectures:

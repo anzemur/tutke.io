@@ -22,7 +22,8 @@ var userSchema = new mongoose.Schema({
   role: {type: userEnums.userRoles, required: true},
   comments: [commentSchema],
   postedLectures: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Lecture'} ],
-  lecturesRequests:  [ {type: mongoose.Schema.Types.ObjectId, ref: 'LecturesRequest'} ]
+  lecturesRequests:  [ {type: mongoose.Schema.Types.ObjectId, ref: 'LecturesRequest'} ],
+  createdAt: {type: Date, "default": Date.now}
 });
 
 mongoose.model('User', userSchema, 'Users');

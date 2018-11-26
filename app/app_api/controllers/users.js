@@ -30,9 +30,13 @@ module.exports.getUser = (req, res) => {
   if (req.params && req.params.userId) {
     var query = User.findById(req.params.userId);
 
-    if(req.query && req.query.populate) 
+    if(req.query && req.query.populate) {
       query.populate('postedLectures');
-
+      query.populate({path: 'lecturesRequests', populate: {path: 'student'}});
+      query.populate({path: 'lecturesRequests', populate: {path: 'tutor'}});
+      query.populate({path: 'lecturesRequests', populate: {path: 'lecture'}});
+    } 
+      
     query.exec((err, user) => {
       if (!user) {
         respondJson(res, 404, errors.NotFound);
