@@ -149,3 +149,28 @@ module.exports.deleteUser = function(req, res) {
     respondJson(res, 400, errors.BadRequest + 'userId');
   }
 }
+
+
+/**
+ * USER AUTHENTICATION by username and password (Simulates user authentication*)
+ * Body: {string} username
+ *       {string} password
+ */
+module.exports.authUser = function(req, res) {
+  if(req.body.username && req.body.password) {
+    User
+      .findOne({username: req.body.username})
+      .exec((err, user) => {
+        if (!user) {
+          respondJson(res, 404, errors.NotFound);
+          return;
+        } else if (err) {
+          respondJson(res, 500, err.message);
+          return;
+        }
+        respondJson(res, 200, user);
+      });
+  } else {
+    respondJson(res, 400, errors.BadRequest + 'username or password.');
+  }
+}

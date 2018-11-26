@@ -10,7 +10,8 @@ router.get('/', ctrlIndex.index);
 router.post('/', ctrlIndex.index);
 
 /* Log In page routes.*/
-router.get('/login', ctrlLogIn.logIn);
+router.get('/login', ctrlLogIn.renderLogIn);
+router.post('/login', ctrlLogIn.logIn);
 
 /* Sign Up page routes.*/
 router.get('/signUp', ctrlSignUp.signUpRender);

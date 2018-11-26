@@ -17,11 +17,13 @@ module.exports.signUp = async (req, res) => {
     if(req.body.password == req.body.password1) {
       var user = await performSignUp(req.body);
       if(user.error) {
-        signUpError = user.error.message ? user.error.message : user.error;
+        signUpError = 'Sign up failed:' + user.error.message ? user.error.message : user.error;
       }
     } else {
       signUpError = "Password mismatch. Please try again."
-    }
+    }    
+  } else {
+    signUpError = "Not enough data. Please try again."
   }
 
   if(signUpError) {

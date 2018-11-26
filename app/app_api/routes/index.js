@@ -26,6 +26,9 @@ router.post('/users',
 router.delete('/users/:userId', 
   ctrlUsers.deleteUser);
 
+router.post('/users/auth', 
+  ctrlUsers.authUser);
+
 /**
  * LECTURES routes.
  */
@@ -55,6 +58,9 @@ router.get('/lecturesRequests',
 
 router.get('/lecturesRequests/:lectureRequestId', 
   ctrlLecturesRequests.getLectureRequest);
+
+router.put('/lecturesRequests/:lectureRequestId', 
+  ctrlLecturesRequests.updateWholeLectureRequest);
 
 router.post('/lecturesRequests', 
   ctrlLecturesRequests.createLectureRequest);
