@@ -59,7 +59,7 @@ module.exports.getLectureRequest = (req, res) => {
       if(err) {
         respondJson(res, 500, err.message)
         return;
-      } else if(!lecture) {
+      } else if(!lecturesRequest) {
         respondJson(res, 404, errors.NotFound);
         return;
       } else {
@@ -70,6 +70,42 @@ module.exports.getLectureRequest = (req, res) => {
     respondJson(res, 400, errors.BadRequest + 'lectureRequestId');
   }
 };
+
+/**
+ * UPDATES the whole lecture request model (User can only update the status attr.)
+ * Path parameter: {string} lectureRequestId.
+ * Body: {LecturesRequest} LecturesRequest model (Only attribute status can be in body).
+ */
+module.exports.updateWholeLectureRequest = (req, res) => {
+  if(req.params && req.params.lectureRequestId) {
+    LecturesRequest
+      .findById(req.params.lectureRequestId)
+      .select('-createdAt -price -requestType -student -tutor -lecture')
+      .exec((err, lecturesRequest) => {
+        if(!lecturesRequest) {
+          respondJson(res, 404, errors.NotFound);
+          return;
+        } else if(err) {
+          respondJson(res, 500, err.message);
+          return;
+        }
+        
+        lecturesRequest.status = req.body.status;
+        
+        lecturesRequest.save((err, lecturesRequest) => {
+          if(err) {
+            respondJson(res, 400, err.message);
+          } else {
+            respondJson(res, 200, lecturesRequest);
+          }
+        });
+      });
+
+  } else {
+    respondJson(res, 400, errors.BadRequest + 'lectureRequestId');
+  }
+};
+
 
 /**
  * CREATES lecture request and adds its reference to tutor and student.
@@ -111,6 +147,7 @@ module.exports.createLectureRequest = (req, res) => {
 /**
  * DELETES lectures request and its reference from tutor and student.
  * Body: {LecturesRequest} LecturesRequest model.
+ * Path parameter: {string} lectureRequestId.
  */
 module.exports.deleteLectureRequest = (req, res) => {
   if(req.params && req.params.lectureRequestId) {
