@@ -18,46 +18,75 @@ module.exports.index = async (req, res) => {
     user = await getUser(loggedInUser);
   }
 
+  /** Lectures requests update handling */
+  var lectureRequestUpdateMsg;
+  var lectureRequestUpdateError;
+  if(req.query && req.query.pendingLectureId && req.query.answer && user && user._id) {
+    if(req.query.answer == 'accept') { 
+      var lectureRequest = await updateLectureRequest(req.query.pendingLectureId, lectureEnums.lecturesRequestStatus.Accepted);
+      user = await getUser(loggedInUser);
+      if(lectureRequest.error) {
+        lectureRequestUpdateError = lectureRequest.error.message ? lectureRequest.error.message : lectureRequest.error;
+      } else {
+        lectureRequestUpdateMsg = "Pending request answer successful with answer: Accept."
+      }
+    } else if (req.query.answer == 'deny') {
+      var lectureRequest = await updateLectureRequest(req.query.pendingLectureId, lectureEnums.lecturesRequestStatus.Denied);
+      user = await getUser(loggedInUser);
+      if(lectureRequest.error) {
+        lectureRequestUpdateError = lectureRequest.error.message ? lectureRequest.error.message : lectureRequest.error;
+      } else {
+        lectureRequestUpdateMsg = "Pending request answer successful with answer: Deny."
+      }
+    }
+  }
+
+  console.log(lectureRequestUpdateError);
+  console.log(lectureRequestUpdateMsg);
+
   /** Lectures requests create handling */
   var lectureRequestMsg;
   var lectureRequestError;
-  if(req.query.lecture && user && user._id) {
+  if(req.query && req.query.lecture && req.query.lectureId && user && user._id) {
     var lectureId = req.query.lectureId;
     var lecture = await getLecture(lectureId);
-
-    if(req.query.lecture == 'offer') {
-      if(lecture._id && lecture.author && user._id) {
-        var body = {
-          lecture: lecture._id,
-          tutor: user._id,
-          student: lecture.author,
-          requestType: lectureEnums.lecturesRequestsTypes.TutorOffer
-        }
-        var lecturesRequests = await createLectureRequest(body);
-        if(lecturesRequests.error) {
-          lectureRequestError =  lecturesRequests.error.message ? lecturesRequests.error.message : lecturesRequests.error;
-        } else {
-          lectureRequestMsg = 'Offer sent to student.' 
-        }
-      } else {
-        lectureRequestError = "Offer to student failed."
-      }
+    if(lecture.error) {
+      lectureRequestError =  lecture.error.message ? lecture.error.message : lecture.error;
     } else {
-      if(lecture._id && lecture.author && user._id) {
-        var body = {
-          lecture: lecture._id,
-          tutor: lecture.author,
-          student: user._id,
-          requestType: lectureEnums.lecturesRequestsTypes.StudentRequest
-        }
-        var lecturesRequests = await createLectureRequest(body);
-        if(lecturesRequests.error) {
-          lectureRequestError =  lecturesRequests.error.message ? lecturesRequests.error.message : lecturesRequests.error;
+      if(req.query.lecture == 'offer') {
+        if(lecture._id && lecture.author && user._id) {
+          var body = {
+            lecture: lecture._id,
+            tutor: user._id,
+            student: lecture.author,
+            requestType: lectureEnums.lecturesRequestsTypes.TutorOffer
+          }
+          var lecturesRequests = await createLectureRequest(body);
+          if(lecturesRequests.error) {
+            lectureRequestError =  lecturesRequests.error.message ? lecturesRequests.error.message : lecturesRequests.error;
+          } else {
+            lectureRequestMsg = 'Offer sent to student.' 
+          }
         } else {
-          lectureRequestMsg = 'Request sent to tutor.' 
+          lectureRequestError = "Offer to student failed."
         }
       } else {
-        lectureRequestError = "Request to tutor failed."
+        if(lecture._id && lecture.author && user._id) {
+          var body = {
+            lecture: lecture._id,
+            tutor: lecture.author,
+            student: user._id,
+            requestType: lectureEnums.lecturesRequestsTypes.StudentRequest
+          }
+          var lecturesRequests = await createLectureRequest(body);
+          if(lecturesRequests.error) {
+            lectureRequestError =  lecturesRequests.error.message ? lecturesRequests.error.message : lecturesRequests.error;
+          } else {
+            lectureRequestMsg = 'Request sent to tutor.' 
+          }
+        } else {
+          lectureRequestError = "Request to tutor failed."
+        }
       }
     }
   }
@@ -80,12 +109,14 @@ module.exports.index = async (req, res) => {
     lecturesError: lecturesErrorMessage,
     env: process.env.NODE_ENV === 'production' ? 'prod' : 'dev',
     lectureRequestMsg: lectureRequestMsg,
-    lectureRequestError: lectureRequestError
+    lectureRequestError: lectureRequestError,
+    lectureRequestUpdateMsg: lectureRequestUpdateMsg,
+    lectureRequestUpdateError: lectureRequestUpdateError
   });
 };
 
 
-/** API CALLS */
+/* API CALLS */
 async function getLectures(page, lectureType, search) {
   var path = '/lectures';
   var options = {
@@ -152,6 +183,25 @@ async function createLectureRequest(body) {
     method: 'POST',
     json: true,
     body: body
+  };
+
+  try {
+    return await rp(options).promise();
+  } catch (error) {
+    return error;
+  }
+}
+
+
+async function updateLectureRequest(lectureId, status) {
+  var path = '/lecturesRequests/' + lectureId;
+  var options = {
+    url: apiParams + path,
+    method: 'PUT',
+    json: true,
+    body: {
+      status: status
+    }
   };
 
   try {

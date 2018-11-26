@@ -12,6 +12,16 @@ block content
           .alert.alert-success.alert-dismissable.fade.in
             a.close(href='#', data-dismiss='alert', aria-label='close') ×
             | #{lectureRequestMsg}
+    if lectureRequestUpdateError
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestUpdateError}
+    if lectureRequestUpdateMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestUpdateMsg}
     input#env(type='hidden', name='env', value=env)
     #toggleNavContainer.container
       ul.nav.nav-tabs.nav-custom.nav-justified
@@ -86,8 +96,12 @@ block content
                         p
                           | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
                           br
-                          button#acceptRequest.acceptDeny Accept
-                          button#denyRequest.acceptDeny Deny
+                          - urlAcc = '/?pendingLectureId=' + pendingLecture._id + '&answer=accept' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlAcc)
+                            button#acceptRequest.acceptDeny Accept
+                          - urlDen = '/?pendingLectureId=' + pendingLecture._id + '&answer=deny' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlDen)
+                            button#denyRequest.acceptDeny Deny
                 else
                   - pendingLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer')
                   if pendingLectures.length == 0
@@ -98,8 +112,12 @@ block content
                         p
                           | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
                           br
-                          button#acceptRequest.acceptDeny Accept
-                          button#denyRequest.acceptDeny Deny
+                          - urlAcc = '/?pendingLectureId=' + pendingLecture._id + '&answer=accept' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlAcc)
+                            button#acceptRequest.acceptDeny Accept
+                          - urlDen = '/?pendingLectureId=' + pendingLecture._id + '&answer=deny' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlDen)
+                            button#denyRequest.acceptDeny Deny
               else
                 h4#profileTitle Please log in to see pending requests.
 
@@ -211,86 +229,6 @@ block content
             .modal-footer
               button.btn.btn-default(type='button', data-dismiss='modal') Close
               button#addNewLectureBtn.btn.btn-primary(type='button', data-dismiss='modal') Add
-
-    //- #addListing.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addListing' aria-hidden='true')
-    //-   .modal-dialog.modal-lg
-    //-     .modal-content
-    //-       .modal-header
-    //-         button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
-    //-         h4.modal-title Add a new request for a specific subject
-    //-       .modal-body
-    //-         .modal-body-info
-    //-           .row
-    //-             .col-sm-4.col-sx-12
-    //-               .form-subject
-    //-                 label(for='subject') Subject:
-    //-                 input#subject.form-control(type='text' placeholder='Main (specific) subject of interest' required='')
-    //-             .col-sm-4.col-sx-12
-    //-               .form-category
-    //-                 label(for='category') Choose category:
-    //-                 select#category.form-control(required='')
-    //-                   option
-    //-                   option algebra
-    //-                   option archaeology
-    //-                   option art
-    //-                   option band
-    //-                   option biology
-    //-                   option botany
-    //-                   option calculus
-    //-                   option chemistry
-    //-                   option computer science
-    //-                   option drama
-    //-                   option economics
-    //-                   option English
-    //-                   option French
-    //-                   option geography
-    //-                   option geology
-    //-                   option geometry
-    //-                   option German
-    //-                   option gym
-    //-                   option health
-    //-                   option history
-    //-                   option home economics
-    //-                   option keyboarding
-    //-                   option language arts
-    //-                   option literature
-    //-                   option logic
-    //-                   option music
-    //-                   option physical education
-    //-                   option physics
-    //-                   option psychology
-    //-                   option reading
-    //-                   option science
-    //-                   option social studies
-    //-                   option world geography
-    //-                   option writing
-    //-             .col-sm-4.col-sx-12
-    //-               .form-expDate
-    //-                 label(for='expDate') Expiration date:
-    //-                 input#expDate.form-control(type='date')
-    //-         .modal-options
-    //-           .modal-radio-group
-    //-             .row
-    //-               .col-md-4.col-sm-12.col-sx-12
-    //-                 label.modal-knowledge Choose your education stage:
-    //-               .col-md-3.col-sm-4.col-sx-12
-    //-                 label.radio-inline
-    //-                   input#primary(type='radio' value='' name='optradio' title='')
-    //-                   | Primary education
-    //-               .col-md-3.col-sm-4.col-sx-12
-    //-                 label.radio-inline
-    //-                   input#secondary(type='radio' value='' name='optradio' title='')
-    //-                   | Secondary education
-    //-               .col-md-2.col-sm-4.col-sx-12
-    //-                 label.radio-inline
-    //-                   input#faculty(type='radio' value='' name='optradio' title='')
-    //-                   | Faculty
-    //-           .modal-form-group
-    //-             label.modal-comment Add optional message:
-    //-             textarea#modal-message.form-control(rows='5')
-    //-       .modal-footer
-    //-         button.btn.btn-default(type='button' data-dismiss='modal') Close
-    //-         button.btn.btn-primary(type='button') Post
     // Modal popup send request
     #sendRequest.modal.fade(tabindex='-1' role='dialog' aria-labelledby='sendRequest' aria-hidden='true')
       .modal-dialog.modal-lg
