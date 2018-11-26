@@ -1,5 +1,5 @@
 /**
- * Helps simulate local storage usage on user log in.
+ * Helps simulate log in.
  */
 $(window).on('load', () => {
   if($('#infoDiv')) {

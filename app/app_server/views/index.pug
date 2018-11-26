@@ -2,6 +2,16 @@ extends layout
 include _includes/skupneHTMLfunkcije.pug
 
 block content
+    if lectureRequestError
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestError}
+    if lectureRequestMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestMsg}
     #toggleNavContainer.container
       ul.nav.nav-tabs.nav-custom.nav-justified
         if lectureType == 'posted'
@@ -110,23 +120,29 @@ block content
             .totalAdPanel
                 .extraHeading
                   span#userPublisher
-                    a(href='profileTutor.html') #{lecture.author.username}
+                    if lecture.author && lecture.author.username
+                      a(href='profileTutor.html') #{lecture.author.username}
+                    else
+                      p Deleted user
                     span.date  - 
                       +formatDate(lecture.createdAt)
                 .panel.panel-default.listingPanel
                   .panel-heading
                     h3#adTitle.panel-title #{lecture.title}
                       span#adPrice
-                        if lecture.lectureType == 'posted'
-                          | #{lecture.price} €/h
+                        | #{lecture.price} €/h
                         if user && user.role =='tutor' && lecture.lectureType =='requested'
-                          button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
-                            span.buttonTextRequest Send Offer 
-                            i.far.fa-share-square
+                          - url = '/?lectureId=' + lecture._id + '&lecture=offer' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=url)
+                            button#requestTutorBtn.btn.btn-primary(type='button')
+                              span.buttonTextRequest Send Offer 
+                              i.far.fa-share-square
                         if user && user.role =='student' && lecture.lectureType =='posted'
-                          button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
-                            span.buttonTextRequest Send Request 
-                            i.far.fa-share-square
+                          - url = '/?lectureId=' + lecture._id + '&lecture=request' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=url)
+                            button#requestTutorBtn.btn.btn-primary(type='button')
+                              span.buttonTextRequest Send Request 
+                              i.far.fa-share-square
                   .panel-body
                     p  #{lecture.description}
 
@@ -181,13 +197,12 @@ block content
                          input#newLectureType(type='hidden', name='lectureType', value='posted')
                       else
                          input#newLectureType(type='hidden', name='lectureType', value='requested')
-              if user.role == 'tutor'
-                .modal-body-info
-                  .row
-                    .col-sm-4.col-sx-12
-                      .form-subject
-                        label(for='priceNewLecture') Price:
-                        input#priceNewLecture.form-control(name='price', type='text', placeholder='Price in €/h.', required='')
+              .modal-body-info
+                .row
+                  .col-sm-4.col-sx-12
+                    .form-subject
+                      label(for='priceNewLecture') Price:
+                      input#priceNewLecture.form-control(name='price', type='text', placeholder='Price in €/h.', required='')
               .modal-options
                 .modal-form-group
                   label.modal-comment Description:
