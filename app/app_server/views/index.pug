@@ -145,92 +145,129 @@ block content
                     - url = '/' + '?page=' + (page+1) + '&lectureType=' + lectureType + '&search=' + search
                     a(href=url aria-label='Next')
                       span(aria-hidden='true') &raquo; 
-
-    a.float(href='#' data-toggle='modal' data-target='#addListing')
-      i.fa.fa-plus.my-float
-    .label-container
-      .label-text Add a New Request
-      i.fa.fa-play.label-arrow
-    // Modal popup add listing
-    #addListing.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addListing' aria-hidden='true')
-      .modal-dialog.modal-lg
-        .modal-content
-          .modal-header
-            button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
-            h4.modal-title Add a new request for a specific subject
-          .modal-body
-            .modal-body-info
-              .row
-                .col-sm-4.col-sx-12
-                  .form-subject
-                    label(for='subject') Subject:
-                    input#subject.form-control(type='text' placeholder='Main (specific) subject of interest' required='')
-                .col-sm-4.col-sx-12
-                  .form-category
-                    label(for='category') Choose category:
-                    select#category.form-control(required='')
-                      option
-                      option algebra
-                      option archaeology
-                      option art
-                      option band
-                      option biology
-                      option botany
-                      option calculus
-                      option chemistry
-                      option computer science
-                      option drama
-                      option economics
-                      option English
-                      option French
-                      option geography
-                      option geology
-                      option geometry
-                      option German
-                      option gym
-                      option health
-                      option history
-                      option home economics
-                      option keyboarding
-                      option language arts
-                      option literature
-                      option logic
-                      option music
-                      option physical education
-                      option physics
-                      option psychology
-                      option reading
-                      option science
-                      option social studies
-                      option world geography
-                      option writing
-                .col-sm-4.col-sx-12
-                  .form-expDate
-                    label(for='expDate') Expiration date:
-                    input#expDate.form-control(type='date')
-            .modal-options
-              .modal-radio-group
+    if user
+      a.float(href='#' data-toggle='modal' data-target='#addListing')
+        i.fa.fa-plus.my-float
+      .label-container
+        .label-text Add a New Request
+        i.fa.fa-play.label-arrow
+    if user
+      // Modal popup for adding new lecture
+      #addListing.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addListing', aria-hidden='true')
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              if user.role == 'tutor'
+                h4.modal-title Add a new lecture
+              else
+                h4.modal-title Request a new lecture
+            .modal-body
+              .modal-body-info
                 .row
-                  .col-md-4.col-sm-12.col-sx-12
-                    label.modal-knowledge Choose your education stage:
-                  .col-md-3.col-sm-4.col-sx-12
-                    label.radio-inline
-                      input#primary(type='radio' value='' name='optradio' title='')
-                      | Primary education
-                  .col-md-3.col-sm-4.col-sx-12
-                    label.radio-inline
-                      input#secondary(type='radio' value='' name='optradio' title='')
-                      | Secondary education
-                  .col-md-2.col-sm-4.col-sx-12
-                    label.radio-inline
-                      input#faculty(type='radio' value='' name='optradio' title='')
-                      | Faculty
-              .modal-form-group
-                label.modal-comment Add optional message:
-                textarea#modal-message.form-control(rows='5')
-          .modal-footer
-            button.btn.btn-default(type='button' data-dismiss='modal') Close
-            button.btn.btn-primary(type='button') Post
+                  .col-sm-4.col-sx-12
+                    .form-subject
+                      label(for='titleNewLecture') Title:
+                      input#titleNewLecture.form-control(name='title', type='text', placeholder='Title', required='')
+                      input#newLectureAuthor(type='hidden', name='lectureType', value=user._id)
+                      if user.role == 'tutor'
+                         input#newLectureType(type='hidden', name='lectureType', value='posted')
+                      else
+                         input#newLectureType(type='hidden', name='lectureType', value='requested')
+              if user.role == 'tutor'
+                .modal-body-info
+                  .row
+                    .col-sm-4.col-sx-12
+                      .form-subject
+                        label(for='priceNewLecture') Price:
+                        input#priceNewLecture.form-control(name='price', type='text', placeholder='Price in €/h.', required='')
+              .modal-options
+                .modal-form-group
+                  label.modal-comment Description:
+                  textarea#modal-message.form-control(name='description', rows='5')
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+              button#addNewLectureBtn.btn.btn-primary(type='button') Add
+
+    //- #addListing.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addListing' aria-hidden='true')
+    //-   .modal-dialog.modal-lg
+    //-     .modal-content
+    //-       .modal-header
+    //-         button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+    //-         h4.modal-title Add a new request for a specific subject
+    //-       .modal-body
+    //-         .modal-body-info
+    //-           .row
+    //-             .col-sm-4.col-sx-12
+    //-               .form-subject
+    //-                 label(for='subject') Subject:
+    //-                 input#subject.form-control(type='text' placeholder='Main (specific) subject of interest' required='')
+    //-             .col-sm-4.col-sx-12
+    //-               .form-category
+    //-                 label(for='category') Choose category:
+    //-                 select#category.form-control(required='')
+    //-                   option
+    //-                   option algebra
+    //-                   option archaeology
+    //-                   option art
+    //-                   option band
+    //-                   option biology
+    //-                   option botany
+    //-                   option calculus
+    //-                   option chemistry
+    //-                   option computer science
+    //-                   option drama
+    //-                   option economics
+    //-                   option English
+    //-                   option French
+    //-                   option geography
+    //-                   option geology
+    //-                   option geometry
+    //-                   option German
+    //-                   option gym
+    //-                   option health
+    //-                   option history
+    //-                   option home economics
+    //-                   option keyboarding
+    //-                   option language arts
+    //-                   option literature
+    //-                   option logic
+    //-                   option music
+    //-                   option physical education
+    //-                   option physics
+    //-                   option psychology
+    //-                   option reading
+    //-                   option science
+    //-                   option social studies
+    //-                   option world geography
+    //-                   option writing
+    //-             .col-sm-4.col-sx-12
+    //-               .form-expDate
+    //-                 label(for='expDate') Expiration date:
+    //-                 input#expDate.form-control(type='date')
+    //-         .modal-options
+    //-           .modal-radio-group
+    //-             .row
+    //-               .col-md-4.col-sm-12.col-sx-12
+    //-                 label.modal-knowledge Choose your education stage:
+    //-               .col-md-3.col-sm-4.col-sx-12
+    //-                 label.radio-inline
+    //-                   input#primary(type='radio' value='' name='optradio' title='')
+    //-                   | Primary education
+    //-               .col-md-3.col-sm-4.col-sx-12
+    //-                 label.radio-inline
+    //-                   input#secondary(type='radio' value='' name='optradio' title='')
+    //-                   | Secondary education
+    //-               .col-md-2.col-sm-4.col-sx-12
+    //-                 label.radio-inline
+    //-                   input#faculty(type='radio' value='' name='optradio' title='')
+    //-                   | Faculty
+    //-           .modal-form-group
+    //-             label.modal-comment Add optional message:
+    //-             textarea#modal-message.form-control(rows='5')
+    //-       .modal-footer
+    //-         button.btn.btn-default(type='button' data-dismiss='modal') Close
+    //-         button.btn.btn-primary(type='button') Post
     // Modal popup send request
     #sendRequest.modal.fade(tabindex='-1' role='dialog' aria-labelledby='sendRequest' aria-hidden='true')
       .modal-dialog.modal-lg
