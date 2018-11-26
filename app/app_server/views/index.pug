@@ -12,6 +12,7 @@ block content
           .alert.alert-success.alert-dismissable.fade.in
             a.close(href='#', data-dismiss='alert', aria-label='close') ×
             | #{lectureRequestMsg}
+    input#env(type='hidden', name='env', value=env)
     #toggleNavContainer.container
       ul.nav.nav-tabs.nav-custom.nav-justified
         if lectureType == 'posted'
@@ -209,7 +210,7 @@ block content
                   textarea#modal-message.form-control(name='description', rows='5')
             .modal-footer
               button.btn.btn-default(type='button', data-dismiss='modal') Close
-              button#addNewLectureBtn.btn.btn-primary(type='button') Add
+              button#addNewLectureBtn.btn.btn-primary(type='button', data-dismiss='modal') Add
 
     //- #addListing.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addListing' aria-hidden='true')
     //-   .modal-dialog.modal-lg

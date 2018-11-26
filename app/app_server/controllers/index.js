@@ -1,6 +1,7 @@
 var rp = require('request-promise');
 var helperFunctions = require('../../lib/helper-functions');
 var apiParams = helperFunctions.getApiParams();
+var lectureEnums = require('../../app_api/models/enums/lectures-enums');
 
 /** Global variable for simulating logged in user */
 global.loggedInUser = null;
@@ -11,15 +12,13 @@ module.exports.index = async (req, res) => {
   var lectureType = req.query.lectureType || 'posted';
   var search = req.query.search || '';
 
-  
   /* Simulate logged in user instead of using local storage with JWT  */
   var user;
   if(loggedInUser) {
     user = await getUser(loggedInUser);
   }
- 
 
-  /** LECTURES REQUEST HANDLING */
+  /** Lectures requests create handling */
   var lectureRequestMsg;
   var lectureRequestError;
   if(req.query.lecture && user && user._id) {
@@ -32,7 +31,7 @@ module.exports.index = async (req, res) => {
           lecture: lecture._id,
           tutor: user._id,
           student: lecture.author,
-          requestType: 'tutorOffer'
+          requestType: lectureEnums.lecturesRequestsTypes.TutorOffer
         }
         var lecturesRequests = await createLectureRequest(body);
         if(lecturesRequests.error) {
@@ -49,7 +48,7 @@ module.exports.index = async (req, res) => {
           lecture: lecture._id,
           tutor: lecture.author,
           student: user._id,
-          requestType: 'studentRequest'
+          requestType: lectureEnums.lecturesRequestsTypes.StudentRequest
         }
         var lecturesRequests = await createLectureRequest(body);
         if(lecturesRequests.error) {
@@ -63,13 +62,14 @@ module.exports.index = async (req, res) => {
     }
   }
 
-  /** FETCH LECTURES ON INDEX PAGE */
+  /** Fetch lectures on index page */
   var lectures = await getLectures(page, lectureType, search);
   var lecturesErrorMessage;
   if(lectures.error) {
     // TODO
   }
 
+  /* Render index page */
   res.render('index', { 
     title: 'Tutke.io', 
     user: user, 
