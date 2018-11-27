@@ -621,4 +621,7 @@ label.labl {
     color: #ff9b00;
 }
 
-
+#addReviewTitle {
+    margin-top: 40px;
+    font-size: 24px;
+}
