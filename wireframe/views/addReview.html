@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <title>Tutke.io</title>
+    <meta charset="utf-8">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body>
+
+    <div class="customNavbar">
+        <a href="index.html" class="navbar-left"><img class="navLogo" src="../res/logoTutke.svg"></a>
+       
+        <div class="dropdown" id="userIconToggle">
+            <a href="#" class="dropdown-toggle" id="userIcon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <i class="fas fa-user-circle"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Account setting</a></li>
+                <li role="separator" class="divider"></li>
+                <!-- <li class="dropdown-header">Nav header</li> -->
+                <li><a href="#">My requests</a></li>
+                <li><a href="#">My listings</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="logIn.html">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="mainContent">
+        <h4>Add a review:</h4>
+        <div class="addReviewContainer">
+            <div class="row">
+                <form>
+                    <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-xs-6" id="leftColumnTextArea">
+                        <div class="textareacontainer">
+                            <textarea placeholder="Leave a review." id="textAreaComment"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-6" id="rightColReview">
+                        <div class="customRow">
+                            <div id="chooseRating" class="customColumn">
+                                <label class="labl">
+                                    <input type="radio" name="radioname" value="one_value"/>
+                                    <div class="starButton">1 <i class="fas fa-star"></i></div>
+                                </label>
+                                <label class="labl">
+                                    <input type="radio" name="radioname" value="one_value"/>
+                                    <div class="starButton">2 <i class="fas fa-star"></i></div>
+                                </label>
+                                <label class="labl">
+                                    <input type="radio" name="radioname" value="one_value"/>
+                                    <div class="starButton">3 <i class="fas fa-star"></i></div>
+                                </label>
+                                <label class="labl">
+                                    <input type="radio" name="radioname" value="one_value"/>
+                                    <div class="starButton">4 <i class="fas fa-star"></i></div>
+                                </label>
+                                <label class="labl">
+                                    <input type="radio" name="radioname" value="one_value" checked="checked"/>
+                                    <div class="starButton">5 <i class="fas fa-star"></i></div>
+                                </label>
+                            </div>
+                            <button type="submit" id="submitReview" class="customColumn"><i class="far fa-share-square"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>    
+    </div>
+    <!-- end of pagination -->
+
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
