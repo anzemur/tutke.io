@@ -41,9 +41,6 @@ module.exports.index = async (req, res) => {
     }
   }
 
-  console.log(lectureRequestUpdateError);
-  console.log(lectureRequestUpdateMsg);
-
   /** Lectures requests create handling */
   var lectureRequestMsg;
   var lectureRequestError;
