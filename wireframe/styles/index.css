@@ -652,3 +652,63 @@ label.labl {
     color: #fff;
     background-color: #ff9b00;
 }
+
+.AccountBtn {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ff9b00;
+    color: #ff9b00;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+.AccountBtn:hover {
+    color: #fff;
+    background-color: #ff9b00;
+}
+
+.accountActivityPanel {
+    height: 100%;
+    background-color: #fff;
+    margin-bottom: 10px;
+    border: 1px solid #dddddd;
+    padding-right: 10px;
+}
+
+h3.panel-title.smallPanel {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+#byUser {
+    font-weight: 400;
+    color: #ff9b00;
+}
+
+p#dateOfAcceptRequest {
+    margin-left: 10px;
+}
+
+.deleteOffer {
+    margin-top: 5px;
+    height: 40px;
+    float: right;
+    border-radius: 20px;
+    color: #ff9b00;
+    background-color: #fff;
+    border: 1px solid #ff9b00;
+    outline: none;
+    font-weight: 400;
+}
+
+.deleteOffer:hover {
+    color: #fff;
+    background-color: #ff9b00;
+}
+
+.profileHeader {
+    color: #1c1259;
+    border-bottom: 1px solid #1c1259;
+    margin-bottom: 20px;
+}
