@@ -140,7 +140,7 @@ block content
                 .extraHeading
                   span#userPublisher
                     if lecture.author && lecture.author.username
-                      a(href='/users/' + lecture.author._id) #{lecture.author.username}
+                      a(href='/user/' + lecture.author._id) #{lecture.author.username}
                     else
                       p Deleted user
                     span.date  - 
