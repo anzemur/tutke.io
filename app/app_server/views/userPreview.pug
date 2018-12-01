@@ -1,0 +1,53 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+
+#mainContent.container-fluid
+  .row
+    #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+      #profileView.thumbnail.profileThumbnail.profilePreview
+        h4#profileTitle Profile Username
+        #userPreviewRating.rating
+          i.fas.fa-star
+          i.fas.fa-star
+          i.fas.fa-star
+          i.far.fa-star
+          i.far.fa-star
+        p Faculty of Computer and Information Science
+        p BA. in Computer Science
+      h4.centered-h4 Reviews (1):
+      a.addReviewButton(href='addReview.html') Add Review
+      .totalAdPanel
+        .panel.panel-default.adPanel
+          .panel-heading
+            h3#adTitle.panel-title.reviewTitle
+              | User - 12/12/2018
+              span#adPrice
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+          .panel-body
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+      h4.centered-h4 Active posted lectures:
+      .totalAdPanel
+        .extraHeading
+          span#userPublisher
+            a(href='profileTutor.html') Tutor
+            span.date  - 05/11/2018
+        .panel.panel-default.adPanel
+          .panel-heading
+            h3#adTitle.panel-title
+              | Learn Linear Algebra!
+              span#adPrice
+                button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
+                  span.buttonTextRequest Send Request 
+                  i.far.fa-share-square
+          .panel-body
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...
+              a(href='#') Read More

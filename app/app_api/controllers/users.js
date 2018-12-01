@@ -35,7 +35,9 @@ module.exports.getUser = (req, res) => {
       query.populate({path: 'lecturesRequests', populate: {path: 'student'}});
       query.populate({path: 'lecturesRequests', populate: {path: 'tutor'}});
       query.populate({path: 'lecturesRequests', populate: {path: 'lecture'}});
-    } 
+    }
+
+    res.render('userPreview');
       
     query.exec((err, user) => {
       if (!user) {
