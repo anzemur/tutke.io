@@ -149,7 +149,8 @@ block content
                   .panel-heading
                     h3#adTitle.panel-title #{lecture.title}
                       span#adPrice
-                        | #{lecture.price} €/h
+                        if lecture.lectureType =='posted'
+                          | #{lecture.price} €/h
                         if user && user.role =='tutor' && lecture.lectureType =='requested'
                           - url = '/?lectureId=' + lecture._id + '&lecture=offer' + '&page=' + page + '&lectureType=' + lectureType
                           a(href=url)
@@ -216,12 +217,13 @@ block content
                          input#newLectureType(type='hidden', name='lectureType', value='posted')
                       else
                          input#newLectureType(type='hidden', name='lectureType', value='requested')
-              .modal-body-info
-                .row
-                  .col-sm-4.col-sx-12
-                    .form-subject
-                      label(for='priceNewLecture') Price:
-                      input#priceNewLecture.form-control(name='price', type='text', placeholder='Price in €/h.', required='')
+              if user.role == 'tutor'
+                .modal-body-info
+                  .row
+                    .col-sm-4.col-sx-12
+                      .form-subject
+                        label(for='priceNewLecture') Price:
+                        input#priceNewLecture.form-control(name='price', type='text', placeholder='Price in €/h.', required='')
               .modal-options
                 .modal-form-group
                   label.modal-comment Description:
