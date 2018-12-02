@@ -1,0 +1,95 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+
+    #mainContent.container-fluid
+      .row
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          #profileView.thumbnail.profileThumbnail.profilePreview
+            .profileHeader
+              h4.centered-h4 Tutor
+            h4#profileTitle Profile Username
+            #userPreviewRating.rating
+              i.fas.fa-star
+              i.fas.fa-star
+              i.fas.fa-star
+              i.far.fa-star
+              i.far.fa-star
+            p Faculty of Computer and Information Science
+            p BA. in Computer Science
+            .row
+              .col-xl-6.col-lg-6.col-md-6.col-sm-6
+                button#editAccBtn.AccountBtn
+                  | Edit 
+                  i.far.fa-user
+              .col-xl-6.col-lg-6.col-md-6.col-sm-6
+                button#deleteAccBtn.AccountBtn
+                  | Delete 
+                  i.far.fa-user
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          h4#postedLecturesMyAcc.centered-h4 Posted lectures:
+          .totalAdPanel
+            .extraHeading
+              span#userPublisher
+                a(href='profileTutor.html') Tutor
+                span.date  - 05/11/2018
+            .panel.panel-default..listingPanel
+              .panel-heading
+                h3#adTitle.panel-title
+                  | Learn Linear Algebra!
+                  span#adPrice
+                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#deletePost')
+                      span.buttonTextRequest Delete 
+                      i.far.fa-trash-alt
+                  span#adPrice
+                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
+                      span.buttonTextRequest Edit 
+                      i.far.fa-edit
+              .panel-body
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor
+      hr
+      .row
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          h4.centered-h4 Accepted Lecture Requests:
+          .accountActivityPanel
+            h3.panel-title.smallPanel
+              | Lecture title 
+              span#byUser by: Username
+            p#dateOfAcceptRequest 13:30 14/12/2018
+          .accountActivityPanel
+            h3.panel-title.smallPanel
+              | Lecture title 
+              span#byUser by: Username
+            p#dateOfAcceptRequest 13:30 14/12/2018
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          h4.centered-h4 Sent Lecture Offers:
+          .accountActivityPanel
+            h3.panel-title.smallPanel
+              | Lecture title 
+              span#byUser for: Username
+              button.deleteOffer Delete
+            p#dateOfAcceptRequest 13:30 14/12/2018
+          .accountActivityPanel
+            h3.panel-title.smallPanel
+              | Lecture title 
+              span#byUser for: Username
+              button.deleteOffer Delete
+            p#dateOfAcceptRequest 13:30 14/12/2018
+      hr
+      h4.centered-h4 Reviews (1):
+      .totalAdPanel
+        .panel.panel-default.listingPanel
+          .panel-heading
+            h3#adTitle.panel-title.reviewTitle
+              | User - 12/12/2018
+              span#adPrice
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+          .panel-body
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
