@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body>
+
+    <div class="customNavbar">
+        <a href="index.html" class="navbar-left"><img class="navLogo" src="../res/logoTutke.svg"></a>
+        
+        <div class="dropdown" id="userIconToggle">
+            <a href="#" class="dropdown-toggle" id="userIcon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <i class="fas fa-user-circle"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Account setting</a></li>
+                <li role="separator" class="divider"></li>
+                <!-- <li class="dropdown-header">Nav header</li> -->
+                <li><a href="#">My requests</a></li>
+                <li><a href="#">My listings</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="logIn.html">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row input-row">
+            <div class="col-sm-4 col-sx-12 input-row">
+                <div class="form-subject">
+                    <label for="subject">Subject:</label>
+                    <input type="text" class="form-control" id="subject" placeholder="Main (specific) subject of interest" required>
+                </div>
+            </div>
+            
+            <div class="col-sm-4 col-sx-12 input-row">
+                <div class="form-category">
+                    <label for="category">Choose category:</label>
+                    <select class="form-control" id="category" required>
+                        <option></option>
+                        <option>algebra</option>
+                        <option>archaeology</option>
+                        <option>art</option>
+                        <option>band</option>
+                        <option>biology</option>
+                        <option>botany</option>
+                        <option>calculus</option>
+                        <option>chemistry</option>
+                        <option>computer science</option>
+                        <option>drama</option>
+                        <option>economics</option>
+                        <option>English</option>
+                        <option>French</option>
+                        <option>geography</option>
+                        <option>geology</option>
+                        <option>geometry</option>
+                        <option>German</option>
+                        <option>gym</option>
+                        <option>health</option>
+                        <option>history</option>
+                        <option>home economics</option>
+                        <option>keyboarding</option>
+                        <option>language arts</option>
+                        <option>literature</option>
+                        <option>logic</option>
+                        <option>music</option>
+                        <option>physical education</option>
+                        <option>physics</option>
+                        <option>psychology</option>
+                        <option>reading</option>
+                        <option>science</option>
+                        <option>social studies</option>
+                        <option>world geography</option>
+                        <option>writing</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-sm-4 col-sx-12 input-row">
+                <div class="form-expDate">
+                    <label for="expDate">Expiration date:</label>
+                    <input type="date" class="form-control" id="expDate">
+                </div>
+            </div>
+
+            <div class="modal-options">
+                <div class="modal-radio-group">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-sx-12 input-row">
+                            <label class="modal-knowledge">Choose your education stage:</label>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-4 col-sx-12 input-row">
+                            <label class="radio-inline"><input id="primary" type="radio" value="" name="optradio" title="">Primary education</label>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-4 col-sx-12 input-row">
+                            <label class="radio-inline"><input id="secondary" type="radio" value="" name="optradio" title="">Secondary education</label>
+                        </div>
+                        
+                        <div class="col-md-2 col-sm-4 col-sx-12 input-row">
+                            <label class="radio-inline"><input id="faculty" type="radio" value="" name="optradio" title="">Faculty</label> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-form-group">
+                    <label class="modal-comment">Add message:</label>
+                    <textarea class="form-control" rows="5" id="modal-message"></textarea>
+                </div>
+            </div>
+
+            <div class="sign-up-btn-position">
+                <button type="submit" id="edit-profile-button" class="btn btn-primary btn-block btn-hover btn-click">Apply Changes</button>
+            </div>
+
+        </div>
+    </div>
+    <!-- Bootstrap scripts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
