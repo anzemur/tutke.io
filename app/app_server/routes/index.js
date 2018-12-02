@@ -5,6 +5,7 @@ var ctrlIndex = require('../controllers/index');
 var ctrlLogIn = require('../controllers/log-in');
 var ctrlSignUp = require('../controllers/sign-up');
 var ctrlUsersProfile = require('../controllers/user-profile');
+var ctrlMyAccount = require('../controllers/my-account');
 
 /* Index page routes. */
 router.get('/', ctrlIndex.index);
@@ -21,6 +22,8 @@ router.post('/signUp', ctrlSignUp.signUp);
 /* Users profile routes */
 router.get('/user/:userId', ctrlUsersProfile.userProfile);
 
+/* My account routes */
+router.get('/account', ctrlMyAccount.myAccount);
 
 
 

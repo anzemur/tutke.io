@@ -10,7 +10,6 @@ module.exports.userProfile = async (req, res) => {
   var user;
   if(loggedInUser) {
     user = await getUser(loggedInUser);
-    console.log(user);
   }
 
   var currentUserError;
