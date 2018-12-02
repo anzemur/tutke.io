@@ -7,46 +7,55 @@ block content
       .row
         #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           #profileView.thumbnail.profileThumbnail.profilePreview
-            h4#profileTitle Profile Username
-            #userPreviewRating.rating
-              i.fas.fa-star
-              i.fas.fa-star
-              i.fas.fa-star
-              i.far.fa-star
-              i.far.fa-star
-            p Faculty of Computer and Information Science
-            p BA. in Computer Science
-          h4.centered-h4 Reviews (1):
-          a.addReviewButton(href='add-review.pug') Add Review
-          .totalAdPanel
-            .panel.panel-default.listingPanel
-              .panel-heading
-                h3#adTitle.panel-title.reviewTitle
-                  | User - 12/12/2018
-                  span#adPrice
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.far.fa-star
-                    i.far.fa-star
-              .panel-body
-                p
-                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            if currentUser
+              h4#profileTitle Profile #{currentUser.username}
+              #userPreviewRating.rating
+                if currentUser.role == 'tutor'
+                  +showRating(currentUser.rating)
+              p Role: #{currentUser.role}
+              if currentUser.role == 'tutor' && currentUser.teachingInstitution
+                p Current teaching institution: #{currentUser.teachingInstitution}
+              p  #{currentUser.educationLevel} 
+              p  #{currentUser.fieldOfEducation}
+            else 
+              h4#profileTitle Couldn't load profile data.
+          if currentUser && currentUser.role == 'tutor'
+            if currentUser.comments
+              h4.centered-h4 Reviews (#{currentUser.comments.length}):
+              each comment in currentUser.comments
+                .totalAdPanel
+                  .panel.panel-default.listingPanel
+                    .panel-heading
+                      h3#adTitle.panel-title.reviewTitle
+                        //- TODO: fix to author name + edit/delete button
+                        | User - 
+                        +formatDate(comment.createdAt)
+                        span#adPrice
+                          +showRating(comment.rating)
+                    .panel-body
+                      p
+                        | #{comment.commentText}
+            else
+              h4.centered-h4 Reviews (0):
+            a.addReviewButton(href='add-review.pug') Add Review
         #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
-          h4.centered-h4 Active posted lectures:
-          .totalAdPanel
-            .extraHeading
-              span#userPublisher
-                a(href='profileTutor.html') Tutor
-                span.date  - 05/11/2018
-            .panel.panel-default.listingPanel
-              .panel-heading
-                h3#adTitle.panel-title
-                  | Learn Linear Algebra!
-                  span#adPrice
-                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
-                      span.buttonTextRequest Send Request 
-                      i.far.fa-share-square
-              .panel-body
-                p
-                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...
+          if currentUser
+            if currentUser.role == 'tutor'
+              h4.centered-h4 Active posted lectures:
+            else 
+              h4.centered-h4 Active posted lecture requests:
+            each lecture in currentUser.postedLectures
+              .totalAdPanel
+                .extraHeading
+                  span#userPublisher
+                    span.date
+                      +formatDate(lecture.createdAt)
+                .panel.panel-default.listingPanel
+                  .panel-heading
+                    h3#adTitle.panel-title
+                      | #{lecture.title}
+                      if lecture.lectureType =='posted'
+                        span#adPrice  #{lecture.price} €/h
+                  .panel-body
+                    p
+                      | #{lecture.description}
