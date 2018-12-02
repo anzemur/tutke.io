@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var ctrlUsers = require('../controllers/users');
+var ctrlComments = require('../controllers/comments');
 var ctrlLectures = require('../controllers/lectures');
 var ctrlLecturesRequests = require('../controllers/lectures-requests');
 
@@ -28,6 +29,21 @@ router.delete('/users/:userId',
 
 router.post('/users/auth', 
   ctrlUsers.authUser);
+ 
+/**
+ * COMMENTS routes.
+ */
+router.post('users/:userId/comments',
+  ctrlComments.createComment);
+  
+router.get('users/:userId/comments/:commentId',
+  ctrlComments.getComment);
+
+router.put('users/:userId/comments:commentId',
+  ctrlComments.updateComment);
+
+router.delete('users/:userId/comments/:commentId',
+  ctrlComments.deleteComment)
 
 /**
  * LECTURES routes.
