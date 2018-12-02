@@ -769,3 +769,9 @@ p#dateOfAcceptRequest {
      margin-top: 20px;
      font-weight: 500;
  }
+
+  /* -------------------------------------------edit lecture */
+
+.input-row {
+    margin-top: 15px;
+}

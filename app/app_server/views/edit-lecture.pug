@@ -1,0 +1,77 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+
+    .container
+      form
+        .row.input-row
+          .col-sm-4.col-sx-12.input-row
+            .form-subject
+              label(for='subject') Subject:
+              input#subject.form-control(type='text' placeholder='Main (specific) subject of interest' required='')
+          .col-sm-4.col-sx-12.input-row
+            .form-category
+              label(for='category') Choose category:
+              select#category.form-control(required='')
+                option
+                option algebra
+                option archaeology
+                option art
+                option band
+                option biology
+                option botany
+                option calculus
+                option chemistry
+                option computer science
+                option drama
+                option economics
+                option English
+                option French
+                option geography
+                option geology
+                option geometry
+                option German
+                option gym
+                option health
+                option history
+                option home economics
+                option keyboarding
+                option language arts
+                option literature
+                option logic
+                option music
+                option physical education
+                option physics
+                option psychology
+                option reading
+                option science
+                option social studies
+                option world geography
+                option writing
+          .col-sm-4.col-sx-12.input-row
+            .form-expDate
+              label(for='expDate') Expiration date:
+              input#expDate.form-control(type='date')
+          .modal-options
+            .modal-radio-group
+              .row
+                .col-md-4.col-sm-12.col-sx-12.input-row
+                  label.modal-knowledge Choose your education stage:
+                .col-md-3.col-sm-4.col-sx-12.input-row
+                  label.radio-inline
+                    input#primary(type='radio' value='' name='optradio' title='')
+                    | Primary education
+                .col-md-3.col-sm-4.col-sx-12.input-row
+                  label.radio-inline
+                    input#secondary(type='radio' value='' name='optradio' title='')
+                    | Secondary education
+                .col-md-2.col-sm-4.col-sx-12.input-row
+                  label.radio-inline
+                    input#faculty(type='radio' value='' name='optradio' title='')
+                    | Faculty
+            .modal-form-group
+              label.modal-comment Add message:
+              textarea#modal-message.form-control(rows='5')
+          .sign-up-btn-position
+            button#edit-profile-button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Apply Changes
