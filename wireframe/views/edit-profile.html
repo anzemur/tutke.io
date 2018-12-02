@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body>
+    <div class="container">
+        <h4 class="centered-h4 edit-profile-title">Edit Profile:</h4>
+        <form action='/signUp' method="POST">
+            <div class="input-group sign-up-inputs">
+                    <label for="first_name">First name<span style="color: red">*</span></label>
+                    <input name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="last_name">Last name<span style="color: red">*</span></label>
+                    <input name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required oninvalid="this.setCustomValidity('Please enter password.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="username">Username<span style="color: red">*</span></label>
+                    <input name="username" class="form-control input-lg" placeholder="Username" type="text" tabindex="3" required oninvalid="this.setCustomValidity('Please enter username.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="password">Password<span style="color: red">*</span></label>
+                    <input name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="4" required oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="email">Email address<span style="color: red">*</span></label>
+                    <input name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="5" required oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="current_teaching">Current teaching institution</label>
+                    <input name="current_teaching" class="form-control input-lg" placeholder="Current teaching institution" type="text" tabindex="6">
+                </div>
+                <div class="form-group sign-up-inputs">
+                    <label for="education">Select your level of education:<span style="color: red">*</span></label>
+                    <select class="form-control  input-lg" id="education" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                    <option>Primary education</option>
+                    <option>Lower secondary education</option>
+                    <option>Upper secondary education</option>
+                    <option>Post-secondary non-tertiary education</option>
+                    <option>Short-cycle tertiary education</option>
+                    <option>Bachelor or equivalent</option>
+                    <option>Master or equivalent</option>
+                    <option>Doctoral or equivalent</option>
+                    </select>
+                </div>
+                <div class="form-group sign-up-inputs">
+                    <label for="education">Select field of your education:<span style="color: red">*</span></label>
+                    <select class="form-control  input-lg" id="education" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                    <option>Primary education</option>
+                    <option>Lower secondary education</option>
+                    <option>Upper secondary education</option>
+                    <option>Post-secondary non-tertiary education</option>
+                    <option>Short-cycle tertiary education</option>
+                    <option>Bachelor or equivalent</option>
+                    <option>Master or equivalent</option>
+                    <option>Doctoral or equivalent</option>
+                    </select>
+                </div>
+                <div class="input-group sign-up-inputs">
+                    <label for="certificates">Upload certificates<span style="font-size: 14px; color: #878797"> (.png/.pdf)</span></label>
+                    <input name="certificates" class="form-control input-lg" type="file" tabindex="5" multiple accept="image/png">
+                </div>
+                <div class="sign-up-btn-position">
+                    <button type="submit" id="edit-profile-button" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
+                </div>
+        </form>
+    </div>
+    <!-- Bootstrap scripts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
