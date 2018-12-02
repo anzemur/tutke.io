@@ -1,83 +1,52 @@
-doctype html
-head
-  title Tutke.io
-  meta(charset='utf-8')
-  // Font Awesome
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.1/css/all.css' integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz' crossorigin='anonymous')
-  // Bootstrap
-  link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
-  // Styles
-  link(rel='stylesheet', href='/stylesheets/index.css')
-.customNavbar
-  a.navbar-left(href='index.html')
-    img.navLogo(src='/images/logoTutke.svg')
-  #userIconToggle.dropdown
-    a#userIcon.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
-      | User 
-      i.fas.fa-user-circle
-    ul.dropdown-menu
-      li
-        a(href='#') Account setting
-      li.divider(role='separator')
-      // <li class="dropdown-header">Nav header</li>
-      li
-        a(href='#') My requests
-      li
-        a(href='#') My listings
-      li.divider(role='separator')
-      li
-        a(href='logIn.html') Log Out
-#mainContent.container-fluid
-  .row
-    #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
-      #profileView.thumbnail.profileThumbnail.profilePreview
-        h4#profileTitle Profile Username
-        #userPreviewRating.rating
-          i.fas.fa-star
-          i.fas.fa-star
-          i.fas.fa-star
-          i.far.fa-star
-          i.far.fa-star
-        p Faculty of Computer and Information Science
-        p BA. in Computer Science
-      h4.centered-h4 Reviews (1):
-      a.addReviewButton(href='addReview.html') Add Review
-      .totalAdPanel
-        .panel.panel-default.adPanel
-          .panel-heading
-            h3#adTitle.panel-title.reviewTitle
-              | User - 12/12/2018
-              span#adPrice
-                i.fas.fa-star
-                i.fas.fa-star
-                i.fas.fa-star
-                i.far.fa-star
-                i.far.fa-star
-          .panel-body
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
-      h4.centered-h4 Active posted lectures:
-      .totalAdPanel
-        .extraHeading
-          span#userPublisher
-            a(href='profileTutor.html') Tutor
-            span.date  - 05/11/2018
-        .panel.panel-default.adPanel
-          .panel-heading
-            h3#adTitle.panel-title
-              | Learn Linear Algebra!
-              span#adPrice
-                button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
-                  span.buttonTextRequest Send Request 
-                  i.far.fa-share-square
-          .panel-body
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...
-              a(href='#') Read More
+extends layout
+include _includes/skupneHTMLfunkcije.pug
 
-script(src='/javascripts/jquery-3.3.1.min.js')
-script(src='/bootstrap/js/bootstrap.min.js')
-script(src='/javascripts/performSearch.js')
-script(src='/javascripts/addNewLecture.js')
-script(src='/javascripts/notify.js')
+block content
+
+    #mainContent.container-fluid
+      .row
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          #profileView.thumbnail.profileThumbnail.profilePreview
+            h4#profileTitle Profile Username
+            #userPreviewRating.rating
+              i.fas.fa-star
+              i.fas.fa-star
+              i.fas.fa-star
+              i.far.fa-star
+              i.far.fa-star
+            p Faculty of Computer and Information Science
+            p BA. in Computer Science
+          h4.centered-h4 Reviews (1):
+          a.addReviewButton(href='addReview.html') Add Review
+          .totalAdPanel
+            .panel.panel-default.listingPanel
+              .panel-heading
+                h3#adTitle.panel-title.reviewTitle
+                  | User - 12/12/2018
+                  span#adPrice
+                    i.fas.fa-star
+                    i.fas.fa-star
+                    i.fas.fa-star
+                    i.far.fa-star
+                    i.far.fa-star
+              .panel-body
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          h4.centered-h4 Active posted lectures:
+          .totalAdPanel
+            .extraHeading
+              span#userPublisher
+                a(href='profileTutor.html') Tutor
+                span.date  - 05/11/2018
+            .panel.panel-default.listingPanel
+              .panel-heading
+                h3#adTitle.panel-title
+                  | Learn Linear Algebra!
+                  span#adPrice
+                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#sendRequest')
+                      span.buttonTextRequest Send Request 
+                      i.far.fa-share-square
+              .panel-body
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...
