@@ -33,16 +33,16 @@ router.post('/users/auth',
 /**
  * COMMENTS routes.
  */
-router.post('users/:userId/comments',
+router.post('/users/:userId/comments',
   ctrlComments.createComment);
   
-router.get('users/:userId/comments/:commentId',
+router.get('/users/:userId/comments/:commentId',
   ctrlComments.getComment);
 
-router.put('users/:userId/comments:commentId',
+router.put('/users/:userId/comments:commentId',
   ctrlComments.updateComment);
 
-router.delete('users/:userId/comments/:commentId',
+router.delete('/users/:userId/comments/:commentId',
   ctrlComments.deleteComment)
 
 /**

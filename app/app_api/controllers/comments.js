@@ -42,7 +42,7 @@ module.exports.getComment = function(req, res) {
 				}
 			);
 	} else {
-		respondJson(res, 404, errors.NotFound);
+		respondJson(res, 400, errors.BadRequest);
 	}
 };
   
