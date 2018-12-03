@@ -138,7 +138,44 @@ module.exports.getComment = function(req, res) {
 };
   
 module.exports.updateComment = function(req, res) {
-  vrniJsonOdgovor(odgovor, 200, {"status": "uspešno"});
+  if(!req.params.userId || !req.params.commentId) {
+		respondJson(res, 400, errors.BadRequest);
+		return;
+	}
+	User
+		.findById(req.params.idUser)
+		.select('comments')
+		.exec(
+			function(err, user){
+				if(!user) {
+					respondJson(res, 404, errors.NotFound);
+					return;
+				} else if(err) {
+					respondJson(res, 500, err.message);
+					return;
+				}
+				if(user.comments && user.comments.length > 0) {
+					var currentComment = user.comments.id(req.params.commentId);
+					if(!currentComment) {
+						respondJson(res, 404, errors.NotFound);
+					} else {
+						currentComment.author = req.body.author; //samo za test
+						currentComment.rating = req.body.rating;
+						currentComment.commentText = req.body.commentText;
+						user.save(function(err, user){
+							if(err) {
+								respondJson(res, 400, errors.BadRequest);
+							} else {
+								updateAvgRating(user._id)
+								respondJson(res, 200, currentComment);
+							}
+						});
+					}
+				} else {
+					respondJson(res, 404, errors.NotFound);
+				}
+			}
+		);
 };
   
 module.exports.deleteComment = function(req, res) {
