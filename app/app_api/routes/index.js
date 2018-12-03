@@ -39,7 +39,7 @@ router.post('/users/:userId/comments',
 router.get('/users/:userId/comments/:commentId',
   ctrlComments.getComment);
 
-router.put('/users/:userId/comments:commentId',
+router.put('/users/:userId/comments/:commentId',
   ctrlComments.updateComment);
 
 router.delete('/users/:userId/comments/:commentId',
