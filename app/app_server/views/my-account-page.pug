@@ -2,6 +2,16 @@ extends layout
 include _includes/skupneHTMLfunkcije.pug
 
 block content
+    if errorMsg
+            .col-sm-12.col-md-12.col-xs-12
+              .alert.alert-danger.alert-dismissable.fade.in
+                a.close(href='#', data-dismiss='alert', aria-label='close') ×
+                | #{errorMsg}
+    if successMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{successMsg}
     #mainContent.container-fluid
       .row
         #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
@@ -48,9 +58,11 @@ block content
                   h3#adTitle.panel-title
                     | #{lecture.title}
                     span#adPrice
-                      button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#deletePost')
-                        span.buttonTextRequest Delete 
-                        i.far.fa-trash-alt
+                      - urlDelLec = '/account?lectureId=' + lecture._id
+                      a(href=urlDelLec)
+                        button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#deletePost')
+                          span.buttonTextRequest Delete 
+                          i.far.fa-trash-alt
                     span#adPrice
                       button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
                         span.buttonTextRequest Edit 
@@ -112,7 +124,9 @@ block content
                     | #{acceptedLecture.lecture.title}
                   if acceptedLecture.student
                     span#byUser  for: #{acceptedLecture.student.username}
-                  button.deleteOffer Delete
+                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
+                  a(href=urlDelReq)
+                    button.deleteOffer Delete
                 p#dateOfAcceptRequest
                   +formatDate(acceptedLecture.createdAt)
           else
@@ -127,7 +141,9 @@ block content
                     | #{acceptedLecture.lecture.title}
                   if acceptedLecture.tutor
                     span#byUser  for: #{acceptedLecture.tutor.username}
-                  button.deleteOffer Delete
+                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
+                  a(href=urlDelReq)
+                    button.deleteOffer Delete
                 p#dateOfAcceptRequest
                   +formatDate(acceptedLecture.createdAt)
       hr
