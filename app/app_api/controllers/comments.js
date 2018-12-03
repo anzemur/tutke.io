@@ -5,12 +5,6 @@ var errors = require('../../lib/errors');
 var helperFunctions = require('../../lib/helper-functions');
 var respondJson = helperFunctions.respondJson;
 
-var vrniJsonOdgovor = function(odgovor, status, vsebina) {
-  odgovor.status(status);
-  odgovor.json(vsebina);
-	};
-	
-
 /**
  * Creates a comment model and stars its addition to user.
  * Body: {Comment} Comment model.
@@ -179,5 +173,38 @@ module.exports.updateComment = function(req, res) {
 };
   
 module.exports.deleteComment = function(req, res) {
-  vrniJsonOdgovor(odgovor, 200, {"status": "uspešno"});
+  if (!req.params.userId || !req.params.commentId){
+		respondJson(res, 400, errors.BadRequest);
+		return;
+	}
+	User
+		.findById(req.params.userId)
+		.exec(
+			function(err, user){
+				if(!user) {
+					respondJson(res, 404, errors.NotFound);
+					return;
+				} else if(err) {
+					respondJson(res, 500, err.message);
+					return;
+				}
+				if(user.comments && user.comments.length > 0) {
+					if(!user.comments.id(req.params.commentId)) {
+						respondJson(res, 404, errors.NotFound);
+					} else {
+						user.comments.id(req.params.commentId).remove();
+						user.save(function(err){
+							if(err) {
+								respondJson(res, 500, err.message);
+							} else {
+								updateAvgRating(user._id);
+								respondJson(res, 204, null);
+							}
+						});
+					}
+				} else {
+					respondJson(res, 404, errors.NotFound);
+				}
+			}
+		);
 };
