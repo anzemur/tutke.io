@@ -7,35 +7,35 @@ block content
       h4#addReviewTitle Add a review:
       .addReviewContainer
         .row
-          form
+          form(action="/users", method="get", role="form")
             #leftColumnTextArea.col-xl-9.col-lg-9.col-md-8.col-sm-8.col-xs-6
               .textareacontainer
-                textarea#textAreaComment(placeholder='Leave a review.')
+                textarea#textAreaComment(placeholder='Leave a review.' name="comment")
             #rightColReview.col-xl-3.col-lg-3.col-md-4.col-sm-4.col-xs-6
               .customRow
                 #chooseRating.customColumn
                   label.labl
-                    input(type='radio' name='radioname' value='one_value')
+                    input(type='radio' name='rating' value='1')
                     .starButton
                       | 1 
                       i.fas.fa-star
                   label.labl
-                    input(type='radio' name='radioname' value='one_value')
+                    input(type='radio' name='rating' value='2')
                     .starButton
                       | 2 
                       i.fas.fa-star
                   label.labl
-                    input(type='radio' name='radioname' value='one_value')
+                    input(type='radio' name='rating' value='3')
                     .starButton
                       | 3 
                       i.fas.fa-star
                   label.labl
-                    input(type='radio' name='radioname' value='one_value')
+                    input(type='radio' name='rating' value='4')
                     .starButton
                       | 4 
                       i.fas.fa-star
                   label.labl
-                    input(type='radio' name='radioname' value='one_value' checked='checked')
+                    input(type='radio' name='rating' value='5' checked='checked')
                     .starButton
                       | 5 
                       i.fas.fa-star
