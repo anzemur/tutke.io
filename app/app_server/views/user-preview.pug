@@ -35,8 +35,6 @@ block content
                     .panel-body
                       p
                         | #{comment.commentText}
-            else
-              h4.centered-h4 Reviews (0):
             a.addReviewButton(href='add-review.pug') Add Review
         #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           if currentUser

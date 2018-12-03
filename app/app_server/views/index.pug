@@ -94,7 +94,8 @@ block content
                     each pendingLecture in pendingLectures
                       li
                         p
-                          | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
+                          if pendingLecture.lecture && pendingLecture.student
+                            | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
                           br
                           - urlAcc = '/?pendingLectureId=' + pendingLecture._id + '&answer=accept' + '&page=' + page + '&lectureType=' + lectureType
                           a(href=urlAcc)
@@ -110,7 +111,8 @@ block content
                     each pendingLecture in pendingLectures
                       li
                         p
-                          | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
+                          if pendingLecture.lecture && pendingLecture.tutor
+                            | #{pendingLecture.lecture.title} - from #{pendingLecture.tutor.username}
                           br
                           - urlAcc = '/?pendingLectureId=' + pendingLecture._id + '&answer=accept' + '&page=' + page + '&lectureType=' + lectureType
                           a(href=urlAcc)

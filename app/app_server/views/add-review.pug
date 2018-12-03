@@ -2,15 +2,14 @@ extends layout
 include _includes/skupneHTMLfunkcije.pug
 
 block content
-
     #mainContent.container-fluid
       h4#addReviewTitle Add a review:
       .addReviewContainer
         .row
-          form(action="/users", method="get", role="form")
+          form(action="/users", method="POST")
             #leftColumnTextArea.col-xl-9.col-lg-9.col-md-8.col-sm-8.col-xs-6
               .textareacontainer
-                textarea#textAreaComment(placeholder='Leave a review.' name="comment")
+                textarea#textAreaComment(placeholder='Leave a review.' name="commentText")
             #rightColReview.col-xl-3.col-lg-3.col-md-4.col-sm-4.col-xs-6
               .customRow
                 #chooseRating.customColumn

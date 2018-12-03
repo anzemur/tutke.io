@@ -11,11 +11,17 @@ module.exports.myAccount = async (req, res) => {
     user = await getUser(loggedInUser);
   }
 
-
-  res.render('my-account-page', { 
-    title: 'My account',
-    user: user
-  });
+  if(!user) {
+    res.render('log-in', { 
+      title: 'Log In',
+      logInError: 'Please log in to see additonal information.'
+    });
+  } else {
+    res.render('my-account-page', { 
+      title: 'My account',
+      user: user
+    });
+  }
 };
 
 
