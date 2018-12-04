@@ -2,7 +2,16 @@ extends layout
 include _includes/skupneHTMLfunkcije.pug
 
 block content
-
+    if errorMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{errorMsg}
+    if successMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{successMsg}
     #mainContent.container-fluid
       .row
         #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
@@ -35,7 +44,8 @@ block content
                     .panel-body
                       p
                         | #{comment.commentText}
-            a.addReviewButton(href='add-review.pug') Add Review
+            - addReviewUrl = '/user/' + currentUser._id + '/comment'
+            a.addReviewButton(href=addReviewUrl) Add Review
         #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           if currentUser
             if currentUser.role == 'tutor'
