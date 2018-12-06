@@ -36,11 +36,23 @@ block content
                   .panel.panel-default.listingPanel
                     .panel-heading
                       h3#adTitle.panel-title.reviewTitle
-                        //- TODO: fix to author name + edit/delete button
-                        | User - 
+                        if comment.author && comment.author.username
+                          | #{comment.author.username} - 
+                        else
+                          | Unknown -
                         +formatDate(comment.createdAt)
+                        if comment.author && comment.author._id && user && user._id
+                          if comment.author._id == user._id
+                            - urlEditCom = ''
+                            a(href=urlEditCom)
+                                button.acceptDeny Edit
+                            - urlDelCom = ''
+                            a(href=urlDelCom)
+                              button#denyRequest.acceptDeny Delete
+
                         span#adPrice
                           +showRating(comment.rating)
+                       
                     .panel-body
                       p
                         | #{comment.commentText}
