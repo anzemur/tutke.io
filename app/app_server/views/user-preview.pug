@@ -44,8 +44,10 @@ block content
                     .panel-body
                       p
                         | #{comment.commentText}
-            - addReviewUrl = '/user/' + currentUser._id + '/comment'
-            a.addReviewButton(href=addReviewUrl) Add Review
+            if user
+              if user.role == 'student' && currentUser.role == 'tutor'
+                - addReviewUrl = '/user/' + currentUser._id + '/comment'
+                a.addReviewButton(href=addReviewUrl) Add Review
         #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           if currentUser
             if currentUser.role == 'tutor'
