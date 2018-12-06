@@ -1,0 +1,22 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+
+    .container
+      form
+        .row.input-row
+          .col-sm-4.col-sx-12.input-row
+            .form-subject
+              label(for='subject') Title:
+              input#subject.form-control(type='text' placeholder='Title' required='')
+          .col-sm-4.col-sx-12.input-row
+            .form-subject
+              label(for='subject') Price:
+              input#subject.form-control(type='text' placeholder='Price in €/h' required='')
+        .modal-form-group
+          label.modal-comment Description:
+          textarea#modal-message.form-control(rows='5')
+        .sign-up-btn-position
+          button#edit-profile-button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Apply Changes
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+    <title>Tutke.io</title>
+    <meta charset="utf-8">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body>
+
+    <div class="customNavbar">
+        <a href="index.html" class="navbar-left"><img class="navLogo" src="../res/logoTutke.svg"></a>
+       
+        <div class="dropdown" id="userIconToggle">
+            <a href="#" class="dropdown-toggle" id="userIcon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <i class="fas fa-user-circle"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Account setting</a></li>
+                <li role="separator" class="divider"></li>
+                <!-- <li class="dropdown-header">Nav header</li> -->
+                <li><a href="#">My requests</a></li>
+                <li><a href="#">My listings</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="logIn.html">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="mainContent">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
+                <div class="thumbnail profileThumbnail profilePreview" id="profileView">
+                    <h4 id="profileTitle">Profile Username</h4>
+                    <div class="rating" id="userPreviewRating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div> 
+                    <p>Faculty of Computer and Information Science</p>
+                    <p>BA. in Computer Science</p>
+                </div>
+                
+                <h4 class="centered-h4">Reviews (1):</h4>
+                    <a href="addReview.html" class="addReviewButton">Add Review</a>
+                <div class="totalAdPanel">
+                    <div class="panel panel-default adPanel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title reviewTitle" id="adTitle">User - 12/12/2018
+                                <span id="adPrice">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </div> 
+
+            </div>
+            
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="rightColumn">
+                <h4 class="centered-h4">Active posted lectures:</h4>
+                
+                <div class="totalAdPanel">
+                    <div class="extraHeading"><span id="userPublisher"><a href="profileTutor.html">Tutor</a><span class="date"> - 05/11/2018</span></span></div>
+                    <div class="panel panel-default adPanel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" id="adTitle">Learn Linear Algebra!<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                        </div>
+                    </div>
+                </div> 
+                
+            </div>
+        </div>    
+    </div>            
+
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>

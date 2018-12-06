@@ -1,0 +1,83 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+    if errorMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{errorMsg}
+    if successMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{successMsg}
+    #mainContent.container-fluid
+      .row
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          #profileView.thumbnail.profileThumbnail.profilePreview
+            if currentUser
+              h4#profileTitle Profile #{currentUser.username}
+              #userPreviewRating.rating
+                if currentUser.role == 'tutor'
+                  +showRating(currentUser.rating)
+              p Role: #{currentUser.role}
+              if currentUser.role == 'tutor' && currentUser.teachingInstitution
+                p Current teaching institution: #{currentUser.teachingInstitution}
+              p  #{currentUser.educationLevel} 
+              p  #{currentUser.fieldOfEducation}
+            else 
+              h4#profileTitle Couldn't load profile data.
+          if currentUser && currentUser.role == 'tutor'
+            if currentUser.comments
+              h4.centered-h4 Reviews (#{currentUser.comments.length}):
+              each comment in currentUser.comments
+                .totalAdPanel
+                  .panel.panel-default.listingPanel
+                    .panel-heading
+                      h3#adTitle.panel-title.reviewTitle
+                        if comment.author && comment.author.username
+                          | #{comment.author.username} - 
+                        else
+                          | Unknown -
+                        +formatDate(comment.createdAt)
+                        if comment.author && comment.author._id && user && user._id
+                          if comment.author._id == user._id
+                            - urlEditCom = ''
+                            a(href=urlEditCom)
+                                button.acceptDeny Edit
+                            - urlDelCom = ''
+                            a(href=urlDelCom)
+                              button#denyRequest.acceptDeny Delete
+
+                        span#adPrice
+                          +showRating(comment.rating)
+                       
+                    .panel-body
+                      p
+                        | #{comment.commentText}
+            if user
+              if user.role == 'student' && currentUser.role == 'tutor'
+                - addReviewUrl = '/user/' + currentUser._id + '/comment'
+                a.addReviewButton(href=addReviewUrl) Add Review
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          if currentUser
+            if currentUser.role == 'tutor'
+              h4.centered-h4 Active posted lectures:
+            else 
+              h4.centered-h4 Active posted lecture requests:
+            each lecture in currentUser.postedLectures
+              .totalAdPanel
+                .extraHeading
+                  span#userPublisher
+                    span.date
+                      +formatDate(lecture.createdAt)
+                .panel.panel-default.listingPanel
+                  .panel-heading
+                    h3#adTitle.panel-title
+                      | #{lecture.title}
+                      if lecture.lectureType =='posted'
+                        span#adPrice  #{lecture.price} €/h
+                  .panel-body
+                    p
+                      | #{lecture.description}

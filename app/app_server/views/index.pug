@@ -1,0 +1,281 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+    if lectureRequestError
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestError}
+    if lectureRequestMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestMsg}
+    if lectureRequestUpdateError
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestUpdateError}
+    if lectureRequestUpdateMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{lectureRequestUpdateMsg}
+    input#env(type='hidden', name='env', value=env)
+    #toggleNavContainer.container
+      ul.nav.nav-tabs.nav-custom.nav-justified
+        if lectureType == 'posted'
+          li.active(role='presentation')
+            a(href='/') Lectures
+          li(role='presentation')
+            a(href='/?page=0&lectureType=requested') Student&apos;s requests
+        else
+          li(role='presentation')
+            a(href='/') Lectures
+          li.active(role='presentation')
+            a(href='/?page=0&lectureType=requested') Student&apos;s requests
+    #mainContent.container-fluid
+      .row
+        #leftColumn.col-xl-4.col-lg-4.col-md-4.col-sm-4
+          .thumbnail.profileThumbnail(stlye='margin-top:200px')
+            if user
+              h4#profileTitle Logged in as #{user.firstName} #{user.lastName}
+              p Username: #{user.username}
+              if user.role == 'tutor'
+                p Posted lectures: #{user.postedLectures.length}
+                p Rating: 
+                  span.rating
+                    if user && user.role == 'tutor'
+                      +showRating(user.rating)
+              else
+                p Requested lectures: #{user.postedLectures.length}
+              p User since: 
+                +formatDate(user.createdAt)
+            else 
+              h4#profileTitle Please log in to see profile info.
+          //- .thumbnail.upcomingEvents
+          //-   h4#upcomingEvents Upcoming Events
+          //-   ul#upcomingEventsList
+          //-     li
+          //-       a(href='#') Learn Linear Algebra!, 9/12/2019 at 17:45
+          //-     li
+          //-       a(href='#') JAVA programming, 10/12/2019 at 12:45
+          //-     li
+          //-       a(href='#') Fun times with prof. Mur, 22/12/2019 at 9:00
+          //-     li
+          //-       a(href='#') Learn Linear Algebra!, 28/12/2019 at 14:30
+          //- .thumbnail.upcomingEvents
+          //-   h4#upcomingEvents Pending Requests
+          //-   ul#upcomingEventsList
+          //-     li
+          //-       p
+          //-         | Learn Linear Algebra! - TutorUsername - 
+          //-         span.statusPending Pending
+          //-     li
+          //-       p
+          //-         | JAVA programming - TutorUsername - 
+          //-         span.statusPending Pending
+          //-     li
+          //-       p
+          //-         | Learn Linear Algebra! - TutorUsername - 
+          //-         span.statusDenied
+          //-           | Denied 
+          //-           a.far.fa-trash-alt(href='#' title='Remove from list')
+          .thumbnail.upcomingEvents
+            h4#upcomingEvents Pending Requests
+            ul#upcomingEventsList
+              if user
+                if user.role == 'tutor'
+                  - pendingLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest')
+                  if pendingLectures.length == 0
+                    h4#profileTitle No pending requests.
+                  else
+                    each pendingLecture in pendingLectures
+                      li
+                        p
+                          if pendingLecture.lecture && pendingLecture.student
+                            | #{pendingLecture.lecture.title} - from #{pendingLecture.student.username}
+                          br
+                          - urlAcc = '/?pendingLectureId=' + pendingLecture._id + '&answer=accept' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlAcc)
+                            button#acceptRequest.acceptDeny Accept
+                          - urlDen = '/?pendingLectureId=' + pendingLecture._id + '&answer=deny' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlDen)
+                            button#denyRequest.acceptDeny Deny
+                else
+                  - pendingLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer')
+                  if pendingLectures.length == 0
+                    h4#profileTitle No pending requests.
+                  else
+                    each pendingLecture in pendingLectures
+                      li
+                        p
+                          if pendingLecture.lecture && pendingLecture.tutor
+                            | #{pendingLecture.lecture.title} - from #{pendingLecture.tutor.username}
+                          br
+                          - urlAcc = '/?pendingLectureId=' + pendingLecture._id + '&answer=accept' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlAcc)
+                            button#acceptRequest.acceptDeny Accept
+                          - urlDen = '/?pendingLectureId=' + pendingLecture._id + '&answer=deny' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=urlDen)
+                            button#denyRequest.acceptDeny Deny
+              else
+                h4#profileTitle Please log in to see pending requests.
+
+          //- #dailyQuote.thumbnail
+          //-   h4 Daily Quote
+          //-   p
+          //-     | &ldquo;Winners embrace hard work. They love the discipline of it, the trade-off they&rsquo;re making to win. Losers, on the other hand, see it as punishment. And that&rsquo;s the difference.&rdquo;
+          //-   p - Lou Holtz
+        #rightColumn.col-xl-8.col-lg-8.col-md-8.col-sm-8
+          #searchTutor.container-fluid.container-jumbotron
+            h3(style='padding-left: 15px') Search available lectures:
+            .input-group
+              input#inputSearchText.form-control(type='text' placeholder='Search for...')
+              span.input-group-btn
+                button#btnSearch.btn.btn-default(type='button' lecture=lectureType) Go!
+            if search != ''
+              h5  Showing results for: #{search}                
+          each lecture in lectures
+            .totalAdPanel
+                .extraHeading
+                  span#userPublisher
+                    if user
+                      if lecture.author._id == user._id
+                        a(href='/account') #{lecture.author.username}
+                      else if lecture.author && lecture.author.username
+                        a(href='/user/' + lecture.author._id) #{lecture.author.username}
+                      else
+                        p Deleted user
+                    else if lecture.author && lecture.author.username
+                      a(href='/user/' + lecture.author._id) #{lecture.author.username}
+                    else
+                      p Deleted user
+                    span.date  - 
+                      +formatDate(lecture.createdAt)
+                .panel.panel-default.listingPanel
+                  .panel-heading
+                    h3#adTitle.panel-title #{lecture.title}
+                      span#adPrice
+                        if lecture.lectureType =='posted'
+                          | #{lecture.price} €/h
+                        if user && user.role =='tutor' && lecture.lectureType =='requested'
+                          - url = '/?lectureId=' + lecture._id + '&lecture=offer' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=url)
+                            button#requestTutorBtn.btn.btn-primary(type='button')
+                              span.buttonTextRequest Send Offer 
+                              i.far.fa-share-square
+                        if user && user.role =='student' && lecture.lectureType =='posted'
+                          - url = '/?lectureId=' + lecture._id + '&lecture=request' + '&page=' + page + '&lectureType=' + lectureType
+                          a(href=url)
+                            button#requestTutorBtn.btn.btn-primary(type='button')
+                              span.buttonTextRequest Send Request 
+                              i.far.fa-share-square
+                  .panel-body
+                    p  #{lecture.description}
+
+          // pagination
+          .text-center
+            nav#pagination(aria-label='Page navigation')
+              ul.pagination
+                li
+                  if page == 0
+                    a.disabled(href='#' aria-label='Previous')
+                      span(aria-hidden='true') &laquo;
+                  else
+                    - url = '/' + '?page=' + (page-1) + '&lectureType=' + lectureType + '&search=' + search
+                    a(href=url aria-label='Previous')
+                      span(aria-hidden='true') &laquo;
+                li 
+                  span(aria-hidden='true') #{page + 1}
+                li
+                  if lectures.length < 5
+                    a.disabled(href='#' aria-label='Next')
+                      span(aria-hidden='true') &raquo;        
+                  else
+                    - url = '/' + '?page=' + (page+1) + '&lectureType=' + lectureType + '&search=' + search
+                    a(href=url aria-label='Next')
+                      span(aria-hidden='true') &raquo; 
+    if user
+      a.float(href='#' data-toggle='modal' data-target='#addListing')
+        i.fa.fa-plus.my-float
+      .label-container
+        .label-text Add a New Request
+        i.fa.fa-play.label-arrow
+    if user
+      // Modal popup for adding new lecture
+      #addListing.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addListing', aria-hidden='true')
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              if user.role == 'tutor'
+                h4.modal-title Add a new lecture
+              else
+                h4.modal-title Request a new lecture
+            .modal-body
+              .modal-body-info
+                .row
+                  .col-sm-4.col-sx-12
+                    .form-subject
+                      label(for='titleNewLecture') Title:
+                      input#titleNewLecture.form-control(name='title', type='text', placeholder='Title', required='')
+                      input#newLectureAuthor(type='hidden', name='lectureType', value=user._id)
+                      if user.role == 'tutor'
+                         input#newLectureType(type='hidden', name='lectureType', value='posted')
+                      else
+                         input#newLectureType(type='hidden', name='lectureType', value='requested')
+              if user.role == 'tutor'
+                .modal-body-info
+                  .row
+                    .col-sm-4.col-sx-12
+                      .form-subject
+                        label(for='priceNewLecture') Price:
+                        input#priceNewLecture.form-control(name='price', type='text', placeholder='Price in €/h.', required='')
+              .modal-options
+                .modal-form-group
+                  label.modal-comment Description:
+                  textarea#modal-message.form-control(name='description', rows='5')
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+              button#addNewLectureBtn.btn.btn-primary(type='button', data-dismiss='modal') Add
+    // Modal popup send request
+    #sendRequest.modal.fade(tabindex='-1' role='dialog' aria-labelledby='sendRequest' aria-hidden='true')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+            h4.modal-title Confirmation form
+          .modal-body
+            .modal-adPreview
+              h3#adTitle.modal-adTitle
+                | Learn Linear Algebra!
+                span#adPrice Price: 15$/h
+              br
+              p.adInfo
+                | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &apos;Content here, content here&apos;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &apos;lorem ipsum&apos; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+            .modal-options
+              .modal-radio-group
+                .row
+                  .col-md-4.col-sm-12.col-sx-12
+                    label.modal-knowledge Choose your level of knowledge:
+                  .col-md-2.col-sm-4.col-sx-12
+                    label.radio-inline
+                      input#novice(type='radio' value='' name='optradio' title="I don't have any knowledge.")
+                      | Novice
+                  .col-md-3.col-sm-4.col-sx-12
+                    label.radio-inline
+                      input#beginner(type='radio' value='' name='optradio' title='I know just the basics.')
+                      | Advanced beginner
+                  .col-md-3.col-sm-4.col-sx-12
+                    label.radio-inline
+                      input#competent(type='radio' value='' name='optradio' title='I need to understand only a few things.')
+                      | Competent
+              .modal-form-group
+                label.modal-comment Add optional message:
+                textarea#modal-message.form-control(rows='2')
+          .modal-footer
+            button.btn.btn-default(type='button' data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Send
+    

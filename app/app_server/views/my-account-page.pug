@@ -1,0 +1,164 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+    if errorMsg
+            .col-sm-12.col-md-12.col-xs-12
+              .alert.alert-danger.alert-dismissable.fade.in
+                a.close(href='#', data-dismiss='alert', aria-label='close') ×
+                | #{errorMsg}
+    if successMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{successMsg}
+    #mainContent.container-fluid
+      .row
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          #profileView.thumbnail.profileThumbnail.profilePreview
+            if user
+              .profileHeader
+                if user.role == 'tutor'
+                  h4.centered-h4 Tutor
+                else
+                  h4.centered-h4 Student
+              h4#profileTitle Profile #{user.username}
+              if user.role == 'tutor'
+                #userPreviewRating.rating
+                  +showRating(user.rating)
+              if user.role == 'tutor' && user.teachingInstitution
+                p Teaching institution: #{user.teachingInstitution}
+              p #{user.educationLevel}
+              p #{user.fieldOfEducation}              
+              .row
+                .col-xl-6.col-lg-6.col-md-6.col-sm-6
+                  button#editAccBtn.AccountBtn
+                    | Edit 
+                    i.far.fa-user
+                .col-xl-6.col-lg-6.col-md-6.col-sm-6
+                  button#deleteAccBtn.AccountBtn
+                    | Delete 
+                    i.far.fa-user
+            else
+              .profileHeader
+                h4.centered-h4 Please log in to see additional information.
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          if user.role == 'tutor'
+            h4.centered-h4 Active posted lectures:
+          else 
+            h4.centered-h4 Active posted lecture requests:
+          each lecture in user.postedLectures
+            .totalAdPanel
+              .extraHeading
+                span#userPublisher
+                  span.date
+                    +formatDate(lecture.createdAt)
+              .panel.panel-default.listingPanel
+                .panel-heading
+                  h3#adTitle.panel-title
+                    | #{lecture.title}
+                    span#adPrice
+                      - urlDelLec = '/account?lectureId=' + lecture._id
+                      a(href=urlDelLec)
+                        button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#deletePost')
+                          span.buttonTextRequest Delete 
+                          i.far.fa-trash-alt
+                    span#adPrice
+                      button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
+                        span.buttonTextRequest Edit 
+                        i.far.fa-edit
+                    if lecture.lectureType =='posted'
+                      span#adPrice  #{lecture.price} €/h
+                .panel-body
+                  p
+                    | #{lecture.description}
+      hr
+      .row
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          if user.role == 'tutor'
+            h4.centered-h4 Accepted Students Requests:
+          else
+            h4.centered-h4 Accepted Tutors Offers:
+          if user.role == 'tutor'
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'studentRequest')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No accepted requests.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.student
+                    span#byUser  from: #{acceptedLecture.student.username}
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+          else
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'tutorOffer')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No accepted offers.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.tutor
+                    span#byUser  from: #{acceptedLecture.tutor.username}
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
+          if user.role == 'tutor'
+            h4.centered-h4 Sent Lecture Offers:
+          else
+            h4.centered-h4 Sent Lecture Requests::
+          if user.role == 'tutor'
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No sent offers.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.student
+                    span#byUser  for: #{acceptedLecture.student.username}
+                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
+                  a(href=urlDelReq)
+                    button.deleteOffer Delete
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+          else
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No sent requests.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.tutor
+                    span#byUser  for: #{acceptedLecture.tutor.username}
+                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
+                  a(href=urlDelReq)
+                    button.deleteOffer Delete
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+      hr
+      if user.role == 'tutor' 
+        h4.centered-h4 Reviews (#{user.comments.length}):
+        each comment in user.comments
+          .totalAdPanel
+            .panel.panel-default.listingPanel
+              .panel-heading
+                h3#adTitle.panel-title.reviewTitle
+                  //- TODO: fix to author name + edit/delete button
+                  | User - 
+                  +formatDate(comment.createdAt)
+                  span#adPrice
+                    +showRating(comment.rating)
+              .panel-body
+                p
+                  | #{comment.commentText}

@@ -1,0 +1,148 @@
+doctype html
+html
+  head
+    title Sign Up
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title= title
+    // Font Awesome
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css', integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz', crossorigin='anonymous')
+    // Bootstrap
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    // Styles
+    link(rel='stylesheet', type='text/css', href='/stylesheets/signUp.css')
+  body
+    .container
+      if error
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{error}
+      .row
+        .col-sm-10.col-sm-offset-1.col-md-offset-3.col-md-6.col-xs-12
+          .sign-up-form
+            #toggleNavContainer.container
+              ul.nav.nav-tabs.nav-custom.nav-justified
+                li.active(role='presentation')
+                  a(href='#Tutor', data-toggle='tab') Tutor
+                li(role='presentation')
+                  a(href='#Student', data-toggle='tab') Student
+            .tab-content
+              // Tutor Sign Up tab
+              #Tutor.tab-pane.fade.in.active
+                form.scrollbar-primary(style='overflow-y: scroll; height: 650px;', action='/signUp', method="POST")
+                  .input-group.sign-up-inputs
+                    input(type='hidden', name='role', value='tutor')
+                  .input-group.sign-up-inputs
+                    label(for='first_name')
+                      | First name
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='firstName', placeholder='First name', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='last_name')
+                      | Last name
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='lastName', placeholder='Last name', type='text', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter last name.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='username')
+                      | Username
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='username', placeholder='Username', type='text', tabindex='3', required='', oninvalid="this.setCustomValidity('Please enter username.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='password')
+                      | Password
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='password', placeholder='Password', type='password', tabindex='4', required='', oninvalid="this.setCustomValidity('Please enter password.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='password1')
+                      | Please confirm your password
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='password1', placeholder='Password', type='password', tabindex='5', required='', oninvalid="this.setCustomValidity('Please confirm password.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='email')
+                      | Email address
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='email', placeholder='Email address', type='email', tabindex='6', required='', oninvalid="this.setCustomValidity('Please enter email.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='current_teaching') Current teaching institution
+                    input.form-control.input-lg(name='teachingInstitution', placeholder='Current teaching institution', type='text', tabindex='7')
+                  .form-group.sign-up-inputs
+                    label(for='education')
+                      | Select your level of education:
+                      span(style='color: red') *
+                    select#education.form-control.input-lg(name='educationLevel', tabindex='7', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                      option Primary education
+                      option Lower secondary education
+                      option Upper secondary education
+                      option Post-secondary non-tertiary education
+                      option Short-cycle tertiary education
+                      option Bachelor or equivalent
+                      option Master or equivalent
+                      option Doctoral or equivalent
+                  .form-group.sign-up-inputs
+                    label(for='education')
+                      | Enter your field of education:
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='fieldOfEducation', placeholder='Field of education', type='text', tabindex='8', required='', oninvalid="this.setCustomValidity('Please enter field of education.')", oninput="this.setCustomValidity('')")
+                  .sign-up-btn-position
+                    button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Sign Up
+              // Student Sign Up tab
+              #Student.tab-pane
+                form.scrollbar-primary(style='overflow-y: scroll; height: 650px;', action='/signUp', method="POST")
+                  .input-group.sign-up-inputs
+                    input(type='hidden', name='role', value='student')
+                  .input-group.sign-up-inputs
+                    label(for='first_name')
+                      | First name
+                      span(style='color: red') *
+                    input.form-control.input-lg.col-lg-8(name='firstName', placeholder='First name', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='last_name')
+                      | Last name
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='lastName', placeholder='Last name', type='text', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter last name.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='username')
+                      | Username
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='username', placeholder='Username', type='text', tabindex='3', required='', oninvalid="this.setCustomValidity('Please enter username.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='password')
+                      | Password
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='password', placeholder='Password', type='password', tabindex='4', required='', oninvalid="this.setCustomValidity('Please enter password.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='password1')
+                      | Please confirm your password
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='password1', placeholder='Password', type='password', tabindex='5', required='', oninvalid="this.setCustomValidity('Please confirm password.')", oninput="this.setCustomValidity('')")
+                  .input-group.sign-up-inputs
+                    label(for='email')
+                      | Email address
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='email', placeholder='Email address', type='email', tabindex='6', required='', oninvalid="this.setCustomValidity('Please enter email.')", oninput="this.setCustomValidity('')")
+                  .form-group.sign-up-inputs
+                    label(for='education')
+                      | Select your level of education:
+                      span(style='color: red') *
+                    select#education.form-control.input-lg(name='educationLevel', tabindex='7', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')")
+                      option None
+                      option Primary education
+                      option Lower secondary education
+                      option Upper secondary education
+                      option Post-secondary non-tertiary education
+                      option Short-cycle tertiary education
+                      option Bachelor or equivalent
+                      option Master or equivalent
+                      option Doctoral or equivalent
+                  .form-group.sign-up-inputs
+                    label(for='education')
+                      | Enter your field of education:
+                      span(style='color: red') *
+                    input.form-control.input-lg(name='fieldOfEducation', placeholder='Field of education', type='text', tabindex='8', required='', oninvalid="this.setCustomValidity('Please enter field of education.')", oninput="this.setCustomValidity('')")
+                  .sign-up-btn-position(style='margin-top: 5px;')
+                    button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Sign Up
+    // Bootstrap scripts
+    script(src='/javascripts/jquery-3.3.1.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')

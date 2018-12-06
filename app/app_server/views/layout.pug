@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    // Font Awesome
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css', integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz', crossorigin='anonymous')
+    // Bootsrap 
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    // Styles
+    link(rel='stylesheet', href='/stylesheets/index.css')
+  body.Site
+    .Site-content
+      .customNavbar
+        a.navbar-left(href='/')
+          img.navLogo(src='/images/logoTutke.svg')
+        #userIconToggle.dropdown
+          a#userIcon.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+            i.fas.fa-user-circle
+          ul.dropdown-menu            
+            // <li class="dropdown-header">Nav header</li>            
+            if user
+              li
+                a(href='/account') My account
+              li.divider(role='separator')
+              li
+                a(href='/login') Log Out  
+            else
+              li
+                a(href='/login') Log In 
+              li
+                a(href='/signUp') Sign Up!  
+
+    block content
+
+  .footer
+    p &copy; Tutke.io 2018
+    
+  script(src='/javascripts/jquery-3.3.1.min.js')
+  script(src='/bootstrap/js/bootstrap.min.js')
+  script(src='/javascripts/performSearch.js')
+  script(src='/javascripts/addNewLecture.js')
+  script(src='/javascripts/notify.js')

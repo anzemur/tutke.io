@@ -1,0 +1,30 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "NODEMON [Default PORT]",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceFolder}/bin/www",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "DEBUG [Default PORT]",
+      "program": "${workspaceFolder}/bin/www"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "SEED [Default PORT]",
+      "program": "${workspaceFolder}/app_api/models/seed/seed"
+    },
+  ]
+}

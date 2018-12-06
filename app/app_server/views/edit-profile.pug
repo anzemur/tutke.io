@@ -1,0 +1,68 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+    .container
+      h4.centered-h4.edit-profile-title Edit Profile:
+      form(action='/signUp' method='POST')
+        .input-group.sign-up-inputs
+          label(for='first_name')
+            | First name
+            span(style='color: red') *
+          input.form-control.input-lg(name='first_name' placeholder='First name' type='text' tabindex='1' required='' oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')")
+        .input-group.sign-up-inputs
+          label(for='last_name')
+            | Last name
+            span(style='color: red') *
+          input.form-control.input-lg(name='last_name' placeholder='Last name' type='text' tabindex='2' required='' oninvalid="this.setCustomValidity('Please enter password.')" oninput="this.setCustomValidity('')")
+        .input-group.sign-up-inputs
+          label(for='username')
+            | Username
+            span(style='color: red') *
+          input.form-control.input-lg(name='username' placeholder='Username' type='text' tabindex='3' required='' oninvalid="this.setCustomValidity('Please enter username.')" oninput="this.setCustomValidity('')")
+        .input-group.sign-up-inputs
+          label(for='password')
+            | Password
+            span(style='color: red') *
+          input.form-control.input-lg(name='password' placeholder='Password' type='password' tabindex='4' required='' oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')")
+        .input-group.sign-up-inputs
+          label(for='email')
+            | Email address
+            span(style='color: red') *
+          input.form-control.input-lg(name='email' placeholder='Email address' type='email' tabindex='5' required='' oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')")
+        .input-group.sign-up-inputs
+          label(for='current_teaching') Current teaching institution
+          input.form-control.input-lg(name='current_teaching' placeholder='Current teaching institution' type='text' tabindex='6')
+        .form-group.sign-up-inputs
+          label(for='education')
+            | Select your level of education:
+            span(style='color: red') *
+          select#education.form-control.input-lg(required='' oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')")
+            option Primary education
+            option Lower secondary education
+            option Upper secondary education
+            option Post-secondary non-tertiary education
+            option Short-cycle tertiary education
+            option Bachelor or equivalent
+            option Master or equivalent
+            option Doctoral or equivalent
+        .form-group.sign-up-inputs
+          label(for='education')
+            | Select field of your education:
+            span(style='color: red') *
+          select#education.form-control.input-lg(required='' oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')")
+            option Primary education
+            option Lower secondary education
+            option Upper secondary education
+            option Post-secondary non-tertiary education
+            option Short-cycle tertiary education
+            option Bachelor or equivalent
+            option Master or equivalent
+            option Doctoral or equivalent
+        .input-group.sign-up-inputs
+          label(for='certificates')
+            | Upload certificates
+            span(style='font-size: 14px; color: #878797')  (.png/.pdf)
+          input.form-control.input-lg(name='certificates' type='file' tabindex='5' multiple='' accept='image/png')
+        .sign-up-btn-position
+          button#edit-profile-button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Apply Changes
