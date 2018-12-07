@@ -1,6 +1,6 @@
 $('#addNewLectureBtn').click(function (e){
   var env = $('#env').val(); 
-  var apiParams =  env == 'dev' ? 'http://localhost:3000/api' : 'heroku_url'; // TODO
+  var apiParams =  env == 'dev' ? 'http://localhost:3000/api' : 'https://tutke-io.herokuapp.com/api';
   
   var error = false;
   var author =  $('#newLectureAuthor').val();
