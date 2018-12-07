@@ -27,7 +27,8 @@ router.post('/user/:userId/comment', ctrlAddComment.addComment);
 
 /* My account routes */
 router.get('/account', ctrlMyAccount.myAccount);
-
+router.get('/account/edit', ctrlMyAccount.editAccountPage);
+router.post('/account/edit', ctrlMyAccount.editAccountReq);
 
 
 module.exports = router;
