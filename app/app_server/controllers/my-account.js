@@ -121,6 +121,57 @@ module.exports.editAccountReq = async (req, res) => {
   }
 };
 
+/* GET edit lecture page */
+module.exports.editLecturePage = async (req, res) => {
+  var successMsg;
+  var errorMsg;
+
+  /* Simulate logged in user instead of using local storage with JWT  */
+  var user;
+  if(loggedInUser) {
+    user = await getUser(loggedInUser);
+  }
+
+  var lecture;
+  if(req.params.lectureId) {
+    lecture = await getLecture(req.params.lectureId);
+    if(lecture.error) {
+      errorMsg = 'Couldn\'t find lecture with given id: ' + userUpdate.error;
+    }
+  }
+
+  if(!user) {
+    res.render('log-in', { 
+      title: 'Log In',
+      logInError: 'Please log in to see additonal information.'
+    });
+  } else if(!lecture) {
+    res.render('my-account-page', { 
+      title: 'My account',
+      user: user,
+      errorMsg: errorMsg,
+      successMsg: successMsg
+    });
+  } else if(errorMsg) {
+    res.render('my-account-page', { 
+      title: 'My account',
+      user: user,
+      errorMsg: errorMsg,
+      successMsg: successMsg
+    });
+  } else {
+    res.render('edit-lecture', { 
+      title: 'Edit lecture',
+      user: user,
+      lecture: lecture,
+      errorMsg: errorMsg,
+      successMsg: successMsg
+    });
+  }
+};
+
+
+
 async function deleteLectureRequest(lectureReqId) {
   var path = '/lecturesRequests/' + lectureReqId;
   var options = {
@@ -191,6 +242,22 @@ async function updateUser(body, role, id) {
     }
   };
  
+  try {
+    return await rp(options).promise();
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getLecture(lectureId) {
+  var path = '/lectures/' + lectureId;
+  var options = {
+    url: apiParams + path,
+    method: 'GET',
+    json: {},
+    qs: {}
+  };
+
   try {
     return await rp(options).promise();
   } catch (error) {

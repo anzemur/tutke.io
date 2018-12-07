@@ -29,6 +29,8 @@ router.post('/user/:userId/comment', ctrlAddComment.addComment);
 router.get('/account', ctrlMyAccount.myAccount);
 router.get('/account/edit', ctrlMyAccount.editAccountPage);
 router.post('/account/edit', ctrlMyAccount.editAccountReq);
+router.get('/account/edit/lecture/:lectureId', ctrlMyAccount.editLecturePage);
+// router.post('/account/edit/lecture/:lectureId', ctrlMyAccount.editLectureReq);
 
 
 module.exports = router;

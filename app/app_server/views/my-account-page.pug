@@ -65,9 +65,11 @@ block content
                           span.buttonTextRequest Delete 
                           i.far.fa-trash-alt
                     span#adPrice
-                      button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
-                        span.buttonTextRequest Edit 
-                        i.far.fa-edit
+                      - urlEditLec = '/account/edit/lecture/' + lecture._id
+                      a(href=urlEditLec)
+                        button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
+                          span.buttonTextRequest Edit 
+                          i.far.fa-edit
                     if lecture.lectureType =='posted'
                       span#adPrice  #{lecture.price} €/h
                 .panel-body
