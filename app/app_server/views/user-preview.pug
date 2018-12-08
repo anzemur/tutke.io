@@ -14,7 +14,7 @@ block content
             | #{successMsg}
     #mainContent.container-fluid
       .row
-        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           #profileView.thumbnail.profileThumbnail.profilePreview
             if currentUser
               h4#profileTitle Profile #{currentUser.username}
@@ -60,7 +60,7 @@ block content
               if user.role == 'student' && currentUser.role == 'tutor'
                 - addReviewUrl = '/user/' + currentUser._id + '/comment'
                 a.addReviewButton(href=addReviewUrl) Add Review
-        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           if currentUser
             if currentUser.role == 'tutor'
               h4.centered-h4 Active posted lectures:

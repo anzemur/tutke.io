@@ -14,7 +14,7 @@ block content
             | #{successMsg}
     #mainContent.container-fluid
       .row
-        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           #profileView.thumbnail.profileThumbnail.profilePreview
             if user
               .profileHeader
@@ -44,7 +44,7 @@ block content
             else
               .profileHeader
                 h4.centered-h4 Please log in to see additional information.
-        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           if user.role == 'tutor'
             h4.centered-h4 Active posted lectures:
           else 
@@ -78,7 +78,7 @@ block content
                     | #{lecture.description}
       hr
       .row
-        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        #leftColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           if user.role == 'tutor'
             h4.centered-h4 Accepted Students Requests:
           else
@@ -111,7 +111,7 @@ block content
                     span#byUser  from: #{acceptedLecture.tutor.username}
                 p#dateOfAcceptRequest
                   +formatDate(acceptedLecture.createdAt)
-        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        #rightColumn.col-xl-6.col-lg-6.col-md-6.col-sm-6
           if user.role == 'tutor'
             h4.centered-h4 Sent Lecture Offers:
           else
