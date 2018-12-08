@@ -30,6 +30,9 @@ module.exports.dbPage = async (req, res) => {
       var usersDrop = await dropUsers();
       var lecturesDrop = await dropLectures();
       var lecturesRequestsDrop = await dropLecturesRequests();
+      if(loggedInUser) {
+        loggedInUser = null;
+      }
 
       successMsg = "Database dropped successfully!";
     } else {

@@ -162,7 +162,10 @@ block content
               .panel-heading
                 h3#adTitle.panel-title.reviewTitle
                   //- TODO: fix to author name + edit/delete button
-                  | User - 
+                  if comment.author && comment.author.username
+                    | #{comment.author.username} - 
+                  else
+                    | Unknown -
                   +formatDate(comment.createdAt)
                   span#adPrice
                     +showRating(comment.rating)
