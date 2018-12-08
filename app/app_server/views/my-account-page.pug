@@ -36,10 +36,11 @@ block content
                     button#editAccBtn.AccountBtn
                       | Edit 
                       i.far.fa-user
-                .col-xl-6.col-lg-6.col-md-6.col-sm-6
-                  button#deleteAccBtn.AccountBtn
-                    | Delete 
-                    i.far.fa-user
+                a(href='/account?delete=true')
+                  .col-xl-6.col-lg-6.col-md-6.col-sm-6
+                    button#deleteAccBtn.AccountBtn
+                      | Delete 
+                      i.far.fa-user
             else
               .profileHeader
                 h4.centered-h4 Please log in to see additional information.
