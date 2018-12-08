@@ -46,7 +46,7 @@ block content
                             - urlEditCom = ''
                             a(href=urlEditCom)
                                 button.acceptDeny Edit
-                            - urlDelCom = ''
+                            - urlDelCom = '/user/' + currentUser._id + '?commentId='+ comment._id
                             a(href=urlDelCom)
                               button#denyRequest.acceptDeny Delete
 
