@@ -60,7 +60,16 @@ module.exports.index = async (req, res) => {
           }
           var lecturesRequests = await createLectureRequest(body);
           if(lecturesRequests.error) {
-            lectureRequestError =  lecturesRequests.error.message ? lecturesRequests.error.message : lecturesRequests.error;
+            if(lecturesRequests.error.message) {
+              if(lecturesRequests.error.message.indexOf("E11000 duplicate key error")  !== -1) {
+                lectureRequestError = "You already sent request for this lecture!";
+              } else {
+                lectureRequestError = lecturesRequests.error.message;
+              }
+            } else {
+              lectureRequestError = lecturesRequests.error;
+            }
+
           } else {
             lectureRequestMsg = 'Offer sent to student.' 
           }
@@ -77,7 +86,16 @@ module.exports.index = async (req, res) => {
           }
           var lecturesRequests = await createLectureRequest(body);
           if(lecturesRequests.error) {
-            lectureRequestError =  lecturesRequests.error.message ? lecturesRequests.error.message : lecturesRequests.error;
+            if(lecturesRequests.error.message) {
+              if(lecturesRequests.error.message.indexOf("E11000 duplicate key error")  !== -1) {
+                lectureRequestError = "You already sent request for this lecture!";
+              } else {
+                lectureRequestError = lecturesRequests.error.message;
+              }
+            } else {
+              lectureRequestError = lecturesRequests.error;
+            }
+            
           } else {
             lectureRequestMsg = 'Request sent to tutor.' 
           }

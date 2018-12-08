@@ -31,7 +31,7 @@ module.exports.dbPage = async (req, res) => {
       var lecturesDrop = await dropLectures();
       var lecturesRequestsDrop = await dropLecturesRequests();
 
-      successMsg = "Database dropped successfully!";
+      successMsg = "Database dropped successfully! " + usersDrop;
     } else {
       errorMsg = "Database is not connected. Please connect to database and try again!"
     }
@@ -89,7 +89,7 @@ module.exports.dbPage = async (req, res) => {
         comment.error ? errorsCount++ : successCount++;
       }
     }
-    var itemsCount = comments.length + students.length*2 + lectures.length*2;
+    var itemsCount = comments.length*students.length + students.length*2 + lectures.length*students.length*2;
     successMsg = `Successfully added ${successCount}/${itemsCount}. Number of errors: ${errorsCount}`;
   }
 
