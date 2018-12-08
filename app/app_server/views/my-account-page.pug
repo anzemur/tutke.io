@@ -49,6 +49,9 @@ block content
             h4.centered-h4 Active posted lectures:
           else 
             h4.centered-h4 Active posted lecture requests:
+          if user.postedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No posted lectures.
           each lecture in user.postedLectures
             .totalAdPanel
               .extraHeading
