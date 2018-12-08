@@ -38,7 +38,7 @@ module.exports.myAccount = async (req, res) => {
   if(!user) {
     res.render('log-in', { 
       title: 'Log In',
-      logInError: 'Please log in to see additonal information.'
+      error: 'Please log in to see additonal information.'
     });
   } else {
     res.render('my-account-page', { 
@@ -66,7 +66,7 @@ module.exports.editAccountPage = async (req, res) => {
   if(!user) {
     res.render('log-in', { 
       title: 'Log In',
-      logInError: 'Please log in to see additonal information.'
+      error: 'Please log in to see additonal information.'
     });
   } else {
     res.render('edit-profile', { 
@@ -143,7 +143,7 @@ module.exports.editLecturePage = async (req, res) => {
   if(!user) {
     res.render('log-in', { 
       title: 'Log In',
-      logInError: 'Please log in to see additonal information.'
+      error: 'Please log in to see additonal information.'
     });
   } else if(!lecture) {
     res.render('my-account-page', { 
