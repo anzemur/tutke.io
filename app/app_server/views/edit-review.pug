@@ -1,0 +1,35 @@
+extends layout
+include _includes/skupneHTMLfunkcije.pug
+
+block content
+    #mainContent.container-fluid
+      h4#addReviewTitle Edit review:
+      .addReviewContainer
+        .row
+          - addCommentUrl = '/user/' + currentUser + '/comment/' + commentContent._id + '/edit'
+          form(action=addCommentUrl, method="POST")
+            #leftColumnTextArea.col-xl-9.col-lg-9.col-md-8.col-sm-8.col-xs-6
+              .textareacontainer
+                textarea#textAreaComment(placeholder='Leave a review.' name="commentText") #{commentContent.commentText}
+            #rightColReview.col-xl-3.col-lg-3.col-md-4.col-sm-4.col-xs-6
+              .customRow
+                #chooseRating.customColumn
+                  - var starNum = 1;
+                    while starNum < 6
+                      if starNum == commentContent.rating
+                        label.labl
+                          input(type='radio' name='rating' value= starNum checked='checked')
+                          .starButton
+                            | #{starNum} 
+                            i.fas.fa-star
+                        - starNum++  
+                      else
+                        label.labl
+                          input(type='radio' name='rating' value=starNum)
+                          .starButton
+                            | #{starNum} 
+                            i.fas.fa-star
+                        - starNum++  
+
+                button#submitReview.customColumn(type='submit')
+                  i.far.fa-share-square

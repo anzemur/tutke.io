@@ -43,7 +43,7 @@ block content
                         +formatDate(comment.createdAt)
                         if comment.author && comment.author._id && user && user._id
                           if comment.author._id == user._id
-                            - urlEditCom = ''
+                            - urlEditCom = '/user/' + currentUser._id + '/comment/' + comment._id + '/edit'
                             a(href=urlEditCom)
                                 button.acceptDeny Edit
                             - urlDelCom = '/user/' + currentUser._id + '?commentId='+ comment._id
