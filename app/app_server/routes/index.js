@@ -25,6 +25,8 @@ router.post('/signUp', ctrlSignUp.signUp);
 router.get('/user/:userId', ctrlUsersProfile.userProfile);
 router.get('/user/:userId/comment', ctrlAddComment.renderCommentForm);
 router.post('/user/:userId/comment', ctrlAddComment.addComment);
+router.get('/user/:userId/comment/:commentId/edit', ctrlAddComment.editCommentPage);
+router.post('/user/:userId/comment/:commentId/edit', ctrlAddComment.editCommentReq);
 
 /* My account routes */
 router.get('/account', ctrlMyAccount.myAccount);

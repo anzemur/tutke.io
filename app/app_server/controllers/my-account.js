@@ -170,8 +170,6 @@ module.exports.editLecturePage = async (req, res) => {
   }
 };
 
-
-
 async function deleteLectureRequest(lectureReqId) {
   var path = '/lecturesRequests/' + lectureReqId;
   var options = {
