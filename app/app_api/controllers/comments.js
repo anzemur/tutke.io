@@ -137,7 +137,7 @@ module.exports.updateComment = function(req, res) {
 		return;
 	}
 	User
-		.findById(req.params.idUser)
+		.findById(req.params.userId)
 		.select('comments')
 		.exec(
 			function(err, user){
