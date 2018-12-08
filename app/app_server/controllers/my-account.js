@@ -51,6 +51,127 @@ module.exports.myAccount = async (req, res) => {
 };
 
 
+/* GET edit account page */
+module.exports.editAccountPage = async (req, res) => {
+  var successMsg;
+  var errorMsg;
+
+  /* Simulate logged in user instead of using local storage with JWT  */
+  var user;
+  if(loggedInUser) {
+    user = await getUser(loggedInUser);
+  }
+
+
+  if(!user) {
+    res.render('log-in', { 
+      title: 'Log In',
+      logInError: 'Please log in to see additonal information.'
+    });
+  } else {
+    res.render('edit-profile', { 
+      title: 'Edit account',
+      user: user,
+      errorMsg: errorMsg,
+      successMsg: successMsg
+    });
+  }
+};
+
+/* POST edit account request */
+module.exports.editAccountReq = async (req, res) => {
+  var successMsg;
+  var errorMsg;
+
+  /* Simulate logged in user instead of using local storage with JWT  */
+  var user;
+  if(loggedInUser) {
+    user = await getUser(loggedInUser);
+  }
+
+  /* Update user model */
+  if(req.body) {
+    if(req.body.password == req.body.password1 && user) {
+      var userUpdate = await updateUser(req.body, user.role, user._id);
+      if(userUpdate.error) {
+        errorMsg = 'User update failed:' + userUpdate.error;
+      } else {
+        user = await getUser(loggedInUser);
+      }
+    } else {
+      errorMsg = "Password mismatch. Please try again.";
+    }    
+  } else {
+    errorMsg = 'Not enough data. Please try again.';
+  }
+
+  if(errorMsg) {
+    res.render('edit-profile', { 
+      title: 'Edit account',
+      user: user,
+      errorMsg: errorMsg
+    });
+  } else {
+    res.render('my-account-page', { 
+      title: 'My account',
+      user: user,
+      errorMsg: errorMsg,
+      successMsg: 'User updated successfully.'
+    });
+  }
+};
+
+/* GET edit lecture page */
+module.exports.editLecturePage = async (req, res) => {
+  var successMsg;
+  var errorMsg;
+
+  /* Simulate logged in user instead of using local storage with JWT  */
+  var user;
+  if(loggedInUser) {
+    user = await getUser(loggedInUser);
+  }
+
+  var lecture;
+  if(req.params.lectureId) {
+    lecture = await getLecture(req.params.lectureId);
+    if(lecture.error) {
+      errorMsg = 'Couldn\'t find lecture with given id: ' + userUpdate.error;
+    }
+  }
+
+  if(!user) {
+    res.render('log-in', { 
+      title: 'Log In',
+      logInError: 'Please log in to see additonal information.'
+    });
+  } else if(!lecture) {
+    res.render('my-account-page', { 
+      title: 'My account',
+      user: user,
+      errorMsg: errorMsg,
+      successMsg: successMsg
+    });
+  } else if(errorMsg) {
+    res.render('my-account-page', { 
+      title: 'My account',
+      user: user,
+      errorMsg: errorMsg,
+      successMsg: successMsg
+    });
+  } else {
+    res.render('edit-lecture', { 
+      title: 'Edit lecture',
+      user: user,
+      lecture: lecture,
+      errorMsg: errorMsg,
+      successMsg: successMsg
+    });
+  }
+};
+
+
+
 async function deleteLectureRequest(lectureReqId) {
   var path = '/lecturesRequests/' + lectureReqId;
   var options = {
@@ -93,6 +214,48 @@ async function getUser(userId) {
     qs: {
       populate: true
     }
+  };
+
+  try {
+    return await rp(options).promise();
+  } catch (error) {
+    return error;
+  }
+}
+
+async function updateUser(body, role, id) {
+  var path = '/users/' + id;
+  var options = {
+    url: apiParams + path,
+    method: 'PUT',
+    json: true,
+    body: {
+      username: body.username,
+      password: body.password,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      email: body.email,
+      teachingInstitution: body.teachingInstitution,
+      educationLevel: body.educationLevel,
+      fieldOfEducation: body.fieldOfEducation,
+      role: role
+    }
+  };
+ 
+  try {
+    return await rp(options).promise();
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getLecture(lectureId) {
+  var path = '/lectures/' + lectureId;
+  var options = {
+    url: apiParams + path,
+    method: 'GET',
+    json: {},
+    qs: {}
   };
 
   try {

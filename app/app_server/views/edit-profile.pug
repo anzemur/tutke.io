@@ -2,42 +2,55 @@ extends layout
 include _includes/skupneHTMLfunkcije.pug
 
 block content
+    if errorMsg
+            .col-sm-12.col-md-12.col-xs-12
+              .alert.alert-danger.alert-dismissable.fade.in
+                a.close(href='#', data-dismiss='alert', aria-label='close') ×
+                | #{errorMsg}
     .container
       h4.centered-h4.edit-profile-title Edit Profile:
-      form(action='/signUp' method='POST')
+      form(action='/account/edit', method="POST")
+        .input-group.sign-up-inputs
+          input(type='hidden', name='role', value='tutor')
         .input-group.sign-up-inputs
           label(for='first_name')
             | First name
             span(style='color: red') *
-          input.form-control.input-lg(name='first_name' placeholder='First name' type='text' tabindex='1' required='' oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')")
+          input.form-control.input-lg(name='firstName', placeholder='First name', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')" value=user.firstName)
         .input-group.sign-up-inputs
           label(for='last_name')
             | Last name
             span(style='color: red') *
-          input.form-control.input-lg(name='last_name' placeholder='Last name' type='text' tabindex='2' required='' oninvalid="this.setCustomValidity('Please enter password.')" oninput="this.setCustomValidity('')")
+          input.form-control.input-lg(name='lastName', placeholder='Last name', type='text', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter last name.')", oninput="this.setCustomValidity('')" value=user.lastName)
         .input-group.sign-up-inputs
           label(for='username')
             | Username
             span(style='color: red') *
-          input.form-control.input-lg(name='username' placeholder='Username' type='text' tabindex='3' required='' oninvalid="this.setCustomValidity('Please enter username.')" oninput="this.setCustomValidity('')")
+          input.form-control.input-lg(name='username', placeholder='Username', type='text', tabindex='3', required='', oninvalid="this.setCustomValidity('Please enter username.')", oninput="this.setCustomValidity('')" value=user.username)
         .input-group.sign-up-inputs
           label(for='password')
             | Password
             span(style='color: red') *
-          input.form-control.input-lg(name='password' placeholder='Password' type='password' tabindex='4' required='' oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')")
+          input.form-control.input-lg(name='password', placeholder='Password', type='password', tabindex='4', required='', oninvalid="this.setCustomValidity('Please enter password.')", oninput="this.setCustomValidity('')")
+        .input-group.sign-up-inputs
+          label(for='password1')
+            | Please confirm your password
+            span(style='color: red') *
+          input.form-control.input-lg(name='password1', placeholder='Password', type='password', tabindex='5', required='', oninvalid="this.setCustomValidity('Please confirm password.')", oninput="this.setCustomValidity('')")
         .input-group.sign-up-inputs
           label(for='email')
             | Email address
             span(style='color: red') *
-          input.form-control.input-lg(name='email' placeholder='Email address' type='email' tabindex='5' required='' oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')")
+          input.form-control.input-lg(name='email', placeholder='Email address', type='email', tabindex='6', required='', oninvalid="this.setCustomValidity('Please enter email.')", oninput="this.setCustomValidity('')" value=user.email)
         .input-group.sign-up-inputs
           label(for='current_teaching') Current teaching institution
-          input.form-control.input-lg(name='current_teaching' placeholder='Current teaching institution' type='text' tabindex='6')
+          input.form-control.input-lg(name='teachingInstitution', placeholder='Current teaching institution', type='text', tabindex='7' value=user.teachingInstitution)
         .form-group.sign-up-inputs
           label(for='education')
             | Select your level of education:
             span(style='color: red') *
-          select#education.form-control.input-lg(required='' oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')")
+          select#education.form-control.input-lg(name='educationLevel', tabindex='7', required='', oninvalid="this.setCustomValidity('Please enter first name.')", oninput="this.setCustomValidity('')" value=user.educationLevel)
+            option None
             option Primary education
             option Lower secondary education
             option Upper secondary education
@@ -48,21 +61,8 @@ block content
             option Doctoral or equivalent
         .form-group.sign-up-inputs
           label(for='education')
-            | Select field of your education:
+            | Enter your field of education:
             span(style='color: red') *
-          select#education.form-control.input-lg(required='' oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')")
-            option Primary education
-            option Lower secondary education
-            option Upper secondary education
-            option Post-secondary non-tertiary education
-            option Short-cycle tertiary education
-            option Bachelor or equivalent
-            option Master or equivalent
-            option Doctoral or equivalent
-        .input-group.sign-up-inputs
-          label(for='certificates')
-            | Upload certificates
-            span(style='font-size: 14px; color: #878797')  (.png/.pdf)
-          input.form-control.input-lg(name='certificates' type='file' tabindex='5' multiple='' accept='image/png')
+          input.form-control.input-lg(name='fieldOfEducation', placeholder='Field of education', type='text', tabindex='8', required='', oninvalid="this.setCustomValidity('Please enter field of education.')", oninput="this.setCustomValidity('')" value=user.fieldOfEducation)
         .sign-up-btn-position
           button#edit-profile-button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Apply Changes

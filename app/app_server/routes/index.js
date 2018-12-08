@@ -6,6 +6,7 @@ var ctrlLogIn = require('../controllers/log-in');
 var ctrlSignUp = require('../controllers/sign-up');
 var ctrlUsersProfile = require('../controllers/user-profile');
 var ctrlMyAccount = require('../controllers/my-account');
+var ctrlAddComment = require('../controllers/add-comment.js');
 
 /* Index page routes. */
 router.get('/', ctrlIndex.index);
@@ -21,10 +22,15 @@ router.post('/signUp', ctrlSignUp.signUp);
 
 /* Users profile routes */
 router.get('/user/:userId', ctrlUsersProfile.userProfile);
+router.get('/user/:userId/comment', ctrlAddComment.renderCommentForm);
+router.post('/user/:userId/comment', ctrlAddComment.addComment);
 
 /* My account routes */
 router.get('/account', ctrlMyAccount.myAccount);
-
+router.get('/account/edit', ctrlMyAccount.editAccountPage);
+router.post('/account/edit', ctrlMyAccount.editAccountReq);
+router.get('/account/edit/lecture/:lectureId', ctrlMyAccount.editLecturePage);
+// router.post('/account/edit/lecture/:lectureId', ctrlMyAccount.editLectureReq);
 
 
 module.exports = router;

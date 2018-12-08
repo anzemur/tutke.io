@@ -33,5 +33,5 @@ function objResponse(status, message) {
  * Return API url.
  */
 module.exports.getApiParams = () => {
-  return process.env.NODE_ENV === 'production' ? 'heroku_url/api' : 'http://localhost:' + (process.env.PORT || '3000') + '/api';
+  return process.env.NODE_ENV === 'production' ? 'https://tutke-io.herokuapp.com/api' : 'http://localhost:' + (process.env.PORT || '3000') + '/api';
 };
