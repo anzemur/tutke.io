@@ -13,6 +13,19 @@ module.exports.myAccount = async (req, res) => {
     user = await getUser(loggedInUser);
   }
 
+  var deletedUser = false;
+  /** User delete handling */
+  if(req.query && req.query.delete && user && user._id) {
+    var userToDelete = await deleteUser(user._id);
+    if(userToDelete && userToDelete.error) {
+      errorMsg = userToDelete.error.message ? userToDelete.error.message : userToDelete.error;
+    } else {
+      successMsg = "User successfully deleted.";
+      deletedUser = true;
+      user = null;
+    }
+  }
+
   /** Sent lectures requests delete handling */
   if(req.query && req.query.sentLectureId && user && user._id) {
     var lectureRequest = await deleteLectureRequest(req.query.sentLectureId);
@@ -31,14 +44,16 @@ module.exports.myAccount = async (req, res) => {
     if(lecture && lecture.error) {
       errorMsg = lecture.error.message ? lecture.error.message : lecture.error;
     } else {
-      successMsg = "Lecture successfully deleted."
+      successMsg = "Lecture successfully deleted.";
     }
   }
 
   if(!user) {
+    errorMsg = deletedUser ? null : 'Please log in to see additonal information.';
     res.render('log-in', { 
       title: 'Log In',
-      error: 'Please log in to see additonal information.'
+      error: errorMsg,
+      successful: successMsg
     });
   } else {
     res.render('my-account-page', { 
@@ -169,6 +184,21 @@ module.exports.editLecturePage = async (req, res) => {
     });
   }
 };
+
+async function deleteUser(userId) {
+  var path = '/users/' + userId
+  var options = {
+    url: apiParams + path,
+    method: 'DELETE',
+    json: {},
+  };
+
+  try {
+    return await rp(options).promise();
+  } catch (error) {
+    return error;
+  }
+}
 
 async function deleteLectureRequest(lectureReqId) {
   var path = '/lecturesRequests/' + lectureReqId;
