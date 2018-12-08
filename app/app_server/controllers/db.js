@@ -31,7 +31,7 @@ module.exports.dbPage = async (req, res) => {
       var lecturesDrop = await dropLectures();
       var lecturesRequestsDrop = await dropLecturesRequests();
 
-      successMsg = "Database dropped successfully! " + usersDrop;
+      successMsg = "Database dropped successfully!";
     } else {
       errorMsg = "Database is not connected. Please connect to database and try again!"
     }

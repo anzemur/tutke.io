@@ -28,8 +28,8 @@ block content
                   +showRating(user.rating)
               if user.role == 'tutor' && user.teachingInstitution
                 p Teaching institution: #{user.teachingInstitution}
-              p #{user.educationLevel}
-              p #{user.fieldOfEducation}              
+              p Education level: #{user.educationLevel}
+              p Field of education: #{user.fieldOfEducation}              
               .row
                 a(href='/account/edit')
                   .col-xl-6.col-lg-6.col-md-6.col-sm-6
