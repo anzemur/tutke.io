@@ -1,7 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var Lecture =  mongoose.model('Lecture');
 var LecturesRequest =  mongoose.model('LecturesRequest');
 
 var errors = require('../../lib/errors');

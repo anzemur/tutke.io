@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title Log In
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title= title
+    // Font Awesome
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css', integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz', crossorigin='anonymous')
+    // Bootsrap
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    // Styles
+    link(rel='stylesheet', type='text/css', href='/stylesheets/logIn.css')
+  body
+    .container
+      if successful
+        #infoDiv(style='display: none;', uId=userId)
+      if errorMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-danger.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{errorMsg}
+      if successMsg
+        .col-sm-12.col-md-12.col-xs-12
+          .alert.alert-success.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            | #{successMsg}
+      .row
+        .col-sm-offset-2.col-sm-8.col-md-offset-4.col-md-4.col-xs-12
+          .log-in-form.panel.panel-default
+            h3 Admin database console
+            .log-in-btn-position
+              - urlDropDb = '/db?drop=true'
+              a(href=urlDropDb)
+                button.btn.btn-primary.btn-block.btn-hover.btn-click Drop database
+            .log-in-btn-position
+              - urlInitDb = '/db?init=true'
+              a(href=urlInitDb)
+                button.btn.btn-primary.btn-block.btn-hover.btn-click Initialize database
+    
+  script(src='/javascripts/jquery-3.3.1.min.js')
+  script(src='/bootstrap/js/bootstrap.min.js')
+  script(src='/javascripts/logInHelper.js')
