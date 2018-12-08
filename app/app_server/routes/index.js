@@ -33,7 +33,7 @@ router.get('/account', ctrlMyAccount.myAccount);
 router.get('/account/edit', ctrlMyAccount.editAccountPage);
 router.post('/account/edit', ctrlMyAccount.editAccountReq);
 router.get('/account/edit/lecture/:lectureId', ctrlMyAccount.editLecturePage);
-// router.post('/account/edit/lecture/:lectureId', ctrlMyAccount.editLectureReq);
+router.post('/account/edit/lecture/:lectureId', ctrlMyAccount.editLectureReq);
 
 /* Admin database routes */
 router.get('/db', ctrlAdminDb.dbPage);

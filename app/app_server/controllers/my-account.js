@@ -185,6 +185,53 @@ module.exports.editLecturePage = async (req, res) => {
   }
 };
 
+/* POST edit lecture */
+module.exports.editLectureReq = async (req, res) => {
+  var successMsg;
+  var errorMsg;
+
+  /* Simulate logged in user instead of using local storage with JWT  */
+  var user;
+  if(loggedInUser) {
+    user = await getUser(loggedInUser);
+  }
+
+  if(user && user._id && req.body.title && req.body.description) {
+    if(user.role == 'tutor') {
+      if(req.body.price) {
+        var lecture = await editLecture(req.body, req.params.lectureId);
+        if(lecture.error) {
+          errorMsg = lecture.error.message ? lecture.error.message : lecture.error;
+        } else {
+          successMsg = 'Lecture successfully edited.';
+          user = await getUser(loggedInUser);
+        }
+      } else {
+        errorMsg = 'Please enter price.';
+      }
+    } else {
+      var lecture = await editLecture(req.body, req.params.lectureId);
+      if(lecture.error) {
+        errorMsg = lecture.error.message ? lecture.error.message : lecture.error;
+      } else {
+        successMsg = 'Lecture successfully edited.';
+        user = await getUser(loggedInUser);
+      }
+    }
+  } else {
+    errorMsg = 'Please enter all of the required data!';
+  }
+
+  res.render('my-account-page', { 
+    title: 'My account',
+    user: user,
+    errorMsg: errorMsg,
+    successMsg: successMsg
+  });
+ 
+ };
+
+
 async function deleteUser(userId) {
   var path = '/users/' + userId
   var options = {
@@ -284,6 +331,22 @@ async function getLecture(lectureId) {
     method: 'GET',
     json: {},
     qs: {}
+  };
+
+  try {
+    return await rp(options).promise();
+  } catch (error) {
+    return error;
+  }
+}
+
+async function editLecture(body, lectureId){
+  var path = '/lectures/' + lectureId
+  var options = {
+    url: apiParams + path,
+    method: 'PUT',
+    json: true,
+    body: body
   };
 
   try {
