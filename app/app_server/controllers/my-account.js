@@ -53,7 +53,7 @@ module.exports.myAccount = async (req, res) => {
     res.render('log-in', { 
       title: 'Log In',
       error: errorMsg,
-      successful: successMsg
+      msg: successMsg
     });
   } else {
     res.render('my-account-page', { 
