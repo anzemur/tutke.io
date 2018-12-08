@@ -3,7 +3,8 @@ include _includes/skupneHTMLfunkcije.pug
 
 block content
     .container
-      form
+      -urlEditLec = '/account/edit/lecture/' + lecture._id
+      form(action=urlEditLec, method="POST")
         .row.input-row
           .col-sm-4.col-sx-12.input-row
             .form-subject
