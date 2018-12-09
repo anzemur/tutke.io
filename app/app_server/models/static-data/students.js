@@ -1,7 +1,7 @@
 module.exports = [
   {
     username: "student",
-    password: "password1",
+    password: "Password1",
     firstName: "Janez",
     lastName: "Novak",
     email: "student@gmail.com",
@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     username: "student1",
-    password: "password1",
+    password: "Password1",
     firstName: "Jon",
     lastName: "Novaković",
     email: "student1@gmail.com",
@@ -21,7 +21,7 @@ module.exports = [
   },
   {
     username: "student2",
-    password: "password1",
+    password: "Password1",
     firstName: "Tine",
     lastName: "Petek",
     email: "student2@gmail.com",
@@ -31,7 +31,7 @@ module.exports = [
   },
   {
     username: "student3",
-    password: "password1",
+    password: "Password1",
     firstName: "Lovro",
     lastName: "Kalan",
     email: "student3@gmail.com",

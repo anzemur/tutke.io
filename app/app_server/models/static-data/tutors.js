@@ -1,7 +1,7 @@
 module.exports = [
   {
-    username: "tutor",
-    password: "password1",
+    username: "tutor0",
+    password: "Password1",
     firstName: "Toni",
     lastName: "Novac",
     email: "tutor@gmail.com",
@@ -12,7 +12,7 @@ module.exports = [
   },
   {
     username: "tutor1",
-    password: "password1",
+    password: "Password1",
     firstName: "Vladimir",
     lastName: "Ratic",
     email: "tutor1@gmail.com",
@@ -23,7 +23,7 @@ module.exports = [
   },
   {
     username: "tutor2",
-    password: "password1",
+    password: "Password1",
     firstName: "Tomaž",
     lastName: "Tutnik",
     email: "tutor2@gmail.com",
@@ -34,7 +34,7 @@ module.exports = [
   },
   {
     username: "tutor3",
-    password: "password1",
+    password: "Password1",
     firstName: "Toni",
     lastName: "Novac",
     email: "tutor3@gmail.com",

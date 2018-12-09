@@ -752,26 +752,30 @@ p#dateOfAcceptRequest {
 
  /* ----------------------------------------------edit profile */
 
- .sign-up-inputs {
-    width: 100%;
+.sign-up-inputs {
+   width: 100%;
+   margin-top: 20px;
+}
+
+.form-control.input-lg {
+   border-radius: 0;
+}
+.edit-profile-title {
     margin-top: 20px;
- }
- 
- .form-control.input-lg {
-    border-radius: 0;
- }
+}
+#edit-profile-button {
+    margin-top: 20px;
+    font-weight: 500;
+}
 
- .edit-profile-title {
-     margin-top: 20px;
- }
-
- #edit-profile-button {
-     margin-top: 20px;
-     font-weight: 500;
- }
 
   /* -------------------------------------------edit lecture */
 
 .input-row {
     margin-top: 15px;
+}
+
+#edit-lecture-button {
+    margin-top: 20px;
+    font-weight: 500;
 }

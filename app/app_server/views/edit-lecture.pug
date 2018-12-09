@@ -9,15 +9,16 @@ block content
           .col-sm-4.col-sx-12.input-row
             .form-subject
               label(for='subject') Title:
-              input#subject.form-control(type='text' placeholder='Title' required='' value=lecture.title name="title")
+              input#titleEditLecture.form-control(type='text' placeholder='Title' required='' value=lecture.title name="title")
+              input#editLectureType(type='hidden', name='lectureType', value=lecture.lectureType)
           .col-sm-4.col-sx-12.input-row
             if user && user.role == 'tutor'
               .form-subject
                 label(for='subject') Price:
-                input#subject.form-control(type='text' placeholder='Price in €/h' required='' value=lecture.price name="price")
+                input#editLecturePrice.form-control(type='text' placeholder='Price in €/h' required='' value=lecture.price name="price")
         .modal-form-group
           label.modal-comment Description:
           textarea#modal-message.form-control(rows='5' value=lecture.description name="description") #{lecture.description}
         .sign-up-btn-position
-          button#edit-profile-button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Apply Changes
+          button#edit-lecture-button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Apply Changes
 
