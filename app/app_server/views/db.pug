@@ -17,33 +17,28 @@ html
     .container
       if successful
         #infoDiv(style='display: none;', uId=userId)
-      if error
+      if errorMsg
         .col-sm-12.col-md-12.col-xs-12
           .alert.alert-danger.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
             a.close(href='#', data-dismiss='alert', aria-label='close') ×
-            | #{error}
-      if msg
+            | #{errorMsg}
+      if successMsg
         .col-sm-12.col-md-12.col-xs-12
           .alert.alert-success.alert-dismissable.fade.in(style='position: absolute; width: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0;')
             a.close(href='#', data-dismiss='alert', aria-label='close') ×
-            | #{msg}
+            | #{successMsg}
       .row
         .col-sm-offset-2.col-sm-8.col-md-offset-4.col-md-4.col-xs-12
           .log-in-form.panel.panel-default
-            h3 Log in to your account
-            form(action='/logIn' method="POST")
-              .input-group.log-in-inputs
-                span.input-group-addon
-                  span.glyphicon.glyphicon-user
-                input.form-control.left-border-none.input-lg(name='username', placeholder='Username or email', type='text', tabindex='1', required='', oninvalid="this.setCustomValidity('Please enter username.')", oninput="this.setCustomValidity('')")
-              .input-group.log-in-inputs
-                span.input-group-addon
-                  span.glyphicon.glyphicon-lock
-                input.form-control.left-border-none.input-lg(name='password', placeholder='Password', type='password', tabindex='2', required='', oninvalid="this.setCustomValidity('Please enter password.')", oninput="this.setCustomValidity('')")
-              .log-in-btn-position
-                button.btn.btn-primary.btn-block.btn-hover.btn-click(type='submit') Log In
-            div
-              a.panel-footer(href='/signUp') Not a part of tutke.io yet? Sign Up
+            h3 Admin database console
+            .log-in-btn-position
+              - urlDropDb = '/db?drop=true'
+              a(href=urlDropDb)
+                button.btn.btn-primary.btn-block.btn-hover.btn-click Drop database
+            .log-in-btn-position
+              - urlInitDb = '/db?init=true'
+              a(href=urlInitDb)
+                button.btn.btn-primary.btn-block.btn-hover.btn-click Initialize database
     
   script(src='/javascripts/jquery-3.3.1.min.js')
   script(src='/bootstrap/js/bootstrap.min.js')

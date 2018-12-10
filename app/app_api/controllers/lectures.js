@@ -8,7 +8,7 @@ var helperFunctions = require('../../lib/helper-functions');
 var respondJson = helperFunctions.respondJson;
 
 /**
- * GET all lectures. TODO: Add sort, pagination, query..
+ * GET all lectures.
  * Query parameter: {boolean} populate
  */
 module.exports.getLectures = (req, res) => {

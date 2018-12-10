@@ -6,6 +6,56 @@ Both can post to the site, tutors put out ads about what they tutor, and student
 Students can respond to tutors' listings and vice versa. To know if they are compatible, they can view each other's profiles, read reviews, and listings, current and past alike.
 Our goal is to spread knowledge.
 
+## Installation
+#### First you need to clone this repository using command: 
+
+```bash
+$ git clone bitbucket_url
+```
+
+#### If you want to run tutke.io app you must have installed all of the following prerequisites:
+* npm
+* node
+* MongoDB (v3.6.*)
+
+### How to install the prerequisites:
+* [MongoDB guide](https://docs.mongodb.com/manual/installation/)
+* [Node.js + npm](https://nodejs.org/en/download/)
+
+#### After you have your local database set up, run command in your pc's root folder: 
+
+```bash
+$ mongod
+```
+
+#### Then intstall all of the dependecies using command inside the /app folder: 
+
+```bash
+$ npm install
+```
+
+#### After the dependecies are installed you can run the app  with command:
+```bash
+$ npm start
+```
+
+## App urls
+* Local app url: http://localhost:3000/
+* Heroku app url: https://tutke-io.herokuapp.com/
+
+## Supported devices
+* Xiaomi Redmi Note 3
+* Samsung Galaxy s8
+* iPhone 6s
+* PCs
+
+## User's input checking
+* All of the fields on Sign Up, Edit my account, Add lecture and Update lecture pages are required. (varies based on user's role)
+* Passwords fields on Sign Up page and  Edit my account page: First and second password field must match and password must contain at least one lower case character, at least one upper case character and must be at least 8 characters long. (3 points validation)
+* Username field on Sign Up page and  Edit my account page: Username must be at least 6 characters long and must contain alphanumeric values. (3 points validation)
+* Price field on Add lecture and Edit lecture page: Price must be a number.
+* Description field on Add lecture and Edit lecture page: Description must be at least 200 characters long.
+
 
 ### Developers
 * Lovro Kalan

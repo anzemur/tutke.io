@@ -28,17 +28,19 @@ block content
                   +showRating(user.rating)
               if user.role == 'tutor' && user.teachingInstitution
                 p Teaching institution: #{user.teachingInstitution}
-              p #{user.educationLevel}
-              p #{user.fieldOfEducation}              
+              p Education level: #{user.educationLevel}
+              p Field of education: #{user.fieldOfEducation}              
               .row
-                .col-xl-6.col-lg-6.col-md-6.col-sm-6
-                  button#editAccBtn.AccountBtn
-                    | Edit 
-                    i.far.fa-user
-                .col-xl-6.col-lg-6.col-md-6.col-sm-6
-                  button#deleteAccBtn.AccountBtn
-                    | Delete 
-                    i.far.fa-user
+                a(href='/account/edit')
+                  .col-xl-6.col-lg-6.col-md-6.col-sm-6
+                    button#editAccBtn.AccountBtn
+                      | Edit 
+                      i.far.fa-user
+                a(href='/account?delete=true')
+                  .col-xl-6.col-lg-6.col-md-6.col-sm-6
+                    button#deleteAccBtn.AccountBtn
+                      | Delete 
+                      i.far.fa-user
             else
               .profileHeader
                 h4.centered-h4 Please log in to see additional information.
@@ -47,6 +49,9 @@ block content
             h4.centered-h4 Active posted lectures:
           else 
             h4.centered-h4 Active posted lecture requests:
+          if user.postedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No posted lectures.
           each lecture in user.postedLectures
             .totalAdPanel
               .extraHeading
@@ -64,9 +69,11 @@ block content
                           span.buttonTextRequest Delete 
                           i.far.fa-trash-alt
                     span#adPrice
-                      button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
-                        span.buttonTextRequest Edit 
-                        i.far.fa-edit
+                      - urlEditLec = '/account/edit/lecture/' + lecture._id
+                      a(href=urlEditLec)
+                        button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
+                          span.buttonTextRequest Edit 
+                          i.far.fa-edit
                     if lecture.lectureType =='posted'
                       span#adPrice  #{lecture.price} €/h
                 .panel-body
@@ -155,7 +162,10 @@ block content
               .panel-heading
                 h3#adTitle.panel-title.reviewTitle
                   //- TODO: fix to author name + edit/delete button
-                  | User - 
+                  if comment.author && comment.author.username
+                    | #{comment.author.username} - 
+                  else
+                    | Unknown -
                   +formatDate(comment.createdAt)
                   span#adPrice
                     +showRating(comment.rating)
