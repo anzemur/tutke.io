@@ -43,6 +43,20 @@ $ npm start
 * Local app url: http://localhost:3000/
 * Heroku app url: https://tutke-io.herokuapp.com/
 
+## Supported devices
+* Xiaomi Redmi Note 3
+* Samsung Galaxy s8
+* iPhone 6s
+* PCs
+
+## User's input checking
+* All of the fields on Sign Up, Edit my account, Add lecture and Update lecture pages are required. (varies based on user's role)
+* Passwords fields on Sign Up page and  Edit my account page: First and second password field must match and password must contain at least one lower case character, at least one upper case character and must be at least 8 characters long. (3 points validation)
+* Username field on Sign Up page and  Edit my account page: Username must be at least 6 characters long and must contain alphanumeric values. (3 points validation)
+* Price field on Add lecture and Edit lecture page: Price must be a number.
+* Description field on Add lecture and Edit lecture page: Description must be at least 200 characters long.
+
+
 ### Developers
 * Lovro Kalan
 * Zala Erič
