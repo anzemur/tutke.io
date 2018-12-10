@@ -220,8 +220,25 @@ module.exports.editLectureReq = async (req, res) => {
   }
 
   if(user && user._id && req.body.title && req.body.description) {
-    if(user.role == 'tutor') {
-      if(req.body.price) {
+
+    if(req.body.description.length < 200) {
+      errorMsg= "Description must be at least 200 characters long. Please try again.";
+    }  
+
+    if(!errorMsg) {
+      if(user.role == 'tutor') {
+        if(req.body.price && !isNaN(req.body.price)) {
+          var lecture = await editLecture(req.body, req.params.lectureId);
+          if(lecture.error) {
+            errorMsg = lecture.error.message ? lecture.error.message : lecture.error;
+          } else {
+            successMsg = 'Lecture successfully edited.';
+            user = await getUser(loggedInUser);
+          }
+        } else {
+          errorMsg = 'Please enter price. Price must be an number.';
+        }
+      } else {
         var lecture = await editLecture(req.body, req.params.lectureId);
         if(lecture.error) {
           errorMsg = lecture.error.message ? lecture.error.message : lecture.error;
@@ -229,16 +246,6 @@ module.exports.editLectureReq = async (req, res) => {
           successMsg = 'Lecture successfully edited.';
           user = await getUser(loggedInUser);
         }
-      } else {
-        errorMsg = 'Please enter price.';
-      }
-    } else {
-      var lecture = await editLecture(req.body, req.params.lectureId);
-      if(lecture.error) {
-        errorMsg = lecture.error.message ? lecture.error.message : lecture.error;
-      } else {
-        successMsg = 'Lecture successfully edited.';
-        user = await getUser(loggedInUser);
       }
     }
   } else {
