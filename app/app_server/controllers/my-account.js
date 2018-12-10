@@ -106,7 +106,30 @@ module.exports.editAccountReq = async (req, res) => {
 
   /* Update user model */
   if(req.body) {
-    if(req.body.password == req.body.password1 && user) {
+    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    var usernameRegex = /^\w{6,}$/;
+
+    if(req.body.password && req.body.password1) {
+      if(!passwordRegex.test(req.body.password)) {
+        errorMsg = "Password must contain at least one lower case character, at least one upper case character and must be at least 8 characters long. Please enter valid data and try again.";
+      }
+      if(!passwordRegex.test(req.body.password1)) {
+        errorMsg = "Password must contain at least one lower case character, at least one upper case character and must be at least 8 characters long. Please enter valid data and try again.";
+      }
+    } else {
+      errorMsg = "Password missing. Please try again."
+    }
+
+    if(req.body.username) {
+      if(!usernameRegex.test(req.body.username)) {
+        errorMsg = "Username must be at least 6 characters long and must contain alphanumeric values. Please enter valid data and try again.";
+      }
+    } else {
+      errorMsg = "Username missing. Please try again."
+    }
+
+
+    if(req.body.password == req.body.password1 && user && !errorMsg) {
       var userUpdate = await updateUser(req.body, user.role, user._id);
       if(userUpdate.error) {
         errorMsg = 'User update failed:' + userUpdate.error;
