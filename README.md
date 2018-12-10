@@ -18,6 +18,10 @@ $ git clone bitbucket_url
 * node
 * MongoDB (v3.6.*)
 
+### How to install the prerequisites:
+* [MongoDB guide](https://docs.mongodb.com/manual/installation/)
+* [Node.js + npm](https://nodejs.org/en/download/)
+
 #### After you have your local database set up, run command in your pc's root folder: 
 
 ```bash
