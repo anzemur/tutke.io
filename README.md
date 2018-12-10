@@ -50,7 +50,7 @@ $ npm start
 * PCs
 
 ## User's input checking
-* All of the fields on Sign Up, Edit my account, Add lecture and Update lecture pages are required. (varies based on user's role)
+* All of the fields on Sign Up, Edit my account, Add lecture and Update lecture pages are required (varies based on user's role). Input values are strings, but we have some special cases.
 * Passwords fields on Sign Up page and  Edit my account page: First and second password field must match and password must contain at least one lower case character, at least one upper case character and must be at least 8 characters long. (3 points validation)
 * Username field on Sign Up page and  Edit my account page: Username must be at least 6 characters long and must contain alphanumeric values. (3 points validation)
 * Price field on Add lecture and Edit lecture page: Price must be a number.
