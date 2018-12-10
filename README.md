@@ -6,6 +6,38 @@ Both can post to the site, tutors put out ads about what they tutor, and student
 Students can respond to tutors' listings and vice versa. To know if they are compatible, they can view each other's profiles, read reviews, and listings, current and past alike.
 Our goal is to spread knowledge.
 
+## Installation
+#### First you need to clone this repository using command: 
+
+```bash
+$ git clone bitbucket_url
+```
+
+#### If you want to run tutke.io app you must have installed all of the following prerequisites:
+* npm
+* node
+* MongoDB (v3.6.*)
+
+#### After you have your local database set up, run command in your pc's root folder: 
+
+```bash
+$ mongod
+```
+
+#### Then intstall all of the dependecies using command inside the /app folder: 
+
+```bash
+$ npm install
+```
+
+#### After the dependecies are installed you can run the app  with command:
+```bash
+$ npm start
+```
+
+## App urls
+* Local app url: http://localhost:3000/
+* Heroku app url: https://tutke-io.herokuapp.com/
 
 ### Developers
 * Lovro Kalan
