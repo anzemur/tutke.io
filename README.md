@@ -7,10 +7,10 @@ Students can respond to tutors' listings and vice versa. To know if they are com
 Our goal is to spread knowledge.
 
 ## Installation
-#### First you need to clone this repository using command: 
+#### First you need to clone this repository using command and change {bitbucket_username} with your account's username : 
 
 ```bash
-$ git clone bitbucket_url
+$ git clone https://{bitbucket_username}@bitbucket.org/spproject/tutke-app.git
 ```
 
 #### If you want to run tutke.io app you must have installed all of the following prerequisites:
