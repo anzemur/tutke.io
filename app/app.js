@@ -11,7 +11,7 @@ var fs = require('fs');
 var mergedCode = uglifyJs.minify({
   'app.js': fs.readFileSync('app_client/app.js', 'utf-8'),
   'foot.directive.js': fs.readFileSync('app_client/shared/directives/foot/foot.directive.js', 'utf-8'),
-  'nav.directive.js': fs.readFileSync('app_client/shared/directives/nav/nav.directive.js', 'utf-8'),
+  'navigation.directive.js': fs.readFileSync('app_client/shared/directives/navigation/navigation.directive.js', 'utf-8'),
 });
 
 /* Save merged code to new file: */ 

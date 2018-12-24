@@ -1,7 +1,11 @@
 (function () {
   function setUp($routeProvider) {
     $routeProvider
-      .when('/', {})
+      .when('/', {
+        templateUrl: 'index/index.component.html',
+        // controller: 'seznamCtrl',
+        // controllerAs: 'vm'
+      })
       .otherwise({redirecTo: '/'});
   }
 
