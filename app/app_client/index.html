@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="tutke">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <title>Tutke.io</title>
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  </head>
+  <body class="Site">
+    <div class="Site-content">
+      <nav></nav>
+    </div>
+    <div class="container">
+      <div ng-view>
+      </div>
+      <foot></foot>
+    </div>
+  </body>
+  <script src="/angular/angular.min.js"></script>
+  <script src="/lib/angular-route.min.js"></script>
+  <script src="/app.js"></script>
+  <script src='/shared/directives/foot/foot.directive.js'></script>
+  <script src='/shared/directives/nav/nav.directive.js'></script>
+  <script src="/javascripts/jquery-3.3.1.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+</html>

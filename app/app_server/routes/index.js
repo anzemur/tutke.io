@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+var ctrlAngularApp = require('../controllers/angular-app');
+router.get('/', ctrlAngularApp.angularApp);
+
+/* Old routing when app was build on server side with express. */
 var ctrlIndex = require('../controllers/index');
 var ctrlLogIn = require('../controllers/log-in');
 var ctrlSignUp = require('../controllers/sign-up');
