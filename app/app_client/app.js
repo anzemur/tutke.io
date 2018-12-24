@@ -1,10 +1,12 @@
-var tutkeApp = angular.module('tutke', ['ngRoute']);
+(function () {
+  function setUp($routeProvider) {
+    $routeProvider
+      .when('/', {})
+      .otherwise({redirecTo: '/'});
+  }
 
-function setUp($routeProvider) {
-  $routeProvider
-    .when('/', {})
-    .otherwise({redirecTo: '/'});
-}
-
-tutkeApp
-  .config(['$routeProvider', setUp]);
+  /* global angular */
+  angular
+    .module('tutke', ['ngRoute'])
+    .config(['$routeProvider', setUp]);
+})();

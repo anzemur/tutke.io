@@ -5,6 +5,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var uglifyJs = require('uglify-js');
+var fs = require('fs');
+
+var mergedCode = uglifyJs.minify({
+  'app.js': fs.readFileSync('app_client/app.js', 'utf-8'),
+  'foot.directive.js': fs.readFileSync('app_client/shared/directives/foot/foot.directive.js', 'utf-8'),
+  'nav.directive.js': fs.readFileSync('app_client/shared/directives/nav/nav.directive.js', 'utf-8'),
+});
+
+/* Save merged code to new file: */ 
+fs.writeFile('public/angular/tutke.min.js', mergedCode.code, (error) => {
+  if (error)
+    console.log(error);
+  else
+    console.log('Script is generated and saved as "tutke.min.js".');
+});
 
 /* Connect to db. */
 require('./app_api/models/db');

@@ -1,5 +1,5 @@
-(() => {
-  var nav = () => {
+(function() {
+  var nav = function() {
     return {
       restrict: 'EA',
       templateUrl: '/shared/directives/nav/nav.component.html'
