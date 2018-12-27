@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var uglifyJs = require('uglify-js');
 var fs = require('fs');
+var passport = require('passport');
 
 var mergedCode = uglifyJs.minify({
   'app.js': fs.readFileSync('app_client/app.js', 'utf-8'),
@@ -25,13 +26,15 @@ fs.writeFile('public/angular/tutke.min.js', mergedCode.code, (error) => {
 
 /* Connect to db. */
 require('./app_api/models/db');
+/* Register passport config */
+require('./app_api/config/passport');
 
 var indexRouter = require('./app_server/routes/index');
 var indexApi = require('./app_api/routes/index');
 
 var app = express();
 
-// View engine setup
+/* View engine setup */
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'pug');
 
@@ -41,6 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
+app.use(passport.initialize());
 
 // app.use('/', indexRouter);
 
