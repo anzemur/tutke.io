@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var ctrlAuthentication = require('../controllers/authentication');
 var ctrlUsers = require('../controllers/users');
 var ctrlComments = require('../controllers/comments');
 var ctrlLectures = require('../controllers/lectures');
@@ -29,7 +30,17 @@ router.delete('/users/:userId',
 
 router.post('/users/auth', 
   ctrlUsers.authUser);
+
+/**
+ * USER AUTHENTICATION routes.
+ */
+router.post('/register',
+  ctrlAuthentication.register);
+
+router.post('/login',
+  ctrlAuthentication.login);
  
+
 /**
  * COMMENTS routes.
  */

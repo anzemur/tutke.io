@@ -33,7 +33,7 @@ var userSchema = new mongoose.Schema({
  * Hashes user's password using random value salt.
  * @param {String} password user's password 
  */
-userSchema.methods.hashPassword = (password) => {
+userSchema.methods.hashPassword = function(password) {
   this.randomHashingValue = crypto.randomBytes(16).toString('hex');
   this.password = crypto.pbkdf2Sync(password, this.randomHashingValue, 1000, 64, 'sha512').toString('hex');
 };
@@ -42,7 +42,7 @@ userSchema.methods.hashPassword = (password) => {
  * Checks if given password matches user's password
  * @param {String} password user's password 
  */
-userSchema.methods.checkPassword = (password) => {
+userSchema.methods.checkPassword = function(password) {
   var hashedPassword = crypto.pbkdf2Sync(password, this.randomHashingValue, 1000, 64, 'sha512').toString('hex');
   return this.password == hashedPassword;
 };
@@ -50,7 +50,7 @@ userSchema.methods.checkPassword = (password) => {
 /**
  * Generates JWT for current user.
  */
-userSchema.methods.generateJwt = () => {
+userSchema.methods.generateJwt = function() {
   var exDate = new Date();
   exDate.setDate(exDate.getDate() + 7);
   
