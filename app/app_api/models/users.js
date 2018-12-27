@@ -47,5 +47,28 @@ userSchema.methods.checkPassword = (password) => {
   return this.password == hashedPassword;
 };
 
+/**
+ * Generates JWT for current user.
+ */
+userSchema.methods.generateJwt = () => {
+  var exDate = new Date();
+  exDate.setDate(exDate.getDate() + 7);
+  
+  return jwt.sign({
+    _id: this._id,
+    email: this.email,
+    ime: this.ime,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    teachingInstitution: this.teachingInstitution,
+    educationLevel: this.educationLevel,
+    fieldOfEducation: this.fieldOfEducation,
+    rating: this.rating,
+    role: this.role,
+    educationLevel: this.educationLevel,
+    fieldOfEducation: this.fieldOfEducation,
+    exDate: parseInt(exDate.getTime() / 1000, 10)
+  }, process.env.JWT_PASSWORD);
+};
 
 mongoose.model('User', userSchema, 'Users');
