@@ -18,6 +18,8 @@ var mergedCode = uglifyJs.minify({
   'navigation.directive.js': fs.readFileSync('app_client/shared/directives/navigation/navigation.directive.js', 'utf-8'),
   /* Services */
   'authentication.service.js': fs.readFileSync('app_client/shared/services/authentication.service.js', 'utf-8'),
+  /* Controllers */
+  'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8')
 });
 
 /* Save merged code to new file: */ 

@@ -90,7 +90,7 @@
 
     };
   }
-  authentication.$inject = ['$window'];
+  authentication.$inject = ['$window', '$http'];
   
   /* global angular */
   angular

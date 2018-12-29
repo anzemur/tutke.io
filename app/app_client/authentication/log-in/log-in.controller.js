@@ -7,9 +7,8 @@
       password: ''
     };
 
-    vm.logInError = "fsdfsd";
-
-    // vm.prvotnaStran = $location.search().stran || '/';
+    vm.logInError = '';
+    vm.indexPage = $location.search().page || '/';
 
     vm.checkLogInData = function() {
       vm.logInError = '';
@@ -30,8 +29,8 @@
         .doLogIn(vm.logInData)
         .then(
           function(success) {
-            // $location.search('stran', null);
-            // $location.path(vm.prvotnaStran);
+            $location.search('page', null);
+            $location.path(vm.indexPage);
           },
           function(error) {
             vm.logInError = error.data.message;
