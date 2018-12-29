@@ -10,10 +10,14 @@ var uglifyJs = require('uglify-js');
 var fs = require('fs');
 var passport = require('passport');
 
+/* Minify code into one .min file */
 var mergedCode = uglifyJs.minify({
   'app.js': fs.readFileSync('app_client/app.js', 'utf-8'),
+  /* Directives */
   'foot.directive.js': fs.readFileSync('app_client/shared/directives/foot/foot.directive.js', 'utf-8'),
   'navigation.directive.js': fs.readFileSync('app_client/shared/directives/navigation/navigation.directive.js', 'utf-8'),
+  /* Services */
+  'authentication.service.js': fs.readFileSync('app_client/shared/services/authentication.service.js', 'utf-8'),
 });
 
 /* Save merged code to new file: */ 
@@ -57,12 +61,12 @@ app.use((req, res) => {
 });
 
 /* Catch 404 and forward to error handler */
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 /* Error handler */
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -70,6 +74,16 @@ app.use(function(err, req, res, next) {
   // Render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+/* Handle unauthorized error 401 */
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({
+      'message': err.name + ": " + err.message
+    });
+  }
 });
 
 module.exports = app;
