@@ -67,6 +67,17 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
+/* Handle unauthorized error 401 */
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({
+      'status': 401,
+      'message': err.name + ": " + err.message
+    });
+  }
+});
+
 /* Error handler */
 app.use((err, req, res, next) => {
   // Set locals, only providing error in development
@@ -76,16 +87,6 @@ app.use((err, req, res, next) => {
   // Render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-/* Handle unauthorized error 401 */
-app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') {
-    res.status(401);
-    res.json({
-      'message': err.name + ": " + err.message
-    });
-  }
 });
 
 module.exports = app;

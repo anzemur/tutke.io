@@ -11,6 +11,11 @@
         controller: 'loginInCtrl',
         controllerAs: 'vm'
       })
+      // .when('/registration', {
+      //   templateUrl: 'authentication/registration/registration.component.html',
+      //   controller: 'loginInCtrl',
+      //   controllerAs: 'vm'
+      // })
       .otherwise({redirecTo: '/'});
     $locationProvider.html5Mode(true);
   }
