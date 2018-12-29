@@ -6,7 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var uglifyJs = require('uglify-js');
+var uglifyJs = require('uglify-es');
 var fs = require('fs');
 var passport = require('passport');
 
@@ -19,7 +19,10 @@ var mergedCode = uglifyJs.minify({
   /* Services */
   'authentication.service.js': fs.readFileSync('app_client/shared/services/authentication.service.js', 'utf-8'),
   /* Controllers */
-  'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8')
+  'index.controller.js': fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
+  'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
+  /* Filters */
+  'users-lecture-requests.filter.js': fs.readFileSync('app_client/shared/filters/users-lecture-requests.filter.js', 'utf-8'),
 });
 
 /* Save merged code to new file: */ 

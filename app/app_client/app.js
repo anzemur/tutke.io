@@ -3,8 +3,8 @@
     $routeProvider
       .when('/', {
         templateUrl: 'index/index.component.html',
-        // controller: 'seznamCtrl',
-        // controllerAs: 'vm'
+        controller: 'indexCtrl',
+        controllerAs: 'vm'
       })
       .when('/login', {
         templateUrl: 'authentication/log-in/log-in.component.html',

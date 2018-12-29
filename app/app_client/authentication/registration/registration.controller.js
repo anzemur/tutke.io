@@ -15,7 +15,6 @@
       teachingInstitution: '',
     };
 
-
     vm.registrationError = '';
     vm.indexPage = $location.search().page || '/';
 
@@ -31,10 +30,8 @@
       vm.doRegistration();
     };
 
-
     vm.doRegistration = function() {
       vm.registrationError = '';
-
       authentication
         .doRegister(vm.registrationData)
         .then(

@@ -68,14 +68,18 @@
         var token = getToken();
         var tokenData = JSON.parse($window.atob(token.split('.')[1]));
 
-        return $http({
-          url: '/users/' + tokenData._id, 
-          method: "GET",
-          params: {populate: true}
-       }).then(
-        function success(response) {
-          return response;
+        return $http.get('/api/users/' + tokenData._id, {
+          params: { populate: true }
         });
+
+      //   return $http({
+      //     url: '/api/users/' + tokenData._id, 
+      //     method: "GET",
+      //     params: {populate: true}
+      //  }).then(
+      //   function success(response) {
+      //     return response.data;
+      //   });
       }
     }
 
