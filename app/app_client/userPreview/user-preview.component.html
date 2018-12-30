@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
       <div class="thumbnail profileThumbnail profilePreview" id="profileView">
-        <h4 id="profileTitle">Profile Username</h4>
+        <h4 id="profileTitle"> {{ vm.user.username }} </h4>
         <div class="rating" id="userPreviewRating">
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
@@ -12,8 +12,8 @@
           <i class="far fa-star"></i>
           <i class="far fa-star"></i>
         </div>
-        <p>Faculty of Computer and Information Science</p>
-        <p>BA. in Computer Science</p>
+        <p> {{ vm.user.teachingInstitution }} </p>
+        <p> {{ vm.user.educationLevel }} </p>
       </div>
 
       <h4 class="centered-h4">Reviews (1):</h4>
