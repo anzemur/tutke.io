@@ -81,7 +81,7 @@
         </div>
         <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
         <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
-            <div class="extraHeading"><span id="userPublisher"><a href="profileTutor.html">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+            <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
             <div class="panel panel-default listingPanel">
                 <div class="panel-heading">
                     <h3 class="panel-title" id="adTitle">{{ lecture.title }}
