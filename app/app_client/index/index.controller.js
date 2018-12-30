@@ -37,6 +37,11 @@
       vm.getLecturesPaginated();
     }
 
+    vm.changePage = function(next) {
+      next ? vm.pagination.page++ : vm.pagination.page--;
+      vm.getLecturesPaginated();
+    }
+
 
     
     /* Returns current logged in user. */
