@@ -16,6 +16,11 @@
       //   controller: 'loginInCtrl',
       //   controllerAs: 'vm'
       // })
+      .when('/user/:userId', {
+        templateUrl: 'userPreview/user-preview.component.html',
+        controller: 'userCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({redirecTo: '/'});
     $locationProvider.html5Mode(true);
   }
