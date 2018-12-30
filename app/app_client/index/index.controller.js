@@ -14,6 +14,7 @@
     
 
     vm.getLecturesPaginated = function() {
+      vm.msgError = '';
       lectures.getLecturesPaginated(vm.pagination).then(
         function success(response) {
           vm.lectures = response.data;
@@ -26,6 +27,8 @@
     }
 
     vm.answerToPendingLecture = function(accept, id) {
+      vm.msgError = '';
+      vm.msgSuccess = '';
       lecturesRequests.updateLectureRequest(accept, id).then(
         function success(response) {
           vm.msgSuccess = accept ? 'Lecture request accepted.' : 'Lecture request denied.';
@@ -40,6 +43,10 @@
     }
 
     vm.sendLectureRequest = function(lectureId, posterId) {
+      vm.msgError = '';
+      vm.msgSuccess = '';
+      vm.msgInfo = '';
+
       var lectureRequest = {
         lecture: lectureId,
         student: '',
