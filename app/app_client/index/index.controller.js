@@ -15,7 +15,6 @@
       lectures.getLecturesPaginated(vm.pagination).then(
         function success(response) {
           vm.lectures = response.data;
-          console.log(response)
         },
         function error(error) {
           vm.lecturesError = error.e;
@@ -45,16 +44,18 @@
 
     
     /* Returns current logged in user. */
-    authentication.getCurrentUser().then(
-      function success(response) {
-        vm.user = response.data;
-      },
-      function error(error) {
-        vm.isLoggedIn = false;
-        authentication.doLogOut();
-        console.log(error.e);
-      }
-    )
+    if (vm.isLoggedIn) {
+      authentication.getCurrentUser().then(
+        function success(response) {
+          vm.user = response.data;
+        },
+        function error(error) {
+          vm.isLoggedIn = false;
+          authentication.doLogOut();
+          console.log(error.e);
+        }
+      )
+    }
 
     /* Get initial lectures */
     vm.getLecturesPaginated();
