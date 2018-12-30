@@ -1,7 +1,8 @@
 (() => {
-  function indexCtrl($location, authentication, lectures) {
+  function indexCtrl($location, authentication, lectures, lecturesRequests) {
     var vm = this;
-    vm.lecturesError = '';
+    vm.msgError = '';
+    vm.msgSuccess = '';
     vm.isLoggedIn = authentication.isLoggedIn();
 
     vm.pagination = {
@@ -17,17 +18,33 @@
           vm.lectures = response.data;
         },
         function error(error) {
-          vm.lecturesError = error.e;
+          vm.msgError = error.e;
           console.log(error.e);
         }
       )
     }
 
+    vm.answerToPendingLecture = function(accept, id) {
+      lecturesRequests.updateLectureRequest(accept, id).then(
+        function success(response) {
+          vm.msgSuccess = accept ? 'Lecture request accepted.' : 'Lecture request denied.';
+          vm.user.lecturesRequests = vm.user.lecturesRequests.filter(x => x._id != id);
+          console.log(vm.msgSuccess)
+        },
+        function error(error) {
+          vm.msgError = error.e;
+          console.log(error.e);
+        }
+      )
+    }
+
+    /* Performs db search. */
     vm.doSearch = function() {
       vm.pagination.page = 0;
       vm.getLecturesPaginated();
     }
 
+    /* Changes lecture type in lectures filter. */
     vm.changeLectureType = function(type) {
       if (vm.pagination.lectureType == type) {
         return;
@@ -36,13 +53,12 @@
       vm.getLecturesPaginated();
     }
 
+    /* Changes page based on the 'next' value. */
     vm.changePage = function(next) {
       next ? vm.pagination.page++ : vm.pagination.page--;
       vm.getLecturesPaginated();
     }
 
-
-    
     /* Returns current logged in user. */
     if (vm.isLoggedIn) {
       authentication.getCurrentUser().then(
@@ -61,7 +77,7 @@
     vm.getLecturesPaginated();
   } 
 
-  indexCtrl.$inject = ['$location', 'authentication', 'lectures'];
+  indexCtrl.$inject = ['$location', 'authentication', 'lectures', 'lecturesRequests'];
 
   /* global angular */
   angular

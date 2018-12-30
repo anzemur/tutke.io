@@ -19,6 +19,7 @@ var mergedCode = uglifyJs.minify({
   /* Services */
   'authentication.service.js': fs.readFileSync('app_client/shared/services/authentication.service.js', 'utf-8'),
   'lectures.service.js': fs.readFileSync('app_client/shared/services/lectures.service.js', 'utf-8'),
+  'lecture-requests.service.js': fs.readFileSync('app_client/shared/services/lecture-requests.service.js', 'utf-8'),
   /* Controllers */
   'index.controller.js': fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
   'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
