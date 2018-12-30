@@ -1,9 +1,45 @@
 (() => {
-  function indexCtrl($location, authentication) {
+  function indexCtrl($location, authentication, lectures) {
     var vm = this;
-
+    vm.lecturesError = '';
     vm.isLoggedIn = authentication.isLoggedIn();
 
+    vm.pagination = {
+      search: '',
+      page: 0,
+      lectureType: 'posted'
+    }
+    
+
+    vm.getLecturesPaginated = function() {
+      lectures.getLecturesPaginated(vm.pagination).then(
+        function success(response) {
+          vm.lectures = response.data;
+          console.log(response)
+        },
+        function error(error) {
+          vm.lecturesError = error.e;
+          console.log(error.e);
+        }
+      )
+    }
+
+    vm.doSearch = function() {
+      vm.pagination.page = 0;
+      vm.getLecturesPaginated();
+    }
+
+    vm.changeLectureType = function(type) {
+      if (vm.pagination.lectureType == type) {
+        return;
+      }
+      vm.pagination.lectureType = vm.pagination.lectureType == 'posted' ? 'requested' : 'posted';
+      vm.getLecturesPaginated();
+    }
+
+
+    
+    /* Returns current logged in user. */
     authentication.getCurrentUser().then(
       function success(response) {
         vm.user = response.data;
@@ -14,9 +50,12 @@
         console.log(error.e);
       }
     )
+
+    /* Get initial lectures */
+    vm.getLecturesPaginated();
   } 
 
-  indexCtrl.$inject = ['$location', 'authentication'];
+  indexCtrl.$inject = ['$location', 'authentication', 'lectures'];
 
   /* global angular */
   angular

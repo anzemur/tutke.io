@@ -2,8 +2,8 @@
 
 <div class="container" id="toggleNavContainer">
   <ul class="nav nav-tabs nav-custom nav-justified">
-      <li role="presentation" class="active"><a href="/"></a>Lectures</a></li>
-      <li role="presentation"><a href="/">Student's requests</a></li>
+      <li ng-click="vm.changeLectureType('posted')" role="presentation" ng-class="{'active': vm.pagination.lectureType === 'posted'}"><a href="/">Lectures</a></li>
+      <li ng-click="vm.changeLectureType('requested')" role="presentation" ng-class="{'active': vm.pagination.lectureType === 'requested'}"><a href="/">Student's requests</a></li>
     </ul>
 </div>
 <div class="container-fluid" id="mainContent">
@@ -30,8 +30,11 @@
                     <h4 id="upcomingEvents">Pending Requests</h4>
                     <ul id="upcomingEventsList">
                         <h4 ng-if="vm.user.lecturesRequests.length === 0" id="profileTitle">No pending requests.</h4>
-                        <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'tutor'" ng-repeat="request in vm.user.lecturesRequests | getFilteredRequests">
-                            <p>Learn Linear Algebra! - from Student1<br><button class="acceptDeny" id="acceptRequest">Accept</button><button class="acceptDeny" id="denyRequest">Deny</button></p>
+                        <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'tutor'" ng-repeat="request in vm.user.lecturesRequests | getFilteredStudentsRequests">
+                            <p>{{ request.lecture.title }} - from {{ request.student.username }}<br><button class="acceptDeny" id="acceptRequest">Accept</button><button class="acceptDeny" id="denyRequest">Deny</button></p>
+                        </li>
+                        <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'student'" ng-repeat="request in vm.user.lecturesRequests | getFilteredTutorsRequests">
+                            <p>{{ request.lecture.title }} - from {{ request.tutor.username }}<br><button class="acceptDeny" id="acceptRequest">Accept</button><button class="acceptDeny" id="denyRequest">Deny</button></p>
                         </li>
                     </ul>
               </div>
@@ -53,20 +56,21 @@
         <div class="container-fluid container-jumbotron" id="searchTutor">
             <h3 style="padding-left: 15px">Search available lectures:</h3>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                    <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
                 </span>
             </div>
         </div>
-        <div class="totalAdPanel">
-            <div class="extraHeading"><span id="userPublisher"><a href="profileTutor.html">Tutor</a><span class="date"> - 05/11/2018</span></span></div>
+        <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
+        <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
+            <div class="extraHeading"><span id="userPublisher"><a href="profileTutor.html">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
             <div class="panel panel-default listingPanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title" id="adTitle">Learn Linear Algebra!<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                    <h3 class="panel-title" id="adTitle">{{ lecture.title }}<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nulla ut nulla lacinia vulputate. Vivamus dictum ornare congue. Donec risus est, aliquet sed facilisis nec, varius dapibus odio. Sed a tincidunt leo. Ut vulputate sit amet arcu et vestibulum. Quisque ut facilisis enim. Nunc vitae lorem ornare, hendrerit dolor a, pellentesque nulla...<a href="#">Read More</a></p>
+                    <p>{{ lecture.description }}</p>
                 </div>
             </div>
         </div> 
