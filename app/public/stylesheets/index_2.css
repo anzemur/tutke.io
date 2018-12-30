@@ -1005,3 +1005,8 @@ p#dateOfAcceptRequest {
     margin-top: 20px;
     font-weight: 500;
 }
+
+.alert-message {
+    margin-right: 15%;
+    margin-left: 15%;
+}

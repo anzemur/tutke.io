@@ -1,5 +1,16 @@
 <navigation></navigation>
-
+<div role="alert" ng-show="vm.msgError" class="alert alert-danger alert-message">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p> {{ vm.msgError }} </p>
+</div>
+<div role="alert" ng-show="vm.msgSuccess" class="alert alert-success alert-message">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p> {{ vm.msgSuccess }} </p>
+</div>
 <div class="container" id="toggleNavContainer">
   <ul class="nav nav-tabs nav-custom nav-justified">
       <li ng-click="vm.changeLectureType('posted')" role="presentation" ng-class="{'active': vm.pagination.lectureType === 'posted'}"><a href="/">Lectures</a></li>
@@ -31,7 +42,7 @@
                     <ul id="upcomingEventsList">
                         <h4 ng-if="vm.user.lecturesRequests.length === 0" id="profileTitle">No pending requests.</h4>
                         <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'tutor'" ng-repeat="request in vm.user.lecturesRequests | getFilteredStudentsRequests">
-                            <p>{{ request.lecture.title }} - from {{ request.student.username }}<br><button class="acceptDeny" id="acceptRequest">Accept</button><button class="acceptDeny" id="denyRequest">Deny</button></p>
+                            <p>{{ request.lecture.title }} - from {{ request.student.username }}<br><button ng-click="vm.answerToPendingLecture(true, request._id)" class="acceptDeny" id="acceptRequest">Accept</button><button ng-click="vm.answerToPendingLecture(false, request._id)" class="acceptDeny" id="denyRequest">Deny</button></p>
                         </li>
                         <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'student'" ng-repeat="request in vm.user.lecturesRequests | getFilteredTutorsRequests">
                             <p>{{ request.lecture.title }} - from {{ request.tutor.username }}<br><button class="acceptDeny" id="acceptRequest">Accept</button><button class="acceptDeny" id="denyRequest">Deny</button></p>
