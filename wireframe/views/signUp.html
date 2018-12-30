@@ -2,22 +2,23 @@
 <head>
     <title>Sign Up</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="../styles/signUp.css">
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
 </head>
-<body>
+<body class="loginBody">
     <div class="container">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 col-md-offset-3 col-md-6 col-xs-12">
                 <div class="sign-up-form">
 
                     <div class="container" id="toggleNavContainer">
-                        <ul class="nav nav-tabs nav-custom nav-justified">
+                        <ul id="signupNavTabs" class="nav nav-tabs nav-custom nav-justified">
                             <li role="presentation" class="active"><a href="#Tutor" data-toggle="tab">Tutor</a></li>
                             <li role="presentation"><a href="#Student" data-toggle="tab">Student</a></li>
                           </ul>
@@ -26,7 +27,7 @@
                     <div class="tab-content" >
                         <!-- Tutor Sign Up tab-->
                         <div class="tab-pane fade in active"  id="Tutor">
-                            <form class="scrollbar-primary" style="overflow-y: scroll; height: 580px;" action="index.html">
+                            <form class="scrollbar-primary scrollSignup" style="overflow-y: scroll; height: 580px;" action="index.html">
                                 <div class="input-group sign-up-inputs">
                                     <label for="first_name">First name<span style="color: red">*</span></label>
                                     <input name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
@@ -82,7 +83,7 @@
                                     <input name="certificates" class="form-control input-lg" type="file" tabindex="5" multiple accept="image/png">
                                 </div>
                                 <div class="sign-up-btn-position">
-                                    <button type="submit" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
+                                    <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
                                 </div>
                             </form>
                         </div>
@@ -123,7 +124,7 @@
                                 </select>
                             </div>     
                             <div class="sign-up-btn-position" style="margin-top: 5px;">
-                                <button type="submit" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
+                                <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
                             </div>    
                         </div>
                     </div>
