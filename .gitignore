@@ -2,3 +2,4 @@
 .DS_Store
 app/node_modules
 app/.env
+app/public/angular/tutke.min.js

@@ -11,8 +11,17 @@
       });
     }
 
+    var sendLectureRequest = function(body) {
+      return $http.post('/api/lecturesRequests', body, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    }
+
     return {
-      updateLectureRequest: updateLectureRequest
+      updateLectureRequest: updateLectureRequest,
+      sendLectureRequest: sendLectureRequest
     };
   }
   lecturesRequests.$inject = ['$window', '$http', 'authentication'];

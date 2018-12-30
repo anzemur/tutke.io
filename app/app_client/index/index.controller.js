@@ -3,6 +3,7 @@
     var vm = this;
     vm.msgError = '';
     vm.msgSuccess = '';
+    vm.msgInfo = '';
     vm.isLoggedIn = authentication.isLoggedIn();
 
     vm.pagination = {
@@ -13,18 +14,21 @@
     
 
     vm.getLecturesPaginated = function() {
+      vm.msgError = '';
       lectures.getLecturesPaginated(vm.pagination).then(
         function success(response) {
           vm.lectures = response.data;
         },
         function error(error) {
-          vm.msgError = error.e;
-          console.log(error.e);
+          vm.msgError = error.data ? error.data.message : error;
+          console.log(error);
         }
       )
     }
 
     vm.answerToPendingLecture = function(accept, id) {
+      vm.msgError = '';
+      vm.msgSuccess = '';
       lecturesRequests.updateLectureRequest(accept, id).then(
         function success(response) {
           vm.msgSuccess = accept ? 'Lecture request accepted.' : 'Lecture request denied.';
@@ -32,8 +36,46 @@
           console.log(vm.msgSuccess)
         },
         function error(error) {
-          vm.msgError = error.e;
-          console.log(error.e);
+          vm.msgError = error.data ? error.data.message : error;
+          console.log(error);
+        }
+      )
+    }
+
+    vm.sendLectureRequest = function(lectureId, posterId) {
+      vm.msgError = '';
+      vm.msgSuccess = '';
+      vm.msgInfo = '';
+
+      var lectureRequest = {
+        lecture: lectureId,
+        student: '',
+        tutor: '',
+        requestType: ''
+      };
+
+      if (vm.user.role == 'tutor') {
+        lectureRequest.student = posterId,
+        lectureRequest.tutor = vm.user._id,
+        lectureRequest.lectureType = 'studentRequest'
+      } else {
+        lectureRequest.student = vm.user._id,
+        lectureRequest.tutor = posterId,
+        lectureRequest.requestType = 'tutorOffer'
+      }
+
+      lecturesRequests.sendLectureRequest(lectureRequest).then(
+        function success(response) {
+          vm.msgSuccess = 'Lecture request sent.';
+        },
+        function error(error) {
+          if(error.data && error.data.message && error.data.message.indexOf("E11000 duplicate key error")  !== -1) {
+            vm.msgInfo = "You already sent request for this lecture.";
+            console.log(error);
+          } else {
+            vm.msgError = error.data ? error.data.message : error;
+            console.log(error);
+          }
         }
       )
     }
@@ -68,7 +110,7 @@
         function error(error) {
           vm.isLoggedIn = false;
           authentication.doLogOut();
-          console.log(error.e);
+          console.log(error);
         }
       )
     }

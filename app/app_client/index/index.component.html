@@ -1,15 +1,21 @@
 <navigation></navigation>
-<div role="alert" ng-show="vm.msgError" class="alert alert-danger alert-message">
+<div role="alert" ng-if="vm.msgError" class="alert alert-danger alert-message">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
     <p> {{ vm.msgError }} </p>
 </div>
-<div role="alert" ng-show="vm.msgSuccess" class="alert alert-success alert-message">
+<div role="alert" ng-if="vm.msgSuccess" class="alert alert-success alert-message">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
     <p> {{ vm.msgSuccess }} </p>
+</div>
+<div role="alert" ng-if="vm.msgInfo" class="alert alert-info alert-message">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p> {{ vm.msgInfo }} </p>
 </div>
 <div class="container" id="toggleNavContainer">
   <ul class="nav nav-tabs nav-custom nav-justified">
@@ -78,7 +84,17 @@
             <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
             <div class="panel panel-default listingPanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title" id="adTitle">{{ lecture.title }}<span id="adPrice"><button type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest"><span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i></button></span></h3>
+                    <h3 class="panel-title" id="adTitle">{{ lecture.title }}
+                        <span id="adPrice">
+                            <p ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </p>
+                            <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted && vm.isLoggedIn'" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
+                            </button>
+                            <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                            </button>
+                        </span>
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <p>{{ lecture.description }}</p>
@@ -89,7 +105,7 @@
   </div>
 </div> 
 
-<a href="#" class="float" data-toggle="modal" data-target="#addListing">
+<a ng-if="vm.isLoggedIn" href="#" class="float" data-toggle="modal" data-target="#addListing">
   <i class="fa fa-plus my-float"></i>
 </a>
 <div class="label-container">
