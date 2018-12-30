@@ -26,8 +26,8 @@ module.exports.getLectures = (req, res) => {
   query.sort( {createdAt: -1} );
 
   if(req.query && req.query.page) {
-    query.skip(req.query.page*5);
-    query.limit(5);
+    query.skip(req.query.page*10);
+    query.limit(10);
   }
 
   query.exec((err, lectures) => {

@@ -38,7 +38,6 @@
         );
     }
   }
-
   loginInCtrl.$inject = ['$location', 'authentication'];
 
   /* global angular */
