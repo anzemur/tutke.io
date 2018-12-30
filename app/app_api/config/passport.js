@@ -16,14 +16,14 @@ passport.use(new LocalStrategy({
         if (error)
           return response(error);
         if (!user) {
-          return response(null, false, {
-            message: 'Wrong username.'
-          });
+          return response(null, false,
+            'Incorrect username or password.'
+          );
         }
         if (!user.checkPassword(password)) {
-          return response(null, false, {
-            message: 'Incorrect password.'
-          });
+          return response(null, false, 
+            'Incorrect username or password.'
+          );
         }
         return response(null, user);
       }

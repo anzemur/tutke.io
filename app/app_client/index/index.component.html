@@ -9,8 +9,9 @@
 <div class="container-fluid" id="mainContent">
   <div class="row">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" id="leftColumn">
-              <div  class="thumbnail profileThumbnail"  stlye="margin-top:200px">
-                  <h4 id="profileTitle">Profile</h4>
+              <div role="alert" ng-show="!vm.isLoggedIn" class="alert alert-info"> Please log in to see profile info. </div>
+              <div ng-if="vm.isLoggedIn" class="thumbnail profileThumbnail"  stlye="margin-top:200px">
+                  <h4 id="profileTitle">Logged in as {{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
                   <p>Rating:
                       <span class="rating">
                           <i class="fas fa-star"></i>
@@ -20,44 +21,33 @@
                           <i class="far fa-star"></i>
                       </span> 
                   </p>
-                  <p>Last time online: 14:43 06/10/2018</p>
+                  <p>Username: {{ vm.user.username }}</p>
+                  <p ng-if="vm.user.role === 'tutor'">Posted lectures: {{ vm.user.postedLectures.length }}</p>
+                  <p ng-if="vm.user.role === 'student'">Posted requests: {{ vm.user.postedLectures.length }}</p>
+                  <p>User since: {{ vm.user.createdAt | date: 'd. MMMM, yyyy' }}</p>
               </div>
-              <div class="thumbnail upcomingEvents">
+              <div ng-if="vm.isLoggedIn" class="thumbnail upcomingEvents">
+                    <h4 id="upcomingEvents">Pending Requests</h4>
+                    <ul id="upcomingEventsList">
+                        <h4 ng-if="vm.user.lecturesRequests.length === 0" id="profileTitle">No pending requests.</h4>
+                        <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'tutor'" ng-repeat="request in vm.user.lecturesRequests | getFilteredRequests">
+                            <p>Learn Linear Algebra! - from Student1<br><button class="acceptDeny" id="acceptRequest">Accept</button><button class="acceptDeny" id="denyRequest">Deny</button></p>
+                        </li>
+                    </ul>
+              </div>
+              <div ng-if="vm.isLoggedIn" class="thumbnail upcomingEvents">
                       <h4 id="upcomingEvents">Upcoming Events</h4>
                       <ul id="upcomingEventsList">
                           <li>
                               <a href="#">Learn Linear Algebra!, 9/12/2019 at 17:45</a>
                           </li>
-                          <li>
-                              <a href="#">JAVA programming, 10/12/2019 at 12:45</a>
-                          </li>
-                          <li>
-                              <a href="#">Fun times with prof. Mur, 22/12/2019 at 9:00</a>
-                          </li>
-                          <li>
-                              <a href="#">Learn Linear Algebra!, 28/12/2019 at 14:30</a>
-                          </li>
                       </ul>
               </div>
-              <div class="thumbnail upcomingEvents">
-                      <h4 id="upcomingEvents">Pending Requests</h4>
-                      <ul id="upcomingEventsList">
-                          <li>
-                              <p>Learn Linear Algebra! - TutorUsername - <span class="statusPending">Pending</span></p>
-                          </li>
-                          <li>
-                              <p>JAVA programming - TutorUsername - <span class="statusPending">Pending</span></p>
-                          </li>
-                          <li>
-                              <p>Learn Linear Algebra! - TutorUsername - <span class="statusDenied">Denied <a href="#" class="far fa-trash-alt" title="Remove from list"></a></span></p>
-                          </li>
-                      </ul>
-              </div>
-              <div class="thumbnail" id="dailyQuote">
+              <!-- <div class="thumbnail" id="dailyQuote">
                   <h4>Daily Quote</h4>
                   <p>“Winners embrace hard work. They love the discipline of it, the trade-off they’re making to win. Losers, on the other hand, see it as punishment. And that’s the difference.”</p>
                   <p>- Lou Holtz</p>
-              </div>
+              </div> -->
       </div>
       <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" id="rightColumn">
         <div class="container-fluid container-jumbotron" id="searchTutor">

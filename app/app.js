@@ -6,7 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var uglifyJs = require('uglify-js');
+var uglifyJs = require('uglify-es');
 var fs = require('fs');
 var passport = require('passport');
 
@@ -18,6 +18,11 @@ var mergedCode = uglifyJs.minify({
   'navigation.directive.js': fs.readFileSync('app_client/shared/directives/navigation/navigation.directive.js', 'utf-8'),
   /* Services */
   'authentication.service.js': fs.readFileSync('app_client/shared/services/authentication.service.js', 'utf-8'),
+  /* Controllers */
+  'index.controller.js': fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
+  'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
+  /* Filters */
+  'users-lecture-requests.filter.js': fs.readFileSync('app_client/shared/filters/users-lecture-requests.filter.js', 'utf-8'),
 });
 
 /* Save merged code to new file: */ 
@@ -65,6 +70,17 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
+/* Handle unauthorized error 401 */
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({
+      'status': 401,
+      'message': err.name + ": " + err.message
+    });
+  }
+});
+
 /* Error handler */
 app.use((err, req, res, next) => {
   // Set locals, only providing error in development
@@ -74,16 +90,6 @@ app.use((err, req, res, next) => {
   // Render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-/* Handle unauthorized error 401 */
-app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') {
-    res.status(401);
-    res.json({
-      'message': err.name + ": " + err.message
-    });
-  }
 });
 
 module.exports = app;
