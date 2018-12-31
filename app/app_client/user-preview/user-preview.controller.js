@@ -3,20 +3,34 @@
     var vm = this;
     vm.msgError = '';
     vm.msgSuccess = '';
-
-    vm.test = 'llalala'
+    vm.msgInfo = '';
+    vm.isLoggedIn = authentication.isLoggedIn();
     
     vm.userId = $routeParams.userId
 
     vm.getUser = function () {
       user.getUser($routeParams.userId).then(
         function success(response) {
-          vm.user = response.data;
+          vm.previewedUser = response.data;
           console.log(response.data)
         },
         function error(error) {
           vm.msgError = error.e;
           console.log(error.e);
+        }
+      )
+    }
+
+    /* Returns current logged in user. */
+    if (vm.isLoggedIn) {
+      authentication.getCurrentUser().then(
+        function success(response) {
+          vm.user = response.data;
+        },
+        function error(error) {
+          vm.isLoggedIn = false;
+          authentication.doLogOut();
+          console.log(error);
         }
       )
     }
