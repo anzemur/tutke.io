@@ -17,7 +17,7 @@
       //   controllerAs: 'vm'
       // })
       .when('/user/:userId', {
-        templateUrl: 'userPreview/user-preview.component.html',
+        templateUrl: 'user-preview/user-preview.component.html',
         controller: 'userCtrl',
         controllerAs: 'vm'
       })
