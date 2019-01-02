@@ -24,6 +24,7 @@ var mergedCode = uglifyJs.minify({
   /* Controllers */
   'index.controller.js': fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
   'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
+  'addCommentModalPopUp.controller.js': fs.readFileSync('app_client/addCommentModalPopUp/addCommentModalPopUp.controller.js', 'utf-8'),
   'user-preview.controller.js': fs.readFileSync('app_client/user-preview/user-preview.controller.js', 'utf-8'),
   /* Filters */
   'students-lecture-requests.filter.js': fs.readFileSync('app_client/shared/filters/students-lecture-requests.filter.js', 'utf-8'),

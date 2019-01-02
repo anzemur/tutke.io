@@ -23,9 +23,9 @@
 
     vm.showAddReviewPopUp = function () {
       $uibModal.open({
-        templateUrl: '/addCommentModalPopUp/addCommentModalPopUp.component.html'
-        // controller: 'addCommentCtrl',
-        // controllerAs: 'vm'
+        templateUrl: '/addCommentModalPopUp/addCommentModalPopUp.component.html',
+        controller: 'addCommentCtrl',
+        controllerAs: 'vm'
       });
     };
 

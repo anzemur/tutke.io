@@ -1015,3 +1015,13 @@ div.modal-content {
     background-color: rgb(245, 246, 250);
     padding-bottom: 40px;
 }
+
+#textAreaComment {
+    border-style: none;
+    border-color: Transparent;
+    overflow: auto;
+    border-radius: 0;
+    -webkit-appearance:none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
