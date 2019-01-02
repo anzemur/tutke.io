@@ -1,5 +1,5 @@
 (function () {
-  function user($window, $http) {
+  function user($window, $http, authentication) {
     var getUser = function (userId) {
       return $http.get('/api/users/' + userId, {
         params: {
@@ -8,12 +8,22 @@
       });
     }
 
+    var addCommentForUserId = function (userId, data) {
+      console.log(data)
+      return $http.post('/api/users/' + userId + '/comments', data, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    };
+
     return {
-      getUser: getUser
+      getUser: getUser,
+      addCommentForUserId: addCommentForUserId
     }
   }
 
-  user.$inject = ['$window', '$http'];
+  user.$inject = ['$window', '$http', 'authentication'];
 
   /* global angular */
   angular

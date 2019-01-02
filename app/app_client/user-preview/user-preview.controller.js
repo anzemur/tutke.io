@@ -5,6 +5,7 @@
     vm.msgSuccess = '';
     vm.msgInfo = '';
     vm.isLoggedIn = authentication.isLoggedIn();
+    vm.logedInUser = authentication.getCurrentUser();
     
     vm.userId = $routeParams.userId
 
@@ -22,17 +23,25 @@
     }
 
     vm.showAddReviewPopUp = function () {
-      $uibModal.open({
+      var sampleModalWindow = $uibModal.open({
         templateUrl: '/addCommentModalPopUp/addCommentModalPopUp.component.html',
         controller: 'addCommentCtrl',
         controllerAs: 'vm',
         resolve: {
           userPreviewData: function() {
             return {
-              username: vm.previewedUser.username
+              user: vm.previewedUser,
+              logedInUser: vm.logedInUser
             };
           }
         }
+      });
+
+      sampleModalWindow.result.then(function (data) {
+        if (typeof data != 'undefined')
+          vm.previewedUser.comments.push(data);
+      }, function (error) {
+
       });
     };
 
