@@ -1,6 +1,8 @@
 (() => {
-  function addCommentCtrl($uibModalInstance) {
+  function addCommentCtrl($uibModalInstance, userPreviewData) {
     var vm = this;
+
+    vm.userPreviewData = userPreviewData;
 
     vm.commentPopUp = {
       cancelAddComment: function () {
@@ -8,7 +10,7 @@
       }
     };
   }
-  addCommentCtrl.$inject = ['$uibModalInstance'];
+  addCommentCtrl.$inject = ['$uibModalInstance', 'userPreviewData'];
 
   /* global angular */
   angular

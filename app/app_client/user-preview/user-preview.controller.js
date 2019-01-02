@@ -25,7 +25,14 @@
       $uibModal.open({
         templateUrl: '/addCommentModalPopUp/addCommentModalPopUp.component.html',
         controller: 'addCommentCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          userPreviewData: function() {
+            return {
+              username: vm.previewedUser.username
+            };
+          }
+        }
       });
     };
 
