@@ -22,7 +22,11 @@
     }
 
     vm.showAddReviewPopUp = function () {
-      alert("Dodajmo komentar!");
+      $uibModal.open({
+        templateUrl: '/addCommentModalPopUp/addCommentModalPopUp.component.html'
+        // controller: 'addCommentCtrl',
+        // controllerAs: 'vm'
+      });
     };
 
     /* Returns current logged in user. */

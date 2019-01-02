@@ -1010,3 +1010,8 @@ p#dateOfAcceptRequest {
     margin-right: 15%;
     margin-left: 15%;
 }
+
+div.modal-content {
+    background-color: rgb(245, 246, 250);
+    padding-bottom: 40px;
+}
