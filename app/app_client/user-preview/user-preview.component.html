@@ -35,7 +35,7 @@
       </div>
 
       <h4 class="centered-h4">Reviews ({{vm.previewedUser.comments.length}}):</h4>
-      <a href="addReview.html" class="addReviewButton">Add Review</a>
+      <a ng-click="vm.showAddReviewPopUp()" class="addReviewButton">Add Review</a>
       <div class="totalAdPanel" ng-repeat="comment in vm.previewedUser.comments">
         <div class="panel panel-default listingPanel">
           <div class="panel-heading">

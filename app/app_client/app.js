@@ -27,6 +27,6 @@
 
   /* global angular */
   angular
-    .module('tutke', ['ngRoute'])
+    .module('tutke', ['ngRoute', 'ui.bootstrap'])
     .config(['$routeProvider', '$locationProvider', setUp]);
 })();

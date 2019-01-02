@@ -1,5 +1,5 @@
 (() => {
-  function userCtrl($location, authentication, $routeParams, user) {
+  function userCtrl($location, authentication, $routeParams, $uibModal, user) {
     var vm = this;
     vm.msgError = '';
     vm.msgSuccess = '';
@@ -21,6 +21,10 @@
       )
     }
 
+    vm.showAddReviewPopUp = function () {
+      alert("Dodajmo komentar!");
+    };
+
     /* Returns current logged in user. */
     if (vm.isLoggedIn) {
       authentication.getCurrentUser().then(
@@ -38,7 +42,7 @@
     vm.getUser();
   }
 
-  userCtrl.$inject = ['$location', 'authentication', '$routeParams', 'user'];
+  userCtrl.$inject = ['$location', 'authentication', '$routeParams', '$uibModal', 'user'];
 
   /* global angular */
   angular
