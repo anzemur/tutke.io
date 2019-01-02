@@ -25,11 +25,10 @@
       <div class="thumbnail profileThumbnail profilePreview" id="profileView">
         <h4 id="profileTitle"> {{ vm.previewedUser.username }} </h4>
         <div class="rating" id="userPreviewRating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+          <span ng-repeat="i in [0, 1, 2, 3, 4]">
+            <i ng-if="vm.previewedUser.rating > i" class="fas fa-star"></i>
+            <i ng-if="vm.previewedUser.rating < i+1" class="far fa-star"></i>
+          </span>
         </div>
         <p> {{ vm.previewedUser.teachingInstitution }} </p>
         <p> {{ vm.previewedUser.educationLevel }} </p>
@@ -42,11 +41,12 @@
           <div class="panel-heading">
             <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{comment.createdAt | date: 'd. MMMM, yyyy'}}
               <span id="adPrice">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
+                <div class="rating" id="userPreviewRating">
+                  <span ng-repeat="i in [0, 1, 2, 3, 4]">
+                    <i ng-if="comment.rating > i" class="fas fa-star"></i>
+                    <i ng-if="comment.rating < i+1" class="far fa-star"></i>
+                  </span>
+                </div>
               </span>
             </h3>
           </div>
