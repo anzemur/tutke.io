@@ -19,7 +19,7 @@
           vm.msgError = error.e;
           console.log(error.e);
         }
-      )
+      );
     }
 
     vm.showAddReviewPopUp = function () {
@@ -44,10 +44,23 @@
             _id = authorId,
             username = vm.user.username
           }
+          vm.previewedUser.rating = calcAvgRating(data.rating).toString();
+          console.log(vm.previewedUser.rating);
           vm.previewedUser.comments.push(data);
       }, function (error) {
 
       });
+    };
+
+    function calcAvgRating(newRating){
+      var numOfComments = vm.previewedUser.comments.length;
+      var sumOfRatings = 0;
+      for (var i = 0; i < numOfComments; i++) {
+        sumOfRatings += vm.previewedUser.comments[i].rating;
+      }
+      sumOfRatings += newRating;
+      var avgRating = (sumOfRatings / numOfComments+1);
+      return Math.round(avgRating);
     };
 
     /* Returns current logged in user. */

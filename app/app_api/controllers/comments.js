@@ -87,7 +87,7 @@ var calcAvgRating = (user) => {
 		for (var i = 0; i < numOfComments; i++) {
       sumOfRatings += user.comments[i].rating;
 		}
-		var avgRating = parseInt(sumOfRatings / numOfComments, 10);
+		var avgRating = Math.round(sumOfRatings / numOfComments);
 		user.rating = avgRating;
 		user.save((err) => {
 			if (err) {
