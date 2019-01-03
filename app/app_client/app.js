@@ -13,10 +13,15 @@
       })
       // .when('/registration', {
       //   templateUrl: 'authentication/registration/registration.component.html',
-      //   controller: 'loginInCtrl',
+      //   controller: 'registrationCtrl',
       //   controllerAs: 'vm'
       // })
       .when('/user/:userId', {
+        templateUrl: 'user-preview/user-preview.component.html',
+        controller: 'userCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/account/:userId', {
         templateUrl: 'user-preview/user-preview.component.html',
         controller: 'userCtrl',
         controllerAs: 'vm'
