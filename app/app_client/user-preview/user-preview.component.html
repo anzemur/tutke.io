@@ -39,7 +39,7 @@
       <div class="totalAdPanel" ng-repeat="comment in vm.previewedUser.comments">
         <div class="panel panel-default listingPanel">
           <div class="panel-heading">
-            <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{comment.createdAt | date: 'd. MMMM, yyyy'}}
+            <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{comment.createdAt | date: 'd/MM/yyyy H:mm'}}
               <span id="adPrice">
                 <div class="rating" id="userPreviewRating">
                   <span ng-repeat="i in [0, 1, 2, 3, 4]">
