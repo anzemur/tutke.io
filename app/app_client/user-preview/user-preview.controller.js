@@ -39,6 +39,11 @@
 
       sampleModalWindow.result.then(function (data) {
         if (typeof data != 'undefined')
+          authorId = data.author;
+          data.author = {
+            _id = authorId,
+            username = vm.user.username
+          }
           vm.previewedUser.comments.push(data);
       }, function (error) {
 
