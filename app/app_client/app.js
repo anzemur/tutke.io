@@ -11,11 +11,11 @@
         controller: 'loginInCtrl',
         controllerAs: 'vm'
       })
-      // .when('/registration', {
-      //   templateUrl: 'authentication/registration/registration.component.html',
-      //   controller: 'registrationCtrl',
-      //   controllerAs: 'vm'
-      // })
+      .when('/registration', {
+        templateUrl: 'authentication/registration/registration.component.html',
+        controller: 'registrationCtrl',
+        controllerAs: 'vm'
+      })
       .when('/user/:userId', {
         templateUrl: 'user-preview/user-preview.component.html',
         controller: 'userCtrl',
