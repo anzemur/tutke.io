@@ -1,0 +1,209 @@
+<navigation></navigation>
+
+<div role="alert" ng-if="vm.msgError" class="alert alert-danger alert-message">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <p> {{ vm.msgError }} </p>
+</div>
+<div role="alert" ng-if="vm.msgSuccess" class="alert alert-success alert-message">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <p> {{ vm.msgSuccess }} </p>
+</div>
+<div role="alert" ng-if="vm.msgInfo" class="alert alert-info alert-message">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <p> {{ vm.msgInfo }} </p>
+</div>
+
+<div class="container-fluid" id="mainContent">
+  <div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
+      <div class="thumbnail profileThumbnail profilePreview" id="profileView">
+        <div class="profileHeader">
+          <h4 class="centered-h4">{{ vm.user.role.charAt(0).toUpperCase() + vm.user.role.slice(1) }}</h4>
+        </div>
+        <h4 id="profileTitle">{{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
+        <h4 id="profileTitle">Profile: <i>{{ vm.user.username }}</i></h4>
+        <p ng-if="vm.user.role === 'tutor'">Rating:
+          <span ng-if="vm.user.role === 'tutor'" class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </span> 
+        </p>
+          <p ng-if="vm.user.role === 'tutor' && vm.user.teachingInstitution !== ''">Teaching institution: {{ vm.user.teachingInstitution }}</p>
+          <p>Education level: {{ vm.user.educationLevel }}</p>
+          <p>Field of education: {{ vm.user.fieldOfEducation }}</p>
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <button class="AccountBtn" id="editAccBtn">Edit <i class="far fa-user"></i></button> <!-- TODO: link edit-profile -->
+          </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+          <button class="AccountBtn" id="deleteAccBtn">Delete <i class="far fa-user"></i></button> <!-- TODO: delete user -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="rightColumn">
+    <h4 ng-if="vm.user.role === 'tutor'" class="centered-h4" id="postedLecturesMyAcc">Active posted lectures:</h4>
+    <h4 ng-if="vm.user.role === 'student'" class="centered-h4" id="postedLecturesMyAcc">Active posted lecture requests:</h4>
+      
+      <h4 ng-if="vm.lectures.length === 0" class="centered-h4"><i>No lectures.</i></h4> <!-- TODO: fix! -->
+      <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures | getFilteredTutorsLectures(vm.userId)"> <!-- TODO: filter lectures of this user -->
+        <!-- TODO: posted stuff from vm.userId
+            .panel-heading
+              h3#adTitle.panel-title
+                | #{lecture.title}
+                span#adPrice
+                  - urlDelLec = '/account?lectureId=' + lecture._id
+                  a(href=urlDelLec)
+                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#deletePost')
+                      span.buttonTextRequest Delete 
+                      i.far.fa-trash-alt
+                span#adPrice
+                  - urlEditLec = '/account/edit/lecture/' + lecture._id
+                  a(href=urlEditLec)
+                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
+                      span.buttonTextRequest Edit 
+                      i.far.fa-edit
+                if lecture.lectureType =='posted'
+                  span#adPrice  #{lecture.price} €/h
+            .panel-body
+              p
+                | #{lecture.description}
+        -->
+      </div> 
+    </div>
+  </div>  
+  
+  <hr> 
+  
+  <div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
+      <!--
+          if user.role == 'tutor'
+            h4.centered-h4 Accepted Students Requests:
+          else
+            h4.centered-h4 Accepted Tutors Offers:
+          if user.role == 'tutor'
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'studentRequest')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No accepted requests.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.student
+                    span#byUser  from: #{acceptedLecture.student.username}
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+          else
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'tutorOffer')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No accepted offers.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.tutor
+                    span#byUser  from: #{acceptedLecture.tutor.username}
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+      -->
+      <h4 class="centered-h4">Accepted Lecture Requests:</h4>
+      <div class="accountActivityPanel">
+        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">by: Username</span></h3>
+        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      </div>
+      <div class="accountActivityPanel">
+        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">by: Username</span></h3>
+        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      </div>
+    </div>
+    
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="rightColumn">
+      <!-- 
+          if user.role == 'tutor'
+            h4.centered-h4 Sent Lecture Offers:
+          else
+            h4.centered-h4 Sent Lecture Requests::
+          if user.role == 'tutor'
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No sent offers.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.student
+                    span#byUser  for: #{acceptedLecture.student.username}
+                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
+                  a(href=urlDelReq)
+                    button.deleteOffer Delete
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+          else
+            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest')
+            if acceptedLectures.length == 0
+              .profileHeader
+                h3.panel-title.smallPanel No sent requests.
+            each acceptedLecture in acceptedLectures
+              .accountActivityPanel
+                h3.panel-title.smallPanel
+                  if acceptedLecture.lecture
+                    | #{acceptedLecture.lecture.title}
+                  if acceptedLecture.tutor
+                    span#byUser  for: #{acceptedLecture.tutor.username}
+                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
+                  a(href=urlDelReq)
+                    button.deleteOffer Delete
+                p#dateOfAcceptRequest
+                  +formatDate(acceptedLecture.createdAt)
+      -->
+      <h4 class="centered-h4">Sent Lecture Offers:</h4>
+      <div class="accountActivityPanel">
+        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">for: Username</span><button class="deleteOffer">Delete</button></h3>
+        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      </div>
+      <div class="accountActivityPanel">
+        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">for: Username</span><button class="deleteOffer">Delete</button></h3>
+        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      </div>
+    </div>
+  </div>
+  
+  <hr ng-if="vm.user.role === 'tutor'" >
+
+  <h4 ng-if="vm.user.role === 'tutor' && vm.user.comments.length === 0" class="centered-h4">No reviews for {{vm.user.username}}</h4>
+  <h4 ng-if="vm.user.role === 'tutor' && vm.user.comments.length > 0" class="centered-h4">Reviews ({{ vm.user.comments.length }}):</h4>
+    <div ng-if="vm.user.role === 'tutor' && vm.user.comments.length > 0" class="totalAdPanel" ng-repeat="comment in vm.user.comments">
+      <div class="panel panel-default adPanel">
+        <div class="panel-heading">
+          <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{ comment.createdAt | date: 'd. MMMM, yyyy' }}
+            <span id="adPrice">
+              <i class="fas fa-star" ng-repeat="n in [].constructor(comment.rating) track by $index"></i> <!-- TODO: looks kinda ugly... -->
+              <i class="far fa-star" ng-repeat="n in [].constructor(5 - comment.rating) track by $index"></i>
+            </span>
+          </h3>
+        </div>
+      <div class="panel-body">
+        <p>{{ comment.commentText }}</p> <!-- TODO: text overflows -->
+      </div>
+    </div>
+  </div> 
+</div>
+
+<foot></foot>

@@ -21,9 +21,9 @@
         controller: 'userCtrl',
         controllerAs: 'vm'
       })
-      .when('/account/:userId', {
-        templateUrl: 'user-preview/user-preview.component.html',
-        controller: 'userCtrl',
+      .when('/account', {
+        templateUrl: 'profile/profile.component.html',
+        controller: 'profileCtrl',
         controllerAs: 'vm'
       })
       .otherwise({redirecTo: '/'});
