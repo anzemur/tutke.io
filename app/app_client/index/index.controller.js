@@ -1,11 +1,16 @@
 (() => {
   function indexCtrl($location, authentication, lectures, lecturesRequests) {
     var vm = this;
+
+    /* Removes background from body. */
+    var body = angular.element(document.querySelector('body'));
+    body.removeClass('loginBody');
+
     vm.msgError = '';
     vm.msgSuccess = '';
     vm.msgInfo = '';
     vm.isLoggedIn = authentication.isLoggedIn();
-
+    
     vm.pagination = {
       search: '',
       page: 0,
