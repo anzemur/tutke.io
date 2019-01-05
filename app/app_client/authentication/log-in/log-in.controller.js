@@ -2,10 +2,16 @@
   function loginInCtrl($location, authentication) {
     var vm = this;
 
+    /* Add background to body. */
+    var body = angular.element(document.querySelector('body'));
+    body.addClass('loginBody');
+
     vm.logInData = {
       username: '',
       password: ''
     };
+
+
 
     vm.logInError = '';
     vm.indexPage = $location.search().page || '/';
@@ -29,6 +35,7 @@
         .doLogIn(vm.logInData)
         .then(
           function(success) {
+            body.removeClass('loginBody');
             $location.search('page', null);
             $location.path(vm.indexPage);
           },
