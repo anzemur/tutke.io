@@ -24,7 +24,7 @@
 
     vm.showAddReviewPopUp = function () {
       var sampleModalWindow = $uibModal.open({
-        templateUrl: '/addCommentModalPopUp/addCommentModalPopUp.component.html',
+        templateUrl: '/add-comment-modal-pop-up/add-comment-modal-pop-up.component.html',
         controller: 'addCommentCtrl',
         controllerAs: 'vm',
         resolve: {
@@ -59,7 +59,7 @@
         sumOfRatings += vm.previewedUser.comments[i].rating;
       }
       sumOfRatings += newRating;
-      var avgRating = (sumOfRatings / numOfComments+1);
+      var avgRating = (sumOfRatings / (numOfComments+1));
       return Math.round(avgRating);
     };
 

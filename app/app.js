@@ -25,7 +25,7 @@ var mergedCode = uglifyJs.minify({
   'index.controller.js': fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
   'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
   'registration.controller.js': fs.readFileSync('app_client/authentication/registration/registration.controller.js', 'utf-8'),
-  'addCommentModalPopUp.controller.js': fs.readFileSync('app_client/addCommentModalPopUp/addCommentModalPopUp.controller.js', 'utf-8'),
+  'add-comment-modal-pop-up.controller.js': fs.readFileSync('app_client/add-comment-modal-pop-up/add-comment-modal-pop-up.controller.js', 'utf-8'),
   'user-preview.controller.js': fs.readFileSync('app_client/user-preview/user-preview.controller.js', 'utf-8'),
   'profile.controller.js': fs.readFileSync('app_client/profile/profile.controller.js', 'utf-8'),
   /* Filters */

@@ -63,7 +63,7 @@
 
       <h3 ng-if="vm.previewedUser.postedLectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
       <div class="totalAdPanel" ng-repeat="postedLecture in vm.previewedUser.postedLectures">
-        <div class="extraHeading"><span id="userPublisher"><a>{{vm.previewedUser.username}}</a><span class="date"> - {{ postedLecture.createdAt | date: 'd/MM/yyyy H:mm' }}</span></span></div>
+        <div class="extraHeading"><span id="userPublisher"><span class="date"> {{ postedLecture.createdAt | date: 'd/MM/yyyy H:mm' }}</span></span></div>
         <div class="panel panel-default listingPanel">
           <div class="panel-heading">
             <h3 class="panel-title" id="adTitle">{{ postedLecture.title }}<span id="adPrice"><button type="button" class="btn btn-primary"

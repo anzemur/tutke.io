@@ -153,7 +153,7 @@ module.exports.updateComment = function(req, res) {
 					if(!currentComment) {
 						respondJson(res, 404, errors.NotFound);
 					} else {
-						currentComment.author = req.body.author; //samo za test
+						currentComment.author = req.body.author;
 						currentComment.rating = req.body.rating;
 						currentComment.commentText = req.body.commentText;
 						user.save(function(err, user){
