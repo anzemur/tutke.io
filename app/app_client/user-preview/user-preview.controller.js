@@ -9,6 +9,7 @@
     
     vm.userId = $routeParams.userId
 
+    /* Gets previewed user. */
     vm.getUser = function () {
       user.getUser($routeParams.userId).then(
         function success(response) {
@@ -22,6 +23,7 @@
       );
     }
 
+    /* Add comment modal pop up. */
     vm.showAddReviewPopUp = function () {
       var sampleModalWindow = $uibModal.open({
         templateUrl: '/add-comment-modal-pop-up/add-comment-modal-pop-up.component.html',
@@ -44,15 +46,18 @@
             _id = authorId,
             username = vm.user.username
           }
-          vm.previewedUser.rating = calcAvgRating(data.rating).toString();
-          console.log(vm.previewedUser.rating);
+          vm.previewedUser.rating = calcAvgUserRating(data.rating).toString();
           vm.previewedUser.comments.push(data);
+          vm.msgSuccess = 'Comment was successfully added.';
       }, function (error) {
-
+        var errMsg = error.data ? error.data.message : error;
+        vm.msgError = `There was an error while adding a comment: ${errMsg}.`;
+        console.log(error);
       });
     };
 
-    function calcAvgRating(newRating){
+    /* Calculates the new updated user rating. */
+    function calcAvgUserRating(newRating){
       var numOfComments = vm.previewedUser.comments.length;
       var sumOfRatings = 0;
       for (var i = 0; i < numOfComments; i++) {

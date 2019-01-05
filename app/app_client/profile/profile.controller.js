@@ -22,47 +22,6 @@
       );
     }
 
-    vm.showAddReviewPopUp = function () {
-      var sampleModalWindow = $uibModal.open({
-        templateUrl: '/add-comment-modal-pop-up/add-comment-modal-pop-up.component.html',
-        controller: 'addCommentCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          userPreviewData: function() {
-            return {
-              user: vm.previewedUser,
-              logedInUser: vm.logedInUser
-            };
-          }
-        }
-      });
-
-      sampleModalWindow.result.then(function (data) {
-        if (typeof data != 'undefined')
-          authorId = data.author;
-          data.author = {
-            _id = authorId,
-            username = vm.user.username
-          }
-          vm.previewedUser.rating = calcAvgRating(data.rating).toString();
-          console.log(vm.previewedUser.rating);
-          vm.previewedUser.comments.push(data);
-      }, function (error) {
-
-      });
-    };
-
-    function calcAvgRating(newRating){
-      var numOfComments = vm.previewedUser.comments.length;
-      var sumOfRatings = 0;
-      for (var i = 0; i < numOfComments; i++) {
-        sumOfRatings += vm.previewedUser.comments[i].rating;
-      }
-      sumOfRatings += newRating;
-      var avgRating = (sumOfRatings / numOfComments+1);
-      return Math.round(avgRating);
-    };
-
     /* Returns current logged in user. */
     if (vm.isLoggedIn) {
       authentication.getCurrentUser().then(

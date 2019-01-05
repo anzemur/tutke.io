@@ -35,7 +35,7 @@
     };
 
     vm.addComment = function(userId, formData) {
-      user.addCommentForUserId(userId, {
+      user.addCommentToUser(userId, {
         author: formData.author,
         commentText: formData.comment,
         rating: formData.rating

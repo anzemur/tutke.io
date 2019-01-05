@@ -12,7 +12,7 @@
       lectureType: 'posted'
     }
     
-
+    
     vm.getLecturesPaginated = function() {
       vm.msgError = '';
       lectures.getLecturesPaginated(vm.pagination).then(
@@ -20,12 +20,14 @@
           vm.lectures = response.data;
         },
         function error(error) {
-          vm.msgError = error.data ? error.data.message : error;
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error getting lectures: ${errMsg}.`;
           console.log(error);
         }
       )
     }
 
+    /* Accepts or denies pending lecture request. */
     vm.answerToPendingLecture = function(accept, id) {
       vm.msgError = '';
       vm.msgSuccess = '';
@@ -42,6 +44,7 @@
       )
     }
 
+    /* Sends lecture request to user. */
     vm.sendLectureRequest = function(lectureId, posterId) {
       vm.msgError = '';
       vm.msgSuccess = '';

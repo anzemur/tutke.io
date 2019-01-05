@@ -8,7 +8,7 @@
       });
     }
 
-    var addCommentForUserId = function (userId, data) {
+    var addCommentToUser = function (userId, data) {
       console.log(data)
       return $http.post('/api/users/' + userId + '/comments', data, {
         headers: {
@@ -19,7 +19,7 @@
 
     return {
       getUser: getUser,
-      addCommentForUserId: addCommentForUserId
+      addCommentToUser: addCommentToUser
     }
   }
 
