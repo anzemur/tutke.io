@@ -2,6 +2,10 @@
   function registrationCtrl($location, authentication) {
     var vm = this;
 
+    /* Add background to body. */
+    var body = angular.element(document.querySelector('body'));
+    body.addClass('loginBody');
+
     vm.registrationData = {
       username: '',
       password: '',
@@ -36,6 +40,7 @@
         .doRegister(vm.registrationData)
         .then(
           function(success) {
+            body.removeClass('loginBody');
             $location.search('page', null);
             $location.path(vm.indexPage);
           },

@@ -1016,6 +1016,12 @@ p#dateOfAcceptRequest {
     margin-left: 15%;
 }
 
+.alert-message-log-in {
+  margin-top: 5%;
+  margin-right: 7%;
+  margin-left: 7%;
+}
+
 div.modal-content {
     background-color: rgb(245, 246, 250);
     padding-bottom: 40px;
