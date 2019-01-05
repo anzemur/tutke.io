@@ -7,13 +7,13 @@
     vm.isLoggedIn = authentication.isLoggedIn();
     vm.logedInUser = authentication.getCurrentUser();
     
-    vm.userId = $routeParams.userId
+    vm.userId = $routeParams.userId;
 
     vm.getUser = function () {
       user.getUser($routeParams.userId).then(
         function success(response) {
           vm.previewedUser = response.data;
-          console.log(response.data)
+          console.log(response.data);
         },
         function error(error) {
           vm.msgError = error.e;
@@ -33,7 +33,7 @@
           authentication.doLogOut();
           console.log(error);
         }
-      )
+      );
     }
 
     vm.getUser();
@@ -45,5 +45,4 @@
   angular
     .module('tutke')
     .controller('profileCtrl', profileCtrl);
-
 })();

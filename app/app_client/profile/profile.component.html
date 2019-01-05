@@ -27,19 +27,17 @@
           <h4 class="centered-h4">{{ vm.user.role.charAt(0).toUpperCase() + vm.user.role.slice(1) }}</h4>
         </div>
         <h4 id="profileTitle">{{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
-        <h4 id="profileTitle">Profile: <i>{{ vm.user.username }}</i></h4>
-        <p ng-if="vm.user.role === 'tutor'">Rating:
-          <span ng-if="vm.user.role === 'tutor'" class="rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="far fa-star"></i>
-            <i class="far fa-star"></i>
-          </span> 
-        </p>
-          <p ng-if="vm.user.role === 'tutor' && vm.user.teachingInstitution !== ''">Teaching institution: {{ vm.user.teachingInstitution }}</p>
-          <p>Education level: {{ vm.user.educationLevel }}</p>
-          <p>Field of education: {{ vm.user.fieldOfEducation }}</p>
+        <h4 id="profileTitle">Username: <i>{{ vm.user.username }}</i></h4>
+        <div ng-if="vm.user.role === 'tutor'" class="rating" id="userPreviewRating">
+          <span ng-repeat="i in [0, 1, 2, 3, 4]">
+            <i ng-if="vm.user.rating > i" class="fas fa-star"></i>
+            <i ng-if="vm.user.rating < i+1" class="far fa-star"></i>
+          </span>
+        </div>
+        <p ng-if="vm.user.role === 'tutor' && vm.user.teachingInstitution !== ''">Teaching institution: {{ vm.user.teachingInstitution }}</p>
+        <p>Education level: {{ vm.user.educationLevel }}</p>
+        <p>Field of education: {{ vm.user.fieldOfEducation }}</p>
+        
         <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
             <button class="AccountBtn" id="editAccBtn">Edit <i class="far fa-user"></i></button> <!-- TODO: link edit-profile -->
@@ -47,6 +45,7 @@
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
           <button class="AccountBtn" id="deleteAccBtn">Delete <i class="far fa-user"></i></button> <!-- TODO: delete user -->
         </div>
+        
       </div>
     </div>
   </div>
@@ -55,132 +54,59 @@
     <h4 ng-if="vm.user.role === 'tutor'" class="centered-h4" id="postedLecturesMyAcc">Active posted lectures:</h4>
     <h4 ng-if="vm.user.role === 'student'" class="centered-h4" id="postedLecturesMyAcc">Active posted lecture requests:</h4>
       
-      <h4 ng-if="vm.lectures.length === 0" class="centered-h4"><i>No lectures.</i></h4> <!-- TODO: fix! -->
-      <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures | getFilteredTutorsLectures(vm.userId)"> <!-- TODO: filter lectures of this user -->
-        <!-- TODO: posted stuff from vm.userId
-            .panel-heading
-              h3#adTitle.panel-title
-                | #{lecture.title}
-                span#adPrice
-                  - urlDelLec = '/account?lectureId=' + lecture._id
-                  a(href=urlDelLec)
-                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#deletePost')
-                      span.buttonTextRequest Delete 
-                      i.far.fa-trash-alt
-                span#adPrice
-                  - urlEditLec = '/account/edit/lecture/' + lecture._id
-                  a(href=urlEditLec)
-                    button#requestTutorBtn.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPost')
-                      span.buttonTextRequest Edit 
-                      i.far.fa-edit
-                if lecture.lectureType =='posted'
-                  span#adPrice  #{lecture.price} €/h
-            .panel-body
-              p
-                | #{lecture.description}
-        -->
-      </div> 
+      <h4 ng-if="vm.user.postedLectures.length === 0" class="centered-h4"><i>No posted lectures.</i></h4>
+        <!-- TODO: EDIT and DELETE buttons. Need pagination for lectures. -->
+      <div class="totalAdPanel" ng-repeat="postedLecture in vm.user.postedLectures">
+        <div class="extraHeading"><span id="userPublisher"><span class="date">Posted: {{ postedLecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+        <div class="panel panel-default listingPanel">
+          <div ng-if="vm.user.role === 'tutor'" class="panel-heading">
+            <h3 class="panel-title" id="adTitle">{{ postedLecture.title }}<span id="adPrice">{{ postedLecture.price }} €/h 
+              <button class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
+              <button class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#deletePost"><span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i></button></span></h3>
+          </div>
+          <div ng-if="vm.user.role === 'student'" class="panel-heading">
+            <h3 class="panel-title" id="adTitle">{{ postedLecture.title }}<span id="adPrice">
+            <button class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
+            <button class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#deletePost"><span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i></button></span></h3>
+          </div>
+          <div class="panel-body">
+            <p>{{ postedLecture.description }}</p>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <!-- Pagination may be needed! -->
   </div>  
   
   <hr> 
   
   <div class="row">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
-      <!--
-          if user.role == 'tutor'
-            h4.centered-h4 Accepted Students Requests:
-          else
-            h4.centered-h4 Accepted Tutors Offers:
-          if user.role == 'tutor'
-            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'studentRequest')
-            if acceptedLectures.length == 0
-              .profileHeader
-                h3.panel-title.smallPanel No accepted requests.
-            each acceptedLecture in acceptedLectures
-              .accountActivityPanel
-                h3.panel-title.smallPanel
-                  if acceptedLecture.lecture
-                    | #{acceptedLecture.lecture.title}
-                  if acceptedLecture.student
-                    span#byUser  from: #{acceptedLecture.student.username}
-                p#dateOfAcceptRequest
-                  +formatDate(acceptedLecture.createdAt)
-          else
-            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'tutorOffer')
-            if acceptedLectures.length == 0
-              .profileHeader
-                h3.panel-title.smallPanel No accepted offers.
-            each acceptedLecture in acceptedLectures
-              .accountActivityPanel
-                h3.panel-title.smallPanel
-                  if acceptedLecture.lecture
-                    | #{acceptedLecture.lecture.title}
-                  if acceptedLecture.tutor
-                    span#byUser  from: #{acceptedLecture.tutor.username}
-                p#dateOfAcceptRequest
-                  +formatDate(acceptedLecture.createdAt)
-      -->
-      <h4 class="centered-h4">Accepted Lecture Requests:</h4>
-      <div class="accountActivityPanel">
-        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">by: Username</span></h3>
-        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      <h4 ng-if="vm.user.role === 'student'" class="centered-h4">Accepted Tutors Offers:</h4>
+      <div ng-if="vm.user.role === 'student'" class="accountActivityPanel" ng-repeat="request in vm.user.lecturesRequests | getFilteredTutorsRequests"> <!-- acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'tutorOffer') -->
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">by: {{ request.tutor.username }}</span></h3>
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
       </div>
-      <div class="accountActivityPanel">
-        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">by: Username</span></h3>
-        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      
+      <h4 ng-if="vm.user.role === 'tutor'" class="centered-h4">Accepted Students Requests:</h4>
+      <div ng-if="vm.user.role === 'tutor'" class="accountActivityPanel" ng-repeat="request in vm.user.lecturesRequests | getFilteredStudentsRequests"> <!-- acceptedLectures = user.lecturesRequests.filter(x => x.status == 'accepted' && x.requestType == 'studentRequest') -->
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">by: {{ request.student.username }}</span></h3>
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
       </div>
     </div>
     
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="rightColumn">
-      <!-- 
-          if user.role == 'tutor'
-            h4.centered-h4 Sent Lecture Offers:
-          else
-            h4.centered-h4 Sent Lecture Requests::
-          if user.role == 'tutor'
-            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer')
-            if acceptedLectures.length == 0
-              .profileHeader
-                h3.panel-title.smallPanel No sent offers.
-            each acceptedLecture in acceptedLectures
-              .accountActivityPanel
-                h3.panel-title.smallPanel
-                  if acceptedLecture.lecture
-                    | #{acceptedLecture.lecture.title}
-                  if acceptedLecture.student
-                    span#byUser  for: #{acceptedLecture.student.username}
-                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
-                  a(href=urlDelReq)
-                    button.deleteOffer Delete
-                p#dateOfAcceptRequest
-                  +formatDate(acceptedLecture.createdAt)
-          else
-            - acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest')
-            if acceptedLectures.length == 0
-              .profileHeader
-                h3.panel-title.smallPanel No sent requests.
-            each acceptedLecture in acceptedLectures
-              .accountActivityPanel
-                h3.panel-title.smallPanel
-                  if acceptedLecture.lecture
-                    | #{acceptedLecture.lecture.title}
-                  if acceptedLecture.tutor
-                    span#byUser  for: #{acceptedLecture.tutor.username}
-                  - urlDelReq = '/account?sentLectureId=' + acceptedLecture._id
-                  a(href=urlDelReq)
-                    button.deleteOffer Delete
-                p#dateOfAcceptRequest
-                  +formatDate(acceptedLecture.createdAt)
-      -->
-      <h4 class="centered-h4">Sent Lecture Offers:</h4>
-      <div class="accountActivityPanel">
-        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">for: Username</span><button class="deleteOffer">Delete</button></h3>
-        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      <h4 ng-if="vm.user.role === 'student'" class="centered-h4">Sent Lecture Requests:</h4>
+      <div ng-if="vm.user.role === 'student'" class="accountActivityPanel" ng-repeat="request in vm.user.lecturesRequests | getFilteredStudentsRequests"> <!-- acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest') -->
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">for: {{ request.tutor.username }}</span><button class="deleteOffer">Delete</button></h3>
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
       </div>
-      <div class="accountActivityPanel">
-        <h3 class="panel-title smallPanel">Lecture title <span id="byUser">for: Username</span><button class="deleteOffer">Delete</button></h3>
-        <p id="dateOfAcceptRequest">13:30 14/12/2018</p>
+      
+      <h4 ng-if="vm.user.role === 'tutor'" class="centered-h4">Sent Lecture Offers:</h4>
+      <div ng-if="vm.user.role === 'tutor'" class="accountActivityPanel" ng-repeat="request in vm.user.lecturesRequests | getFilteredTutorsRequests"> <!-- acceptedLectures = user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer') -->
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">for: {{ request.student.username }}</span><button class="deleteOffer">Delete</button></h3>
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
       </div>
     </div>
   </div>
@@ -192,18 +118,22 @@
     <div ng-if="vm.user.role === 'tutor' && vm.user.comments.length > 0" class="totalAdPanel" ng-repeat="comment in vm.user.comments">
       <div class="panel panel-default adPanel">
         <div class="panel-heading">
-          <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{ comment.createdAt | date: 'd. MMMM, yyyy' }}
+          <h3 class="panel-title reviewTitle" id="adTitle"><a ng-href="/user/{{comment.author._id}}">{{ comment.author.username }}</a> - {{ comment.createdAt | date: 'd. MMMM, yyyy (H:mm)' }}
             <span id="adPrice">
-              <i class="fas fa-star" ng-repeat="n in [].constructor(comment.rating) track by $index"></i> <!-- TODO: looks kinda ugly... -->
-              <i class="far fa-star" ng-repeat="n in [].constructor(5 - comment.rating) track by $index"></i>
+              <div class="rating" id="userPreviewRating">
+                <span ng-repeat="i in [0, 1, 2, 3, 4]">
+                  <i ng-if="comment.rating > i" class="fas fa-star"></i>
+                  <i ng-if="comment.rating < i+1" class="far fa-star"></i>
+                </span>
+              </div>
             </span>
           </h3>
         </div>
-      <div class="panel-body">
-        <p>{{ comment.commentText }}</p> <!-- TODO: text overflows -->
+        <div class="panel-body">
+          <p id="commentBody">{{ comment.commentText }}</p> <!-- TODO: text overflows -->
+        </div>
       </div>
     </div>
-  </div> 
 </div>
 
 <foot></foot>

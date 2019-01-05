@@ -7,9 +7,9 @@ module.exports.lecturesRequestStatus = {
   Accepted: 'accepted',
   Denied: 'denied',
   Pending: 'pending'
-}
+};
 
 module.exports.lecturesRequestsTypes = {
   StudentRequest: 'studentRequest',
   TutorOffer: 'tutorOffer' 
-}
+};
