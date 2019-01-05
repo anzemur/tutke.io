@@ -24,7 +24,7 @@
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
       <div class="thumbnail profileThumbnail profilePreview" id="profileView">
         <h4 id="profileTitle"> {{ vm.previewedUser.username }} </h4>
-        <div class="rating" id="userPreviewRating">
+        <div ng-if="vm.previewedUser.role === 'tutor'" class="rating" id="userPreviewRating">
           <span ng-repeat="i in [0, 1, 2, 3, 4]">
             <i ng-if="vm.previewedUser.rating > i" class="fas fa-star"></i>
             <i ng-if="vm.previewedUser.rating < i+1" class="far fa-star"></i>
@@ -34,24 +34,26 @@
         <p> {{ vm.previewedUser.educationLevel }} </p>
       </div>
 
-      <h4 class="centered-h4">Reviews ({{vm.previewedUser.comments.length}}):</h4>
-      <a ng-click="vm.showAddReviewPopUp()" class="addReviewButton">Add Review</a>
-      <div class="totalAdPanel" ng-repeat="comment in vm.previewedUser.comments">
-        <div class="panel panel-default listingPanel">
-          <div class="panel-heading">
-            <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{comment.createdAt | date: 'd/MM/yyyy H:mm'}}
-              <span id="adPrice">
-                <div class="rating" id="userPreviewRating">
-                  <span ng-repeat="i in [0, 1, 2, 3, 4]">
-                    <i ng-if="comment.rating > i" class="fas fa-star"></i>
-                    <i ng-if="comment.rating < i+1" class="far fa-star"></i>
-                  </span>
-                </div>
-              </span>
-            </h3>
-          </div>
-          <div class="panel-body">
-            <p>{{ comment.commentText }}</p>
+      <div ng-if="vm.previewedUser.role === 'tutor'">
+        <h4 class="centered-h4">Reviews ({{vm.previewedUser.comments.length}}):</h4>
+        <a ng-if="vm.user.role === 'student'" ng-click="vm.showAddReviewPopUp()" class="addReviewButton">Add Review</a>
+        <div class="totalAdPanel" ng-repeat="comment in vm.previewedUser.comments">
+          <div class="panel panel-default listingPanel">
+            <div class="panel-heading">
+              <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{comment.createdAt | date: 'd/MM/yyyy H:mm'}}
+                <span id="adPrice">
+                  <div class="rating" id="userPreviewRating">
+                    <span ng-repeat="i in [0, 1, 2, 3, 4]">
+                      <i ng-if="comment.rating > i" class="fas fa-star"></i>
+                      <i ng-if="comment.rating < i+1" class="far fa-star"></i>
+                    </span>
+                  </div>
+                </span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p>{{ comment.commentText }}</p>
+            </div>
           </div>
         </div>
       </div>

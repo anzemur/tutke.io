@@ -9,9 +9,7 @@
       $window.localStorage['jwt'] = token;
     };
     
-    /**
-     * Returns jwt from local storage.
-     */
+    /* Returns jwt from local storage.*/
     var getToken = function() {
      return $window.localStorage['jwt'];
     };
@@ -40,16 +38,13 @@
       );
     };
 
-    /**
-     * Removes token on log out.
-     */
+    /* Removes token on log out. */
     var doLogOut = function() {
       $window.localStorage.removeItem('token');
     };
 
-    /**
-     * Checks if user is logged in based on validation of jwt.
-     */
+
+    /* Checks if user is logged in based on validation of jwt. */
     var isLoggedIn = function() {
       var token = getToken();
       if (token) {
@@ -60,9 +55,7 @@
       }
     }
 
-    /**
-     * Return current logged in user.
-     */
+    /* Return current logged in user. */
     var getCurrentUser = function() {
       if (isLoggedIn()) {
         var token = getToken();
@@ -71,15 +64,6 @@
         return $http.get('/api/users/' + tokenData._id, {
           params: { populate: true }
         });
-
-      //   return $http({
-      //     url: '/api/users/' + tokenData._id, 
-      //     method: "GET",
-      //     params: {populate: true}
-      //  }).then(
-      //   function success(response) {
-      //     return response.data;
-      //   });
       }
     }
 

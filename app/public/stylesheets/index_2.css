@@ -779,6 +779,11 @@ div.thumbnail.profileThumbnail p {
     text-align: center;
 }
 
+div.thumbnail.profileThumbnail.profileThumbnailIndex p {
+  text-align: left;
+  margin-left: 1rem;
+}
+
 div.thumbnail.profileThumbnail {
     margin-top: 39px;
 }

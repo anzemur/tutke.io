@@ -1,5 +1,6 @@
 (function () {
   function user($window, $http, authentication) {
+    
     var getUser = function (userId) {
       return $http.get('/api/users/' + userId, {
         params: {
