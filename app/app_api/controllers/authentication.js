@@ -37,12 +37,12 @@ module.exports.login = (req, res) => {
  * Body: {User} User model.
  */
 module.exports.register = (req, res) => {
-  if (!req.body.username || !req.body.password || !req.body.password1 || !req.body.firstName || 
+  if (!req.body.username || !req.body.password || !req.body.reenterPassword || !req.body.firstName || 
       !req.body.lastName || !req.body.email || !req.body.educationLevel || !req.body.fieldOfEducation) {
         respondJson(res, 400, 'Please enter all of the required data and try again.');
   }
 
-  if(req.body.password != req.body.password1) {
+  if(req.body.password != req.body.reenterPassword) {
     respondJson(res, 400, 'Password mismatch. Please try again.');
   }
 
