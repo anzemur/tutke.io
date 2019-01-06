@@ -43,12 +43,12 @@
               <div ng-if="vm.isLoggedIn" class="thumbnail upcomingEvents">
                     <h4 id="upcomingEvents">Pending Requests</h4>
                     <ul id="upcomingEventsList">
-                        <h4 ng-if="vm.user.lecturesRequests.length === 0" id="profileTitle">No pending requests.</h4>
-                        <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'tutor'" ng-repeat="request in vm.user.lecturesRequests | getFilteredStudentsRequests">
+                        <h4 ng-if="vm.pendingLectureRequest.length === 0" id="profileTitle">No pending requests.</h4>
+                        <li ng-if="vm.pendingLectureRequest.length > 0 && vm.user.role === 'tutor'" ng-repeat="request in vm.pendingLectureRequest">
                             <p>{{ request.lecture.title }} - from {{ request.student.username }}<br><button ng-click="vm.answerToPendingLecture(true, request._id)" class="acceptDeny" id="acceptRequest">Accept</button><button ng-click="vm.answerToPendingLecture(false, request._id)" class="acceptDeny" id="denyRequest">Deny</button></p>
                         </li>
-                        <li ng-if="vm.user.lecturesRequests.length > 0 && vm.user.role === 'student'" ng-repeat="request in vm.user.lecturesRequests | getFilteredTutorsRequests">
-                            <p>{{ request.lecture.title }} - from {{ request.tutor.username }}<br><button class="acceptDeny" id="acceptRequest">Accept</button><button class="acceptDeny" id="denyRequest">Deny</button></p>
+                        <li ng-if="vm.pendingLectureRequest.length > 0 && vm.user.role === 'student'" ng-repeat="request in vm.pendingLectureRequest">
+                            <p>{{ request.lecture.title }} - from {{ request.tutor.username }}<br><button ng-click="vm.answerToPendingLecture(true, request._id)" class="acceptDeny" id="acceptRequest">Accept</button><button ng-click="vm.answerToPendingLecture(false, request._id)" class="acceptDeny" id="denyRequest">Deny</button></p>
                         </li>
                     </ul>
               </div>
@@ -82,9 +82,9 @@
             <div class="panel panel-default listingPanel">
                 <div class="panel-heading">
                     <h3 class="panel-title" id="adTitle">{{ lecture.title }}
-                        <span id="adPrice">
-                            <p ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </p>
-                            <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted && vm.isLoggedIn'" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                        <span id="adPrice"> 
+                            <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
+                            <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
                                 <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
                             </button>
                             <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">

@@ -6,6 +6,7 @@
     var body = angular.element(document.querySelector('body'));
     body.removeClass('loginBody');
 
+    vm.pendingLectureRequest = [];
     vm.msgError = '';
     vm.msgSuccess = '';
     vm.msgInfo = '';
@@ -16,7 +17,6 @@
       page: 0,
       lectureType: 'posted'
     }
-    
     
     vm.getLecturesPaginated = function() {
       vm.msgError = '';
@@ -40,7 +40,7 @@
         function success(response) {
           vm.msgSuccess = accept ? 'Lecture request accepted.' : 'Lecture request denied.';
           vm.user.lecturesRequests = vm.user.lecturesRequests.filter(x => x._id != id);
-          console.log(vm.msgSuccess)
+          vm.pendingLectureRequest = vm.pendingLectureRequest.filter(x => x._id != id);
         },
         function error(error) {
           vm.msgError = error.data ? error.data.message : error;
@@ -114,6 +114,12 @@
       authentication.getCurrentUser().then(
         function success(response) {
           vm.user = response.data;
+
+          if(vm.user.role == 'tutor') {
+            vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer');
+          } else {
+            vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest');
+          }
         },
         function error(error) {
           vm.isLoggedIn = false;
