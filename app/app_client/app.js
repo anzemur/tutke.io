@@ -32,6 +32,6 @@
 
   /* global angular */
   angular
-    .module('tutke', ['ngRoute', 'ui.bootstrap'])
+    .module('tutke', ['ngRoute', 'ui.bootstrap', 'vcRecaptcha'])
     .config(['$routeProvider', '$locationProvider', setUp]);
 })();

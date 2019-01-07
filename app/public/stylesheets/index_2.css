@@ -1036,3 +1036,12 @@ div.modal-content {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
+.text-xs-center {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.recaptcha {
+  display: inline-block;
+}

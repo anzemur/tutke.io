@@ -21,6 +21,7 @@
       educationLevel: '',
       fieldOfEducation: '',
       teachingInstitution: '',
+      recaptchaResponse: ''
     };
 
     vm.indexPage = $location.search().page || '/';

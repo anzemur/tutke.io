@@ -64,6 +64,15 @@
                                 <label for="fieldOfEducation">Enter your field of education<span style="color: red">*</span></label>
                                 <input ng-model="vm.registrationData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education" type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')" oninput="this.setCustomValidity('')">
                             </div>
+                            <div class="text-xs-center">
+                              <div
+                                class="recaptcha"
+                                vc-recaptcha
+                                ng-model="vm.registrationData.recaptchaResponse"
+                                lang="en"
+                                key="'6LcTqIcUAAAAAA0NusD9dqZLRP_2AWVAUEr2XvfX'">
+                              </div>
+                            </div>
                             <div class="sign-up-btn-position">
                                 <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
                             </div>
@@ -115,8 +124,17 @@
                                 <label for="fieldOfEducation">Enter your field of education<span style="color: red">*</span></label>
                                 <input ng-model="vm.registrationData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education" type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')" oninput="this.setCustomValidity('')">
                             </div>
-                            <div class="sign-up-btn-position" style="margin-top: 5px;">
-                                <button type="submit" id="signUpBtn" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
+                            <div class="text-xs-center">
+                              <div
+                                class="recaptcha"
+                                vc-recaptcha
+                                ng-model="vm.registrationData.recaptchaResponse"
+                                lang="en"
+                                key="'6LcTqIcUAAAAAA0NusD9dqZLRP_2AWVAUEr2XvfX'">
+                              </div>
+                            </div>
+                            <div class="sign-up-btn-position">
+                              <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
                             </div>
                         </form>
                     </div>
