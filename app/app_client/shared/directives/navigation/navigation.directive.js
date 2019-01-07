@@ -2,7 +2,9 @@
   var navigation = function() {
     return {
       restrict: 'EA',
-      templateUrl: '/shared/directives/navigation/navigation.component.html'
+      templateUrl: '/shared/directives/navigation/navigation.component.html',
+      controller: 'navigationCtrl',
+      controllerAs: 'navvm'
     };
   };
   

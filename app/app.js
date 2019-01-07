@@ -28,6 +28,7 @@ var mergedCode = uglifyJs.minify({
   'add-comment-modal-pop-up.controller.js': fs.readFileSync('app_client/add-comment-modal-pop-up/add-comment-modal-pop-up.controller.js', 'utf-8'),
   'user-preview.controller.js': fs.readFileSync('app_client/user-preview/user-preview.controller.js', 'utf-8'),
   'profile.controller.js': fs.readFileSync('app_client/profile/profile.controller.js', 'utf-8'),
+  'navigation.controller.js': fs.readFileSync('app_client/shared/directives/navigation/navigation.controller.js', 'utf-8'),
   /* Filters */
   'students-lecture-requests.filter.js': fs.readFileSync('app_client/shared/filters/students-lecture-requests.filter.js', 'utf-8'),
   'tutors-lecture-requests.filter.js': fs.readFileSync('app_client/shared/filters/tutors-lecture-requests.filter.js', 'utf-8'),
