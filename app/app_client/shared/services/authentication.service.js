@@ -1,6 +1,13 @@
 (function() {
   function authentication($window, $http) {
 
+    /* UTF-8 String decoding support. */
+    var b64Utf8 = function (string) {
+      return decodeURIComponent(Array.prototype.map.call($window.atob(string), function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    };
+
     /**
      * Saves jwt to local storage.
      * @param {*} token 
@@ -48,7 +55,7 @@
     var isLoggedIn = function() {
       var token = getToken();
       if (token) {
-        var tokenData = JSON.parse($window.atob(token.split('.')[1]));
+        var tokenData = JSON.parse(b64Utf8(token.split('.')[1]));
         return tokenData.exDate > Date.now()/1000;
       } else {
         return false;
@@ -59,7 +66,7 @@
     var getCurrentUser = function() {
       if (isLoggedIn()) {
         var token = getToken();
-        var tokenData = JSON.parse($window.atob(token.split('.')[1]));
+        var tokenData = JSON.parse(b64Utf8(token.split('.')[1]));
 
         return $http.get('/api/users/' + tokenData._id, {
           params: { populate: true }
