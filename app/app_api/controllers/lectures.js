@@ -10,6 +10,7 @@ var respondJson = helperFunctions.respondJson;
 /**
  * GET all lectures.
  * Query parameter: {boolean} populate
+ * Query parameter: {String} lectureType
  */
 module.exports.getLectures = (req, res) => {
   var queryOptions = {};
@@ -189,3 +190,30 @@ module.exports.deleteLecture = (req, res) => {
     respondJson(res, 400, errors.BadRequest + 'userId');
   }
 };
+
+
+/**
+ * GET lectures count and number of pages.
+ * Query parameter: {String} lectureType
+ */
+module.exports.getCount = (req, res) => {
+  var queryOptions = {};
+  if(req.query && req.query.lectureType) 
+    queryOptions['lectureType'] = req.query.lectureType;
+
+  Lecture
+    .find(queryOptions)
+    .count()
+    .exec((err, response) => {
+      if (err) {
+        respondJson(res, 500, err.message);
+        return;
+      }
+
+      var data = {
+        pages: Math.ceil(response/10),
+        count: response
+      }
+      respondJson(res, 200, data);
+    });
+}

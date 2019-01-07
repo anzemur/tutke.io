@@ -1,8 +1,9 @@
 (function() {
   function lectures($window, $http) {
 
+    /* Returns a page of lectures. */
     var getLecturesPaginated = function(options) {
-      return $http.get('/api/lectures/', {
+      return $http.get('/api/lectures', {
         params: { 
           populate: true,
           page: options.page,
@@ -12,24 +13,18 @@
       });
     }
 
-    var getLectureById = function(id) {
-
-    }
-
-    var createNewLecture = function() {
-
-    }
-
-    var deleteLecture = function() {
-
-    }
-
-    var updateLecture = function() {
-
+    /* Returns number of pages and lecture count. */
+    var getLecturesCount = function(lectureType) {
+      return $http.get('/api/lectures-count', {
+        params: { 
+          lectureType: lectureType
+        }
+      });
     }
 
     return {
-      getLecturesPaginated: getLecturesPaginated
+      getLecturesPaginated: getLecturesPaginated,
+      getLecturesCount: getLecturesCount
     };
   }
   lectures.$inject = ['$window', '$http'];

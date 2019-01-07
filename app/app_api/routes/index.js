@@ -83,6 +83,9 @@ router.post('/lectures', auth,
 router.delete('/lectures/:lectureId', auth,
   ctrlLectures.deleteLecture);
 
+router.get('/lectures-count', 
+  ctrlLectures.getCount);
+
 /**
  * LECTURE REQUESTS routes.
  */

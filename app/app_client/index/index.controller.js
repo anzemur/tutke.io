@@ -11,6 +11,7 @@
     vm.msgSuccess = '';
     vm.msgInfo = '';
     vm.isLoggedIn = authentication.isLoggedIn();
+    vm.numberOfPages = 0;
     
     vm.pagination = {
       search: '',
@@ -19,7 +20,8 @@
     }
     
     /* Returns paginated lectures. */
-    vm.getLecturesPaginated = function() {
+    getLecturesPaginated = function() {
+      getLecturesCount();
       vm.msgError = '';
       lectures.getLecturesPaginated(vm.pagination).then(
         function success(response) {
@@ -28,6 +30,21 @@
         function error(error) {
           var errMsg = error.data ? error.data.message : error;
           vm.msgError = `There was an error getting lectures: ${errMsg}.`;
+          console.log(error);
+        }
+      )
+    }
+
+    /* Returns number of pages. */
+    getLecturesCount = function() {
+      lectures.getLecturesCount(vm.pagination.lectureType).then(
+        function success(response) {
+          vm.numberOfPages = response.data.pages;
+        },
+        function error(error) {
+          vm.numberOfPages = 0;
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error getting lectures count: ${errMsg}.`;
           console.log(error);
         }
       )
@@ -80,12 +97,11 @@
         },
         function error(error) {
           if(error.data && error.data.message && error.data.message.indexOf("E11000 duplicate key error")  !== -1) {
-            vm.msgInfo = "You already sent request for this lecture.";
-            console.log(error);
+            vm.msgInfo = "You already sent request for this lecture.";  
           } else {
             vm.msgError = error.data ? error.data.message : error;
-            console.log(error);
           }
+          console.log(error);
         }
       )
     }
@@ -93,22 +109,24 @@
     /* Performs db search. */
     vm.doSearch = function() {
       vm.pagination.page = 0;
-      vm.getLecturesPaginated();
+      getLecturesPaginated();
     }
 
     /* Changes lecture type in lectures filter. */
     vm.changeLectureType = function(type) {
+      vm.pagination.page = 0;
       if (vm.pagination.lectureType == type) {
+        getLecturesPaginated();
         return;
       }
       vm.pagination.lectureType = vm.pagination.lectureType == 'posted' ? 'requested' : 'posted';
-      vm.getLecturesPaginated();
+      getLecturesPaginated();
     }
 
     /* Changes page based on the 'next' value. */
     vm.changePage = function(next) {
       next ? vm.pagination.page++ : vm.pagination.page--;
-      vm.getLecturesPaginated();
+      getLecturesPaginated();
     }
 
     /* Returns current logged in user. */
@@ -137,7 +155,7 @@
     }
 
     /* Get initial lectures */
-    vm.getLecturesPaginated();
+    getLecturesPaginated();
   } 
 
   indexCtrl.$inject = ['$location', 'authentication', 'lectures', 'lecturesRequests'];

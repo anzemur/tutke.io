@@ -120,7 +120,7 @@
               <span aria-hidden="true">&laquo;</span>
           </a>
           </li>
-          <li><a>{{ vm.pagination.page + 1 }}</a></li>
+          <li><a>{{ vm.pagination.page + 1 }} / {{ vm.numberOfPages }}</a></li>
           <li>
           <a ng-click="vm.changePage(true)" ng-class="{'disabled': vm.lectures.length < 10}" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
