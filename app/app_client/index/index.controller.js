@@ -37,7 +37,7 @@
 
     /* Returns number of pages. */
     getLecturesCount = function() {
-      lectures.getLecturesCount(vm.pagination.lectureType).then(
+      lectures.getLecturesCount(vm.pagination.lectureType, vm.pagination.search).then(
         function success(response) {
           vm.numberOfPages = response.data.pages;
         },
@@ -114,6 +114,7 @@
 
     /* Changes lecture type in lectures filter. */
     vm.changeLectureType = function(type) {
+      vm.pagination.search = '';
       vm.pagination.page = 0;
       if (vm.pagination.lectureType == type) {
         getLecturesPaginated();

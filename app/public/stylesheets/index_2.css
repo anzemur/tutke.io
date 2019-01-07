@@ -1045,3 +1045,7 @@ div.modal-content {
 .recaptcha {
   display: inline-block;
 }
+
+#filter {
+  border-radius: 3rem;
+}

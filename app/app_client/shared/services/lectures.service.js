@@ -14,10 +14,11 @@
     }
 
     /* Returns number of pages and lecture count. */
-    var getLecturesCount = function(lectureType) {
+    var getLecturesCount = function(lectureType, search) {
       return $http.get('/api/lectures-count', {
         params: { 
-          lectureType: lectureType
+          lectureType: lectureType,
+          search: search
         }
       });
     }

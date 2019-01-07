@@ -67,37 +67,116 @@
               </div>
       </div>
       <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" id="rightColumn">
-        <div class="container-fluid container-jumbotron" id="searchTutor">
-            <h3 style="padding-left: 15px">Search available lectures:</h3>
-            <div class="input-group">
-                <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
-                </span>
-            </div>
+        <div ng-if="vm.numberOfPages === 0">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                      <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                  </span>
+              </div>
+          </div>
+          <h3 style="padding-left: 15px">No lectures found.</h3>
         </div>
-        <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
-        <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
-            <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
-            <div class="panel panel-default listingPanel">
-                <div class="panel-heading">
-                    <h3 class="panel-title" id="adTitle">{{ lecture.title }}
-                        <span id="adPrice"> 
-                            <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
-                            <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
-                                <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
-                            </button>
-                            <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
-                                <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
-                            </button>
-                        </span>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <p>{{ lecture.description }}</p>
-                </div>
-            </div>
-        </div> 
+        <div ng-if="vm.numberOfPages > 1">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                      <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                  </span>
+              </div>
+          </div>
+          <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
+          <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
+              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="panel panel-default listingPanel">
+                  <div class="panel-heading">
+                      <h3 class="panel-title" id="adTitle">{{ lecture.title }}
+                          <span id="adPrice"> 
+                              <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
+                              <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                          </span>
+                      </h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ lecture.description }}</p>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div ng-if="vm.numberOfPages === 1 && vm.pagination.search !== ''">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                      <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                  </span>
+              </div>
+          </div>
+          <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
+          <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
+              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="panel panel-default listingPanel">
+                  <div class="panel-heading">
+                      <h3 class="panel-title" id="adTitle">{{ lecture.title }}
+                          <span id="adPrice"> 
+                              <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
+                              <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                          </span>
+                      </h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ lecture.description }}</p>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- Client side filtering/search when there is only one page of lectures. -->
+        <div ng-if="vm.numberOfPages === 1 && vm.pagination.search === ''">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="searchFilter" id="filter" name="filter" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn btn" id="btnSearch"></span>
+              </div>
+          </div>
+          <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
+          <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures | filter: searchFilter">
+              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="panel panel-default listingPanel">
+                  <div class="panel-heading">
+                      <h3 class="panel-title" id="adTitle">{{ lecture.title }}
+                          <span id="adPrice"> 
+                              <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
+                              <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                          </span>
+                      </h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ lecture.description }}</p>
+                  </div>
+              </div>
+          </div>
+        </div>
       </div>
   </div>
 </div> 
@@ -112,7 +191,7 @@
 
 
 <!-- pagination -->
-<div class="text-center">
+<div ng-if="vm.numberOfPages > 0" class="text-center">
   <nav aria-label="Page navigation">
       <ul class="pagination">
           <li>

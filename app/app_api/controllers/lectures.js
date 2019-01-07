@@ -201,6 +201,9 @@ module.exports.getCount = (req, res) => {
   if(req.query && req.query.lectureType) 
     queryOptions['lectureType'] = req.query.lectureType;
 
+  if(req.query && req.query.search && req.query != '') 
+    queryOptions['$text'] = { $search: req.query.search };
+  
   Lecture
     .find(queryOptions)
     .count()
