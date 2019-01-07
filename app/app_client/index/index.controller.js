@@ -18,6 +18,7 @@
       lectureType: 'posted'
     }
     
+    /* Returns paginated lectures. */
     vm.getLecturesPaginated = function() {
       vm.msgError = '';
       lectures.getLecturesPaginated(vm.pagination).then(
@@ -72,6 +73,7 @@
         lectureRequest.requestType = 'tutorOffer'
       }
 
+      /* Sends a lecture request to lecture's author. */
       lecturesRequests.sendLectureRequest(lectureRequest).then(
         function success(response) {
           vm.msgSuccess = 'Lecture request sent.';
@@ -119,6 +121,11 @@
             vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer');
           } else {
             vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest');
+          }
+
+          var createdAtDate = new Date(vm.user.createdAt);
+          if(new Date(createdAtDate.getTime() + 1*60000) > new Date()) {
+            vm.msgInfo = 'Welcome to Tutke.io. Hope you will have an awesome time using our application!';
           }
         },
         function error(error) {

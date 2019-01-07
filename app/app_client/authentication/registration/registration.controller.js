@@ -25,6 +25,7 @@
 
     vm.indexPage = $location.search().page || '/';
 
+    /* Checks if all of the input data is correct. */
     vm.checkRegistrationData = function() {
       vm.msgError = '';
       console.log(vm.registrationData)
@@ -39,9 +40,15 @@
           }
         }
       }
+      if(vm.registrationData.password != vm.registrationData.reenterPassword) {
+        vm.msgError = 'Password mismatch. Please try again.';
+        return false;
+      }
+
       vm.doRegistration();
     };
 
+    /* Performs registration and redirects user to index. */
     vm.doRegistration = function() {
       vm.msgError = '';
       authentication
@@ -53,12 +60,19 @@
             $location.path(vm.indexPage);
           },
           function(error) {
-            vm.msgError = error.data.message;
+            if (error.data && error.data.message && error.data.message.errmsg && error.data.message.errmsg.indexOf("email_1 dup key")  !== -1) {
+              vm.msgError = 'User with this email already exists. Please try again.'
+            } else if (error.data && error.data.message && error.data.message.errmsg && error.data.message.errmsg.indexOf("username_1 dup key")  !== -1) {
+              vm.msgError = 'User with this username already exists. Please try again.'
+            } else {
+              vm.msgError = error.data.message;
+            }
             console.log(error);
           }
         );
     }
 
+    /* Changes role on navigation switch. */
     vm.changeRole = function(role) {
       vm.registrationData.role = role;
     }

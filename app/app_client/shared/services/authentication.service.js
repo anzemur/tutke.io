@@ -47,7 +47,7 @@
 
     /* Removes token on log out. */
     var doLogOut = function() {
-      $window.localStorage.removeItem('token');
+      $window.localStorage.removeItem('jwt');
     };
 
 

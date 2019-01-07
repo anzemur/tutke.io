@@ -2,11 +2,11 @@
   <div class="dropdown" id="userIconToggle"><a class="dropdown-toggle" id="userIcon" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"></i></a>
     <ul class="dropdown-menu">
       <!-- <li class="dropdown-header">Nav header</li>            -->
-      <li ng-if="vm.isLoggedIn"><a href="/account">My account</a></li>
-      <li ng-if="vm.isLoggedIn" class="divider" role="separator"></li>
-      <li ng-if="vm.isLoggedIn"><a href="/login">Log Out </a></li>
-      <li ng-if="!vm.isLoggedIn"><a href="/login">Log In </a></li>
-      <li ng-if="!vm.isLoggedIn"><a href="/registration">Sign Up! </a></li>
+      <li ng-if="navvm.isLoggedIn"><a ng-href="/account">My account</a></li>
+      <li ng-if="navvm.isLoggedIn" class="divider" role="separator"></li>
+      <li ng-if="navvm.isLoggedIn"><a ng-click="navvm.logOut()" href="">Log Out </a></li>
+      <li ng-if="!navvm.isLoggedIn"><a ng-href="/login">Log In </a></li>
+      <li ng-if="!navvm.isLoggedIn"><a ng-href="/registration">Sign Up! </a></li>
     </ul>
   </div>
 </div>
