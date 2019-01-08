@@ -8,6 +8,14 @@
         }
       });
     }
+    
+    var deleteUser = function (userId) {
+      return $http.delete('/api/users/' + userId, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    }
 
     var addCommentToUser = function (userId, data) {
       console.log(data)
@@ -20,6 +28,7 @@
 
     return {
       getUser: getUser,
+      deleteUser: deleteUser,
       addCommentToUser: addCommentToUser
     }
   }
