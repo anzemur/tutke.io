@@ -57,6 +57,7 @@
         }
       )
     } else {
+      authentication.doLogOut();
       $location.path('/login');
       $route.reload();
     }
