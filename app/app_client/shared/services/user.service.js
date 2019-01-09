@@ -1,6 +1,7 @@
 (function () {
   function user($window, $http, authentication) {
     
+    /* Gets user. */
     var getUser = function (userId) {
       return $http.get('/api/users/' + userId, {
         params: {
@@ -9,6 +10,7 @@
       });
     }
     
+    /* Deletes user. */
     var deleteUser = function (userId) {
       return $http.delete('/api/users/' + userId, {
         headers: {
@@ -17,6 +19,7 @@
       });
     }
 
+    /* Adds comment to user. */
     var addCommentToUser = function (userId, data) {
       console.log(data)
       return $http.post('/api/users/' + userId + '/comments', data, {
@@ -27,8 +30,8 @@
     };
 
     return {
-      getUser: getUser,
-      deleteUser: deleteUser,
+      getUser         : getUser,
+      deleteUser      : deleteUser,
       addCommentToUser: addCommentToUser
     }
   }

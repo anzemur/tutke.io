@@ -160,24 +160,44 @@ module.exports.createLecture = (req, res) => {
 /**
  * DELETES lecture and adds its reference from the user.
  * Query parameter: {string} Author's userId.
- * Path parameter: {string} lectureId
  */
 module.exports.deleteLecture = (req, res) => {
-  if(req.query && req.query.userId) {
+  var userId = req.payload._id;
+  var userRole = req.payload.role;
+
+  if(userId) {
     if (req.params && req.params.lectureId) {
-      Lecture.findByIdAndDelete(req.params.lectureId)
-        .then(delRes => {
-          User.updateOne(
-            { _id: req.query.userId},
-            { $pull: { postedLectures: mongoose.Types.ObjectId(req.params.lectureId) } }
-          )
-          .then(updateRes => {
-            respondJson(res, 204, null);
-          })
-          .catch(err=> {
-            respondJson(res, 500, 'User update failed:' + err.message);
+      Lecture.findById(req.params.lectureId)
+        .then(lecture => {
+          if(!lecture) {
+            respondJson(res, 404, errors.NotFound);
             return;
-          })
+          } else {
+            if(userId == lecture.author.toString() || userRole == 'admin') {
+              Lecture.findByIdAndDelete(req.params.lectureId)
+                .then(delRes => {
+                  User.updateOne(
+                    { _id: userId},
+                    { $pull: { postedLectures: mongoose.Types.ObjectId(req.params.lectureId) } }
+                  )
+                  .then(updateRes => {
+                    respondJson(res, 204, null);
+                  })
+                  .catch(err=> {
+                    respondJson(res, 500, 'User update failed:' + err.message);
+                    return;
+                  })
+                })
+                .catch(err => {
+                  respondJson(res, 500, err.message);
+                  return;
+                });
+
+            } else {
+              respondJson(res, 403, errors.Forbidden);
+              return;
+            }
+          }
         })
         .catch(err => {
           respondJson(res, 500, err.message);

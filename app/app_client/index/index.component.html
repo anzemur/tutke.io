@@ -39,8 +39,9 @@
                   <p ng-if="vm.user.role === 'tutor'">Posted lectures: {{ vm.user.postedLectures.length }}</p>
                   <p ng-if="vm.user.role === 'student'">Posted requests: {{ vm.user.postedLectures.length }}</p>
                   <p>User since: {{ vm.user.createdAt | date: 'd. MMMM, yyyy' }}</p>
+                  <p>Account type: {{ vm.user.role | uppercase }}</p>
               </div>
-              <div ng-if="vm.isLoggedIn" class="thumbnail upcomingEvents">
+              <div ng-if="vm.isLoggedIn && vm.user.role !== 'admin'" class="thumbnail upcomingEvents">
                     <h4 id="upcomingEvents">Pending Requests</h4>
                     <ul id="upcomingEventsList">
                         <h4 ng-if="vm.pendingLectureRequest.length === 0" id="profileTitle">No pending requests.</h4>
@@ -95,6 +96,9 @@
                               <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
                                   <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
                               </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
+                              </button>
                           </span>
                       </h3>
                   </div>
@@ -128,6 +132,9 @@
                               <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
                                   <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
                               </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
+                              </button>
                           </span>
                       </h3>
                   </div>
@@ -159,6 +166,9 @@
                               </button>
                               <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
                                   <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
                               </button>
                           </span>
                       </h3>
