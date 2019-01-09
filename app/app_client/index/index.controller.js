@@ -83,11 +83,11 @@
       if (vm.user.role == 'tutor') {
         lectureRequest.student = posterId,
         lectureRequest.tutor = vm.user._id,
-        lectureRequest.lectureType = 'studentRequest'
+        lectureRequest.requestType = 'tutorOffer'
       } else {
         lectureRequest.student = vm.user._id,
         lectureRequest.tutor = posterId,
-        lectureRequest.requestType = 'tutorOffer'
+        lectureRequest.requestType = 'studentRequest'
       }
 
       /* Sends a lecture request to lecture's author. */
@@ -137,9 +137,9 @@
           vm.user = response.data;
 
           if(vm.user.role == 'tutor') {
-            vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer');
-          } else {
             vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest');
+          } else {
+            vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer');
           }
 
           var createdAtDate = new Date(vm.user.createdAt);

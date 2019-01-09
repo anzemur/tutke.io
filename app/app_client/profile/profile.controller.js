@@ -6,44 +6,14 @@
     vm.msgSuccess = '';
     vm.msgInfo = '';
     vm.isLoggedIn = authentication.isLoggedIn();
-    vm.logedInUser = authentication.getCurrentUser();
-    
-    vm.userId = $routeParams.userId;
-    
+
     vm.lecturesRequestsAccepted = [];
     vm.lecturesRequestsPending = [];
     
-    vm.pagination = {
-      search: '',
-      page: 0,
-      lectureType: 'posted'
-    }
-    
-    /* Returns paginated lectures. */
-    vm.getLecturesPaginated = function() {
-      vm.msgError = '';
-      lectures.getLecturesPaginated(vm.pagination).then(
-        function success(response) {
-          vm.lectures = response.data;
-        },
-        function error(error) {
-          var errMsg = error.data ? error.data.message : error;
-          vm.msgError = `There was an error getting lectures: ${errMsg}.`;
-          console.log(error);
-        }
-      )
-    }
-    
-    /* Changes page based on the 'next' value. */
-    vm.changePage = function(next) {
-      next ? vm.pagination.page++ : vm.pagination.page--;
-      vm.getLecturesPaginated();
-    };
-    
     /* Deletes user from database and loads login page. */
-    vm.deleteUser = function(id) {
+    vm.deleteUser = function() {
       vm.msgError = '';
-      user.deleteUser(id).then(
+      user.deleteUser(vm.user._id).then(
         function success(response) {
           $location.path('/login');
           $route.reload();
@@ -86,9 +56,10 @@
           console.log(error);
         }
       )
+    } else {
+      $location.path('/login');
+      $route.reload();
     }
-
-    vm.getLecturesPaginated();
   }
 
   profileCtrl.$inject = ['$window', '$location', 'authentication', 'lectures', 'lecturesRequests', '$routeParams', '$uibModal', 'user' , '$route', '$scope'];
