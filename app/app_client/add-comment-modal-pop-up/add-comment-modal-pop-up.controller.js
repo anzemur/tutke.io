@@ -38,16 +38,15 @@
         vm.commentFormError = "Please add a star rating!";
         return false;
       } else {
-        // console.log(vm.userPreviewData.logedInUser.$$state.value.data.username)
         if (!vm.comment) {
           vm.addComment(vm.userPreviewData.user._id, {
-            author: vm.userPreviewData.logedInUser.$$state.value.data._id,
+            author: vm.userPreviewData.logedInUser._id,
             comment: vm.formData.comment,
             rating: vm.formData.rating
           });
         } else {
           vm.editComment(vm.userPreviewData.user._id, vm.comment._id, {
-            author: vm.userPreviewData.logedInUser.$$state.value.data._id,
+            author: vm.userPreviewData.logedInUser._id,
             comment: vm.formData.comment,
             rating: vm.formData.rating
           });

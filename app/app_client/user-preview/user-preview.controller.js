@@ -5,8 +5,7 @@
     vm.msgSuccess = '';
     vm.msgInfo = '';
     vm.isLoggedIn = authentication.isLoggedIn();
-    vm.logedInUser = authentication.getCurrentUser();
-    
+
     vm.userId = $routeParams.userId
 
     /* Gets previewed user. */
@@ -34,12 +33,12 @@
             if(commentId == null){
               return {
                 user: vm.previewedUser,
-                logedInUser: vm.logedInUser
+                logedInUser: vm.user
               };
             }else {
               return {
                 user: vm.previewedUser,
-                logedInUser: vm.logedInUser,
+                logedInUser: vm.user,
                 commentToEdit: vm.previewedUser.comments.filter(x => x._id == commentId)[0]
               };
             }
@@ -165,6 +164,27 @@
         function error(error) {
           vm.isLoggedIn = false;
           authentication.doLogOut();
+          console.log(error);
+        }
+      )
+    }
+
+    /* If user us admin he can delete user from database. */
+    vm.deleteUserAdmin = function() {
+      if(!vm.user.role == 'admin') {
+        vm.msgError = 'You are not authorized to do this!';
+        return false;
+      }
+      vm.msgError = '';
+      user.deleteUser(vm.previewedUser._id).then(
+        function success(response) {
+          vm.msgSuccess = 'User deleted.';
+          $location.path('/');
+          $route.reload();
+        },
+        function error(error) {
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
           console.log(error);
         }
       )

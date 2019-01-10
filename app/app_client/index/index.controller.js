@@ -6,6 +6,7 @@
     var body = angular.element(document.querySelector('body'));
     body.removeClass('loginBody');
 
+    vm.lectures = [];
     vm.pendingLectureRequest = [];
     vm.msgError = '';
     vm.msgSuccess = '';
@@ -40,7 +41,13 @@
             _id = vm.user._id,
             username = vm.user.username
           }
-          vm.lectures = [data, ...vm.lectures];
+
+          if(vm.lectures.length == 0) {
+            vm.lectures.push(data);
+            vm.numberOfPages = 1;
+          } else {
+            vm.lectures = [data, ...vm.lectures];
+          }
           vm.msgSuccess = 'Lecture was successfully added.';
         }
       }, function(error) {
