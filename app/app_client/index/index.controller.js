@@ -1,5 +1,5 @@
 (() => {
-  function indexCtrl($location, authentication, lectures, lecturesRequests) {
+  function indexCtrl($location, authentication, lectures, lecturesRequests, $uibModal) {
     var vm = this;
 
     /* Removes background from body. */
@@ -17,6 +17,21 @@
       search: '',
       page: 0,
       lectureType: 'posted'
+    }
+
+    vm.addNewLecturePopUp = function() {
+      $uibModal.open({
+        templateUrl: '/add-lecture-pop-up/add-lecture-pop-up.component.html',
+        controller: 'addLectureController',
+        controllerAs: 'vm',
+        resolve: {
+          userData: function() {
+            return {
+              user: vm.user
+            };
+          }
+        }
+      });
     }
     
     /* Returns paginated lectures. */
@@ -159,7 +174,7 @@
     getLecturesPaginated();
   } 
 
-  indexCtrl.$inject = ['$location', 'authentication', 'lectures', 'lecturesRequests'];
+  indexCtrl.$inject = ['$location', 'authentication', 'lectures', 'lecturesRequests', '$uibModal'];
 
   /* global angular */
   angular
