@@ -46,7 +46,7 @@
             _id = authorId,
             username = vm.user.username
           }
-          vm.previewedUser.rating = calcAvgUserRating(data.rating).toString();
+          vm.previewedUser.rating = calcAvgUserRatingAdded(data.rating).toString();
           vm.previewedUser.comments.push(data);
           vm.msgSuccess = 'Comment was successfully added.';
       }, function (error) {
@@ -70,10 +70,12 @@
         }
       );
       vm.previewedUser.comments = vm.previewedUser.comments.filter(x => x._id != commentId);
+      vm.previewedUser.rating = calcAvgUserRating().toString();
+      console.log(vm.previewedUser.rating);
     };
 
     /* Calculates the new updated user rating. */
-    function calcAvgUserRating(newRating){
+    function calcAvgUserRatingAdded(newRating){
       var numOfComments = vm.previewedUser.comments.length;
       var sumOfRatings = 0;
       for (var i = 0; i < numOfComments; i++) {
@@ -81,6 +83,17 @@
       }
       sumOfRatings += newRating;
       var avgRating = (sumOfRatings / (numOfComments+1));
+      return Math.round(avgRating);
+    };
+
+    function calcAvgUserRating() {
+      var numOfComments = vm.previewedUser.comments.length;
+      if(numOfComments == 0) return 0;
+      var sumOfRatings = 0;
+      for (var i = 0; i < numOfComments; i++) {
+        sumOfRatings += vm.previewedUser.comments[i].rating;
+      }
+      var avgRating = (sumOfRatings / numOfComments);
       return Math.round(avgRating);
     };
 

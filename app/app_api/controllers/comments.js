@@ -96,6 +96,15 @@ var calcAvgRating = (user) => {
 				console.log("Tutor's rating was updated to: " + avgRating + ".");
 			}
 		});
+	} else {
+		user.rating = 0;
+		user.save((err) => {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log("Tutor's rating was updated to: " + avgRating + ".");
+			}
+		});
 	}
 }
   
