@@ -4,7 +4,6 @@
 
     vm.userPreviewData = userPreviewData;
     vm.comment = userPreviewData.commentToEdit;
-    console.log('lalala', vm.comment);
   
     vm.formData = {
       author: "",

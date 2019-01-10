@@ -11,8 +11,6 @@
       password: ''
     };
 
-
-
     vm.logInError = '';
     vm.indexPage = $location.search().page || '/';
 

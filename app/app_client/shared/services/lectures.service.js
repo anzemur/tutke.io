@@ -41,11 +41,21 @@
       });
     }
 
+    /* Updates lecture. */
+    var updateLecture = function(lectureId, body) {
+      return $http.put('/api/lectures/' + lectureId, body, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    }
+
     return {
       getLecturesPaginated: getLecturesPaginated,
       getLecturesCount    : getLecturesCount,
       deleteLecture       : deleteLecture,
-      addNewLecture       : addNewLecture
+      addNewLecture       : addNewLecture,
+      updateLecture       : updateLecture
     };
   }
   lectures.$inject = ['$http', 'authentication'];

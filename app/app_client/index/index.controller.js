@@ -36,13 +36,11 @@
 
       addPopUp.result.then(function(data) {
         if (typeof data != 'undefined') {
-          console.log(vm.lectures) 
           data.author = {
             _id = vm.user._id,
             username = vm.user.username
           }
           vm.lectures = [data, ...vm.lectures];
-          console.log(vm.lectures) 
           vm.msgSuccess = 'Lecture was successfully added.';
         }
       }, function(error) {

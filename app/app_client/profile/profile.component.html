@@ -89,13 +89,13 @@
         <div class="panel panel-default listingPanel">
           <div ng-if="vm.user.role === 'tutor'" class="panel-heading">
             <h3 class="panel-title" id="adTitle">{{ postedLecture.title }}<span id="adPrice">{{ postedLecture.price }} €/h 
-              <button class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
+              <button ng-click="vm.editLecturePopUp(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
               <button ng-click="vm.deleteLecture(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#deletePost"><span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i></button></span>
             </h3>
           </div>
           <div ng-if="vm.user.role === 'student'" class="panel-heading">
             <h3 class="panel-title" id="adTitle">{{ postedLecture.title }}<span id="adPrice">
-            <button class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
+            <button ng-click="vm.editLecturePopUp(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
             <button ng-click="vm.deleteLecture(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#deletePost"><span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i></button></span></h3>
           </div>
           <div class="panel-body">

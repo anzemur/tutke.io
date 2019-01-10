@@ -2,6 +2,9 @@
   function addLectureController($uibModalInstance, lectures, userData) {
     var vm = this;
     vm.userData = userData;
+    vm.lecture = userData.lecture;
+    console.log(vm.lecture)
+    console.log(userData)
     vm.addLectureError = '';
 
     vm.lectureData = {
@@ -11,7 +14,18 @@
       lectureType: ''
     };
 
-    vm.newLecturePopUp = {
+    /* Set edit lecture data to pop up. */
+    if(vm.lecture) {
+      vm.lectureData.title = vm.lecture.title;
+      vm.lectureData.description = vm.lecture.description;
+      vm.lectureData.lectureType = vm.lecture.lectureType;
+
+      if(vm.lecture.lectureType == 'posted') {
+        vm.lectureData.price = vm.lecture.price;
+      }
+    }
+
+    vm.lecturePopUp = {
       cancel: function() {
         $uibModalInstance.close();
       },
@@ -45,19 +59,39 @@
           return false;
         }
       }
-      vm.addLecture(); 
+
+      if(vm.lecture) {
+        vm.updateLecture();
+      } else {
+        vm.addLecture(); 
+      }
     }
 
+    /* Updates existing lecture. */
+    vm.updateLecture = function() {
+      lectures.updateLecture(vm.lecture._id, vm.lectureData).then(
+        function success(response) {
+          vm.lecturePopUp.close(response.data);
+        },
+        function error(error) {
+          var errMsg = error.data ? error.data.message : error;
+          vm.addLectureError = `There was an error while editing lecture: ${errMsg}.`;
+          console.log(error);
+        }
+      )
+    }
+
+    /* Adds new lecture to db. */
     vm.addLecture = function() {
       vm.lectureData.lectureType = vm.userData.user.role == 'tutor' ? 'posted' : 'requested';
 
       lectures.addNewLecture(vm.lectureData).then(
         function success(response) {
-          vm.newLecturePopUp.close(response.data);
+          vm.lecturePopUp.close(response.data);
         },
         function error(error) {
           var errMsg = error.data ? error.data.message : error;
-          vm.addLectureError = `There was an error adding lecture: ${errMsg}.`;
+          vm.addLectureError = `There was an error while adding lecture: ${errMsg}.`;
           console.log(error);
         }
       )

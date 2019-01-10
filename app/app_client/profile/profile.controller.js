@@ -44,6 +44,44 @@
       )
     }
 
+    /* Edit lecture pop up. */
+    vm.editLecturePopUp = function(lectureId) {
+      var editPopUp = $uibModal.open({
+        templateUrl: '/add-lecture-pop-up/add-lecture-pop-up.component.html',
+        controller: 'addLectureController',
+        controllerAs: 'vm',
+        resolve: {
+          userData: function() {
+            return {
+              user: vm.user,
+              lecture: vm.user.postedLectures.filter(x => x._id == lectureId)[0]
+            };
+          }
+        }
+      });
+
+      editPopUp.result.then(function(data) {
+        if (typeof data != 'undefined') {
+          for(var lecture of vm.user.postedLectures) {
+            if(lecture._id == data._id) {
+              lecture.description = data.description;
+              lecture.price = data.price;
+              lecture.title = data.title;
+            }
+          }
+
+          vm.msgSuccess = 'Lecture was successfully edited.';
+        }
+      }, function(error) {
+        if(error === "backdrop click") return;
+        if(error === "escape key press") return;
+
+        var errMsg = error.data ? error.data.message : error;
+        vm.msgError = `There was an error while editing a lecture: ${errMsg}.`;
+        console.log(error);
+      });
+    }
+
     /* Deletes lecture request. */
     vm.deletePendingLectureRequest = function(id) {
       vm.msgSuccess = '';
