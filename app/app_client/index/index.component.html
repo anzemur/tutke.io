@@ -201,7 +201,7 @@
   </div>
 </div> 
 
-<a ng-if="vm.isLoggedIn" href="#" class="float" data-toggle="modal" data-target="#addListing">
+<a ng-if="vm.isLoggedIn" ng-click="vm.addNewLecturePopUp()" href="#" class="float" data-toggle="modal" data-target="#addListing">
   <i class="fa fa-plus my-float"></i>
 </a>
 <div class="label-container">
