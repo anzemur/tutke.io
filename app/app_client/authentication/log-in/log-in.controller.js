@@ -41,6 +41,7 @@
           },
           function(error) {
             vm.logInError = error.data.message;
+            vm.logInData.password = '';
           }
         );
     }

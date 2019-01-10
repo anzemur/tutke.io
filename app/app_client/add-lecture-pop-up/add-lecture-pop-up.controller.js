@@ -45,7 +45,10 @@
           return false;
         }
       }
+      vm.addLecture(); 
+    }
 
+    vm.addLecture = function() {
       vm.lectureData.lectureType = vm.userData.user.role == 'tutor' ? 'posted' : 'requested';
 
       lectures.addNewLecture(vm.lectureData).then(

@@ -128,10 +128,6 @@
           console.log(error);
         }
       )
-    } else {
-      authentication.doLogOut();
-      $location.path('/login');
-      $route.reload();
     }
 
     vm.getUser();
