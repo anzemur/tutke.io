@@ -15,12 +15,47 @@
       vm.msgError = '';
       user.deleteUser(vm.user._id).then(
         function success(response) {
+          authentication.doLogOut();
           $location.path('/login');
           $route.reload();
         },
         function error(error) {
           var errMsg = error.data ? error.data.message : error;
           vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
+          console.log(error);
+        }
+      )
+    }
+
+    /* Deletes lecture. */
+    vm.deleteLecture = function(lectureId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
+      lectures.deleteLecture(lectureId).then(
+        function success(response) {
+          vm.msgSuccess = 'Lecture successfully deleted.';
+          vm.user.postedLectures = vm.user.postedLectures.filter(x => x._id != lectureId);
+        },
+        function error(error) {
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error while deleting lecture: ${errMsg}.`;
+          console.log(error);
+        }
+      )
+    }
+
+    /* Deletes lecture request. */
+    vm.deletePendingLectureRequest = function(id) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
+      lecturesRequests.deleteLectureRequest(id).then(
+        function success(response) {
+          vm.msgSuccess = 'Lecture request successfully deleted.';
+          vm.lecturesRequestsPending = vm.lecturesRequestsPending.filter(x => x._id != id);
+        },
+        function error(error) {
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error while deleting lecture request: ${errMsg}.`;
           console.log(error);
         }
       )

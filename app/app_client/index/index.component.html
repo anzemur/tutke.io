@@ -39,7 +39,7 @@
                   <p ng-if="vm.user.role === 'tutor'">Posted lectures: {{ vm.user.postedLectures.length }}</p>
                   <p ng-if="vm.user.role === 'student'">Posted requests: {{ vm.user.postedLectures.length }}</p>
                   <p>User since: {{ vm.user.createdAt | date: 'd. MMMM, yyyy' }}</p>
-                  <p>Account type: {{ vm.user.role | uppercase }}</p>
+                  <p>Account type: {{ vm.user.role.charAt(0).toUpperCase() + vm.user.role.slice(1) }}</p>
               </div>
               <div ng-if="vm.isLoggedIn && vm.user.role !== 'admin'" class="thumbnail upcomingEvents">
                     <h4 id="upcomingEvents">Pending Requests</h4>
@@ -84,7 +84,13 @@
           </div>
           <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
           <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
-              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
               <div class="panel panel-default listingPanel">
                   <div class="panel-heading">
                       <h3 class="panel-title" id="adTitle">{{ lecture.title }}
@@ -120,7 +126,13 @@
           </div>
           <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
           <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
-              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
               <div class="panel panel-default listingPanel">
                   <div class="panel-heading">
                       <h3 class="panel-title" id="adTitle">{{ lecture.title }}
@@ -155,7 +167,13 @@
           </div>
           <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
           <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures | filter: searchFilter">
-              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
               <div class="panel panel-default listingPanel">
                   <div class="panel-heading">
                       <h3 class="panel-title" id="adTitle">{{ lecture.title }}
