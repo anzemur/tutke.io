@@ -29,6 +29,15 @@
       });
     };
 
+    var editCommentToUser = function (userId, commentId, data) {
+      console.log(data)
+      return $http.put('/api/users/' + userId + '/comments/' + commentId, data, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    };
+
     var deleteComment = function (userId, commentId) {
       return $http.delete('/api/users/' + userId + '/comments/' + commentId, {
         headers: {
@@ -41,6 +50,7 @@
       getUser         : getUser,
       deleteUser      : deleteUser,
       addCommentToUser: addCommentToUser,
+      editCommentToUser: editCommentToUser,
       deleteComment: deleteComment
     }
   }

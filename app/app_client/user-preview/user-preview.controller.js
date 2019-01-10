@@ -48,16 +48,27 @@
       });
 
       sampleModalWindow.result.then(function (data) {
-        if (typeof data != 'undefined')
+        if (typeof data != 'undefined') {
           authorId = data.author;
           data.author = {
             _id = authorId,
             username = vm.user.username
           }
-          vm.previewedUser.rating = calcAvgUserRatingAdded(data.rating).toString();
-          vm.previewedUser.comments.push(data);
-          vm.msgSuccess = 'Comment was successfully added.';
+          if (!data.edit){
+            vm.previewedUser.rating = calcAvgUserRatingAdded(data.rating).toString();
+            vm.previewedUser.comments.push(data);
+            vm.msgSuccess = 'Comment was successfully added.';
+          } else {
+            vm.previewedUser.comments = vm.previewedUser.comments.filter(x => x._id != data._id);
+            vm.previewedUser.comments.push(data);
+            vm.previewedUser.rating = calcAvgUserRating().toString();
+            vm.msgSuccess = 'Comment was successfully edited.';
+          }
+        }
       }, function (error) {
+        if (error === "backdrop click") return;
+        if (error === "escape key press") return;
+
         var errMsg = error.data ? error.data.message : error;
         vm.msgError = `There was an error while adding a comment: ${errMsg}.`;
         console.log(error);
