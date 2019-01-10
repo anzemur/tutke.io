@@ -19,8 +19,9 @@
       lectureType: 'posted'
     }
 
+    /* Add new lecture modal popup. */
     vm.addNewLecturePopUp = function() {
-      $uibModal.open({
+      var addPopUp = $uibModal.open({
         templateUrl: '/add-lecture-pop-up/add-lecture-pop-up.component.html',
         controller: 'addLectureController',
         controllerAs: 'vm',
@@ -31,6 +32,26 @@
             };
           }
         }
+      });
+
+      addPopUp.result.then(function(data) {
+        if (typeof data != 'undefined') {
+          console.log(vm.lectures) 
+          data.author = {
+            _id = vm.user._id,
+            username = vm.user.username
+          }
+          vm.lectures = [data, ...vm.lectures];
+          console.log(vm.lectures) 
+          vm.msgSuccess = 'Lecture was successfully added.';
+        }
+      }, function(error) {
+        if(error === "backdrop click") return;
+        if(error === "escape key press") return;
+
+        var errMsg = error.data ? error.data.message : error;
+        vm.msgError = `There was an error while adding a lecture: ${errMsg}.`;
+        console.log(error);
       });
     }
 

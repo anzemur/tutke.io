@@ -1,6 +1,15 @@
 (function() {
   function lectures($http, authentication) {
 
+    /* Adds a new lecture. */
+    var addNewLecture = function(body) {
+      return $http.post('/api/lectures', body, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    }
+
     /* Returns a page of lectures. */
     var getLecturesPaginated = function(options) {
       return $http.get('/api/lectures', {
@@ -35,7 +44,8 @@
     return {
       getLecturesPaginated: getLecturesPaginated,
       getLecturesCount    : getLecturesCount,
-      deleteLecture       : deleteLecture
+      deleteLecture       : deleteLecture,
+      addNewLecture       : addNewLecture
     };
   }
   lectures.$inject = ['$http', 'authentication'];
