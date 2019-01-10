@@ -56,6 +56,22 @@
       });
     };
 
+    vm.deleteOwnComment = function (userId, commentId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
+      user.deleteComment(userId, commentId).then(
+        function success(response) {
+          vm.msgSuccess = 'Comment successfully deleted.';
+        },
+        function error(error) {
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error while deleting comment: ${errMsg}.`;
+          console.log(error);
+        }
+      );
+      vm.previewedUser.comments = vm.previewedUser.comments.filter(x => x._id != commentId);
+    };
+
     /* Calculates the new updated user rating. */
     function calcAvgUserRating(newRating){
       var numOfComments = vm.previewedUser.comments.length;
