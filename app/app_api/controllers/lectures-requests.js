@@ -145,40 +145,46 @@ module.exports.createLectureRequest = (req, res) => {
 
 /**
  * DELETES lectures request and its reference from tutor and student.
- * Body: {LecturesRequest} LecturesRequest model.
  * Path parameter: {string} lectureRequestId.
  */
 module.exports.deleteLectureRequest = (req, res) => {
-  if(req.params && req.params.lectureRequestId) {
+  var userId = userId = req.payload._id;
 
+  if(req.params && req.params.lectureRequestId) {
     LecturesRequest.findById(req.params.lectureRequestId)
       .then(lecturesRequest => {
+
         var tutorId = lecturesRequest.tutor;
         var studentId = lecturesRequest.student;
 
-        LecturesRequest.findByIdAndDelete(req.params.lectureRequestId)
-          .then(delRes => {
-            User.updateMany(
-              { $or: 
-                [
-                  { _id: tutorId},
-                  { _id: studentId}
-                ]
-              },
-              { $pull: { lecturesRequests: mongoose.Types.ObjectId(req.params.lectureRequestId) } }
-            )
-            .then(updateRes => {
-              respondJson(res, 204, null);
+        if(userId == tutorId.toString() || userId == studentId.toString()) {
+          LecturesRequest.findByIdAndDelete(req.params.lectureRequestId)
+            .then(delRes => {
+              User.updateMany(
+                { $or: 
+                  [
+                    { _id: tutorId},
+                    { _id: studentId}
+                  ]
+                },
+                { $pull: { lecturesRequests: mongoose.Types.ObjectId(req.params.lectureRequestId) } }
+              )
+              .then(updateRes => {
+                respondJson(res, 204, null);
+              })
+              .catch(err=> {
+                respondJson(res, 500, 'User update failed:' + err.message);
+                return;
+              })
             })
-            .catch(err=> {
-              respondJson(res, 500, 'User update failed:' + err.message);
+            .catch(err => {
+              respondJson(res, 500, err.message);
               return;
-            })
-          })
-          .catch(err => {
-            respondJson(res, 500, err.message);
+            });
+          } else {
+            respondJson(res, 403, errors.Forbidden);
             return;
-          });
+          }
         })
       .catch(err => {
         respondJson(res, 404, errors.NotFound);

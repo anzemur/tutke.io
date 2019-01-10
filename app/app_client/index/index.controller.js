@@ -33,6 +33,27 @@
         }
       });
     }
+
+    /* If user is logged in as admin he can delete the lecture. */
+    vm.deleteLectureAdmin = function(lectureId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
+      if (vm.user.role == 'admin') {
+        lectures.deleteLecture(lectureId).then(
+          function success(response) {
+            vm.msgSuccess = 'Lecture successfully deleted.';
+            vm.lectures = vm.lectures.filter(x => x._id != lectureId);
+          },
+          function error(error) {
+            var errMsg = error.data ? error.data.message : error;
+            vm.msgError = `There was an error while deleting lecture: ${errMsg}.`;
+            console.log(error);
+          }
+        )
+      } else {
+        vm.msgError = 'You are not authorized to do this!';
+      }
+    }
     
     /* Returns paginated lectures. */
     getLecturesPaginated = function() {
@@ -98,11 +119,11 @@
       if (vm.user.role == 'tutor') {
         lectureRequest.student = posterId,
         lectureRequest.tutor = vm.user._id,
-        lectureRequest.lectureType = 'studentRequest'
+        lectureRequest.requestType = 'tutorOffer'
       } else {
         lectureRequest.student = vm.user._id,
         lectureRequest.tutor = posterId,
-        lectureRequest.requestType = 'tutorOffer'
+        lectureRequest.requestType = 'studentRequest'
       }
 
       /* Sends a lecture request to lecture's author. */
@@ -152,14 +173,18 @@
           vm.user = response.data;
 
           if(vm.user.role == 'tutor') {
-            vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer');
-          } else {
             vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'studentRequest');
+          } else {
+            vm.pendingLectureRequest = vm.user.lecturesRequests.filter(x => x.status == 'pending' && x.requestType == 'tutorOffer');
           }
 
           var createdAtDate = new Date(vm.user.createdAt);
           if(new Date(createdAtDate.getTime() + 1*60000) > new Date()) {
             vm.msgInfo = 'Welcome to Tutke.io. Hope you will have an awesome time using our application!';
+          }
+
+          if(vm.user.role == 'admin') {
+            vm.msgInfo = 'You are logged in as administrator. You can modify all of the application contents.';
           }
         },
         function error(error) {

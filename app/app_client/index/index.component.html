@@ -26,7 +26,7 @@
 <div class="container-fluid" id="mainContent">
   <div class="row">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" id="leftColumn">
-              <div role="alert" ng-show="!vm.isLoggedIn" class="alert alert-info"> Please log in to see profile info. </div>
+              <div id="notLoggedInInfo" role="alert" ng-show="!vm.isLoggedIn" class="alert alert-info"> Please log in to see profile info. </div>
               <div ng-if="vm.isLoggedIn" class="thumbnail profileThumbnail profileThumbnailIndex"  stlye="margin-top:200px">
                   <h4 id="profileTitle">Logged in as {{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
                   <div ng-if="vm.user.role === 'tutor'" class="rating" id="userPreviewRating">
@@ -39,8 +39,9 @@
                   <p ng-if="vm.user.role === 'tutor'">Posted lectures: {{ vm.user.postedLectures.length }}</p>
                   <p ng-if="vm.user.role === 'student'">Posted requests: {{ vm.user.postedLectures.length }}</p>
                   <p>User since: {{ vm.user.createdAt | date: 'd. MMMM, yyyy' }}</p>
+                  <p>Account type: {{ vm.user.role.charAt(0).toUpperCase() + vm.user.role.slice(1) }}</p>
               </div>
-              <div ng-if="vm.isLoggedIn" class="thumbnail upcomingEvents">
+              <div ng-if="vm.isLoggedIn && vm.user.role !== 'admin'" class="thumbnail upcomingEvents">
                     <h4 id="upcomingEvents">Pending Requests</h4>
                     <ul id="upcomingEventsList">
                         <h4 ng-if="vm.pendingLectureRequest.length === 0" id="profileTitle">No pending requests.</h4>
@@ -51,14 +52,6 @@
                             <p>{{ request.lecture.title }} - from {{ request.tutor.username }}<br><button ng-click="vm.answerToPendingLecture(true, request._id)" class="acceptDeny" id="acceptRequest">Accept</button><button ng-click="vm.answerToPendingLecture(false, request._id)" class="acceptDeny" id="denyRequest">Deny</button></p>
                         </li>
                     </ul>
-              </div>
-              <div ng-if="vm.isLoggedIn" class="thumbnail upcomingEvents">
-                      <h4 id="upcomingEvents">Upcoming Events</h4>
-                      <ul id="upcomingEventsList">
-                          <li>
-                              <a href="#">Learn Linear Algebra!, 9/12/2019 at 17:45</a>
-                          </li>
-                      </ul>
               </div>
               <div class="thumbnail" id="dailyQuote">
                   <h4>Daily Quote</h4>
@@ -91,7 +84,13 @@
           </div>
           <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
           <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
-              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
               <div class="panel panel-default listingPanel">
                   <div class="panel-heading">
                       <h3 class="panel-title" id="adTitle">{{ lecture.title }}
@@ -102,6 +101,9 @@
                               </button>
                               <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
                                   <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
                               </button>
                           </span>
                       </h3>
@@ -124,7 +126,13 @@
           </div>
           <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
           <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
-              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
               <div class="panel panel-default listingPanel">
                   <div class="panel-heading">
                       <h3 class="panel-title" id="adTitle">{{ lecture.title }}
@@ -135,6 +143,9 @@
                               </button>
                               <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
                                   <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
                               </button>
                           </span>
                       </h3>
@@ -156,7 +167,13 @@
           </div>
           <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
           <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures | filter: searchFilter">
-              <div class="extraHeading"><span id="userPublisher"><a ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a><span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
               <div class="panel panel-default listingPanel">
                   <div class="panel-heading">
                       <h3 class="panel-title" id="adTitle">{{ lecture.title }}
@@ -167,6 +184,9 @@
                               </button>
                               <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
                                   <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
                               </button>
                           </span>
                       </h3>

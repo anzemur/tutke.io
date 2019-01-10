@@ -56,6 +56,7 @@ userSchema.methods.generateJwt = function() {
   
   return jwt.sign({
     _id: this._id,
+    role: this.role,
     exDate: parseInt(exDate.getTime() / 1000, 10)
   }, process.env.JWT_PASSWORD);
 };

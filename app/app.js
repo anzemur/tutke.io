@@ -48,7 +48,7 @@ require('./app_api/models/db');
 /* Register passport config */
 require('./app_api/config/passport');
 
-var indexRouter = require('./app_server/routes/index');
+// var indexRouter = require('./app_server/routes/index');
 var indexApi = require('./app_api/routes/index');
 
 var app = express();

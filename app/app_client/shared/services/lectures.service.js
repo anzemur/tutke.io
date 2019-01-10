@@ -1,5 +1,5 @@
 (function() {
-  function lectures($window, $http) {
+  function lectures($http, authentication) {
 
     /* Returns a page of lectures. */
     var getLecturesPaginated = function(options) {
@@ -23,12 +23,22 @@
       });
     }
 
+    /* Deletes lecture. */
+    var deleteLecture = function(lectureId) {
+      return $http.delete('/api/lectures/' + lectureId, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    }
+
     return {
       getLecturesPaginated: getLecturesPaginated,
-      getLecturesCount: getLecturesCount
+      getLecturesCount    : getLecturesCount,
+      deleteLecture       : deleteLecture
     };
   }
-  lectures.$inject = ['$window', '$http'];
+  lectures.$inject = ['$http', 'authentication'];
   
   /* global angular */
   angular

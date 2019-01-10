@@ -1049,3 +1049,7 @@ div.modal-content {
 #filter {
   border-radius: 3rem;
 }
+
+#notLoggedInInfo {
+  margin-top: 30px;
+}
