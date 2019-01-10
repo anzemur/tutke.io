@@ -26,7 +26,7 @@
 <div class="container-fluid" id="mainContent">
   <div class="row">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" id="leftColumn">
-              <div role="alert" ng-show="!vm.isLoggedIn" class="alert alert-info"> Please log in to see profile info. </div>
+              <div id="notLoggedInInfo" role="alert" ng-show="!vm.isLoggedIn" class="alert alert-info"> Please log in to see profile info. </div>
               <div ng-if="vm.isLoggedIn" class="thumbnail profileThumbnail profileThumbnailIndex"  stlye="margin-top:200px">
                   <h4 id="profileTitle">Logged in as {{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
                   <div ng-if="vm.user.role === 'tutor'" class="rating" id="userPreviewRating">
