@@ -24,17 +24,25 @@
     }
 
     /* Add comment modal pop up. */
-    vm.showAddReviewPopUp = function () {
+    vm.showAddReviewPopUp = function (commentId) {
       var sampleModalWindow = $uibModal.open({
         templateUrl: '/add-comment-modal-pop-up/add-comment-modal-pop-up.component.html',
         controller: 'addCommentCtrl',
         controllerAs: 'vm',
         resolve: {
           userPreviewData: function() {
-            return {
-              user: vm.previewedUser,
-              logedInUser: vm.logedInUser
-            };
+            if(commentId == null){
+              return {
+                user: vm.previewedUser,
+                logedInUser: vm.logedInUser
+              };
+            }else {
+              return {
+                user: vm.previewedUser,
+                logedInUser: vm.logedInUser,
+                commentToEdit: vm.previewedUser.comments.filter(x => x._id == commentId)[0]
+              };
+            }
           }
         }
       });
@@ -46,7 +54,7 @@
             _id = authorId,
             username = vm.user.username
           }
-          vm.previewedUser.rating = calcAvgUserRating(data.rating).toString();
+          vm.previewedUser.rating = calcAvgUserRatingAdded(data.rating).toString();
           vm.previewedUser.comments.push(data);
           vm.msgSuccess = 'Comment was successfully added.';
       }, function (error) {
@@ -56,8 +64,26 @@
       });
     };
 
+    vm.deleteOwnComment = function (userId, commentId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
+      user.deleteComment(userId, commentId).then(
+        function success(response) {
+          vm.msgSuccess = 'Comment successfully deleted.';
+        },
+        function error(error) {
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error while deleting comment: ${errMsg}.`;
+          console.log(error);
+        }
+      );
+      vm.previewedUser.comments = vm.previewedUser.comments.filter(x => x._id != commentId);
+      vm.previewedUser.rating = calcAvgUserRating().toString();
+      console.log(vm.previewedUser.rating);
+    };
+
     /* Calculates the new updated user rating. */
-    function calcAvgUserRating(newRating){
+    function calcAvgUserRatingAdded(newRating){
       var numOfComments = vm.previewedUser.comments.length;
       var sumOfRatings = 0;
       for (var i = 0; i < numOfComments; i++) {
@@ -65,6 +91,17 @@
       }
       sumOfRatings += newRating;
       var avgRating = (sumOfRatings / (numOfComments+1));
+      return Math.round(avgRating);
+    };
+
+    function calcAvgUserRating() {
+      var numOfComments = vm.previewedUser.comments.length;
+      if(numOfComments == 0) return 0;
+      var sumOfRatings = 0;
+      for (var i = 0; i < numOfComments; i++) {
+        sumOfRatings += vm.previewedUser.comments[i].rating;
+      }
+      var avgRating = (sumOfRatings / numOfComments);
       return Math.round(avgRating);
     };
 

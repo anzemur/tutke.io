@@ -29,10 +29,19 @@
       });
     };
 
+    var deleteComment = function (userId, commentId) {
+      return $http.delete('/api/users/' + userId + '/comments/' + commentId, {
+        headers: {
+          Authorization: 'Bearer ' + authentication.getToken()
+        }
+      });
+    }
+
     return {
       getUser         : getUser,
       deleteUser      : deleteUser,
-      addCommentToUser: addCommentToUser
+      addCommentToUser: addCommentToUser,
+      deleteComment: deleteComment
     }
   }
 

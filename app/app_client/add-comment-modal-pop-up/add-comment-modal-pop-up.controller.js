@@ -3,6 +3,13 @@
     var vm = this;
 
     vm.userPreviewData = userPreviewData;
+    vm.comment = userPreviewData.commentToEdit;
+  
+    vm.formData = {
+      author: "",
+      comment: "",
+      rating: ""
+    }
 
     vm.commentPopUp = {
       cancelAddComment: function () {
@@ -12,6 +19,12 @@
         $uibModalInstance.close(response);
       }
     };
+
+    if(vm.comment){
+      console.log('aaaa', vm.comment);
+      vm.formData.comment = vm.comment.commentText;
+      vm.formData.rating = vm.comment.rating;
+    }
 
     vm.sendingCommentData = function () {
       vm.commentFormError = "";

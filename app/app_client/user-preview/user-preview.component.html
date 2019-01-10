@@ -1,5 +1,5 @@
 <navigation></navigation>
-
+<!-- 
 <div role="alert" ng-if="vm.msgError" class="alert alert-danger alert-message">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -17,7 +17,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
   <p> {{ vm.msgInfo }} </p>
-</div>
+</div> -->
 
 <div class="container-fluid" id="mainContent">
   <div class="row">
@@ -36,13 +36,15 @@
 
       <div ng-if="vm.previewedUser.role === 'tutor'">
         <h4 class="centered-h4">Reviews ({{vm.previewedUser.comments.length}}):</h4>
-        <a ng-if="vm.user.role === 'student'" ng-click="vm.showAddReviewPopUp()" class="addReviewButton">Add Review</a>
+        <a ng-if="vm.user.role === 'student'" ng-click="vm.showAddReviewPopUp(null)" class="addReviewButton">Add Review</a>
         <div class="totalAdPanel" ng-repeat="comment in vm.previewedUser.comments">
           <div class="panel panel-default listingPanel">
             <div class="panel-heading">
               <h3 class="panel-title reviewTitle" id="adTitle">{{ comment.author.username }} - {{comment.createdAt | date: 'd/MM/yyyy H:mm'}}
                 <span id="adPrice">
                   <div class="rating" id="userPreviewRating">
+                    <button ng-if="vm.user.username === comment.author.username || vm.user.role === 'admin' " ng-click="vm.showAddReviewPopUp(comment._id)" class="acceptDeny" id="acceptRequest">Edit</button>
+                    <button ng-if="vm.user.username === comment.author.username || vm.user.role === 'admin' " ng-click="vm.deleteOwnComment(vm.previewedUser._id, comment._id)" class="acceptDeny" id="denyRequest">Delete</button>
                     <span ng-repeat="i in [0, 1, 2, 3, 4]">
                       <i ng-if="comment.rating > i" class="fas fa-star"></i>
                       <i ng-if="comment.rating < i+1" class="far fa-star"></i>
