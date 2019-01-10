@@ -1,5 +1,5 @@
 (() => {
-  function userCtrl($location, authentication, $routeParams, $uibModal, user, lecturesRequests) {
+  function userCtrl($location, authentication, $routeParams, $uibModal, user, lecturesRequests, $route) {
     var vm = this;
     vm.msgError = '';
     vm.msgSuccess = '';
@@ -169,7 +169,7 @@
       )
     }
 
-    /* If user us admin he can delete user from database. */
+    /* If user is admin he can delete user from database. */
     vm.deleteUserAdmin = function() {
       if(!vm.user.role == 'admin') {
         vm.msgError = 'You are not authorized to do this!';
@@ -178,7 +178,7 @@
       vm.msgError = '';
       user.deleteUser(vm.previewedUser._id).then(
         function success(response) {
-          vm.msgSuccess = 'User deleted.';
+          $.notify("User successfully deleted!", "success");
           $location.path('/');
           $route.reload();
         },
@@ -193,7 +193,7 @@
     vm.getUser();
   }
 
-  userCtrl.$inject = ['$location', 'authentication', '$routeParams', '$uibModal', 'user', 'lecturesRequests'];
+  userCtrl.$inject = ['$location', 'authentication', '$routeParams', '$uibModal', 'user', 'lecturesRequests', '$route'];
 
   /* global angular */
   angular

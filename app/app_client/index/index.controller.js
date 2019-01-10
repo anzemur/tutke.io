@@ -206,7 +206,7 @@
 
           var createdAtDate = new Date(vm.user.createdAt);
           if(new Date(createdAtDate.getTime() + 1*60000) > new Date()) {
-            vm.msgInfo = 'Welcome to Tutke.io. Hope you will have an awesome time using our application!';
+            vm.msgInfo = 'Welcome to Tutke.io! Hope you will have an awesome time using our application!';
           }
 
           if(vm.user.role == 'admin') {

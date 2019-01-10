@@ -15,6 +15,7 @@
       vm.msgError = '';
       user.deleteUser(vm.user._id).then(
         function success(response) {
+          $.notify("Account successfully deleted!", "success");
           authentication.doLogOut();
           $location.path('/login');
           $route.reload();

@@ -67,6 +67,7 @@
         .doRegister(vm.registrationData)
         .then(
           function(success) {
+            $.notify("Registration successful.", "success");
             body.removeClass('loginBody');
             $location.search('page', null);
             $location.path(vm.indexPage);
