@@ -46,6 +46,9 @@
           vm.msgSuccess = 'Lecture was successfully added.';
         }
       }, function(error) {
+        if(error === "backdrop click") return;
+        if(error === "escape key press") return;
+
         var errMsg = error.data ? error.data.message : error;
         vm.msgError = `There was an error while adding a lecture: ${errMsg}.`;
         console.log(error);

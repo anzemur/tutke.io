@@ -2,6 +2,7 @@
   function addLectureController($uibModalInstance, lectures, userData) {
     var vm = this;
     vm.userData = userData;
+    vm.addLectureError = '';
 
     vm.lectureData = {
       price: '',
