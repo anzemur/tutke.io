@@ -24,17 +24,25 @@
     }
 
     /* Add comment modal pop up. */
-    vm.showAddReviewPopUp = function () {
+    vm.showAddReviewPopUp = function (commentId) {
       var sampleModalWindow = $uibModal.open({
         templateUrl: '/add-comment-modal-pop-up/add-comment-modal-pop-up.component.html',
         controller: 'addCommentCtrl',
         controllerAs: 'vm',
         resolve: {
           userPreviewData: function() {
-            return {
-              user: vm.previewedUser,
-              logedInUser: vm.logedInUser
-            };
+            if(commentId == null){
+              return {
+                user: vm.previewedUser,
+                logedInUser: vm.logedInUser
+              };
+            }else {
+              return {
+                user: vm.previewedUser,
+                logedInUser: vm.logedInUser,
+                commentToEdit: vm.previewedUser.comments.filter(x => x._id == commentId)[0]
+              };
+            }
           }
         }
       });

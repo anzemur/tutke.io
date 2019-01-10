@@ -2,7 +2,7 @@
   <button type="button" ng-click="vm.commentPopUp.cancelAddComment()" class="close">
     <span aria-hidden="true">x</span><span class="sr-only">Close</span>
   </button>
-  <h4 id="addReviewTitle">Add a review for {{ vm.userPreviewData.username }}:</h4>
+  <h4 id="addReviewTitle">Add a review for {{ vm.userPreviewData.user.username }}:</h4>
   <div class="addReviewContainer">
     <div class="row">
       <form name="addReview" ng-submit="vm.sendingCommentData()" role="form">
