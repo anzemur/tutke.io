@@ -1,5 +1,5 @@
 (() => {
-  function userCtrl($location, authentication, $routeParams, $uibModal, user) {
+  function userCtrl($location, authentication, $routeParams, $uibModal, user, lecturesRequests) {
     var vm = this;
     vm.msgError = '';
     vm.msgSuccess = '';
@@ -75,6 +75,46 @@
       });
     };
 
+
+    /* Sends lecture request to user. */
+    vm.sendLectureRequest = function(lectureId) {
+      vm.msgError = '';
+      vm.msgSuccess = '';
+      vm.msgInfo = '';
+
+      var lectureRequest = {
+        lecture: lectureId,
+        student: '',
+        tutor: '',
+        requestType: ''
+      };
+
+      if (vm.user.role == 'tutor') {
+        lectureRequest.student = vm.previewedUser._id,
+        lectureRequest.tutor = vm.user._id,
+        lectureRequest.requestType = 'tutorOffer'
+      } else {
+        lectureRequest.student = vm.user._id,
+        lectureRequest.tutor = vm.previewedUser._id,
+        lectureRequest.requestType = 'studentRequest'
+      }
+
+      /* Sends a lecture request to lecture's author. */
+      lecturesRequests.sendLectureRequest(lectureRequest).then(
+        function success(response) {
+          vm.msgSuccess = 'Lecture request sent.';
+        },
+        function error(error) {
+          if(error.data && error.data.message && error.data.message.indexOf("E11000 duplicate key error")  !== -1) {
+            vm.msgInfo = "You already sent request for this lecture.";  
+          } else {
+            vm.msgError = error.data ? error.data.message : error;
+          }
+          console.log(error);
+        }
+      )
+    }
+
     vm.deleteOwnComment = function (userId, commentId) {
       vm.msgSuccess = '';
       vm.msgError = '';
@@ -133,7 +173,7 @@
     vm.getUser();
   }
 
-  userCtrl.$inject = ['$location', 'authentication', '$routeParams', '$uibModal', 'user'];
+  userCtrl.$inject = ['$location', 'authentication', '$routeParams', '$uibModal', 'user', 'lecturesRequests'];
 
   /* global angular */
   angular
