@@ -135,8 +135,8 @@ module.exports.updateLecture = function(req, res) {
  * Body: {Lecture} Lecture model.
  */
 module.exports.createLecture = (req, res) => {
-  var userId = req.body.author;
-  req.body.author = mongoose.Types.ObjectId(req.body.author);
+  var userId = req.payload._id
+  req.body.author = mongoose.Types.ObjectId(userId);
   Lecture.create(req.body)
     .then(lecture => {
       User.updateOne(
