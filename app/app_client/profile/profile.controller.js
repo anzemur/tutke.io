@@ -47,6 +47,8 @@
 
     /* Edit lecture pop up. */
     vm.editLecturePopUp = function(lectureId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
       var editPopUp = $uibModal.open({
         templateUrl: '/add-lecture-pop-up/add-lecture-pop-up.component.html',
         controller: 'addLectureController',
@@ -102,6 +104,8 @@
 
     /* Updates user info. */
     vm.editUser = function(userId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
       var editUserPopUpWindow = $uibModal.open({
         templateUrl: '/edit-user-pop-up/edit-user-pop-up.component.html',
         controller: 'editUserCtrl',

@@ -24,6 +24,8 @@
 
     /* Add comment modal pop up. */
     vm.showAddReviewPopUp = function (commentId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
       var sampleModalWindow = $uibModal.open({
         templateUrl: '/add-comment-modal-pop-up/add-comment-modal-pop-up.component.html',
         controller: 'addCommentCtrl',
