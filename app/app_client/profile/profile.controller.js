@@ -12,20 +12,23 @@
     
     /* Deletes user from database and loads login page. */
     vm.deleteUser = function() {
-      vm.msgError = '';
-      user.deleteUser(vm.user._id).then(
-        function success(response) {
-          $.notify("Account successfully deleted!", "success");
-          authentication.doLogOut();
-          $location.path('/login');
-          $route.reload();
-        },
-        function error(error) {
-          var errMsg = error.data ? error.data.message : error;
-          vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
-          console.log(error);
-        }
-      )
+      var confirmAlert = confirm("Are you sure you want to delete your Tutke account?");
+      if (confirmAlert == true) {
+        vm.msgError = '';
+        user.deleteUser(vm.user._id).then(
+          function success(response) {
+            $.notify("Account successfully deleted!", "success");
+            authentication.doLogOut();
+            $location.path('/login');
+            $route.reload();
+          },
+          function error(error) {
+            var errMsg = error.data ? error.data.message : error;
+            vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
+            console.log(error);
+          }
+        );
+      }
     }
 
     /* Deletes lecture. */
