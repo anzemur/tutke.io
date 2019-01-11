@@ -8,37 +8,32 @@
   <form action='/signUp' method="POST">
     <div class="edit-user-input">
       <label for="first_name">First name<span style="color: red">*</span></label>
-      <input name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required
+      <input ng-model="vm.formData.firstName" name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required
         oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
     </div>
     <div class="edit-user-input">
       <label for="last_name">Last name<span style="color: red">*</span></label>
-      <input name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required
+      <input ng-model="vm.formData.lastName" name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required
         oninvalid="this.setCustomValidity('Please enter password.')" oninput="this.setCustomValidity('')">
     </div>
     <div class="edit-user-input">
       <label for="username">Username<span style="color: red">*</span></label>
-      <input name="username" class="form-control input-lg" placeholder="Username" type="text" tabindex="3" required
+      <input ng-model="vm.formData.username" name="username" class="form-control input-lg" placeholder="Username" type="text" tabindex="3" required
         oninvalid="this.setCustomValidity('Please enter username.')" oninput="this.setCustomValidity('')">
     </div>
     <div class="edit-user-input">
-      <label for="password">Password<span style="color: red">*</span></label>
-      <input name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="4" required
-        oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
-    </div>
-    <div class="edit-user-input">
       <label for="email">Email address<span style="color: red">*</span></label>
-      <input name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="5" required
+      <input ng-model="vm.formData.email" name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="5" required
         oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
     </div>
-    <div class="edit-user-input">
+    <div ng-if="vm.userToEdit.role === 'tutor'" class="edit-user-input">
       <label for="current_teaching">Current teaching institution</label>
-      <input name="current_teaching" class="form-control input-lg" placeholder="Current teaching institution" type="text"
+      <input ng-model="vm.formData.teachingInstitution" name="current_teaching" class="form-control input-lg" placeholder="Current teaching institution" type="text"
         tabindex="6">
     </div>
     <div class="edit-user-input">
       <label for="education">Select your level of education:<span style="color: red">*</span></label>
-      <select class="form-control  input-lg" id="education" required oninvalid="this.setCustomValidity('Please enter first name.')"
+      <select ng-model="vm.formData.educationLevel" class="form-control  input-lg" id="education" required oninvalid="this.setCustomValidity('Please enter first name.')"
         oninput="this.setCustomValidity('')">
         <option>Primary education</option>
         <option>Lower secondary education</option>
@@ -51,22 +46,10 @@
       </select>
     </div>
     <div class="edit-user-input">
-      <label for="education">Select field of your education:<span style="color: red">*</span></label>
-      <select class="form-control  input-lg" id="education" required oninvalid="this.setCustomValidity('Please enter first name.')"
+      <label for="fieldOfEducation">Enter your field of education<span style="color: red">*</span></label>
+      <input ng-model="vm.formData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education"
+        type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')"
         oninput="this.setCustomValidity('')">
-        <option>Primary education</option>
-        <option>Lower secondary education</option>
-        <option>Upper secondary education</option>
-        <option>Post-secondary non-tertiary education</option>
-        <option>Short-cycle tertiary education</option>
-        <option>Bachelor or equivalent</option>
-        <option>Master or equivalent</option>
-        <option>Doctoral or equivalent</option>
-      </select>
-    </div>
-    <div class="edit-user-input">
-      <label for="certificates">Upload certificates<span style="font-size: 14px; color: #878797"> (.png/.pdf)</span></label>
-      <input name="certificates" class="form-control input-lg" type="file" tabindex="5" multiple accept="image/png">
     </div>
     <div id="edit-user-btn" class="sign-up-btn-position">
       <button type="submit" id="edit-profile-button-modal" class="btn btn-primary btn-block btn-hover btn-click">Apply
