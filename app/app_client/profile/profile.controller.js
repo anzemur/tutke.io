@@ -124,6 +124,8 @@
           vm.user.fieldOfEducation = data.fieldOfEducation;
 
           if(vm.user.role == 'tutor') vm.user.teachingInstitution = data.teachingInstitution;
+
+          vm.msgSuccess = 'User was successfully edited.';
         }
       }, function(error){
           if (error === "backdrop click") return;
