@@ -99,10 +99,20 @@
         }
       )
     }
-    
+
     /* Updates user info. */
-    vm.editUser = function(id) {
-      console.log('edit '+ id);
+    vm.editUser = function(userId) {
+      var editUserPopUpWindow = $uibModal.open({
+        templateUrl: '/edit-user-pop-up/edit-user-pop-up.component.html',
+        controller: 'editUserCtrl',
+        controllerAs: 'vm',
+        windowClass: 'app-modal-window',
+        resolve: {
+          userData: function () {
+            return vm.user
+          }
+        }
+      });
     }
 
     /* Returns current logged in user. */

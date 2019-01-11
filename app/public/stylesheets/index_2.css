@@ -317,6 +317,21 @@ ul {
         margin: 10px 0px;
         height: 40px;
     }
+
+    .app-modal-window .modal-dialog {
+        width: 70%;
+    }
+
+    .edit-user-input {
+        width: 70%;
+        margin-top: 23px;
+        padding-left: 10%;
+    }
+
+    #edit-profile-button-modal {
+        width: 50vw;
+    }
+
 }
 
 @media (max-width: 1000px) {
@@ -343,6 +358,10 @@ ul {
 
     div#tutorsOffers {
         padding-left: 0;
+    }
+
+    input.edit-user-input {
+        width: 100%;
     }
 }
 
