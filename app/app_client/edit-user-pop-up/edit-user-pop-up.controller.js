@@ -38,12 +38,13 @@
       if (!vm.formData.firstName || !vm.formData.lastName || !vm.formData.username || !vm.formData.email || !vm.formData.educationLevel || !vm.formData.fieldOfEducation){
         vm.editUserFormError = "Please fill in all the required fields!";
         return false;
-      }else {
+      } else {
         vm.editUserWithId(vm.userToEdit._id, vm.formData);
       } 
     };
 
     vm.editUserWithId = function(userId, formData) {
+      vm.editUserFormError = '';
       user.editUser(userId, formData).then(
         function success(response) {
           vm.editUserPopUp.close(response.data);
@@ -51,6 +52,7 @@
         },
         function error(response) {
           vm.editUserFormError = "Editing did not succeed, please try again!"
+          console.log(error);
         }
       );
     }
