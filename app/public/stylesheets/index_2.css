@@ -481,6 +481,7 @@ div.panel-body p{
     background-color: #fff;
     border: 1px solid #ff9b00;
     border-radius: 0;
+    outline: none;
 }
 
 #requestTutorBtn:hover {
@@ -943,6 +944,7 @@ label.labl {
     color: #ff9b00;
     margin-bottom: 10px;
     height: 30px;
+    outline: none;
 }
 
 .AccountBtn:hover {
