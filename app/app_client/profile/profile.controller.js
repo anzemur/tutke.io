@@ -113,6 +113,26 @@
           }
         }
       });
+
+      editUserPopUpWindow.result.then(function(data) {
+        if(typeof data != 'undefined') {
+          vm.user.username = data.username;
+          vm.user.firstName = data.firstName;
+          vm.user.lastName = data.lastName;
+          vm.user.email = data.email;
+          vm.user.educationLevel = data.educationLevel;
+          vm.user.fieldOfEducation = data.fieldOfEducation;
+
+          if(vm.user.role == 'tutor') vm.user.teachingInstitution = data.teachingInstitution;
+        }
+      }, function(error){
+          if (error === "backdrop click") return;
+          if (error === "escape key press") return;
+
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error while editing a user: ${errMsg}.`;
+          console.log(error);
+      });
     }
 
     /* Returns current logged in user. */
