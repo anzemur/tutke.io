@@ -12,6 +12,7 @@ var ctrlUsers = require('../controllers/users');
 var ctrlComments = require('../controllers/comments');
 var ctrlLectures = require('../controllers/lectures');
 var ctrlLecturesRequests = require('../controllers/lectures-requests');
+var ctrlAdminPanel = require('../controllers/admin-panel');
 
 /**
  * USERS routes.
@@ -103,5 +104,14 @@ router.post('/lecturesRequests', auth,
 
 router.delete('/lecturesRequests/:lectureRequestId', auth,
   ctrlLecturesRequests.deleteLectureRequest);
+
+/**
+ * ADMIN panel routes.
+ */
+router.get('/drop',
+  ctrlAdminPanel.dropDb);
+
+router.get('/init',
+  ctrlAdminPanel.initDb);
 
 module.exports = router;

@@ -61,6 +61,11 @@ module.exports.register = async (req, res) => {
     return;
   }
 
+  if(req.body.role == 'admin') {
+    respondJson(res, 403, 'You are not allowed to do that!');
+    return;
+  }
+
   var user = new User();
 
   user.username = req.body.username;
