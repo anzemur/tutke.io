@@ -221,7 +221,7 @@
           </li>
           <li><a>{{ vm.pagination.page + 1 }} / {{ vm.numberOfPages }}</a></li>
           <li>
-          <a ng-click="vm.changePage(true)" ng-class="{'disabled': vm.lectures.length < 10}" href="#" aria-label="Next">
+          <a ng-click="vm.changePage(true)" ng-class="{'disabled': vm.pagination.page + 1 === vm.numberOfPages}" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
           </a>
           </li>
