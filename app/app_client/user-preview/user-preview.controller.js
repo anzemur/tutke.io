@@ -178,18 +178,21 @@
         return false;
       }
       vm.msgError = '';
-      user.deleteUser(vm.previewedUser._id).then(
-        function success(response) {
-          $.notify("User successfully deleted!", "success");
-          $location.path('/');
-          $route.reload();
-        },
-        function error(error) {
-          var errMsg = error.data ? error.data.message : error;
-          vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
-          console.log(error);
-        }
-      )
+      var confirmAlert = confirm('Are you sure you want to drop database? All of the data will be lost.');
+      if(confirmAlert) {
+        user.deleteUser(vm.previewedUser._id).then(
+          function success(response) {
+            $.notify("User successfully deleted!", "success");
+            $location.path('/');
+            $route.reload();
+          },
+          function error(error) {
+            var errMsg = error.data ? error.data.message : error;
+            vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
+            console.log(error);
+          }
+        )
+      }
     }
 
     vm.getUser();

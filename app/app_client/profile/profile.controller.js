@@ -10,6 +10,12 @@
     vm.lecturesRequestsAccepted = [];
     vm.lecturesRequestsPending = [];
     
+    /* Redirects admin to db page. */
+    vm.goToDbPage = function() {
+      $location.path('/db');
+      $route.reload();
+    }
+
     /* Deletes user from database and loads login page. */
     vm.deleteUser = function() {
       var confirmAlert = confirm("Are you sure you want to delete your Tutke account?");

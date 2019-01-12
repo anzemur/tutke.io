@@ -44,12 +44,13 @@
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
               <button ng-click="vm.showEditUserPopUp(vm.user._id)" class="AccountBtn" id="editAccBtn">Edit <i class="far fa-user"></i></button> 
             </div>
-          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-            <button ng-click="vm.deleteUser()" class="AccountBtn" id="deleteAccBtn">Delete <i class="far fa-trash-alt"></i></button>
-          </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+              <button ng-click="vm.deleteUser()" class="AccountBtn" id="deleteAccBtn">Delete <i class="far fa-trash-alt"></i></button>
+            </div>
           <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-            <button ng-href="/db" class="AccountBtn" id="editAccBtn">Admin console <i class="far fa-user"></i></button> 
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+              <button ng-click="vm.goToDbPage()" class="AccountBtn">Admin console <i class="far fa-user"></i></button> 
+            </div>
           </div>
         </div>
       </div>

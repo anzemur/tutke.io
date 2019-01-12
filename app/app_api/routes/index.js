@@ -108,10 +108,10 @@ router.delete('/lecturesRequests/:lectureRequestId', auth,
 /**
  * ADMIN panel routes.
  */
-router.get('/drop',
+router.get('/drop', auth,
   ctrlAdminPanel.dropDb);
 
-router.get('/init',
+router.get('/init', auth,
   ctrlAdminPanel.initDb);
 
 module.exports = router;

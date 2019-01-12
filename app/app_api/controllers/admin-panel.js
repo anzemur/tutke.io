@@ -20,72 +20,85 @@ var lectures = require('../models/static-data/lectures');
 
 /* Removes all of the collections from db. (Requirement for school project.) */
 module.exports.dropDb = async (req, res) => {
-  if (mongoose.connection.readyState == 1) {
-    var usersDrop = await dropUsers();
-    var lecturesDrop = await dropLectures();
-    var lecturesRequestsDrop = await dropLecturesRequests();
+  var userRole = req.payload.role;
 
-    respondJson(res, 200, null);
+  if(userRole == 'admin') {
+    if (mongoose.connection.readyState == 1) {
+      var usersDrop = await dropUsers();
+      var lecturesDrop = await dropLectures();
+      var lecturesRequestsDrop = await dropLecturesRequests();
+
+      respondJson(res, 200, null);
+    } else {
+      respondJson(res, 500, 'Database is not connected. Please connect to database and try again!');
+    }
   } else {
-    respondJson(res, 500, 'Database is not connected. Please connect to database and try again!');
+    respondJson(res, 403, errors.Forbidden);
+    return;
   }
 };
 
 /* Inits db to basic data. (Requirement for school project.) */
 module.exports.initDb = async (req, res) => {
-  var errorsCount = 0;
-  var successCount = 0;
+  var userRole = req.payload.role;
 
-  for(var i = 0; i < tutors.length; i++) {
-    var tutor = await createUser(tutors[i]);
-    tutor.error ? errorsCount++ : successCount++;
+  if(userRole == 'admin') {
+    var errorsCount = 0;
+    var successCount = 0;
+    for(var i = 0; i < tutors.length; i++) {
+      
+      var tutor = await createUser(tutors[i]);
+      tutor.error ? errorsCount++ : successCount++;
 
-    var student = await createUser(students[i]);
-    student.error ? errorsCount++ : successCount++;
+      var student = await createUser(students[i]);
+      student.error ? errorsCount++ : successCount++;
 
-    for(var j = 0; j < lectures.length; j++) {
-      if(lectures[j].lectureType == lectureEnums.lectureType.Posted) {
-        var lecture = await createLecture(lectures[j], tutor.token);
-        lecture.error ? errorsCount++ : successCount++;
+      for(var j = 0; j < lectures.length; j++) {
+        if(lectures[j].lectureType == lectureEnums.lectureType.Posted) {
+          var lecture = await createLecture(lectures[j], tutor.token);
+          lecture.error ? errorsCount++ : successCount++;
 
-        var lr = {
-          lecture: lecture._id,
-          tutor: tutor._id,
-          student: student._id,
-          status: lectureEnums.lecturesRequestStatus.Pending,
-          requestType: lectureEnums.lecturesRequestsTypes.StudentRequest
-        };
+          var lr = {
+            lecture: lecture._id,
+            tutor: tutor._id,
+            student: student._id,
+            status: lectureEnums.lecturesRequestStatus.Pending,
+            requestType: lectureEnums.lecturesRequestsTypes.StudentRequest
+          };
 
-        var lectureRequest = await createLectureRequest(lr, tutor.token);
-        lectureRequest.error ? errorsCount++ : successCount++;
-      } else {
-        lectures[j].author = student._id;
-        var lecture = await createLecture(lectures[j], student.token);
-        lecture.error ? errorsCount++ : successCount++;
+          var lectureRequest = await createLectureRequest(lr, tutor.token);
+          lectureRequest.error ? errorsCount++ : successCount++;
+        } else {
+          lectures[j].author = student._id;
+          var lecture = await createLecture(lectures[j], student.token);
+          lecture.error ? errorsCount++ : successCount++;
 
-        var lr = {
-          lecture: lecture._id,
-          tutor: tutor._id,
-          student: student._id,
-          status: lectureEnums.lecturesRequestStatus.Pending,
-          requestType: lectureEnums.lecturesRequestsTypes.TutorOffer
-        };
+          var lr = {
+            lecture: lecture._id,
+            tutor: tutor._id,
+            student: student._id,
+            status: lectureEnums.lecturesRequestStatus.Pending,
+            requestType: lectureEnums.lecturesRequestsTypes.TutorOffer
+          };
 
-        var lectureRequest = await createLectureRequest(lr, student.token);
-        lectureRequest.error ? errorsCount++ : successCount++;
+          var lectureRequest = await createLectureRequest(lr, student.token);
+          lectureRequest.error ? errorsCount++ : successCount++;
+        }
+      }
+
+      for(var j = 0; j < comments.length; j++) {
+        comments[j].author = student._id;
+        var comment = await addCommentToUser(comments[j], tutor._id, student.token);
+        comment.error ? errorsCount++ : successCount++;
       }
     }
+    var itemsCount = comments.length*students.length + students.length*2 + lectures.length*students.length*2;
+    respondJson(res, 200, { message: `Successfully added ${successCount}/${itemsCount}. Number of errors: ${errorsCount}` });
 
-    for(var j = 0; j < comments.length; j++) {
-      comments[j].author = student._id;
-      var comment = await addCommentToUser(comments[j], tutor._id, student.token);
-      comment.error ? errorsCount++ : successCount++;
-    }
+  } else {
+    respondJson(res, 403, errors.Forbidden);
+    return;
   }
-
-  var itemsCount = comments.length*students.length + students.length*2 + lectures.length*students.length*2;
-  respondJson(res, 200, { message: `Successfully added ${successCount}/${itemsCount}. Number of errors: ${errorsCount}` });
-
 };
 
 
