@@ -21,35 +21,35 @@
                         <form class="scrollbar-primary scrollSignup" style="overflow-y: scroll; height: 650px;" ng-submit="vm.checkRegistrationData()">
                             <div class="input-group sign-up-inputs">
                                 <label for="first_name">First name<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.firstName" name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                                <input id="firstName1" ng-model="vm.registrationData.firstName" name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="last_name">Last name<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.lastName" name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
+                                <input id="lastName1" ng-model="vm.registrationData.lastName" name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="username">Username<span style="color: red">*</span></label>
-                                <input id="username" ng-model="vm.registrationData.username" name="username" class="form-control input-lg" placeholder="Username" type="text" tabindex="3" required oninvalid="this.setCustomValidity('Please enter username.')" oninput="this.setCustomValidity('')">
+                                <input id="username1" id="username" ng-model="vm.registrationData.username" name="username" class="form-control input-lg" placeholder="Username" type="text" tabindex="3" required oninvalid="this.setCustomValidity('Please enter username.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="password">Password<span style="color: red">*</span></label>
-                                <input id="password" ng-model="vm.registrationData.password" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="4" required oninvalid="this.setCustomValidity('Please enter your password.')" oninput="this.setCustomValidity('')">
+                                <input id="password1" ng-model="vm.registrationData.password" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="4" required oninvalid="this.setCustomValidity('Please enter your password.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="password">Please confirm your password<span style="color: red">*</span></label>
-                                <input id="password1" ng-model="vm.registrationData.reenterPassword" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="5" required oninvalid="this.setCustomValidity('Please confirm your password.')" oninput="this.setCustomValidity('')">
+                                <input id="password2" ng-model="vm.registrationData.reenterPassword" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="5" required oninvalid="this.setCustomValidity('Please confirm your password.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="email">Email address<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.email" name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="6" required oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
+                                <input id="email1" ng-model="vm.registrationData.email" name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="6" required oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="current_teaching">Current teaching institution</label>
-                                <input ng-model="vm.registrationData.teachingInstitution" name="current_teaching" class="form-control input-lg" placeholder="Current teaching institution" type="text" tabindex="7">
+                                <input id="teachingInstitution1" ng-model="vm.registrationData.teachingInstitution" name="current_teaching" class="form-control input-lg" placeholder="Current teaching institution" type="text" tabindex="7">
                             </div>
                             <div class="form-group sign-up-inputs">
                                 <label for="education">Select your level of education:<span style="color: red">*</span></label>
-                                <select ng-model="vm.registrationData.educationLevel" class="form-control  input-lg" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                                <select id="educationLevel1" ng-model="vm.registrationData.educationLevel" class="form-control  input-lg" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
                                   <option>Primary education</option>
                                   <option>Lower secondary education</option>
                                   <option>Upper secondary education</option>
@@ -62,7 +62,7 @@
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="fieldOfEducation">Enter your field of education<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education" type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')" oninput="this.setCustomValidity('')">
+                                <input id="fieldOfEducation1" ng-model="vm.registrationData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education" type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="text-xs-center">
                               <div
@@ -84,11 +84,11 @@
                             <input ng-model="vm.registrationData.role" type="hidden" id="role" name="role" value="student">
                             <div class="input-group sign-up-inputs">
                                 <label for="first_name">First name<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.firstName" name="first_name" class="form-control input-lg col-lg-8" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                                <input id="firstName2" ng-model="vm.registrationData.firstName" name="first_name" class="form-control input-lg col-lg-8" placeholder="First name" type="text" tabindex="1" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="last_name">Last name<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.lastName" name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
+                                <input id="lastName2" ng-model="vm.registrationData.lastName" name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required oninvalid="this.setCustomValidity('Please enter last name.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="username">Username<span style="color: red">*</span></label>
@@ -96,19 +96,19 @@
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="password">Password<span style="color: red">*</span></label>
-                                <input id="password2" ng-model="vm.registrationData.password" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="4" required oninvalid="this.setCustomValidity('Please enter password.')" oninput="this.setCustomValidity('')">
+                                <input id="password3" ng-model="vm.registrationData.password" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="4" required oninvalid="this.setCustomValidity('Please enter password.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="password">Please confirm your password<span style="color: red">*</span></label>
-                                <input id="password3" ng-model="vm.registrationData.reenterPassword" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="5" required oninvalid="this.setCustomValidity('Please confirm your password.')" oninput="this.setCustomValidity('')">
+                                <input id="password4" ng-model="vm.registrationData.reenterPassword" name="password" class="form-control input-lg" placeholder="Password" type="password" tabindex="5" required oninvalid="this.setCustomValidity('Please confirm your password.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="input-group sign-up-inputs">
                                 <label for="email">Email address<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.email" name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="6" required oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
+                                <input id="email2" ng-model="vm.registrationData.email" name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="6" required oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="form-group sign-up-inputs">
                                 <label for="education">Select your level of education:<span style="color: red">*</span></label>
-                                <select ng-model="vm.registrationData.educationLevel" class="form-control  input-lg" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+                                <select id="educationLevel2" ng-model="vm.registrationData.educationLevel" class="form-control  input-lg" required oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
                                     <option>None</option>
                                     <option>Primary education</option>
                                     <option>Lower secondary education</option>
@@ -122,7 +122,7 @@
                             </div> 
                             <div class="input-group sign-up-inputs">
                                 <label for="fieldOfEducation">Enter your field of education<span style="color: red">*</span></label>
-                                <input ng-model="vm.registrationData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education" type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')" oninput="this.setCustomValidity('')">
+                                <input id="fieldOfEducation2" ng-model="vm.registrationData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education" type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="text-xs-center">
                               <div
@@ -134,7 +134,7 @@
                               </div>
                             </div>
                             <div class="sign-up-btn-position">
-                              <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
+                              <button type="submit" id="signupBtn1" class="btn btn-primary btn-block btn-hover btn-click">Sign Up</button>
                             </div>
                         </form>
                     </div>
