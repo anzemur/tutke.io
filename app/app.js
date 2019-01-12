@@ -68,7 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
 app.use(passport.initialize());
 
-// Odprava varnostnih pomanjkljivosti
+/* Adds another security level. */
 app.use(function (req, res, next) {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
