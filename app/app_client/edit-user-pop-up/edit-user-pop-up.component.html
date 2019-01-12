@@ -1,0 +1,65 @@
+<div class="row">
+  <div  class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="modal-header">
+      <button type="button" ng-click="vm.editUserPopUp.cancelEditUser()" class="close">
+        <span aria-hidden="true">x</span><span class="sr-only">Zapri</span>
+      </button>
+      <h4 class="modal-title">Edit user: {{ vm.userToEdit.username }}</h4>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+          <form ng-submit="vm.sendEditData()">
+            <div role="alert" ng-show="vm.commentFormError" class="alert alert-danger">{{ vm.commentFormError }}</div>
+            <div class="edit-user-input">
+              <label for="first_name">First name<span style="color: red">*</span></label>
+              <input ng-model="vm.formData.firstName" name="first_name" class="form-control input-lg" placeholder="First name" type="text" tabindex="1" required
+                oninvalid="this.setCustomValidity('Please enter first name.')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="edit-user-input">
+              <label for="last_name">Last name<span style="color: red">*</span></label>
+              <input ng-model="vm.formData.lastName" name="last_name" class="form-control input-lg" placeholder="Last name" type="text" tabindex="2" required
+                oninvalid="this.setCustomValidity('Please enter password.')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="edit-user-input">
+              <label for="username">Username<span style="color: red">*</span></label>
+              <input ng-model="vm.formData.username" name="username" class="form-control input-lg" placeholder="Username" type="text" tabindex="3" required
+                oninvalid="this.setCustomValidity('Please enter username.')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="edit-user-input">
+              <label for="email">Email address<span style="color: red">*</span></label>
+              <input ng-model="vm.formData.email" name="email" class="form-control input-lg" placeholder="Email address" type="email" tabindex="5" required
+                oninvalid="this.setCustomValidity('Please enter email.')" oninput="this.setCustomValidity('')">
+            </div>
+            <div ng-if="vm.userToEdit.role === 'tutor'" class="edit-user-input">
+              <label for="current_teaching">Current teaching institution</label>
+              <input ng-model="vm.formData.teachingInstitution" name="current_teaching" class="form-control input-lg" placeholder="Current teaching institution" type="text"
+                tabindex="6">
+            </div>
+            <div class="edit-user-input">
+              <label for="education">Select your level of education:<span style="color: red">*</span></label>
+              <select ng-model="vm.formData.educationLevel" class="form-control  input-lg" id="education" required oninvalid="this.setCustomValidity('Please enter first name.')"
+                oninput="this.setCustomValidity('')">
+                <option>Primary education</option>
+                <option>Lower secondary education</option>
+                <option>Upper secondary education</option>
+                <option>Post-secondary non-tertiary education</option>
+                <option>Short-cycle tertiary education</option>
+                <option>Bachelor or equivalent</option>
+                <option>Master or equivalent</option>
+                <option>Doctoral or equivalent</option>
+              </select>
+            </div>
+            <div class="edit-user-input">
+              <label for="fieldOfEducation">Enter your field of education<span style="color: red">*</span></label>
+              <input ng-model="vm.formData.fieldOfEducation" name="email" class="form-control input-lg" placeholder="Field of education"
+                type="text" tabindex="7" required oninvalid="this.setCustomValidity('Please enter your field of education.')"
+                oninput="this.setCustomValidity('')">
+            </div>
+            <div id="edit-user-btn" class="sign-up-btn-position">
+              <button type="submit" id="edit-profile-button-modal" class="btn btn-primary btn-block btn-hover btn-click col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">Apply Changes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>

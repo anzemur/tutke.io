@@ -1,0 +1,233 @@
+<navigation></navigation>
+<div role="alert" ng-if="vm.msgError" class="alert alert-danger alert-message">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p> {{ vm.msgError }} </p>
+</div>
+<div role="alert" ng-if="vm.msgSuccess" class="alert alert-success alert-message">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p> {{ vm.msgSuccess }} </p>
+</div>
+<div role="alert" ng-if="vm.msgInfo" class="alert alert-info alert-message">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p> {{ vm.msgInfo }} </p>
+</div>
+<div class="container" id="toggleNavContainer">
+  <ul class="nav nav-tabs nav-custom nav-justified">
+      <li ng-click="vm.changeLectureType('posted')" role="presentation" ng-class="{'active': vm.pagination.lectureType === 'posted'}"><a href="/">Lectures</a></li>
+      <li ng-click="vm.changeLectureType('requested')" role="presentation" ng-class="{'active': vm.pagination.lectureType === 'requested'}"><a href="/">Student's requests</a></li>
+    </ul>
+</div>
+<div class="container-fluid" id="mainContent">
+  <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" id="leftColumn">
+              <div id="notLoggedInInfo" role="alert" ng-show="!vm.isLoggedIn" class="alert alert-info"> Please log in to see profile info. </div>
+              <div ng-if="vm.isLoggedIn" class="thumbnail profileThumbnail profileThumbnailIndex"  stlye="margin-top:200px">
+                  <h4 id="profileTitle">Logged in as {{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
+                  <div ng-if="vm.user.role === 'tutor'" class="rating" id="userPreviewRating">
+                    <span ng-repeat="i in [0, 1, 2, 3, 4]">
+                      <i ng-if="vm.user.rating > i" class="fas fa-star"></i>
+                      <i ng-if="vm.user.rating < i+1" class="far fa-star"></i>
+                    </span>
+                  </div>
+                  <p text-align="right">Username: {{ vm.user.username }}</p>
+                  <p ng-if="vm.user.role === 'tutor'">Posted lectures: {{ vm.user.postedLectures.length }}</p>
+                  <p ng-if="vm.user.role === 'student'">Posted requests: {{ vm.user.postedLectures.length }}</p>
+                  <p>User since: {{ vm.user.createdAt | date: 'd. MMMM, yyyy' }}</p>
+                  <p>Account type: {{ vm.user.role.charAt(0).toUpperCase() + vm.user.role.slice(1) }}</p>
+              </div>
+              <div ng-if="vm.isLoggedIn && vm.user.role !== 'admin'" class="thumbnail upcomingEvents">
+                    <h4 id="upcomingEvents">Pending Requests</h4>
+                    <ul id="upcomingEventsList">
+                        <h4 ng-if="vm.pendingLectureRequest.length === 0" id="profileTitle">No pending requests.</h4>
+                        <li ng-if="vm.pendingLectureRequest.length > 0 && vm.user.role === 'tutor'" ng-repeat="request in vm.pendingLectureRequest">
+                            <p>{{ request.lecture.title }} - from {{ request.student.username }}<br><button ng-click="vm.answerToPendingLecture(true, request._id)" class="acceptDeny" id="acceptRequest">Accept</button><button ng-click="vm.answerToPendingLecture(false, request._id)" class="acceptDeny" id="denyRequest">Deny</button></p>
+                        </li>
+                        <li ng-if="vm.pendingLectureRequest.length > 0 && vm.user.role === 'student'" ng-repeat="request in vm.pendingLectureRequest">
+                            <p>{{ request.lecture.title }} - from {{ request.tutor.username }}<br><button ng-click="vm.answerToPendingLecture(true, request._id)" class="acceptDeny" id="acceptRequest">Accept</button><button ng-click="vm.answerToPendingLecture(false, request._id)" class="acceptDeny" id="denyRequest">Deny</button></p>
+                        </li>
+                    </ul>
+              </div>
+              <div class="thumbnail" id="dailyQuote">
+                  <h4>Daily Quote</h4>
+                  <p>“Winners embrace hard work. They love the discipline of it, the trade-off they’re making to win. Losers, on the other hand, see it as punishment. And that’s the difference.”</p>
+                  <p>- Lou Holtz</p>
+              </div>
+      </div>
+      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" id="rightColumn">
+        <div ng-if="vm.numberOfPages === 0">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                      <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                  </span>
+              </div>
+          </div>
+          <h3 style="padding-left: 15px">No lectures found.</h3>
+        </div>
+        <div ng-if="vm.numberOfPages > 1">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                      <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                  </span>
+              </div>
+          </div>
+          <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
+          <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
+              <div class="panel panel-default listingPanel">
+                  <div class="panel-heading">
+                      <h3 class="panel-title" id="adTitle">{{ lecture.title }}
+                          <span id="adPrice"> 
+                              <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
+                              <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
+                              </button>
+                          </span>
+                      </h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ lecture.description }}</p>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div ng-if="vm.numberOfPages === 1 && vm.pagination.search !== ''">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="vm.pagination.search" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                      <button ng-click="vm.doSearch()" class="btn btn-default" id="btnSearch" type="button">Go!</button>
+                  </span>
+              </div>
+          </div>
+          <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
+          <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures">
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
+              <div class="panel panel-default listingPanel">
+                  <div class="panel-heading">
+                      <h3 class="panel-title" id="adTitle">{{ lecture.title }}
+                          <span id="adPrice"> 
+                              <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
+                              <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
+                              </button>
+                          </span>
+                      </h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ lecture.description }}</p>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- Client side filtering/search when there is only one page of lectures. -->
+        <div ng-if="vm.numberOfPages === 1 && vm.pagination.search === ''">
+          <div class="container-fluid container-jumbotron" id="searchTutor">
+              <h3 style="padding-left: 15px">Search available lectures:</h3>
+              <div class="input-group">
+                  <input ng-model="searchFilter" id="filter" name="filter" type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn btn" id="btnSearch"></span>
+              </div>
+          </div>
+          <h3 ng-if="vm.lectures.length === 0" style="padding-left: 15px">No lectures found.</h3>
+          <div ng-if="vm.lectures.length > 0" class="totalAdPanel" ng-repeat="lecture in vm.lectures | filter: searchFilter">
+              <div class="extraHeading">
+                <span id="userPublisher">
+                  <a ng-if="lecture.author._id !== vm.user._id" ng-href="/user/{{lecture.author._id}}">{{ lecture.author.username }}</a>
+                  <a ng-if="lecture.author._id === vm.user._id" ng-href="/account">{{ lecture.author.username }}</a>
+                  <span class="date"> - {{ lecture.createdAt | date: 'd. MMMM, yyyy' }}</span>
+                </span>
+              </div>
+              <div class="panel panel-default listingPanel">
+                  <div class="panel-heading">
+                      <h3 class="panel-title" id="adTitle">{{ lecture.title }}
+                          <span id="adPrice"> 
+                              <span ng-if="lecture.lectureType === 'posted'"> {{ lecture.price }} €/h </span>
+                              <button ng-if="vm.user.role === 'student' && lecture.lectureType === 'posted' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Request </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'tutor' && lecture.lectureType === 'requested' && vm.isLoggedIn" ng-click="vm.sendLectureRequest(lecture._id, lecture.author._id)" type="button" class="btn btn-primary" id="requestTutorBtn" data-toggle="modal" data-target="#sendRequest">
+                                  <span class="buttonTextRequest">Send Offer </span><i class="far fa-share-square"></i>
+                              </button>
+                              <button ng-if="vm.user.role === 'admin'" ng-click="vm.deleteLectureAdmin(lecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal">
+                                <span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i>
+                              </button>
+                          </span>
+                      </h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ lecture.description }}</p>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div> 
+
+<a ng-if="vm.isLoggedIn && vm.user.role !== 'admin'" ng-click="vm.addNewLecturePopUp()" href="#" class="float" data-toggle="modal" data-target="#addListing">
+  <i class="fa fa-plus my-float"></i>
+</a>
+<div class="label-container">
+  <div class="label-text">Add a New Request</div>
+  <i class="fa fa-play label-arrow"></i>
+</div>
+
+
+<!-- pagination -->
+<div ng-if="vm.numberOfPages > 0" class="text-center">
+  <nav aria-label="Page navigation">
+      <ul class="pagination">
+          <li>
+          <a ng-click="vm.changePage(false)" ng-class="{'disabled': vm.pagination.page === 0}" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+          </a>
+          </li>
+          <li><a>{{ vm.pagination.page + 1 }} / {{ vm.numberOfPages }}</a></li>
+          <li>
+          <a ng-click="vm.changePage(true)" ng-class="{'disabled': vm.pagination.page + 1 === vm.numberOfPages}" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+          </a>
+          </li>
+      </ul>
+  </nav>
+</div>
+<!-- end of pagination -->
+
+<foot></foot>

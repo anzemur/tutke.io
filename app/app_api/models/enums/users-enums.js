@@ -1,4 +1,5 @@
 module.exports.userRoles = {
-  Tutor: 'tutor',
-  Student: 'student'
+  Tutor  : 'tutor',
+  Student: 'student',
+  Admin  : 'admin'
 }

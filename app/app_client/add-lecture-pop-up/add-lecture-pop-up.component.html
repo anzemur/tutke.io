@@ -1,0 +1,42 @@
+<div  class="container-fluid" id="mainContent">
+  <button type="button" ng-click="vm.lecturePopUp.cancel()" class="close">
+    <span aria-hidden="true">x</span><span class="sr-only">Close</span>
+  </button>
+  <h4 ng-if="!vm.lecture" id="addReviewTitle">Add new lecture:</h4>
+  <h4 ng-if="vm.lecture" id="addReviewTitle">Edit lecture:</h4>
+  <div ng-if="vm.addLectureError" class="row"></div>
+    <div ng-if="vm.addLectureError" role="alert" class="alert alert-danger col-sm-12 col-sx-12">{{ vm.addLectureError }}</div>
+  </div>
+  <form role="form" ng-submit="vm.sendLectureData()">
+      <div class="row input-row">
+          <div class="col-sm-12 col-sx-12">
+              <div class="form-subject">
+                  <label for="subject">Title:</label>
+                  <input ng-model="vm.lectureData.title" type="text" class="form-control" id="subject" placeholder="Title" required>
+              </div>
+          </div>
+      </div>
+      <div ng-if="vm.userData.user.role === 'tutor'" class="row input-row">
+          <div class="col-sm-12 col-sx-12">
+              <div class="form-subject">
+                  <label for="subject">Price:</label>
+                  <input ng-model="vm.lectureData.price" type="text" class="form-control" id="subject" placeholder="Price in €/h" required>
+              </div>
+          </div>
+      </div>        
+      <div class="row input-row">
+        <div class="col-sm-12 col-sx-12">
+            <div class="modal-form-group">
+                <label class="modal-comment">Description:</label>
+                <textarea ng-model="vm.lectureData.description" class="form-control" rows="5" id="modal-message"></textarea>
+            </div>
+        </div>
+      </div>
+      <div ng-if="!vm.lecture" class="sign-up-btn-position">
+        <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-hover btn-click"> Add lecture </button>
+      </div>
+      <div ng-if="vm.lecture" class="sign-up-btn-position">
+        <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-hover btn-click"> Edit lecture </button>
+      </div>
+  </form>
+</div>

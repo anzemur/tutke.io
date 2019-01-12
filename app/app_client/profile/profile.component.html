@@ -1,0 +1,176 @@
+<navigation></navigation>
+
+<div role="alert" ng-if="vm.msgError" class="alert alert-danger alert-message">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <p> {{ vm.msgError }} </p>
+</div>
+<div role="alert" ng-if="vm.msgSuccess" class="alert alert-success alert-message">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <p> {{ vm.msgSuccess }} </p>
+</div>
+<div role="alert" ng-if="vm.msgInfo" class="alert alert-info alert-message">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <p> {{ vm.msgInfo }} </p>
+</div>
+
+<div class="container-fluid" id="mainContent">
+  <div class="row">
+    <div ng-if="vm.user.role === 'admin'" class="col-xl-offset-2 col-lg-offset-2 col-md-offset-2 col-xl-8 col-lg-8 col-md-8 col-sm-6 col-sm-offset-3" id="leftColumn">
+        <div class="thumbnail profileThumbnail profilePreview" id="profileView">
+          <div class="profileHeader">
+            <h4 class="centered-h4">{{ vm.user.role.charAt(0).toUpperCase() + vm.user.role.slice(1) }}</h4>
+          </div>
+          <h4 id="profileTitle">{{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
+          <h4 id="profileTitle">Username: <i>{{ vm.user.username }}</i></h4>
+          <div ng-if="vm.user.role === 'tutor'" class="rating" id="userPreviewRating">
+            <span ng-repeat="i in [0, 1, 2, 3, 4]">
+              <i ng-if="vm.user.rating > i" class="fas fa-star"></i>
+              <i ng-if="vm.user.rating < i+1" class="far fa-star"></i>
+            </span>
+          </div>
+          <div ng-if="vm.user.role !== 'admin'">
+            <p ng-if="vm.user.role === 'tutor' && vm.user.teachingInstitution !== ''">Teaching institution: {{ vm.user.teachingInstitution }}</p>
+            <p>Education level: {{ vm.user.educationLevel }}</p>
+            <p>Field of education: {{ vm.user.fieldOfEducation }}</p>
+          </div>
+          
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+              <button ng-click="vm.showEditUserPopUp(vm.user._id)" class="AccountBtn" id="editAccBtn">Edit <i class="far fa-user"></i></button> 
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+              <button ng-click="vm.deleteUser()" class="AccountBtn" id="deleteAccBtn">Delete <i class="far fa-trash-alt"></i></button>
+            </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+              <button ng-click="vm.goToDbPage()" class="AccountBtn">Admin console <i class="far fa-user"></i></button> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="vm.user.role !== 'admin'" class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
+      <div class="thumbnail profileThumbnail profilePreview" id="profileView">
+        <div class="profileHeader">
+          <h4 class="centered-h4">{{ vm.user.role.charAt(0).toUpperCase() + vm.user.role.slice(1) }}</h4>
+        </div>
+        <h4 id="profileTitle">{{ vm.user.firstName }} {{ vm.user.lastName }}</h4>
+        <h4 id="profileTitle">Username: <i>{{ vm.user.username }}</i></h4>
+        <div ng-if="vm.user.role === 'tutor'" class="rating" id="userPreviewRating">
+          <span ng-repeat="i in [0, 1, 2, 3, 4]">
+            <i ng-if="vm.user.rating > i" class="fas fa-star"></i>
+            <i ng-if="vm.user.rating < i+1" class="far fa-star"></i>
+          </span>
+        </div>
+        <p ng-if="vm.user.role === 'tutor' && vm.user.teachingInstitution !== ''">Teaching institution: {{ vm.user.teachingInstitution }}</p>
+        <p>Education level: {{ vm.user.educationLevel }}</p>
+        <p>Field of education: {{ vm.user.fieldOfEducation }}</p>
+        
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <button ng-click="vm.editUser(vm.user._id)" class="AccountBtn" id="editAccBtn">Edit <i class="far fa-user"></i></button>
+          </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+          <button ng-click="vm.deleteUser()" confirm="Are you sure?" class="AccountBtn" id="deleteAccBtn">Delete <i class="far fa-trash-alt"></i></button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div ng-if="vm.user.role !== 'admin'" class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="rightColumn">
+    <h4 ng-if="vm.user.role === 'tutor'" class="centered-h4" id="postedLecturesMyAcc">Active posted lectures:</h4>
+    <h4 ng-if="vm.user.role === 'student'" class="centered-h4" id="postedLecturesMyAcc">Active posted lecture requests:</h4>
+      
+      <h4 ng-if="vm.user.postedLectures.length === 0" class="centered-h4"><i>No posted lectures.</i></h4>
+      <div class="totalAdPanel" ng-repeat="postedLecture in vm.user.postedLectures">
+        <div class="extraHeading"><span id="userPublisher"><span class="date">Posted: {{ postedLecture.createdAt | date: 'd. MMMM, yyyy' }}</span></span></div>
+        <div class="panel panel-default listingPanel">
+          <div ng-if="vm.user.role === 'tutor'" class="panel-heading">
+            <h3 class="panel-title" id="adTitle">{{ postedLecture.title }}<span id="adPrice">{{ postedLecture.price }} €/h 
+              <button ng-click="vm.editLecturePopUp(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
+              <button ng-click="vm.deleteLecture(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#deletePost"><span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i></button></span>
+            </h3>
+          </div>
+          <div ng-if="vm.user.role === 'student'" class="panel-heading">
+            <h3 class="panel-title" id="adTitle">{{ postedLecture.title }}<span id="adPrice">
+            <button ng-click="vm.editLecturePopUp(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#editPost"><span class="buttonTextRequest">Edit </span><i class="far fa-edit"></i></button>
+            <button ng-click="vm.deleteLecture(postedLecture._id)" class="btn btn-primary" id="requestTutorBtn" type="button" data-toggle="modal" data-target="#deletePost"><span class="buttonTextRequest">Delete </span><i class="far fa-trash-alt"></i></button></span></h3>
+          </div>
+          <div class="panel-body">
+            <p>{{ postedLecture.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+  </div>
+  
+  <hr> 
+  
+  <div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="leftColumn">
+      <h4 ng-if="vm.user.role === 'student'" class="centered-h4">Accepted Tutors Offers:</h4>
+      <h4 ng-if="vm.user.role === 'student' && vm.lecturesRequestsAccepted.length === 0" class="centered-h4"><i>No accepted requests.</i></h4>
+      <div ng-if="vm.user.role === 'student'" class="accountActivityPanel" ng-repeat="request in vm.lecturesRequestsAccepted"> 
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">by: {{ request.tutor.username }}</span></h3>
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
+      </div>
+      
+      <h4 ng-if="vm.user.role === 'tutor'" class="centered-h4">Accepted Students Requests:</h4>
+      <h4 ng-if="vm.user.role === 'tutor' && vm.lecturesRequestsAccepted.length === 0" class="centered-h4"><i>No accepted requests.</i></h4>
+      <div ng-if="vm.user.role === 'tutor'" class="accountActivityPanel" ng-repeat="request in vm.lecturesRequestsAccepted">
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">by: {{ request.student.username }}</span></h3>
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
+      </div>
+    </div>
+    
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="rightColumn">
+      <h4 ng-if="vm.user.role === 'student'" class="centered-h4">Sent Lecture Requests:</h4>
+      <h4 ng-if="vm.user.role === 'student' && vm.lecturesRequestsPending.length === 0" class="centered-h4"><i>No sent requests.</i></h4>
+      <div ng-if="vm.user.role === 'student'" class="accountActivityPanel" ng-repeat="request in vm.lecturesRequestsPending"> 
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">for: {{ request.tutor.username }}</span><button ng-click="vm.deletePendingLectureRequest(request._id)" class="deleteOffer">Delete</button></h3> 
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
+      </div>
+      
+      <h4 ng-if="vm.user.role === 'tutor'" class="centered-h4">Sent Lecture Offers:</h4>
+      <h4 ng-if="vm.user.role === 'tutor' && vm.lecturesRequestsPending.length === 0" class="centered-h4"><i>No sent requests.</i></h4>
+      <div ng-if="vm.user.role === 'tutor'" class="accountActivityPanel" ng-repeat="request in vm.lecturesRequestsPending">>
+        <h3 class="panel-title smallPanel">{{ request.lecture.title }} <span id="byUser">for: {{ request.student.username }}</span><button ng-click="vm.deletePendingLectureRequest(request._id)" class="deleteOffer">Delete</button></h3> 
+        <p id="dateOfAcceptRequest">{{ request.createdAt | date: 'H:mm d/MM/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <hr ng-if="vm.user.role === 'tutor'" >
+
+  <h4 ng-if="vm.user.role === 'tutor' && vm.user.comments.length === 0" class="centered-h4">No reviews for {{vm.user.username}}</h4>
+  <h4 ng-if="vm.user.role === 'tutor' && vm.user.comments.length > 0" class="centered-h4">Reviews ({{ vm.user.comments.length }}):</h4>
+  <div ng-if="vm.user.role === 'tutor' && vm.user.comments.length > 0" class="totalAdPanel" ng-repeat="comment in vm.user.comments">
+    <div class="panel panel-default listingPanel">
+      <div class="panel-heading">
+        <h3 class="panel-title reviewTitle" id="adTitle"><a ng-href="/user/{{comment.author._id}}">{{ comment.author.username }}</a> - {{ comment.createdAt | date: 'd. MMMM, yyyy (H:mm)' }}
+          <span id="adPrice">
+            <div class="rating" id="userPreviewRating">
+              <span ng-repeat="i in [0, 1, 2, 3, 4]">
+                <i ng-if="comment.rating > i" class="fas fa-star"></i>
+                <i ng-if="comment.rating < i+1" class="far fa-star"></i>
+              </span>
+            </div>
+          </span>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p id="commentBody">{{ comment.commentText }}</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<foot></foot>

@@ -10,24 +10,26 @@ var respondJson = helperFunctions.respondJson;
 /**
  * GET all lectures.
  * Query parameter: {boolean} populate
+ * Query parameter: {String} lectureType
  */
 module.exports.getLectures = (req, res) => {
   var queryOptions = {};
   if(req.query && req.query.lectureType) 
     queryOptions['lectureType'] = req.query.lectureType;
 
-  if(req.query && req.query.search && req.query != '') 
+  if(req.query && req.query.search && req.query != '') {
     queryOptions['$text'] = { $search: req.query.search };
+  }
 
   var query = Lecture.find(queryOptions);
   if(req.query && req.query.populate) 
     query.populate('author', 'username');
 
   query.sort( {createdAt: -1} );
-
+  
   if(req.query && req.query.page) {
-    query.skip(req.query.page*5);
-    query.limit(5);
+    query.skip(req.query.page*10);
+    query.limit(10);
   }
 
   query.exec((err, lectures) => {
@@ -134,8 +136,8 @@ module.exports.updateLecture = function(req, res) {
  * Body: {Lecture} Lecture model.
  */
 module.exports.createLecture = (req, res) => {
-  var userId = req.body.author;
-  req.body.author = mongoose.Types.ObjectId(req.body.author);
+  var userId = req.payload._id
+  req.body.author = mongoose.Types.ObjectId(userId);
   Lecture.create(req.body)
     .then(lecture => {
       User.updateOne(
@@ -159,24 +161,44 @@ module.exports.createLecture = (req, res) => {
 /**
  * DELETES lecture and adds its reference from the user.
  * Query parameter: {string} Author's userId.
- * Path parameter: {string} lectureId
  */
 module.exports.deleteLecture = (req, res) => {
-  if(req.query && req.query.userId) {
+  var userId = req.payload._id;
+  var userRole = req.payload.role;
+
+  if(userId) {
     if (req.params && req.params.lectureId) {
-      Lecture.findByIdAndDelete(req.params.lectureId)
-        .then(delRes => {
-          User.updateOne(
-            { _id: req.query.userId},
-            { $pull: { postedLectures: mongoose.Types.ObjectId(req.params.lectureId) } }
-          )
-          .then(updateRes => {
-            respondJson(res, 204, null);
-          })
-          .catch(err=> {
-            respondJson(res, 500, 'User update failed:' + err.message);
+      Lecture.findById(req.params.lectureId)
+        .then(lecture => {
+          if(!lecture) {
+            respondJson(res, 404, errors.NotFound);
             return;
-          })
+          } else {
+            if(userId == lecture.author.toString() || userRole == 'admin') {
+              Lecture.findByIdAndDelete(req.params.lectureId)
+                .then(delRes => {
+                  User.updateOne(
+                    { _id: userId},
+                    { $pull: { postedLectures: mongoose.Types.ObjectId(req.params.lectureId) } }
+                  )
+                  .then(updateRes => {
+                    respondJson(res, 204, null);
+                  })
+                  .catch(err=> {
+                    respondJson(res, 500, 'User update failed:' + err.message);
+                    return;
+                  })
+                })
+                .catch(err => {
+                  respondJson(res, 500, err.message);
+                  return;
+                });
+
+            } else {
+              respondJson(res, 403, errors.Forbidden);
+              return;
+            }
+          }
         })
         .catch(err => {
           respondJson(res, 500, err.message);
@@ -189,3 +211,33 @@ module.exports.deleteLecture = (req, res) => {
     respondJson(res, 400, errors.BadRequest + 'userId');
   }
 };
+
+
+/**
+ * GET lectures count and number of pages.
+ * Query parameter: {String} lectureType
+ */
+module.exports.getCount = (req, res) => {
+  var queryOptions = {};
+  if(req.query && req.query.lectureType) 
+    queryOptions['lectureType'] = req.query.lectureType;
+
+  if(req.query && req.query.search && req.query != '') 
+    queryOptions['$text'] = { $search: req.query.search };
+  
+  Lecture
+    .find(queryOptions)
+    .count()
+    .exec((err, response) => {
+      if (err) {
+        respondJson(res, 500, err.message);
+        return;
+      }
+
+      var data = {
+        pages: Math.ceil(response/10),
+        count: response
+      }
+      respondJson(res, 200, data);
+    });
+}

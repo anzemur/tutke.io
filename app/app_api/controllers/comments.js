@@ -87,8 +87,17 @@ var calcAvgRating = (user) => {
 		for (var i = 0; i < numOfComments; i++) {
       sumOfRatings += user.comments[i].rating;
 		}
-		var avgRating = parseInt(sumOfRatings / numOfComments, 10);
+		var avgRating = Math.round(sumOfRatings / numOfComments);
 		user.rating = avgRating;
+		user.save((err) => {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log("Tutor's rating was updated to: " + avgRating + ".");
+			}
+		});
+	} else {
+		user.rating = 0;
 		user.save((err) => {
 			if (err) {
 				console.log(err);
@@ -153,7 +162,7 @@ module.exports.updateComment = function(req, res) {
 					if(!currentComment) {
 						respondJson(res, 404, errors.NotFound);
 					} else {
-						currentComment.author = req.body.author; //samo za test
+						currentComment.author = req.body.author;
 						currentComment.rating = req.body.rating;
 						currentComment.commentText = req.body.commentText;
 						user.save(function(err, user){
