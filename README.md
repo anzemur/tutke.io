@@ -102,6 +102,19 @@ $ npm start
 ## Integration with outsourced api:
 User will be able to see daily students qoutes from this [API](http://quotes.rest/).
 
+## Web App loading times:
+
+| Screens:                       | Chrome        | Firefox |
+| -------------                  |:-------------:| -------:|
+| Sign Up screen (/register)     | 817ms         |  2320ms |
+| Log In screen (/login)         | 558ms         |   930ms |
+| Index/main screen (/)          | 766ms         |  1003ms |
+| Profile screen (/user/:userId) | 726ms         |   665ms |
+| My Account screen (/account)   | 597ms         |  1100ms |
+| /db                            | 474ms         |   658ms |
+
+Both browsers need the most time (2320ms) to load the Sign Up Screen. The biggest reason is the use of reCAPTCHA on this screen. Because reCAPTCHA is the product of Google, it is better optimised for its web browser Chrome and loads with it faster. For reCAPTCHA to work properly, the browser has to fetch fonts, images, scripts and other data which slows down the loading process.
+Additionally, all the screens load times are slowed by loading scripts of angular, bootstrap, analytics and other JS files that are required for the website to work. Because of the nature of the app not having any pictures, the screens can load faster.
 
 
 ## Development guidelines:
