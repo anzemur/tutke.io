@@ -46,6 +46,12 @@ module.exports.getLecturesRequests = (req, res) => {
  */
 module.exports.getLectureRequest = (req, res) => {
   if (req.params && req.params.lectureRequestId) {
+
+    if (!(/^\w+$/.test(req.params.lectureRequestId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
+
     var query = LecturesRequest.findById(req.params.lectureRequestId);
 
     if(req.query && req.query.populate) {
@@ -77,6 +83,10 @@ module.exports.getLectureRequest = (req, res) => {
  */
 module.exports.updateWholeLectureRequest = (req, res) => {
   if(req.params && req.params.lectureRequestId) {
+    if (!(/^\w+$/.test(req.params.lectureRequestId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     LecturesRequest
       .findById(req.params.lectureRequestId)
       .select('-createdAt -price -requestType -student -tutor -lecture')
@@ -151,6 +161,10 @@ module.exports.deleteLectureRequest = (req, res) => {
   var userId = userId = req.payload._id;
 
   if(req.params && req.params.lectureRequestId) {
+    if (!(/^\w+$/.test(req.params.lectureRequestId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     LecturesRequest.findById(req.params.lectureRequestId)
       .then(lecturesRequest => {
 

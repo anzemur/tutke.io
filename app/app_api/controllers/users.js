@@ -60,6 +60,10 @@ module.exports.getUser = (req, res) => {
  */
 module.exports.updateWholeUser = (req, res) => {
   if(req.params && req.params.userId) {
+    if (!(/^\w+$/.test(req.params.userId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     User
       .findById(req.params.userId)
       .select('-comments -rating -role -postedLectures -password -lecturesRequests')
@@ -102,6 +106,10 @@ module.exports.updateWholeUser = (req, res) => {
  */
 module.exports.updateUser = function(req, res) {
   if(req.params && req.params.userId) {
+    if (!(/^\w+$/.test(req.params.userId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     if(req.body.password || req.body.rating || req.body.role || req.body.postedLectures || req.body.lecturesRequests) {
       respondJson(res, 400, 'Cannot update attributes: password, rating, role, postedLectures, lecturesRequests.');
     } else {
@@ -140,6 +148,10 @@ module.exports.createUser = (req, res) => {
  */
 module.exports.deleteUser = function(req, res) {
   if(req.params.userId && req.params.userId) {
+    if (!(/^\w+$/.test(req.params.userId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     User
       .findByIdAndRemove(req.params.userId)
       .exec((err, users) => {

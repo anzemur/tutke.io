@@ -49,6 +49,10 @@ module.exports.getLectures = (req, res) => {
  */
 module.exports.getLecture = (req, res) => {
   if (req.params && req.params.lectureId) {
+    if (!(/^\w+$/.test(req.params.lectureId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     var query = Lecture.findById(req.params.lectureId);
 
     if(req.query && req.query.populate) 
@@ -76,6 +80,10 @@ module.exports.getLecture = (req, res) => {
  */
 module.exports.updateWholeLecture = (req, res) => {
   if(req.params && req.params.lectureId) {
+    if (!(/^\w+$/.test(req.params.lectureId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     Lecture
       .findById(req.params.lectureId)
       .select('-createdAt -author -lectureType')
@@ -113,6 +121,10 @@ module.exports.updateWholeLecture = (req, res) => {
  */
 module.exports.updateLecture = function(req, res) {
   if(req.params && req.params.lectureId) {
+    if (!(/^\w+$/.test(req.params.lectureId)) || Object.keys(req.query).length > 0) {
+      respondJson(res, 400, errors.BadRequest);
+      return;
+    }
     if(req.body.createdAt || req.body.author || req.body.lectureType) {
       respondJson(res, 400, 'Cannot update attributes: createdAt, author, lectureType.');
     } else {
@@ -168,6 +180,10 @@ module.exports.deleteLecture = (req, res) => {
 
   if(userId) {
     if (req.params && req.params.lectureId) {
+      if (!(/^\w+$/.test(req.params.lectureId)) || Object.keys(req.query).length > 0) {
+        respondJson(res, 400, errors.BadRequest);
+        return;
+      }
       Lecture.findById(req.params.lectureId)
         .then(lecture => {
           if(!lecture) {
