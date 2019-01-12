@@ -17,14 +17,20 @@ module.exports.getLectures = (req, res) => {
   if(req.query && req.query.lectureType) 
     queryOptions['lectureType'] = req.query.lectureType;
 
-  if(req.query && req.query.search && req.query != '') 
+  if(req.query && req.query.search && req.query != '') {
     queryOptions['$text'] = { $search: req.query.search };
+    queryOptions['score'] = { $meta: 'textScore' };
+  }
 
   var query = Lecture.find(queryOptions);
   if(req.query && req.query.populate) 
     query.populate('author', 'username');
 
-  query.sort( {createdAt: -1} );
+  if(req.query && !req.query.search) {
+    query.sort( {createdAt: -1} );
+  } else {
+    query.sort( {score: { $meta:'textScore' } })
+  }
 
   if(req.query && req.query.page) {
     query.skip(req.query.page*10);
