@@ -7,10 +7,10 @@ Students can respond to tutors' listings and vice versa. To know if they are com
 Our goal is to spread knowledge.
 
 ## Installation
-#### First you need to clone this repository using command: 
+#### First you need to clone this repository using command and change {bitbucket_username} with your account's username : 
 
 ```bash
-$ git clone bitbucket_url
+$ git clone https://{bitbucket_username}@bitbucket.org/spproject/tutke-app.git
 ```
 
 #### If you want to run tutke.io app you must have installed all of the following prerequisites:
@@ -50,7 +50,7 @@ $ npm start
 * PCs
 
 ## User's input checking
-* All of the fields on Sign Up, Edit my account, Add lecture and Update lecture pages are required. (varies based on user's role)
+* All of the fields on Sign Up, Edit my account, Add lecture and Update lecture pages are required (varies based on user's role). Input values are strings, but we have some special cases.
 * Passwords fields on Sign Up page and  Edit my account page: First and second password field must match and password must contain at least one lower case character, at least one upper case character and must be at least 8 characters long. (3 points validation)
 * Username field on Sign Up page and  Edit my account page: Username must be at least 6 characters long and must contain alphanumeric values. (3 points validation)
 * Price field on Add lecture and Edit lecture page: Price must be a number.

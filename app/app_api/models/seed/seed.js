@@ -3,13 +3,15 @@
  * Adds base data to db. User have to run it manually.  
  * You can define base data in ./data folder.
  */
+require('dotenv').load();
 var mongoose = require('mongoose');
 require('../db');
 var User = mongoose.model('User');
 var userData = require('./data/users')
 
 mongoose.connection.once('open', function () {
-  console.log('Started.')
+  var env = process.env.NODE_ENV ? process.env.NODE_ENV : 'develop'
+  console.log(`Started running seed on ${env}.`)
   var countAdded = 0;
   var countError = 0;
   var total = userData.length;
