@@ -90,9 +90,9 @@ module.exports.initDb = async (req, res) => {
 
 
 
-/* Removes all of the data in Users collection. */
+/* Removes all of the data in Users collection except for admins. */
 async function dropUsers() {
-  return await User.remove({});
+  return await User.remove({ role : { $ne: 'admin' } });
 }
 
 /* Removes all of the data in Lectures collection. */

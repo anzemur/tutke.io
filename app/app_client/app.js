@@ -26,6 +26,11 @@
         controller: 'profileCtrl',
         controllerAs: 'vm'
       })
+      .when('/db', {
+        templateUrl: 'db-admin-panel/db-admin-panel.component.html',
+        controller: 'adminCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({redirecTo: '/'});
     $locationProvider.html5Mode(true);
   }
