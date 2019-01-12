@@ -10,22 +10,31 @@
     vm.lecturesRequestsAccepted = [];
     vm.lecturesRequestsPending = [];
     
+    /* Redirects admin to db page. */
+    vm.goToDbPage = function() {
+      $location.path('/db');
+      $route.reload();
+    }
+
     /* Deletes user from database and loads login page. */
     vm.deleteUser = function() {
-      vm.msgError = '';
-      user.deleteUser(vm.user._id).then(
-        function success(response) {
-          $.notify("Account successfully deleted!", "success");
-          authentication.doLogOut();
-          $location.path('/login');
-          $route.reload();
-        },
-        function error(error) {
-          var errMsg = error.data ? error.data.message : error;
-          vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
-          console.log(error);
-        }
-      )
+      var confirmAlert = confirm("Are you sure you want to delete your Tutke account?");
+      if (confirmAlert == true) {
+        vm.msgError = '';
+        user.deleteUser(vm.user._id).then(
+          function success(response) {
+            $.notify("Account successfully deleted!", "success");
+            authentication.doLogOut();
+            $location.path('/login');
+            $route.reload();
+          },
+          function error(error) {
+            var errMsg = error.data ? error.data.message : error;
+            vm.msgError = `There was an error when trying to delete user: ${errMsg}.`;
+            console.log(error);
+          }
+        );
+      }
     }
 
     /* Deletes lecture. */
@@ -47,6 +56,8 @@
 
     /* Edit lecture pop up. */
     vm.editLecturePopUp = function(lectureId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
       var editPopUp = $uibModal.open({
         templateUrl: '/add-lecture-pop-up/add-lecture-pop-up.component.html',
         controller: 'addLectureController',
@@ -99,10 +110,44 @@
         }
       )
     }
-    
+
     /* Updates user info. */
-    vm.editUser = function(id) {
-      console.log('edit '+ id);
+    vm.editUser = function(userId) {
+      vm.msgSuccess = '';
+      vm.msgError = '';
+      var editUserPopUpWindow = $uibModal.open({
+        templateUrl: '/edit-user-pop-up/edit-user-pop-up.component.html',
+        controller: 'editUserCtrl',
+        controllerAs: 'vm',
+        windowClass: 'app-modal-window',
+        resolve: {
+          userData: function () {
+            return vm.user
+          }
+        }
+      });
+
+      editUserPopUpWindow.result.then(function(data) {
+        if(typeof data != 'undefined') {
+          vm.user.username = data.username;
+          vm.user.firstName = data.firstName;
+          vm.user.lastName = data.lastName;
+          vm.user.email = data.email;
+          vm.user.educationLevel = data.educationLevel;
+          vm.user.fieldOfEducation = data.fieldOfEducation;
+
+          if(vm.user.role == 'tutor') vm.user.teachingInstitution = data.teachingInstitution;
+
+          vm.msgSuccess = 'User was successfully edited.';
+        }
+      }, function(error){
+          if (error === "backdrop click") return;
+          if (error === "escape key press") return;
+
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error while editing a user: ${errMsg}.`;
+          console.log(error);
+      });
     }
 
     /* Returns current logged in user. */

@@ -21,7 +21,6 @@
     };
 
     if(vm.comment){
-      console.log('aaaa', vm.comment);
       vm.formData.comment = vm.comment.commentText;
       vm.formData.rating = vm.comment.rating;
     }

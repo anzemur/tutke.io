@@ -86,6 +86,25 @@ h3.titleLogin {
     background-color: #ff8800 !important;
 }
 
+#dropDbBtn.btn-primary {
+  /* margin-top: 10px; */
+  border-radius: 8px;
+  font-size: 20px;
+  height: 45px;
+  border: none;
+  background-color: #ff9b00;
+  color: #FFF;
+}
+
+#dropDbBtn.btn-hover:hover {
+  background-color: #ffb648
+}
+
+#dropDbBtn.btn-click:active {
+  background-color: #ff8800 !important;
+}
+
+
 .log-in-form.panel.panel-default {
     border: 1px solid #ff9b00;
 }
@@ -317,6 +336,10 @@ ul {
         margin: 10px 0px;
         height: 40px;
     }
+
+    .edit-user-input {
+      margin-top: 23px;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -343,6 +366,10 @@ ul {
 
     div#tutorsOffers {
         padding-left: 0;
+    }
+
+    input.edit-user-input {
+        width: 100%;
     }
 }
 
@@ -462,6 +489,7 @@ div.panel-body p{
     background-color: #fff;
     border: 1px solid #ff9b00;
     border-radius: 0;
+    outline: none;
 }
 
 #requestTutorBtn:hover {
@@ -924,6 +952,7 @@ label.labl {
     color: #ff9b00;
     margin-bottom: 10px;
     height: 30px;
+    outline: none;
 }
 
 .AccountBtn:hover {

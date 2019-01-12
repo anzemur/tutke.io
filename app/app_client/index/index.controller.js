@@ -123,7 +123,8 @@
           vm.pendingLectureRequest = vm.pendingLectureRequest.filter(x => x._id != id);
         },
         function error(error) {
-          vm.msgError = error.data ? error.data.message : error;
+          var errMsg = error.data ? error.data.message : error;
+          vm.msgError = `There was an error while answering to lecture request: ${errMsg}.`;
           console.log(error);
         }
       )

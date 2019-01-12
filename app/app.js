@@ -12,27 +12,30 @@ var passport = require('passport');
 
 /* Minify code into one .min file */
 var mergedCode = uglifyJs.minify({
-  'app.js': fs.readFileSync('app_client/app.js', 'utf-8'),
+  'app.js'                                : fs.readFileSync('app_client/app.js', 'utf-8'),
   /* Directives */
-  'foot.directive.js': fs.readFileSync('app_client/shared/directives/foot/foot.directive.js', 'utf-8'),
-  'navigation.directive.js': fs.readFileSync('app_client/shared/directives/navigation/navigation.directive.js', 'utf-8'),
+  'foot.directive.js'                     : fs.readFileSync('app_client/shared/directives/foot/foot.directive.js', 'utf-8'),
+  'navigation.directive.js'               : fs.readFileSync('app_client/shared/directives/navigation/navigation.directive.js', 'utf-8'),
   /* Services */
-  'authentication.service.js': fs.readFileSync('app_client/shared/services/authentication.service.js', 'utf-8'),
-  'lectures.service.js': fs.readFileSync('app_client/shared/services/lectures.service.js', 'utf-8'),
-  'lecture-requests.service.js': fs.readFileSync('app_client/shared/services/lecture-requests.service.js', 'utf-8'),
-  'user.service.js': fs.readFileSync('app_client/shared/services/user.service.js', 'utf-8'),
+  'authentication.service.js'             : fs.readFileSync('app_client/shared/services/authentication.service.js', 'utf-8'),
+  'lectures.service.js'                   : fs.readFileSync('app_client/shared/services/lectures.service.js', 'utf-8'),
+  'lecture-requests.service.js'           : fs.readFileSync('app_client/shared/services/lecture-requests.service.js', 'utf-8'),
+  'user.service.js'                       : fs.readFileSync('app_client/shared/services/user.service.js', 'utf-8'),
+  'admin.service.js'                      : fs.readFileSync('app_client/shared/services/admin.service.js', 'utf-8'),
   /* Controllers */
-  'index.controller.js': fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
-  'log-in.controller.js': fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
-  'registration.controller.js': fs.readFileSync('app_client/authentication/registration/registration.controller.js', 'utf-8'),
+  'index.controller.js'                   : fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
+  'log-in.controller.js'                  : fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
+  'registration.controller.js'            : fs.readFileSync('app_client/authentication/registration/registration.controller.js', 'utf-8'),
   'add-comment-modal-pop-up.controller.js': fs.readFileSync('app_client/add-comment-modal-pop-up/add-comment-modal-pop-up.controller.js', 'utf-8'),
-  'user-preview.controller.js': fs.readFileSync('app_client/user-preview/user-preview.controller.js', 'utf-8'),
-  'profile.controller.js': fs.readFileSync('app_client/profile/profile.controller.js', 'utf-8'),
-  'navigation.controller.js': fs.readFileSync('app_client/shared/directives/navigation/navigation.controller.js', 'utf-8'),
-  'add-lecture-pop-up.controller.js': fs.readFileSync('app_client/add-lecture-pop-up/add-lecture-pop-up.controller.js', 'utf-8'),
+  'user-preview.controller.js'            : fs.readFileSync('app_client/user-preview/user-preview.controller.js', 'utf-8'),
+  'profile.controller.js'                 : fs.readFileSync('app_client/profile/profile.controller.js', 'utf-8'),
+  'navigation.controller.js'              : fs.readFileSync('app_client/shared/directives/navigation/navigation.controller.js', 'utf-8'),
+  'add-lecture-pop-up.controller.js'      : fs.readFileSync('app_client/add-lecture-pop-up/add-lecture-pop-up.controller.js', 'utf-8'),
+  'edit-user-pop-up.controller.js'        : fs.readFileSync('app_client/edit-user-pop-up/edit-user-pop-up.controller.js', 'utf-8'),
+  'db-admin-panel.controller.js'          : fs.readFileSync('app_client/db-admin-panel/db-admin-panel.controller.js', 'utf-8'),
   /* Filters */
-  'students-lecture-requests.filter.js': fs.readFileSync('app_client/shared/filters/students-lecture-requests.filter.js', 'utf-8'),
-  'tutors-lecture-requests.filter.js': fs.readFileSync('app_client/shared/filters/tutors-lecture-requests.filter.js', 'utf-8'),
+  'students-lecture-requests.filter.js'   : fs.readFileSync('app_client/shared/filters/students-lecture-requests.filter.js', 'utf-8'),
+  'tutors-lecture-requests.filter.js'     : fs.readFileSync('app_client/shared/filters/tutors-lecture-requests.filter.js', 'utf-8'),
 });
 
 /* Save merged code to new file: */ 
