@@ -174,7 +174,8 @@ Every other user role can perform all of the actions that "Not registered user" 
 	
 	
 ## Integration with outsourced api:
-User will be able to see daily students qoutes from this [API](http://quotes.rest/).
+* Google's reCAPTCHA
+* Google Analytics
 
 ## Web App loading times:
 
