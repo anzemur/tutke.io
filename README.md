@@ -190,6 +190,74 @@ User will be able to see daily students qoutes from this [API](http://quotes.res
 Both browsers need the most time (2320ms) to load the Sign Up Screen. The biggest reason is the use of reCAPTCHA on this screen. Because reCAPTCHA is the product of Google, it is better optimised for its web browser Chrome and loads with it faster. For reCAPTCHA to work properly, the browser has to fetch fonts, images, scripts and other data which slows down the loading process.
 Additionally, all the screens load times are slowed by loading scripts of angular, bootstrap, analytics and other JS files that are required for the website to work. Because of the nature of the app not having any pictures, the screens can load faster.
 
+## JMeter load/stress test
+
+Database, application and JMeter all ran on the same local machine while testing.
+
+#### Machine specifications:
+* Proccessor: Intel(R) Core(TM) i5-4670 CPU 3.40 GHz
+* RAM: 8.00 GB
+* Disk: 256 GB SSD
+
+### Tests:
+
+* Sample - number of requests sent
+* Avg - an Arithmetic mean for all responses (sum of all times / count)
+* Min - Minimal response time (ms)
+* Max - Maximum response time (ms)
+* Deviation - the Standard Deviation of the sample elapsed time
+* Error rate - percent of requests with errors
+* Throughput - how many requests per second does your server handle. Larger is better.
+* KB/Sec - self expalanatory
+* Avg. Bytes - average response size
+
+* Number of Threads: (Number of users connects to the target website)
+* Loop Count: (Number of time to execute testing)
+* Ramp-Up Period: (How long to delay before starting the next user)
+
+#### 1.
+* Number of Threads: 4450
+* Loop Count: 1
+* Ramp-Up Period: 10
+
+##### Result:
+
+| Label | #Samples | Average | Min | Max | Std. Dev. | Error % | Throughput | Received KB/sec | Sent KB/sec | Avg. Bytes |
+| ----- | -------- | ------- | --- | --- | --------- | --------| ---------- | --------------- | ----------- | ---------- |
+| HTTP  | 4450     | 181     | 2   | 664 | 181.24    | 0.000%  | 405.8/sec  | 848.38          | 46.76       | 2141.0     |
+
+This is the maximum number of load (users at the same time) that our application can serve without any errors. Standard deviation is quite low and server's Throughput is very high.
+
+#### 2.
+* Number of Threads: 7500
+* Loop Count: 1
+* Ramp-Up Period: 10
+
+##### Result:
+
+| Label | #Samples | Average | Min | Max  | Std. Dev. | Error % | Throughput | Received KB/sec | Sent KB/sec | Avg. Bytes |
+| ----- | -------- | ------- | --- | ---- | --------- | --------| ---------- | --------------- | ----------- | ---------- |
+| HTTP  | 7500     | 1890    | 17  | 3840 | 571.336   | 35,07%  | 519.1/sec  | 1194.85         | 38.30       | 2356.8     |
+
+If we higher the load then we can see some troubles. More than on third of requests responds with and error (mostly "Connection refused"). We can se that the max and the average response time is allot hire under heavier load.
+
+#### 3.
+* Number of Threads: 15000
+* Loop Count: 1
+* Ramp-Up Period: 10
+
+##### Result:
+
+| Label | #Samples | Average | Min | Max  | Std. Dev. | Error % | Throughput | Received KB/sec | Sent KB/sec | Avg. Bytes |
+| ----- | -------- | ------- | --- | ---- | --------- | --------| ---------- | --------------- | ----------- | ---------- |
+| HTTP  | 15000    | 2889    | 7   | 7271 | 922.21    | 71.91%  | 882.1/sec  | 2216.11         | 28.55       | 2572.5     |
+
+If we higher the load to 15k users the app is almost not functional anymore becouse almost two thirds of request fail, but the server is still up and running.
+At this point and higer (25k, 35k, etc) of users app is not functional anymore. Loading times are too long for use and most of the requests fails. But the server doesn't crash and is still running.
+At 5000 users server shoudl scale and get more resources.
+
+You can see more detailed reports in app/tests/JMeter/repors folder.
+
 
 ## Development guidelines:
 * ### Develop branch
