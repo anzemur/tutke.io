@@ -13,6 +13,10 @@ var respondJson = helperFunctions.respondJson;
 module.exports.createComment = function(req, res) {
   var idUser = req.params.userId;
   if (idUser) {
+		if (!(/^\w+$/.test(idUser)) ||  Object.keys(req.query).length > 0) {
+			respondJson(res, 400, errors.BadRequest);
+			return;
+		}
 		User
 			.findById(idUser)
 			.select('comments')
@@ -39,6 +43,9 @@ module.exports.createComment = function(req, res) {
 var addComment = function(req, res, user) {
 	if (!user) {
 		respondJson(res, 404, errors.NotFound);
+	} else if (isNaN(parseInt(req.body.rating, 10))) {
+		respondJson(res, 400, errors.BadRequest);
+		
 	}	else {
 		user.comments.push({
 			author: req.body.author,
@@ -110,6 +117,10 @@ var calcAvgRating = (user) => {
   
 module.exports.getComment = function(req, res) {
   if (req.params && req.params.userId && req.params.commentId) {
+		if (!(/^\w+$/.test(req.params.userId)) || !(/^\w+$/.test(req.params.commentId)) || Object.keys(req.query).length > 0) {
+			respondJson(res, 400, errors.BadRequest);
+			return;
+		}
 		User
 			.findById(req.params.userId)
 			.select('username comments')
@@ -141,7 +152,7 @@ module.exports.getComment = function(req, res) {
 };
   
 module.exports.updateComment = function(req, res) {
-  if(!req.params.userId || !req.params.commentId) {
+	if (!req.params.userId || !req.params.commentId || !(/^\w+$/.test(req.params.userId)) || !(/^\w+$/.test(req.params.commentId)) || Object.keys(req.query).length > 0) {
 		respondJson(res, 400, errors.BadRequest);
 		return;
 	}
@@ -161,6 +172,9 @@ module.exports.updateComment = function(req, res) {
 					var currentComment = user.comments.id(req.params.commentId);
 					if(!currentComment) {
 						respondJson(res, 404, errors.NotFound);
+					} else if (isNaN(parseInt(req.body.rating, 10))) {
+						respondJson(res, 400, errors.BadRequest);
+
 					} else {
 						currentComment.author = req.body.author;
 						currentComment.rating = req.body.rating;
@@ -182,7 +196,7 @@ module.exports.updateComment = function(req, res) {
 };
   
 module.exports.deleteComment = function(req, res) {
-  if (!req.params.userId || !req.params.commentId){
+	if (!req.params.userId || !req.params.commentId || !(/^\w+$/.test(req.params.userId)) || !(/^\w+$/.test(req.params.commentId)) || Object.keys(req.query).length > 0){
 		respondJson(res, 400, errors.BadRequest);
 		return;
 	}

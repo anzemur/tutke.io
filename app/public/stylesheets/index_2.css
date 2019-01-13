@@ -222,6 +222,24 @@ h3.titleLogin {
     background-color: #ff8800 !important;
 }
 
+#signupBtn1.btn-primary {
+  margin-top: 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 45px;
+  border: none;
+  background-color:#ff9b00;
+  color: #FFF;
+}
+
+#signupBtn1.btn-hover:hover {
+  background-color: #ffb648
+}
+
+#signupBtn1.btn-click:focus {
+  background-color: #ff8800 !important;
+}
+
 .input-group.sign-up-inputs {
     padding-left: 25px;
     padding-right: 25px;

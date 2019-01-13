@@ -4,5 +4,6 @@
 *npm*.log
 app/node_modules
 app/.env
+app/app_api/models/seed/.env
 app/public/angular/tutke.min.js
 app/package-lock.json

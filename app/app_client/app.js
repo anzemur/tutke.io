@@ -1,5 +1,8 @@
 (function () {
-  function setUp($routeProvider, $locationProvider) {
+  function setUp($routeProvider, $locationProvider, $httpProvider) {
+
+    $httpProvider.defaults.headers.get = { 'X-Frame-Options': 'DENY' };
+
     $routeProvider
       .when('/', {
         templateUrl: 'index/index.component.html',
@@ -38,5 +41,5 @@
   /* global angular */
   angular
     .module('tutke', ['ngRoute', 'ui.bootstrap', 'vcRecaptcha'])
-    .config(['$routeProvider', '$locationProvider', setUp]);
+    .config(['$routeProvider', '$locationProvider', '$httpProvider', setUp]);
 })();
