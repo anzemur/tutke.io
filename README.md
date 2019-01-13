@@ -1,7 +1,6 @@
 # Tutke.io
 
-Tutke.io is an app that enables tutors and students to connect. 
-You can sign up as either one, depending on whether you wish to learn, or teach.
+Tutke.io is an app that enables tutors and students to connect. You can sign up as either one, depending on whether you wish to learn, or teach.
 Both can post to the site, tutors put out ads about what they tutor, and students put out requests of what they are looking to learn. 
 Students can respond to tutors' listings and vice versa. To know if they are compatible, they can view each other's profiles, read reviews, and listings, current and past alike.
 Our goal is to spread knowledge.
