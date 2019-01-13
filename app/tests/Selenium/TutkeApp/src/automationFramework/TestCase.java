@@ -4,6 +4,7 @@ package automationFramework;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,7 +43,7 @@ public class TestCase {
 	public static void start(WebDriver driver) {
 		 
 		//Launch the app
-		driver.get("https://tutke-io.herokuapp.com");
+		driver.get("https://tutke-io.herokuapp.com/");
 		 
 		if(driver.getTitle().contentEquals("Tutke.io")) {
 			// Print to screen
@@ -68,7 +69,7 @@ public class TestCase {
 	public static void navigateToMainPage(WebDriver driver) {
 		 
 		//quit chrome
-		driver.navigate().to("https://tutke-io.herokuapp.com");
+		driver.navigate().to("https://tutke-io.herokuapp.com/");
 		System.out.println("[OK] Navigated back to main page");
 		
     }
@@ -143,7 +144,11 @@ public class TestCase {
 		Thread.sleep(6000);
 		
 		String iAmHere = driver.getCurrentUrl();
-		System.out.println("[OK] Registration failed due to ReCAPTCHA. Currently at url " + iAmHere);
+		if (!iAmHere.contentEquals("https://tutke-io.herokuapp.com/")) {
+			System.out.println("[OK] Registration failed due to ReCAPTCHA. Currently at url " + iAmHere);
+		} else {
+			System.out.println("[error] Registration did not fail but should have. Currently at url " + iAmHere);
+		}
 		
 		Thread.sleep(7000);
 		
@@ -179,9 +184,15 @@ public class TestCase {
 		Thread.sleep(4000);
 		
 		String iAmHere = driver.getCurrentUrl();
-		System.out.println("[OK] Logged in + currently at url " + iAmHere);
+		//System.out.println("[OK] Logged in + currently at url " + iAmHere);
 		
 		Thread.sleep(3000);
+		
+		if (iAmHere.contentEquals("https://tutke-io.herokuapp.com/")) {
+			System.out.println("[OK] Log in succasful, back at url " + iAmHere);
+		} else {
+			System.out.println("[error] Log in unsuccesful. Currently at url " + iAmHere);
+		}
 		
     }
 	
@@ -256,14 +267,18 @@ public class TestCase {
 		Thread.sleep(2000);
 		
 		driver.findElement(By.id("signupBtn")).submit();
+		Thread.sleep(2000);
 		
-		if (driver.findElement(By.xpath("/html/body/div/div[1]")).isDisplayed()) {
+		if (driver.findElement(By.className("alert-success")).isDisplayed()) {
 			System.out.println("[OK] Lecture added");
 		} else {
 			System.out.println("[error] Lecture not added");
 		}
 		
-		Thread.sleep(3000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
+		
+		//Thread.sleep(3000);
 		
 	}
 	
@@ -271,7 +286,7 @@ public class TestCase {
 		 
 		//navigates to profile
 		//wait for the page to load
-		Thread.sleep(5000);
+		Thread.sleep(4000);
 		driver.findElement(By.id("userIconToggle")).click();
 		Thread.sleep(2000);
 		
@@ -279,15 +294,24 @@ public class TestCase {
 		Thread.sleep(2000);
 		
 		WebElement deletedPost = driver.findElement(By.xpath("//*[@id=\"rightColumn\"]/div[7]/div[2]/div/h3/span/button[2]"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deletedPost);
 		Thread.sleep(2000);
 		deletedPost.click();
 		
-		System.out.println("[OK] Post deleted");
+		Thread.sleep(2000);
+		WebElement success = driver.findElement(By.className("alert-success"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", success);
+		Thread.sleep(2000);
+		if (success.isDisplayed()) {
+			System.out.println("[OK] Lecture deleted");
+		} else {
+			System.out.println("[error] Lecture not deleted");
+		}
+		
 		
 		Thread.sleep(7000);
 		
     }
 	
-	//add lecture, delete post(my account), 
 	
 }
