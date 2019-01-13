@@ -1,11 +1,13 @@
 (() => {
-  function indexCtrl($location, authentication, lectures, lecturesRequests, $uibModal) {
+  function indexCtrl($location, authentication, lectures, lecturesRequests, $uibModal, dailyQuote) {
     var vm = this;
 
     /* Removes background from body. */
     var body = angular.element(document.querySelector('body'));
     body.removeClass('loginBody');
 
+    vm.quote = '';
+    vm.quoteAuthor = '';
     vm.lectures = [];
     vm.pendingLectureRequest = [];
     vm.msgError = '';
@@ -193,6 +195,19 @@
       getLecturesPaginated();
     }
 
+    getDailyQuote = function() {
+      dailyQuote.getQuote().then(
+        function success(response) {
+          console.log(response.data);
+        },
+        function error(error) {
+          vm.quote = 'Winners embrace hard work. They love the discipline of it, the trade-off they’re making to win. Losers, on the other hand, see it as punishment. And that’s the difference.';
+          vm.quoteAuthor = 'Lou Holtz';
+          console.log(error);
+        }
+      )
+    }
+
     /* Returns current logged in user. */
     if (vm.isLoggedIn) {
       authentication.getCurrentUser().then(
@@ -224,9 +239,12 @@
 
     /* Get initial lectures */
     getLecturesPaginated();
+
+    /* Get daily quote */
+    // getDailyQuote();
   } 
 
-  indexCtrl.$inject = ['$location', 'authentication', 'lectures', 'lecturesRequests', '$uibModal'];
+  indexCtrl.$inject = ['$location', 'authentication', 'lectures', 'lecturesRequests', '$uibModal', 'dailyQuote'];
 
   /* global angular */
   angular
