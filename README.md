@@ -34,9 +34,41 @@ $ npm install
 ```
 
 #### After the dependecies are installed you can run the app  with command:
+
 ```bash
 $ npm start
 ```
+
+## Environmental variables
+
+Environmental variables must be inside .env file inside app folder.
+
+* JWT_PASSWORD=your_jwt_secret
+* RECAPTCHA_SECRET=your_recapthca_secret
+* MLAB_URI=your_mlab_uri
+* NODE_ENV=develop OR production based on your enviroment
+
+## Seed
+
+There is a seed script that helps you populate base data into your database (e.g. admin account, languages). Navigate to app/app_api/models/seed.
+
+```bash
+$ cd app/app_api/models/seed
+```
+
+Create .env file with this enviromental variables:
+
+* MLAB_URI=your_mlab_uri
+* NODE_ENV=develop OR production based on your enviroment
+
+Run seed.js script using:
+
+```bash
+$ node seed.js
+```
+
+You can add your own stages of seeding and define data inside ./data folder.
+
 
 ## App urls
 * Local app url: http://localhost:3000/
