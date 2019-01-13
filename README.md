@@ -226,7 +226,7 @@ Database, application and JMeter all ran on the same local machine while testing
 | ----- | -------- | ------- | --- | --- | --------- | --------| ---------- | --------------- | ----------- | ---------- |
 | HTTP  | 4450     | 181     | 2   | 664 | 181.24    | 0.000%  | 405.8/sec  | 848.38          | 46.76       | 2141.0     |
 
-This is the maximum number of load (users at the same time) that our application can serve without any errors. Standard deviation is quite low and server's Throughput is very high.
+This is the maximum number of load (users at the same time) that our application can serve without any errors. Standard deviation is quite low and server's Throughput is very high which is very good.
 
 #### 2.
 * Number of Threads: 7500
@@ -239,7 +239,7 @@ This is the maximum number of load (users at the same time) that our application
 | ----- | -------- | ------- | --- | ---- | --------- | --------| ---------- | --------------- | ----------- | ---------- |
 | HTTP  | 7500     | 1890    | 17  | 3840 | 571.336   | 35,07%  | 519.1/sec  | 1194.85         | 38.30       | 2356.8     |
 
-If we higher the load then we can see some troubles. More than on third of requests responds with and error (mostly "Connection refused"). We can se that the max and the average response time is allot hire under heavier load.
+If we higher the load then we can see some troubles. More than one third of requests responds with an error (mostly "Connection refused"). We can se that the max and the average response time is alot higher under heavier load.
 
 #### 3.
 * Number of Threads: 15000
@@ -252,7 +252,7 @@ If we higher the load then we can see some troubles. More than on third of reque
 | ----- | -------- | ------- | --- | ---- | --------- | --------| ---------- | --------------- | ----------- | ---------- |
 | HTTP  | 15000    | 2889    | 7   | 7271 | 922.21    | 71.91%  | 882.1/sec  | 2216.11         | 28.55       | 2572.5     |
 
-If we higher the load to 15k users the app is almost not functional anymore becouse almost two thirds of request fail, but the server is still up and running.
+If we higher the load to 15k users the app is almost not functional anymore becouse almost two thirds of requests fail, but the server is still up and running.
 At this point and higer (25k, 35k, etc) of users app is not functional anymore. Loading times are too long for use and most of the requests fails. But the server doesn't crash and is still running.
 At 5000 users server should scale and get more resources.
 
