@@ -42,6 +42,49 @@ $ npm start
 * Local app url: http://localhost:3000/
 * Heroku app url: https://tutke-io.herokuapp.com/
 
+## Api url
+* Local app url: http://localhost:3000/api/
+* Heroku app url: https://tutke-io.herokuapp.com/api/
+
+## User roles
+* ####Not registered user:
+	* Can browse site but can't use any action on the page (edit, delete, add).
+	* Can see users profiles.
+	* Can search trough lectures on the page.
+	* Can register as tutor or student.
+	
+Every other user role can perform all of the actions that "Not registered user" can, except for registration.
+
+* ####Admin:
+	* Can delete all of the lectures, comments and users.
+	* Can use admin console where hec an drop database or initialize it.
+	* Can edit or delete his own account.
+	* Can see my profile page.
+	* Can see admin console page.
+
+
+* ####Tutor:
+	* Can add new posted lecture.
+	* Can delete his own posted lectures.
+	* Can edit his own posted lecutes.
+	* Can delete his own sent pending lecture offers.
+	* Can respond to lecture request from student.
+	* Can send lecture offer to student.
+	* Can edit or delete his own account.
+	* Can see my profile page.
+
+
+* ####Student:
+	* Can add new reqested lecture.
+	* Can delete his own reqested lectures.
+	* Can edit his own reqested lecutes.
+	* Can delete his own sent pending lecture requests.
+	* Can respond to lecture offer from tutor.
+	* Can send lecture request to tutor.
+	* Can edit or delete his own account.
+	* Can add comments to tutors.
+	* Can edit or delete his own comments.
+
 ## Supported devices
 * Xiaomi Redmi Note 3
 * Samsung Galaxy s8
