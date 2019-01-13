@@ -254,7 +254,7 @@ If we higher the load then we can see some troubles. More than on third of reque
 
 If we higher the load to 15k users the app is almost not functional anymore becouse almost two thirds of request fail, but the server is still up and running.
 At this point and higer (25k, 35k, etc) of users app is not functional anymore. Loading times are too long for use and most of the requests fails. But the server doesn't crash and is still running.
-At 5000 users server shoudl scale and get more resources.
+At 5000 users server should scale and get more resources.
 
 You can see more detailed reports in app/tests/JMeter/repors folder.
 
