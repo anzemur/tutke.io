@@ -22,6 +22,7 @@ var mergedCode = uglifyJs.minify({
   'lecture-requests.service.js'           : fs.readFileSync('app_client/shared/services/lecture-requests.service.js', 'utf-8'),
   'user.service.js'                       : fs.readFileSync('app_client/shared/services/user.service.js', 'utf-8'),
   'admin.service.js'                      : fs.readFileSync('app_client/shared/services/admin.service.js', 'utf-8'),
+  'daily-quote.service.js'                : fs.readFileSync('app_client/shared/services/daily-quote.service.js', 'utf-8'),
   /* Controllers */
   'index.controller.js'                   : fs.readFileSync('app_client/index/index.controller.js', 'utf-8'),
   'log-in.controller.js'                  : fs.readFileSync('app_client/authentication/log-in/log-in.controller.js', 'utf-8'),
@@ -75,6 +76,15 @@ app.use(function (req, res, next) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   next();
 });
+
+/* Allow CORS */
+// app.all('/*', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   res.header("Access-Control-Allow-Headers", "X-Frame-Options");
+//   next();
+// });
 
 app.use(logger('dev'));
 app.use(express.json());
