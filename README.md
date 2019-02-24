@@ -79,7 +79,7 @@ You can add your own stages of seeding and define data inside ./data folder.
 * Heroku app url: https://tutke-io.herokuapp.com/api/
 
 ## User roles
-* ####Not registered user:
+* #### Not registered user:
 	* Can browse site but can't use any action on the page (edit, delete, add).
 	* Can see users profiles.
 	* Can search trough lectures on the page.
@@ -87,7 +87,7 @@ You can add your own stages of seeding and define data inside ./data folder.
 	
 Every other user role can perform all of the actions that "Not registered user" can, except for registration.
 
-* ####Admin:
+* #### Admin:
 	* Can delete all of the lectures, comments and users.
 	* Can use admin console where hec an drop database or initialize it.
 	* Can edit or delete his own account.
@@ -95,7 +95,7 @@ Every other user role can perform all of the actions that "Not registered user" 
 	* Can see admin console page.
 
 
-* ####Tutor:
+* #### Tutor:
 	* Can add new posted lecture.
 	* Can delete his own posted lectures.
 	* Can edit his own posted lecutes.
@@ -106,7 +106,7 @@ Every other user role can perform all of the actions that "Not registered user" 
 	* Can see my profile page.
 
 
-* ####Student:
+* #### Student:
 	* Can add new reqested lecture.
 	* Can delete his own reqested lectures.
 	* Can edit his own reqested lecutes.
@@ -130,14 +130,7 @@ Every other user role can perform all of the actions that "Not registered user" 
 * Price field on Add lecture and Edit lecture page: Price must be a number.
 * Description field on Add lecture and Edit lecture page: Description must be at least 200 characters long.
 
-
-### Developers
-* Lovro Kalan
-* Zala Erič
-* Anže Mur
-* Matej De Faveri
-
-## Feautured Screens
+## Feautured Screens (Outdated - screens were made in the planing phase)
 
 * ### [Log In screen](docs/logIn.png):
 	* User can log in.
